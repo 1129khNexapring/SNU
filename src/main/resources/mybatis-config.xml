@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!-- 만약에 null 데이터가 전달되었으면 빈칸이 아닌 NULL로 인식하도록 설정 -->
+	</settings>
+	<typeAliases>
+		<typeAlias type="org.ttt.snu.board.domain.Board" alias="Board"/>
+		<typeAlias type="org.ttt.snu.board.domain.Comments" alias="Comments"/>
+		<typeAlias type="org.ttt.snu.attendance.domain.Attendance" alias="Attendance"/>
+		<typeAlias type="org.ttt.snu.grade.domain.Grade" alias="Grade"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/attendance-mapper.xml"/>
+		<mapper resource="mappers/grade-mapper.xml"/>
+	</mappers>
+</configuration>
