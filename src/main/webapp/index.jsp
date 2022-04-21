@@ -14,4 +14,4 @@
 	
 	<%@ include file="/WEB-INF/layout/inc_footer.jsp" %>
 </body>
-</html>
+</html>	
