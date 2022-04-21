@@ -31,7 +31,7 @@
             var mainframe = this.createMainFrame("mainframe","0","0","1280","720",null,null,this);
             mainframe.set_showtitlebar("true");
             mainframe.set_showstatusbar("true");
-            mainframe.set_titletext("FullFrame");
+            mainframe.set_titletext("TopLeftFrame");
             mainframe.on_createBodyFrame = this.mainframe_createBodyFrame;
             // tray
 
