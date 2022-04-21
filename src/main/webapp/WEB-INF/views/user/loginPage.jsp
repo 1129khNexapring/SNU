@@ -66,12 +66,14 @@
 		var admin_id = $("#admin_id").val();
 		var admin_pwd = $("#admin_pwd").val();
 		$.ajax({
-			url : "/login/admincheck.nexa",
+			url : "/login/admincheck.snu",
 			type : "POST",
 			data : {"admin_id" : admin_id, "admin_pwd" : admin_pwd},
-			success : function(data) {
-				if(data == "success") {
-					location.href='/nexaui3/index.html';
+			dataType : "json",
+			success : function(loginUser) {
+				if(loginUser != null) {
+					console.log(loginUser);
+					//location.href='/nexaui3/index.html';
 				}else {
 					alert("xx");
 				}
