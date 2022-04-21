@@ -22,7 +22,7 @@ public class ProfessorController {
 	private ProfessorService pService;
 	
 	@ResponseBody
-	@RequestMapping(value="/login/professorCheck.snu", method=RequestMethod.POST)
+	@RequestMapping(value="/login/professorCheck.snu", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	public String professorCheckLogin(
 				HttpServletRequest request
 				, @ModelAttribute Professor professor
