@@ -13,6 +13,7 @@
             this.set_titletext("Form_Work");
             if (Form == this.constructor)
             {
+
                 this._setFormPosition(1280,720);
             }
             
@@ -20,6 +21,7 @@
 
             
             // UI Components Initialize
+
             obj = new Button("Button00","150","80","124","63",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("Button00");
@@ -51,6 +53,7 @@
 
         this.Button00_onclick = function(obj,e)
         {
+
         	var sId = nexacro.getEnvironmentVariable("ev_Val");
             var sPwd = nexacro.getEnvironmentVariable("ev_Val1");
             alert(sPwd);
