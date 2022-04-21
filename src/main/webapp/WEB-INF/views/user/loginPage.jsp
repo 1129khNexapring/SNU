@@ -52,7 +52,7 @@
 			dataYpe : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-				console.log(loginUser);					
+					location.href='/nexa_p/index.html?ev_Val='+loginUser.pCode+'&ev_Val1='+loginuser.pName+'';			
 				}else {
 					alert("ajax실패");
 				}
