@@ -7,7 +7,7 @@
         <div id="header-layer2"></div>
         <div id="header-layer3"></div>
         <div id="header-layer4"></div>
-        <div id="header-layer5"><a href="/login.nexa">상남대 학사정보시스템</a></div>
+        <div id="header-layer5"><a href="/login.snu">상남대 학사정보시스템</a></div>
     </header>
     <nav id="navi">
         <ul>
