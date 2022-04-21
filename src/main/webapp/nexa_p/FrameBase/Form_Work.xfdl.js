@@ -24,6 +24,11 @@
             obj.set_taborder("0");
             obj.set_text("Button00");
             this.addChild(obj.name, obj);
+
+            obj = new Static("Static00","138","298","283","43",null,null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("섹시한 효광이");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",1280,720,this,function(p){});
