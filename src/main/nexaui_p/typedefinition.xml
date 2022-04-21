@@ -45,4 +45,5 @@
   <Protocols/>
   <DeviceAdaptors/>
   <Update/>
+  <Deploy/>
 </TypeDefinition>
