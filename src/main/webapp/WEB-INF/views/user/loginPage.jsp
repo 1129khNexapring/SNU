@@ -46,12 +46,13 @@
 		var professor_id = $("#professor_id").val();
 		var professor_pwd = $("#professor_pwd").val();
 		$.ajax({
-			url : "/login/professorcheck.nexa",
+			url : "/login/professorCheck.snu",
 			type : "POST",
 			data : {"professor_id" : professor_id, "professor_pwd" : professor_pwd},
-			success : function(data) {
-				if(data == "success") {
-				location.href='/nexaui2/index.html';					
+			dataYpe : "json",
+			success : function(loginUser) {
+				if(loginUser != null) {
+				console.log(loginUser);					
 				}else {
 					alert("ajax실패");
 				}
