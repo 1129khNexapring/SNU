@@ -20,46 +20,13 @@
 
             
             // UI Components Initialize
-            obj = new Button("Button00","516","34","149","46",null,null,null,null,null,null,this);
+            obj = new Button("Button00","129","161","113","42",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_text("학생입니다");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("Button01","98","157","166","78",null,null,null,null,null,null,this);
-            obj.set_taborder("1");
-            obj.set_text("Button01");
+            obj.set_text("Button00");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1080,670,this,
-            	//-- Layout function
-            	function(p)
-            	{
-                var rootobj = p;
-                p = rootobj;
-                p.set_titletext("Form_Work");
-
-                p.Button00.set_taborder("0");
-                p.Button00.set_text("학생입니다");
-                p.Button00.move("516","34","149","46",null,null);
-
-                p.Button01.set_taborder("1");
-                p.Button01.set_text("Button01");
-                p.Button01.move("98","157","166","78",null,null);
-            	}
-            );
-            this.addLayout(obj.name, obj);
-
-            //-- Normal Layout : this
-            obj = new Layout("Desktop_screen","Desktop_screen",1080,670,this,
-            	//-- Layout function
-            	function(p)
-            	{
-                var rootobj = p;
-                p = rootobj;
-
-            	}
-            );
+            obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
@@ -80,11 +47,8 @@
         this.Button00_onclick = function(obj,e)
         {
         	var sId = nexacro.getEnvironmentVariable("ev_Val");
-        	var sName = nexacro.getEnvironmentVariable("ev_Val1");
         	alert(sId);
         };
-
-
 
         });
         
