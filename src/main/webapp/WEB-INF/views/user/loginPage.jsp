@@ -54,6 +54,7 @@
 			success : function(data) {
 				if(data.length != 0) {
 					location.href='/nexa_p/index.html?ev_Val=' + data.pCode + '&ev_Val1=' + data.pName+'';
+
 				}else {
 					alert("ajax실패");
 				}

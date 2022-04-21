@@ -24,6 +24,15 @@
             obj.set_taborder("0");
             obj.set_text("Button00");
             this.addChild(obj.name, obj);
+
+            obj = new Static("Static00","128","322","348","183",null,null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("Static00");
+            this.addChild(obj.name, obj);
+
+            obj = new Radio("Radio00","566","151","171","140",null,null,null,null,null,null,this);
+            obj.set_taborder("2");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
@@ -51,12 +60,24 @@
             alert(sPwd);
         };
 
+        this.Static00_onclick = function(obj,e)
+        {
+
+        };
+
+        this.Radio00_onitemchanged = function(obj,e)
+        {
+
+        };
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+            this.Static00.addEventHandler("onclick",this.Static00_onclick,this);
+            this.Radio00.addEventHandler("onitemchanged",this.Radio00_onitemchanged,this);
         };
         this.loadIncludeScript("Form_Work.xfdl");
         this.loadPreloadList();
