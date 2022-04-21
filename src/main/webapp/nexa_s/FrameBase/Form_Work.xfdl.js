@@ -24,6 +24,11 @@
             obj.set_taborder("0");
             obj.set_text("Button00");
             this.addChild(obj.name, obj);
+
+            obj = new Static("Static00","128","322","348","183",null,null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("Static00");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
