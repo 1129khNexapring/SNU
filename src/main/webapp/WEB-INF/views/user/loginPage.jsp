@@ -29,8 +29,8 @@
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-						console.log(loginUser);
-					//location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
+					//console.log(loginUser);
+					location.href='/nexa_s/index.html?ev_Val='+loginUser.sCode+'&ev_Val1='+loginUser.sName+'';
 				}				
 			},
 			error : function() {
