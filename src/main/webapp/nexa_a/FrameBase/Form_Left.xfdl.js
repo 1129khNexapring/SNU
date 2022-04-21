@@ -23,27 +23,7 @@
 
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",200,670,this,
-            	//-- Layout function
-            	function(p)
-            	{
-                var rootobj = p;
-                p = rootobj;
-                p.set_titletext("Form_Left");
-            	}
-            );
-            this.addLayout(obj.name, obj);
-
-            //-- Normal Layout : this
-            obj = new Layout("Desktop_screen","Desktop_screen",200,670,this,
-            	//-- Layout function
-            	function(p)
-            	{
-                var rootobj = p;
-                p = rootobj;
-
-            	}
-            );
+            obj = new Layout("default","Desktop_screen",200,670,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
