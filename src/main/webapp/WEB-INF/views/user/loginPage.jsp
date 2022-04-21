@@ -29,15 +29,16 @@
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-						console.log(loginUser);
-					//location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
+					//console.log(loginUser);
+					location.href='/nexa_s/index.html?ev_Val='+loginUser.sCode+'&ev_Val1='+loginUser.sName+'';
+
 				}				
 			},
 			error : function() {
 				alert("로그인 실패했습니다");
 			}
 		});
-	});
+	});//주석
 				
 				
 					
@@ -46,13 +47,14 @@
 		var professor_id = $("#professor_id").val();
 		var professor_pwd = $("#professor_pwd").val();
 		$.ajax({
-			url : "/login/professorCheck.snu",
+			url : "/login/professorcheck.snu",
 			type : "POST",
 			data : {"professor_id" : professor_id, "professor_pwd" : professor_pwd},
-			dataYpe : "json",
-			success : function(loginUser) {
-				if(loginUser != null) {
-					location.href='/nexa_p/index.html?ev_Val='+loginUser.pCode+'&ev_Val1='+loginuser.pName+'';			
+			dataType : "json",
+			success : function(data) {
+				if(data.length != 0) {
+					location.href='/nexa_p/index.html?ev_Val=' + data.pCode + '&ev_Val1=' + data.pName+'';
+
 				}else {
 					alert("ajax실패");
 				}
@@ -73,14 +75,11 @@
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-					console.log(loginUser);
-					//location.href='/nexaui3/index.html';
-				}else {
-					alert("xx");
+					location.href='/nexa_a/index.html?ev_Val='+loginUser.aCode+'';
 				}
 			},
 			error : function() {
-				
+				alert("로그인 실패하였습니다");
 			}
 		});
 	});

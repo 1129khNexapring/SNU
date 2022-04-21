@@ -13,20 +13,27 @@
             this.set_titletext("Form_Work");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,670);
+
+                this._setFormPosition(1280,720);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
 
             
             // UI Components Initialize
-            obj = new Button("Button00","396","140","120","50",null,null,null,null,null,null,this);
+
+            obj = new Button("Button00","150","80","124","63",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("Button00");
             this.addChild(obj.name, obj);
+
+            obj = new Static("Static00","138","298","283","43",null,null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("섹시한 효광이");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
+            obj = new Layout("default","Desktop_screen",1280,720,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
@@ -46,9 +53,10 @@
 
         this.Button00_onclick = function(obj,e)
         {
-        	var pId = nexacro.getEnvironmentVariable("ev_Val");
-            var pName = nexacro.getEnvironmentVariable("ev_Val1");
-            alert(pName);
+
+        	var sId = nexacro.getEnvironmentVariable("ev_Val");
+            var sPwd = nexacro.getEnvironmentVariable("ev_Val1");
+            alert(sPwd);
         };
 
         });
