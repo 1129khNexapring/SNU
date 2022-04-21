@@ -4,7 +4,7 @@
     <Layouts>
       <Layout width="1080" height="670" screenid="Desktop_screen">
         <Button id="Button00" taborder="0" text="Button00" left="130" top="64" width="142" height="48" onclick="Button00_onclick"/>
-        <Calendar id="Calendar00" taborder="1" left="382" top="146" width="150" height="20"/>
+        <CheckBox id="CheckBox00" taborder="1" text="CheckBox00" left="361" top="151" width="150" height="20"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
