@@ -12,10 +12,14 @@
 		<typeAlias type="org.ttt.snu.board.domain.Comments" alias="Comments"/>
 		<typeAlias type="org.ttt.snu.attendance.domain.Attendance" alias="Attendance"/>
 		<typeAlias type="org.ttt.snu.grade.domain.Grade" alias="Grade"/>
+		<typeAlias type="org.ttt.snu.lecture.domain.Lecture" alias="Lecture"/>
+		<typeAlias type="org.ttt.snu.professor.domain.Professor" alias="Professor"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/attendance-mapper.xml"/>
 		<mapper resource="mappers/grade-mapper.xml"/>
+		<mapper resource="mappers/lecture-mapper.xml"/>
+		<mapper resource="mappers/professor-mapper.xml"/>
 	</mappers>
 </configuration>

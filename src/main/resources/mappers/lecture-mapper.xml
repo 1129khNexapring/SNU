@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="LectureMapper">
+	<resultMap type="Lecture" id="lectureResultMap">
+		<id property="lCode" column="L_CODE"/>
+		<result property="lType" column="L_TYPE"/>
+		<result property="lName" column="L_NAME"/>
+		<result property="lObjective" column="L_OBJECTIVE"/>
+		<result property="lContents" column="L_CONTENTS"/>
+		<result property="textbook" column="TEXTBOOK"/>
+		<result property="lDays" column="L_DAYS"/>
+		<result property="credit" column="CREDIT"/>
+		<result property="lYear" column="L_YEAR"/>
+		<result property="lSemester" column="L_SEMESTER"/>
+		<result property="lCapacity" column="L_CAPACITY"/>
+		<result property="lStatus" column="L_STATUS"/>
+		<result property="pCode" column="P_CODE"/>
+		<result property="dCode" column="D_CODE"/>
+	</resultMap>
+	
+	<select id="selectAllLectures" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE
+	</select>
+	
+	
+</mapper>
