@@ -23,14 +23,14 @@
 		var student_id = $("#student_id").val();
 		var student_pwd = $("#student_pwd").val();
 		$.ajax({
-			url : "/login/studentcheck.nexa",
+			url : "/login/studentcheck.snu",
 			type : "POST",
 			data : {"student_id" : student_id, "student_pwd" : student_pwd},
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-										console.log(loginUser.studentId);
-					location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
+						console.log(loginUser);
+					//location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
 				}				
 			},
 			error : function() {
