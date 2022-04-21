@@ -1,0 +1,49 @@
+#container {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+.tab {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* Float the list items side by side */
+.tab li {
+    float: left;
+}
+/* Style the links inside the list items */
+.tab li a {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    padding: 14px 16px;
+    font-size: 17px;
+    transition: 0.3s;
+}
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    background-color: #657ec2;
+    padding: 6px 12px;
+    color: #fff;
+    height: 350px;
+}
+ul.tab li.current{
+    background-color: #657ec2;
+    color: #222;
+}
+.tabcontent.current {
+    display: block;
+}
+#login-form-student{
+    margin-top: 150px;
+}
+#login-form-professor{
+    margin-top: 150px;
+}
+#login-form-admin{
+    margin-top: 150px;
+}
