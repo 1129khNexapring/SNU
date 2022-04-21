@@ -1,5 +1,8 @@
 package org.ttt.snu.professor.service;
 
-public interface ProfessorService {
+import org.ttt.snu.professor.domain.Professor;
 
+public interface ProfessorService {
+	
+	Professor checkLogin(Professor professor);
 }
