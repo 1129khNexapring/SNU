@@ -3,5 +3,6 @@
 .project
 .springBeans
 .DS_Store
+.metadata
 /bin/
 /target/
