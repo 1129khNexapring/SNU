@@ -1,10 +1,11 @@
 package org.ttt.snu.professor.store;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.ttt.snu.professor.domain.Professor;
 
 public interface ProfessorStore {
 
-	Professor selectCheckLogin(SqlSession sqlSession, Professor professor);
+	Professor selectProfessorById(SqlSession sqlSession, String id);
 
 }
