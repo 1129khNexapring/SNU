@@ -22,7 +22,7 @@ public class StudentController {
 	private StudentService sService;
 
 	@ResponseBody
-	@RequestMapping(value="/login/studentcheck.snu", method=RequestMethod.POST)
+	@RequestMapping(value="/login/studentcheck.snu", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	public String studentLogin(
 			HttpServletRequest request
 			, @ModelAttribute Student student
