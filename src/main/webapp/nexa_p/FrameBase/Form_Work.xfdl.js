@@ -1,4 +1,3 @@
-
 (function()
 {
     return function()
