@@ -30,22 +30,22 @@
 		function oninitframework()
 		{
 			//-------추가 부분 Start -------//
-			 var urlParams = {};
-			 (function () {
+			  var urlParams = {};
+			  (function () {
 				var match,
-				pl     = /\+/g,
+				pl     = /+/g,
 				search = /([^&=]+)=?([^&]*)/g,
 				decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
 				query  = window.location.search.substring(1);
 				while (match = search.exec(query)) { urlParams[decode(match[1])] = decode(match[2]); }
 			 })();
-			 
-			 //environment 에 값을 전달
-			 nexacro.setInitialVariable("environment", "ev_Val", urlParams.ev_Val);
-			 nexacro.setInitialVariable("environment", "ev_Val1", urlParams.ev_Val1);
-			 //application 에 값을 전달
-			 nexacro.setInitialVariable("application", "gv_Val", urlParams.gv_Val);
-			 //-------추가 부분 End -------//
+
+            //enviroment에 값을 전달
+            nexacro.setInitialVariable("environment", "ev_Val", urlParams.ev_Val);
+            nexacro.setInitialVariable("environment", "ev_Val1", urlParams.ev_Val1);
+            //application에 값을 전달
+            nexacro.setInitialVariable("application", "gv_Val", urlParams.gv_Val);
+            //-------추가 부분 End -------//
 			<!-- SCREEN_INFORMATION : create screen information defined in Environment > ScreenDefinition -->
 			var screeninfo = [
 #{SCREEN_INFORMATION}
