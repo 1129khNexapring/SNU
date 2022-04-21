@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Work" width="1280" height="720" titletext="Form_Work">
+    <Layouts>
+      <Layout width="1280" height="720" screenid="Desktop_screen">
+        <Button id="Button00" taborder="0" text="Button00" left="150" top="80" width="124" height="63" onclick="Button00_onclick"/>
+        <Static id="Static00" taborder="1" text="섹시한 효광이" left="138" top="298" width="283" height="43"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sId = nexacro.getEnvironmentVariable("ev_Val");
+    var sPwd = nexacro.getEnvironmentVariable("ev_Val1");
+    alert(sPwd);
+};
+]]></Script>
+  </Form>
+</FDL>
