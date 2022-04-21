@@ -23,13 +23,13 @@
 		var student_id = $("#student_id").val();
 		var student_pwd = $("#student_pwd").val();
 		$.ajax({
-			url : "/login/studentcheck.nexa",
+			url : "/login/studentcheck.snu",
 			type : "POST",
 			data : {"student_id" : student_id, "student_pwd" : student_pwd},
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-										console.log(loginUser.studentId);
+						console.log(loginUser);
 					location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
 				}				
 			},
@@ -67,18 +67,17 @@
 		var admin_id = $("#admin_id").val();
 		var admin_pwd = $("#admin_pwd").val();
 		$.ajax({
-			url : "/login/admincheck.nexa",
+			url : "/login/admincheck.snu",
 			type : "POST",
 			data : {"admin_id" : admin_id, "admin_pwd" : admin_pwd},
-			success : function(data) {
-				if(data == "success") {
-					location.href='/nexaui3/index.html';
-				}else {
-					alert("xx");
+			dataType : "json",
+			success : function(loginUser) {
+				if(loginUser != null) {
+					location.href='/nexa_a/index.html?ev_Val='+loginUser.aCode+'';
 				}
 			},
 			error : function() {
-				
+				alert("로그인 실패하였습니다");
 			}
 		});
 	});

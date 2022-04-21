@@ -21,6 +21,5 @@
 	<select id="selectProfessorById" parameterType="string" resultMap="professorResultMap">
 		SELECT * FROM PROFESSOR WHERE P_CODE = #{id }
 	</select>
-	
-	
+
 </mapper>
