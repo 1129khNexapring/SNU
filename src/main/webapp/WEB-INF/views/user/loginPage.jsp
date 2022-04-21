@@ -30,7 +30,7 @@
 			success : function(loginUser) {
 				if(loginUser != null) {
 						console.log(loginUser);
-					//location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
+					location.href='/nexaui/index.html?ev_Val='+loginUser.studentId+'&ev_Val1='+loginUser.studentPwd+'';
 				}				
 			},
 			error : function() {
@@ -73,14 +73,11 @@
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-					console.log(loginUser);
-					//location.href='/nexaui3/index.html';
-				}else {
-					alert("xx");
+					location.href='/nexa_a/index.html?ev_Val='+loginUser.aCode+'';
 				}
 			},
 			error : function() {
-				
+				alert("로그인 실패하였습니다");
 			}
 		});
 	});
