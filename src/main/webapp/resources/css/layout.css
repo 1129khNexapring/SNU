@@ -1,0 +1,67 @@
+#header{
+    height: 30px;
+}
+    #header-layer1 {
+        height: inherit;
+        width: 20%;
+        float: left;
+        background-color: #657ec2;
+    }
+    #header-layer2 {
+        height: inherit;
+        width: 20%;
+        float: left;
+        background-color: #657ec2;
+    }
+    #header-layer3 {
+        height: inherit;
+        width: 20%;
+        float: left;
+        background-color: #657ec2;
+    }
+    #header-layer4 {
+        height: inherit;
+        width: 20%;
+        float: left;
+        background-color: #657ec2;
+    }
+    #header-layer5 {
+        height: inherit;
+        width: 20%;
+        float: left;
+        text-align: right;
+        background-color: #657ec2;
+        }
+            #header-layer5 > a {
+                text-decoration: none;
+                color: rgb(232, 232, 232)
+            }    
+#navi {
+    height: 100px;
+}
+	#navi li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		float: left;
+		width: 25%;
+	}
+		#navi li a {
+			display: inline-block;
+			color: #000;
+            text-align: center;
+            text-decoration: none;
+            padding: 14px 16px;
+            font-size: 17px;
+            transition: 0.4s;
+			}
+
+#main {
+    height: 450px;
+}
+
+#footer {
+	text-align : center;
+    height: 200px;
+}
