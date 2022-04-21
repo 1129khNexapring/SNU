@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+ 
 <mapper namespace="ProfessorMapper">
-	<resultMap type="org.ttt.snu.professor.domain.Professor" id="professorResultMap">
+	<resultMap type="Professor" id="professorResultMap">
 		<id property="pCode" column="P_CODE"/>
 		<result property="pName" column="P_NAME"/>
 		<result property="pPassword" column="P_PASSWORD"/>
@@ -18,7 +18,8 @@
 		<result property="dCode" column="D_CODE"/>
 	</resultMap>
 	
-	<select id="selectCheckLogin"  resultMap="professorResultMap">
-		SELECT * FROM PROFESSOR WHERE P_CODE = #{pCode } AND P_PASSWORD = #{pPassword }
+	<select id="selectProfessorById" parameterType="string" resultMap="professorResultMap">
+		SELECT * FROM PROFESSOR WHERE P_CODE = #{id }
 	</select>
+
 </mapper>
