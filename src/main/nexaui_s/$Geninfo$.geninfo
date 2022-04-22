@@ -8,11 +8,11 @@
       <XCSS rule_version="1.04"/>
       <Script rule_version="1.02"/>
     </Rule>
-    <Info project="C:\Users\User\Desktop\SNU\src\main\nexaui_s\" generated="C:\Users\User\Documents\nexacro\17.1\outputs\Student\">
-      <File url="environment.xml" checksum="20220421172929" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220421172929" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220421172929" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220421172929" errormsg=""/>
+    <Info project="C:\Users\YOUM\git\TTT\src\main\nexaui_s\" generated="C:\Users\YOUM\Documents\nexacro\17.1\outputs\Student\">
+      <File url="environment.xml" checksum="20220421173939" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20220421173939" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220421173939" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220421173939" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\CompBase.json" checksum="20211110093724" errormsg=""/>
@@ -20,10 +20,10 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-      <File url="Application_Desktop.xadl" checksum="20220421172929" errormsg=""/>
-      <File url="FrameBase\Form_Top.xfdl" checksum="20220422094322" errormsg=""/>
-      <File url="FrameBase\Form_Left.xfdl" checksum="20220421172929" errormsg=""/>
-      <File url="FrameBase\Form_Work.xfdl" checksum="20220421180244" errormsg=""/>
+      <File url="Application_Desktop.xadl" checksum="20220422102149" errormsg=""/>
+      <File url="FrameBase\Form_Top.xfdl" checksum="20220422102317" errormsg=""/>
+      <File url="FrameBase\Form_Left.xfdl" checksum="20220422105402" errormsg=""/>
+      <File url="FrameBase\Form_Work.xfdl" checksum="20220421174335" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

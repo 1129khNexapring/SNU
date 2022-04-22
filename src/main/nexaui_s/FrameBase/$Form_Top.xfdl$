@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Top" width="1280" height="50" titletext="Form_Top" onload="Form_Top_onload">
+  <Form id="Form_Top" width="1280" height="50" titletext="Form_Top" onload="Form_Top_onload" background="#dd91c9">
     <Layouts>
       <Layout width="1280" height="50" screenid="Desktop_screen">
         <Static id="Static00" taborder="0" text="" left="1012" top="6" width="153" height="36" background="antiquewhite"/>
