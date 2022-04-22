@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Top" width="1280" height="50" titletext="Form_Top">
+  <Form id="Form_Top" width="1280" height="50" titletext="Form_Top" onload="Form_Top_onload">
     <Layouts>
-      <Layout width="1280" height="50" screenid="Desktop_screen"/>
+      <Layout width="1280" height="50" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" text="Static00" left="1030" top="10" width="178" height="30"/>
+      </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Form_Top_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var name = nexacro.getEnvironmentVariable("ev_Val1");
+	this.Static00.set_text(name);
+};
+]]></Script>
   </Form>
 </FDL>
