@@ -21,13 +21,14 @@
 
             
             // UI Components Initialize
-            obj = new Static("Static00","1012","6","153","36",null,null,null,null,null,null,this);
+            obj = new Static("Static00","1012","30","153","36",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("");
             obj.set_background("antiquewhite");
+            obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
-            obj = new Button("Button00","1175","9","97","32",null,null,null,null,null,null,this);
+            obj = new Button("Button00","1175","33","97","32",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("로그아웃");
             obj.set_background("#657ec2");
@@ -62,7 +63,7 @@
         this.Form_Top_onload = function(obj,e)
         {
         	var sName = nexacro.getEnvironmentVariable("ev_Val1");
-        	this.Static00.set_text(sName);
+        	this.Static00.set_text(sName+"님 환영합니다!");
         };
 
         });
