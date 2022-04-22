@@ -11,7 +11,7 @@
                 <ChildFrame id="LeftFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Left.xfdl"/>
                 <VFrameSet id="VFrameSet00" separatesize="30,*" showtitlebar="false" showstatusbar="true">
                   <Frames>
-                    <ChildFrame id="ChildFrame00" formurl="" showtitlebar="false" background="transparent"/>
+                    <ChildFrame id="ChildFrame00" formurl="FrameBase::Form_Tab.xfdl" showtitlebar="false" background="transparent"/>
                     <ChildFrame id="WorkFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Work.xfdl"/>
                   </Frames>
                 </VFrameSet>

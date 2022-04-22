@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Top" width="1280" height="150" titletext="Form_Top" onload="Form_Top_onload" color="#c6b1e1" background="border-box #87dfec">
+  <Form id="Form_Top" width="1280" height="100" titletext="Form_Top" onload="Form_Top_onload" background="white">
     <Layouts>
-      <Layout width="1280" height="150" screenid="Desktop_screen">
+      <Layout width="1280" height="100" screenid="Desktop_screen">
         <Static id="Static00" taborder="0" text="Static00" left="1030" top="10" width="178" height="30"/>
+        <Button id="Button00" taborder="1" left="0" top="0" width="270" height="100" background="url('imagerc::SNU_logo.png') no-repeat center top /contain"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
