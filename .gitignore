@@ -4,8 +4,8 @@
 .springBeans
 .DS_Store
 .metadata
-.geninfo
-.xfdl$
-.xml$
+*.geninfo
+*.xfdl$
+*.xml$
 /bin/
 /target/
