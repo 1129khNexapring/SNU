@@ -3,8 +3,14 @@
   <Form id="frm_grade" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="199" top="242" width="124" height="54"/>
+        <Button id="Button00" taborder="0" text="Button00" left="199" top="242" width="124" height="54" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
   </Form>
 </FDL>
