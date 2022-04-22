@@ -13,7 +13,7 @@
             this.set_titletext("Form_Work");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,670);
+                this._setFormPosition(1080,650);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -35,7 +35,7 @@
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
+            obj = new Layout("default","Desktop_screen",1080,650,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
