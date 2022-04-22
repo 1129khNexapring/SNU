@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_bhrequest" width="1080" height="670" titletext="New Form">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Button id="Button00" taborder="0" text="Button00" left="108" top="123" width="154" height="64"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>
