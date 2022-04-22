@@ -20,7 +20,18 @@
 
             
             // UI Components Initialize
+            obj = new Static("Static00","1012","6","153","36",null,null,null,null,null,null,this);
+            obj.set_taborder("0");
+            obj.set_text("");
+            obj.set_background("antiquewhite");
+            this.addChild(obj.name, obj);
 
+            obj = new Button("Button00","1175","9","97","32",null,null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("로그아웃");
+            obj.set_background("#657ec2");
+            obj.set_color("#ffffff");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",1280,50,this,function(p){});
@@ -39,12 +50,21 @@
         };
         
         // User Script
+        this.registerScript("Form_Top.xfdl", function() {
 
+
+        this.Form_Top_onload = function(obj,e)
+        {
+        	var sName = nexacro.getEnvironmentVariable("ev_Val1");
+        	this.Static00.set_text(sName);
+        };
+
+        });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-
+            this.addEventHandler("onload",this.Form_Top_onload,this);
         };
         this.loadIncludeScript("Form_Top.xfdl");
         this.loadPreloadList();
