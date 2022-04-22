@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Left" width="200" height="670" titletext="Form_Left">
+  <Form id="Form_Left" width="200" height="670" titletext="Form_Left" background="#a290e4">
     <Layouts>
       <Layout width="200" height="670" screenid="Desktop_screen"/>
     </Layouts>
