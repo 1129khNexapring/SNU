@@ -172,6 +172,62 @@
       </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fn_openForm(obj, e);
+};
+
+this.fn_openForm = function(obj, e)
+{
+	var objDs = obj.getBindDataset();
+	var sMenuId = objDs.getColumn(e.row, "LIST_ID");
+	var sMenuNM = objDs.getColumn(e.row, "LIST");
+	var sFormUrl = objDs.getColumn(e.row, "FORM_URL");
+	
+	if(sFormUrl.length <= 0) return;
+	
+	var objApp = nexacro.getApplication();
+	var sWorkFramePath = objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame;
+	
+	var arrObj = sWorkFramePath.all;
+	for(var i=0; i<arrObj.length; i++) 
+	{
+		if(arrObj[i].name == sMenuId)
+		{
+			arrObj[i].setFocus();
+			return;
+		}
+	}
+	
+	var nWidth = sWorkFramePath.getOffsetWidth();
+	var nHeight = sWorkFramePath.getOffsetHeight();
+	
+	var objChildFrame = new ChildFrame(sMenuId, 0, 0, nWidth, nHeight);
+	sWorkFramePath.addChild(sMenuId, objChildFrame);
+	
+	var oParam = {
+			LIST_ID : sMenuId,
+			LIST : sMenuNM,
+			FORM_URL : sFormUrl
+			};
+			
+	objChildFrame.openParam = oParam;
+	objChildFrame.set_resizable(true);
+	objChildFrame.set_openstatus("maximize");
+	objChildFrame.set_showtitlebar(false);
+	
+	objChildFrame.set_formurl(sFormUrl);
+	objChildFrame.show();
+	
+	
+	
+	
+			
+	
+	
+	
+}
 ]]></Script>
   </Form>
 </FDL>
