@@ -9,10 +9,11 @@
             <HFrameSet id="HFrameSet00" separatesize="200,*">
               <Frames>
                 <ChildFrame id="LeftFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Left.xfdl"/>
-                <VFrameSet id="VFrameSet00" separatesize="20,*" showtitlebar="false">
+                <VFrameSet id="VFrameSet00" separatesize="30,0,*" showtitlebar="false">
                   <Frames>
-                    <ChildFrame id="TabFrame" formurl="" showtitlebar="false"/>
-                    <ChildFrame id="WorkFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Work.xfdl" background="aqua"/>
+                    <ChildFrame id="TabFrame" formurl="FrameBase::Form_Mdi.xfdl" showtitlebar="false"/>
+                    <FrameSet id="WorkFrame"/>
+                    <ChildFrame id="MainFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Main.xfdl" background="aqua"/>
                   </Frames>
                 </VFrameSet>
               </Frames>
