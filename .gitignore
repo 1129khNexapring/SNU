@@ -4,5 +4,6 @@
 .springBeans
 .DS_Store
 .metadata
+.geninfo
 /bin/
 /target/
