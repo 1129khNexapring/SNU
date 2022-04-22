@@ -1,0 +1,27 @@
+﻿-P
+"C:\Users\User\Desktop\SNU\src\main\nexaui_s\Student.xprj"
+-O
+"C:\Users\User\Documents\nexacro\17.1\outputs\Student"
+-B
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-FILE
+"'C:\Users\User\Desktop\SNU\src\main\nexaui_s\environment.xml','C:\Users\User\Desktop\SNU\src\main\nexaui_s\Application_Desktop.xadl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\FrameBase\Form_Left.xfdl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\FrameBase\Form_Top.xfdl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\FrameBase\Form_Work.xfdl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\_resource_\_theme_\default'"
+-JSVERSION
+"ECMAScript 2015(ES6)"
+-BOOTSTRAP
+-MODULE
+-BROWSER
+NRE,Internet Explorer 11,Internet Explorer 10,Chrome,Safari,
+-D2
+"C:\Users\User\Desktop\SNU\src\main\webapp\nexa_s\."
+-DB2
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-DT2
+4369
+-DF2
+"'C:\Users\User\Desktop\SNU\src\main\nexaui_s\environment.xml','C:\Users\User\Desktop\SNU\src\main\nexaui_s\Application_Desktop.xadl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\FrameBase\Form_Left.xfdl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\FrameBase\Form_Top.xfdl','C:\Users\User\Desktop\SNU\src\main\nexaui_s\FrameBase\Form_Work.xfdl'"
+-IGNORECOMPRESS
+"C:\Users\User\Desktop\SNU\src\main\nexaui_s\.ignorecompress"
+-RTL
+-Q
+21699082
