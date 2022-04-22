@@ -27,6 +27,7 @@
             obj.set_binddataset("Dataset0");
             obj.set_autosizingtype("col");
             obj.set_autofittype("col");
+            obj.set_treeusecheckbox("false");
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"171\"/></Columns><Rows><Row size=\"24\"/></Rows><Band id=\"body\"><Cell text=\"bind:LIST\" edittype=\"tree\" displaytype=\"treeitemcontrol\" treelevel=\"bind:LEVEL\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
