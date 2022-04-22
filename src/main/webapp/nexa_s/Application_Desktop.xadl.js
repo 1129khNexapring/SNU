@@ -74,10 +74,12 @@
             frame4.set_showstatusbar("true");
             frame2.addChild(frame4.name, frame4);
 
-            var frame5 = new ChildFrame("ChildFrame00",null,null,null,null,null,null,"",frame4);
+            var frame5 = new ChildFrame("ChildFrame00",null,null,null,null,null,null,"FrameBase::Form_Tab.xfdl",frame4);
             frame5.set_showtitlebar("false");
             frame5.set_background("transparent");
             frame4.addChild(frame5.name, frame5);
+            frame5.set_formurl("FrameBase::Form_Tab.xfdl");
+
 
             var frame6 = new ChildFrame("WorkFrame",null,null,null,null,null,null,"FrameBase::Form_Work.xfdl",frame4);
             frame6.set_showtitlebar("false");
