@@ -1,5 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <AppVariables version="2.0">
-  <Datasets/>
+  <Datasets>
+    <Dataset id="p_menu">
+      <ColumnInfo>
+        <Column id="MENU_ID" type="STRING" size="256"/>
+        <Column id="MENU_NAME" type="STRING" size="256"/>
+        <Column id="MENU_LEVEL" type="STRING" size="256"/>
+        <Column id="FORM_URL" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row>
+          <Col id="MENU_ID">10</Col>
+          <Col id="MENU_NAME">학생 성적 관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">20</Col>
+          <Col id="MENU_NAME">학생 출결 관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">30</Col>
+          <Col id="MENU_NAME">강의 게시판</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">40</Col>
+          <Col id="MENU_NAME">학과 정보 조회</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">4010</Col>
+          <Col id="MENU_LEVEL">1</Col>
+          <Col id="MENU_NAME">소속 학과 정보</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">4020</Col>
+          <Col id="MENU_LEVEL">1</Col>
+          <Col id="MENU_NAME">학과 소속 교수</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">4030</Col>
+          <Col id="MENU_LEVEL">1</Col>
+          <Col id="MENU_NAME">수강중인 학생</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">50</Col>
+          <Col id="MENU_NAME">강의 스케줄 관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">60</Col>
+          <Col id="MENU_NAME">교수 정보 관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">70</Col>
+          <Col id="MENU_NAME">강의 관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_NAME">증명서 조회</Col>
+          <Col id="MENU_ID">80</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_NAME">강의 평가 조회</Col>
+          <Col id="MENU_ID">90</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+      </Rows>
+    </Dataset>
+  </Datasets>
   <Variables/>
+  <DataObjects/>
 </AppVariables>
