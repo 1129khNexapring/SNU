@@ -20,7 +20,10 @@
 
             
             // UI Components Initialize
-
+            obj = new Static("Static00","1030","10","178","30",null,null,null,null,null,null,this);
+            obj.set_taborder("0");
+            obj.set_text("Static00");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",1280,50,this,function(p){});
@@ -39,12 +42,20 @@
         };
         
         // User Script
+        this.registerScript("Form_Top.xfdl", function() {
 
+        this.Form_Top_onload = function(obj,e)
+        {
+        	var name = nexacro.getEnvironmentVariable("ev_Val1");
+        	this.Static00.set_text(name);
+        };
+
+        });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-
+            this.addEventHandler("onload",this.Form_Top_onload,this);
         };
         this.loadIncludeScript("Form_Top.xfdl");
         this.loadPreloadList();
