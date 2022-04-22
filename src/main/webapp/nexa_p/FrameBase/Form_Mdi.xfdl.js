@@ -36,17 +36,17 @@
             obj.set_background("url(\'theme://images/btn_MDI_Home.png\') no-repeat center center");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_max","997","5","21","21",null,null,null,null,null,null,this);
+            obj = new Button("btn_max",null,"5","21","21","62",null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("M");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_cacade","1023","5","21","21",null,null,null,null,null,null,this);
+            obj = new Button("btn_cacade",null,"5","21","21","36",null,null,null,null,null,this);
             obj.set_taborder("3");
             obj.set_text("C");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_closeAll","1050","5","21","21",null,null,null,null,null,null,this);
+            obj = new Button("btn_closeAll",null,"5","21","21","9",null,null,null,null,null,this);
             obj.set_taborder("4");
             obj.set_text("X");
             this.addChild(obj.name, obj);

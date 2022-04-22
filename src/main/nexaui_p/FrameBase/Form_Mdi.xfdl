@@ -9,9 +9,9 @@
           </Tabpages>
         </Tab>
         <Button id="btn_home" taborder="1" left="6" top="3" width="25" height="25" background="url('theme://images/btn_MDI_Home.png') no-repeat center center" onclick="btn_home_onclick"/>
-        <Button id="btn_max" taborder="2" text="M" left="997" top="5" width="21" height="21" onclick="btn_max_onclick"/>
-        <Button id="btn_cacade" taborder="3" text="C" left="1023" top="5" width="21" height="21" onclick="btn_cacade_onclick"/>
-        <Button id="btn_closeAll" taborder="4" text="X" left="1050" top="5" width="21" height="21" onclick="btn_closeAll_onclick"/>
+        <Button id="btn_max" taborder="2" text="M" top="5" width="21" height="21" onclick="btn_max_onclick" right="62"/>
+        <Button id="btn_cacade" taborder="3" text="C" top="5" width="21" height="21" onclick="btn_cacade_onclick" right="36"/>
+        <Button id="btn_closeAll" taborder="4" text="X" top="5" width="21" height="21" onclick="btn_closeAll_onclick" right="9"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[

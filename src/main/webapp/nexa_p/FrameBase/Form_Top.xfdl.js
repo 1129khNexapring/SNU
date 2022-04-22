@@ -21,7 +21,7 @@
 
             
             // UI Components Initialize
-            obj = new Static("Static00","956","43","178","50",null,null,null,null,null,null,this);
+            obj = new Static("Static00",null,"43","178","50","146",null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("Static00");
             obj.set_textAlign("right");
@@ -32,7 +32,7 @@
             obj.set_background("url(\'imagerc::SNU_logo.png\') no-repeat center top /contain");
             this.addChild(obj.name, obj);
 
-            obj = new Button("Button01","1144","42","122","52",null,null,null,null,null,null,this);
+            obj = new Button("Button01",null,"42","122","52","14",null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("로그아웃");
             this.addChild(obj.name, obj);
