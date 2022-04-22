@@ -79,6 +79,7 @@
           <Col id="MENU_NAME">강의 평가 조회</Col>
           <Col id="MENU_ID">90</Col>
           <Col id="MENU_LEVEL">0</Col>
+          <Col id="FORM_URL">Base::frm_lectureScore</Col>
         </Row>
       </Rows>
     </Dataset>
