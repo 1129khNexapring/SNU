@@ -20,7 +20,7 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-      <File url="FrameBase\Form_Left.xfdl" checksum="20220422154024" errormsg=""/>
+      <File url="FrameBase\Form_Left.xfdl" checksum="20220422154906" errormsg=""/>
       <File url="Application_Desktop.xadl" checksum="20220422115409" errormsg=""/>
       <File url="Base\frm_attend.xfdl" checksum="20220422123129" errormsg=""/>
       <File url="Base\frm_grade.xfdl" checksum="20220422123306" errormsg=""/>
