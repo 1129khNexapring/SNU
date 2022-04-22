@@ -45,7 +45,7 @@
       <File url="Base\frm_fee.xfdl" checksum="20220422123147" errormsg=""/>
       <File url="Base\frm_Ok.xfdl" checksum="20220422123403" errormsg=""/>
       <File url="Base\frm_book.xfdl" checksum="20220422123140" errormsg=""/>
-      <File url="Base\frm_ask.xfdl" checksum="20220422123124" errormsg=""/>
+      <File url="Base\frm_ask.xfdl" checksum="20220422162630" errormsg=""/>
       <File url="FrameBase\Form_Top.xfdl" checksum="20220422150344" errormsg=""/>
       <File url="FrameBase\Form_Work.xfdl" checksum="20220422101216" errormsg=""/>
     </Info>
