@@ -11,6 +11,7 @@
         {
             this.set_name("Form_Top");
             this.set_titletext("Form_Top");
+            this.set_background("#dd91c9");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1280,50);
