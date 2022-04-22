@@ -105,7 +105,7 @@
 
         	objChildFrame.set_formurl(sFormUrl);
         	objChildFrame.show();
-        	//여기까지 화면연결
+        	//여기까지 화면연결했음
 
 
 
