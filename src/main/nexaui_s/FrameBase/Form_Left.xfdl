@@ -3,22 +3,25 @@
   <Form id="Form_Left" width="200" height="670" titletext="Form_Left">
     <Layouts>
       <Layout width="200" height="670" screenid="Desktop_screen">
-        <Grid id="Grid00" taborder="0" left="0" top="100" width="200" height="570" binddataset="Dataset0" autosizingtype="col" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+        <Grid id="Grid00" taborder="0" left="10" top="10" width="178" height="650" binddataset="Left">
           <Formats>
             <Format id="default">
               <Columns>
                 <Column size="171"/>
               </Columns>
               <Rows>
+                <Row size="24" band="head"/>
                 <Row size="24"/>
               </Rows>
+              <Band id="head">
+                <Cell text="data"/>
+              </Band>
               <Band id="body">
-                <Cell text="bind:LIST" edittype="tree" displaytype="treeitemcontrol" treelevel="bind:LEVEL"/>
+                <Cell text="bind:data" edittype="tree" displaytype="treeitemcontrol" treelevel="bind:level"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Static id="Static00" taborder="1" text="학생 종합 정보" left="0" top="0" width="200" height="100" background="#657ec2" color="#ffffff" textAlign="center"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -171,7 +174,5 @@
         </Rows>
       </Dataset>
     </Objects>
-    <Script type="xscript5.1"><![CDATA[
-]]></Script>
   </Form>
 </FDL>
