@@ -6,5 +6,6 @@
 .metadata
 .geninfo
 .xfdl$
+.xml$
 /bin/
 /target/
