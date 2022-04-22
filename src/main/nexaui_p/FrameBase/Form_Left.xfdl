@@ -1,8 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Left" width="200" height="670" titletext="Form_Left">
+  <Form id="Form_Left" width="200" height="620" titletext="Form_Left">
     <Layouts>
-      <Layout width="200" height="670" screenid="Desktop_screen"/>
+      <Layout width="200" height="620" screenid="Desktop_screen">
+        <Grid id="Grid00" taborder="0" left="3" top="3" width="194" height="616" binddataset="p_menu" treeusecheckbox="false" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="182"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:MENU_NAME" edittype="tree" displaytype="treeitemcontrol" treelevel="bind:MENU_LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
     </Layouts>
+    <Objects/>
   </Form>
 </FDL>
