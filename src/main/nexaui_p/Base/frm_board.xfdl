@@ -3,8 +3,53 @@
   <Form id="frm_board" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="253" top="98" width="120" height="50"/>
+        <Grid id="grd_board" taborder="0" left="20" top="3" width="1037" height="647" binddataset="ds_boardColumn" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No"/>
+                <Cell col="1" text="제목"/>
+                <Cell col="2" text="작성일"/>
+                <Cell col="3" text="작성자"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:No"/>
+                <Cell col="1" text="bind:제목"/>
+                <Cell col="2" text="bind:작성일"/>
+                <Cell col="3" text="bind:작성자"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
+    <Objects>
+      <Dataset id="ds_boardColumn">
+        <ColumnInfo>
+          <Column id="No" type="STRING" size="256"/>
+          <Column id="제목" type="STRING" size="256"/>
+          <Column id="작성일" type="STRING" size="256"/>
+          <Column id="작성자" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="No">1</Col>
+            <Col id="제목">테스트</Col>
+            <Col id="작성자">장효광</Col>
+            <Col id="작성일">2022.04.22</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

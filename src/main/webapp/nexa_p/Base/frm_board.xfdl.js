@@ -17,12 +17,16 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-
+            obj = new Dataset("ds_boardColumn", this);
+            obj._setContents("<ColumnInfo><Column id=\"No\" type=\"STRING\" size=\"256\"/><Column id=\"제목\" type=\"STRING\" size=\"256\"/><Column id=\"작성일\" type=\"STRING\" size=\"256\"/><Column id=\"작성자\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"No\">1</Col><Col id=\"제목\">테스트</Col><Col id=\"작성자\">장효광</Col><Col id=\"작성일\">2022.04.22</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Button("Button00","253","98","120","50",null,null,null,null,null,null,this);
+            obj = new Grid("grd_board","20","3","1037","647",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_text("Button00");
+            obj.set_binddataset("ds_boardColumn");
+            obj.set_autofittype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"제목\"/><Cell col=\"2\" text=\"작성일\"/><Cell col=\"3\" text=\"작성자\"/></Band><Band id=\"body\"><Cell text=\"bind:No\"/><Cell col=\"1\" text=\"bind:제목\"/><Cell col=\"2\" text=\"bind:작성일\"/><Cell col=\"3\" text=\"bind:작성자\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
