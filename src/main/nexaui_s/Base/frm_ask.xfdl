@@ -4,6 +4,7 @@
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
         <Button id="Button00" taborder="0" text="Button00" left="192" top="114" width="174" height="45"/>
+        <Button id="Button01" taborder="1" text="Button01" left="120" top="203" width="287" height="72"/>
       </Layout>
     </Layouts>
   </Form>
