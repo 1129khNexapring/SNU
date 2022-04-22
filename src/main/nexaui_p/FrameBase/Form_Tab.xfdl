@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Tab" width="1080" height="50" titletext="New Form">
+  <Form id="Form_Tab" width="1080" height="50" titletext="New Form" background="orange">
     <Layouts>
       <Layout height="50" mobileorientation="landscape" width="1080"/>
     </Layouts>
