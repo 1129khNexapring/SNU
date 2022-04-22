@@ -11,6 +11,7 @@
         {
             this.set_name("Form_Mdi");
             this.set_titletext("New Form");
+            this.set_background("lightgray");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1080,30);
