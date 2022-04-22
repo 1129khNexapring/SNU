@@ -20,12 +20,20 @@
 
             
             // UI Components Initialize
-            obj = new Grid("Grid00","3","3","194","616",null,null,null,null,null,null,this);
+            obj = new Grid("Grid00","0","100","200",null,null,"0",null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("p_menu");
             obj.set_treeusecheckbox("false");
             obj.set_autofittype("col");
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"182\"/></Columns><Rows><Row size=\"24\"/></Rows><Band id=\"body\"><Cell text=\"bind:MENU_NAME\" edittype=\"tree\" displaytype=\"treeitemcontrol\" treelevel=\"bind:MENU_LEVEL\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00","0","0","200","100",null,null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("교수 종합 정보");
+            obj.set_textAlign("center");
+            obj.set_background("#657ec2");
+            obj.set_color("#ffffff");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
