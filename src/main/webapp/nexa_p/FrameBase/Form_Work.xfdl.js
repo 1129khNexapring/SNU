@@ -13,25 +13,80 @@
             this.set_titletext("Form_Work");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,670);
+                this._setFormPosition(1080,570);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-
+            obj = new Dataset("Dataset00", this);
+            obj._setContents("");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Button("Button00","130","64","142","48",null,null,null,null,null,null,this);
+            obj = new Button("btn_bookmark","7","6","23","20",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_text("Button00");
+            obj.set_text("☆");
+            obj.set_font("bold 14px/normal \"Malgun Gothic\"");
             this.addChild(obj.name, obj);
 
-            obj = new CheckBox("CheckBox00","361","151","150","20",null,null,null,null,null,null,this);
+            obj = new Static("st_title","37","7","455","19",null,null,null,null,null,null,this);
             obj.set_taborder("1");
-            obj.set_text("CheckBox00");
+            obj.set_text("Static00");
+            obj.set_font("bold 14px/normal \"Malgun Gothic\"");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("div_work","7","38",null,null,"10","10",null,null,null,null,this);
+            obj.set_taborder("2");
+            obj.set_text("Div00");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
+            obj = new Layout("default","Desktop_screen",1080,570,this,
+            	//-- Layout function
+            	function(p)
+            	{
+                var rootobj = p;
+                p = rootobj;
+                p.set_titletext("Form_Work");
+
+                p.btn_bookmark.set_taborder("0");
+                p.btn_bookmark.set_text("☆");
+                p.btn_bookmark.set_font("bold 14px/normal \"Malgun Gothic\"");
+                p.btn_bookmark.move("7","6","23","20",null,null);
+
+                p.st_title.set_taborder("1");
+                p.st_title.set_text("Static00");
+                p.st_title.set_font("bold 14px/normal \"Malgun Gothic\"");
+                p.st_title.move("37","7","455","19",null,null);
+
+                p.div_work.set_taborder("2");
+                p.div_work.set_text("Div00");
+                p.div_work.move("7","38",null,null,"10","10");
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+            //-- Normal Layout : this
+            obj = new Layout("Phone_screen","Phone_screen",480,718,this,
+            	//-- Layout function
+            	function(p)
+            	{
+                var rootobj = p;
+                p = rootobj;
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+            //-- Normal Layout : this
+            obj = new Layout("screen00","screen00",1000,650,this,
+            	//-- Layout function
+            	function(p)
+            	{
+                var rootobj = p;
+                p = rootobj;
+
+            	}
+            );
             this.addLayout(obj.name, obj);
             
             // BindItem Information
@@ -49,11 +104,58 @@
         // User Script
         this.registerScript("Form_Work.xfdl", function() {
 
+        this.fv_key = "";
+
+        this.Form_Work_onload = function(obj,e)
+        {
+        	var objOwnerFrame = this.getOwnerFrame();
+
+        	var sMenuId  = objOwnerFrame.openParam.MENU_ID;
+        	var sMenuNM  = objOwnerFrame.openParam.MENU_NAME;
+        	var sFormUrl = objOwnerFrame.openParam.FORM_URL;
+        	var sMenuPath = objOwnerFrame.openParam.MENU_PATH;
+
+        	this.div_work.set_url(sFormUrl);
+        	this.st_title.set_text(sMenuPath);
+
+        	this.fv_key = sMenuId;
+
+        	var objApp = nexacro.getApplication();
+
+
+        };
+
+
+
+        this.fv_myMenu = "I";	//등록(I), 삭제(D)
+        this.btn_bookmark_onclick = function(obj,e)
+        {
+        	if(this.fv_myMenu == "I"){
+        		// 즐겨착기 등록
+        		var objApp = nexacro.getApplication();
+        		var nFindRow = objApp.gds_menu.findRow("MENU_ID", this.fv_key);
+        		var nNewRow = objApp.gds_myMenu.addRow();
+        		objApp.gds_myMenu.copyRow(nNewRow, objApp.gds_menu, nFindRow);
+        		obj.set_text("★");
+        		this.fv_myMenu = "D";
+        	}
+        	else if(this.fv_myMenu == "D"){
+        		//즐겨찾기 삭제
+        		var objApp = nexacro.getApplication();
+        		var nRow = objApp.gds_myMenu.findRow("MENU_ID", this.fv_key);
+        		objApp.gds_myMenu.deleteRow(nRow);
+        		obj.set_text("☆");
+        		this.fv_myMenu = "I";
+        	}
+        	nexacro.setPrivateProfile("myMenuData", objApp.gds_myMenu.saveXML());
+        };
+
         this.Button00_onclick = function(obj,e)
         {
-        	var sId = nexacro.getEnvironmentVariable("ev_Val");
-            var sPwd = nexacro.getEnvironmentVariable("ev_Val1");
-            alert(sPwd);
+        	var sValue = nexacro.getPrivateProfile("myMenuData");
+        	trace(sValue);
+
+
         };
 
         });
@@ -61,7 +163,9 @@
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+            this.addEventHandler("onload",this.Form_Work_onload,this);
+            this.addEventHandler("onactivate",this.Form_Work_onactivate,this);
+            this.btn_bookmark.addEventHandler("onclick",this.btn_bookmark_onclick,this);
         };
         this.loadIncludeScript("Form_Work.xfdl");
         this.loadPreloadList();
