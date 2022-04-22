@@ -11,9 +11,10 @@
         {
             this.set_name("Form_Top");
             this.set_titletext("Form_Top");
+            this.set_background("black");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1280,50);
+                this._setFormPosition(1280,100);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -26,7 +27,7 @@
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1280,50,this,function(p){});
+            obj = new Layout("default","Desktop_screen",1280,100,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
