@@ -11,10 +11,10 @@
         {
             this.set_name("Form_Top");
             this.set_titletext("Form_Top");
-            this.set_background("#dd91c9");
+            this.set_background("#ffffff");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1280,50);
+                this._setFormPosition(1280,100);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -33,9 +33,14 @@
             obj.set_background("#657ec2");
             obj.set_color("#ffffff");
             this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer00","1","1","269","99",null,null,null,null,null,null,this);
+            obj.set_taborder("2");
+            obj.set_background("url(\'theme::default/images/img_WF_Nexacro.png\') no-repeat left top /contain");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1280,50,this,function(p){});
+            obj = new Layout("default","Desktop_screen",1280,100,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
