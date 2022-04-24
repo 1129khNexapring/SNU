@@ -8,11 +8,11 @@
       <XCSS rule_version="1.04"/>
       <Script rule_version="1.02"/>
     </Rule>
-    <Info project="C:\Users\HyoGwang\git\SNU\src\main\nexaui_s\" generated="C:\Users\HyoGwang\Documents\nexacro\17.1\outputs\Student\">
-      <File url="environment.xml" checksum="20220422095814" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220422095814" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220422122729" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220422095814" errormsg=""/>
+    <Info project="C:\Users\User\Desktop\SNU\src\main\nexaui_s\" generated="C:\Users\User\Documents\nexacro\17.1\outputs\Student\">
+      <File url="environment.xml" checksum="20220421172929" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20220421172929" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220424210802" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220421172929" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\CompBase.json" checksum="20211110093724" errormsg=""/>
@@ -20,7 +20,35 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-
+      <File url="Application_Desktop.xadl" checksum="20220424212138" errormsg=""/>
+      <File url="FrameBase\Form_Left.xfdl" checksum="20220424211810" errormsg=""/>
+      <File url="Base\frm_ask.xfdl" checksum="20220422162915" errormsg=""/>
+      <File url="Base\frm_attend.xfdl" checksum="20220422162918" errormsg=""/>
+      <File url="Base\frm_bhcareer.xfdl" checksum="20220422162922" errormsg=""/>
+      <File url="Base\frm_bhrequest.xfdl" checksum="20220422162925" errormsg=""/>
+      <File url="Base\frm_book.xfdl" checksum="20220422162927" errormsg=""/>
+      <File url="Base\frm_fee.xfdl" checksum="20220422162931" errormsg=""/>
+      <File url="Base\frm_grade.xfdl" checksum="20220422162933" errormsg=""/>
+      <File url="Base\frm_helpcareer.xfdl" checksum="20220422162935" errormsg=""/>
+      <File url="Base\frm_helplist.xfdl" checksum="20220422162937" errormsg=""/>
+      <File url="Base\frm_hhcareer.xfdl" checksum="20220422162940" errormsg=""/>
+      <File url="Base\frm_hhrequest.xfdl" checksum="20220422162942" errormsg=""/>
+      <File url="Base\frm_lectureSchedule.xfdl" checksum="20220422162944" errormsg=""/>
+      <File url="Base\frm_lecturescore.xfdl" checksum="20220422162946" errormsg=""/>
+      <File url="Base\frm_militarycareer.xfdl" checksum="20220422162948" errormsg=""/>
+      <File url="Base\frm_militaryrequest.xfdl" checksum="20220422123339" errormsg=""/>
+      <File url="Base\frm_moneycareer.xfdl" checksum="20220422123344" errormsg=""/>
+      <File url="Base\frm_moneylist.xfdl" checksum="20220422163017" errormsg=""/>
+      <File url="Base\frm_movecareer.xfdl" checksum="20220422163023" errormsg=""/>
+      <File url="Base\frm_moverequest.xfdl" checksum="20220422163027" errormsg=""/>
+      <File url="Base\frm_mypage.xfdl" checksum="20220422163036" errormsg=""/>
+      <File url="Base\frm_Ok.xfdl" checksum="20220422163040" errormsg=""/>
+      <File url="Base\frm_seasoncareer.xfdl" checksum="20220422163043" errormsg=""/>
+      <File url="Base\frm_seasonrequest.xfdl" checksum="20220422163047" errormsg=""/>
+      <File url="Base\frm_timetable.xfdl" checksum="20220422163050" errormsg=""/>
+      <File url="FrameBase\Form_Tab.xfdl" checksum="20220424212038" errormsg=""/>
+      <File url="FrameBase\Form_Top.xfdl" checksum="20220422150344" errormsg=""/>
+      <File url="FrameBase\Form_Work.xfdl" checksum="20220424211240" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

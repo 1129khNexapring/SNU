@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AppVariables version="2.0">
   <Datasets>
-    <Dataset id="Dataset0">
+    <Dataset id="gds_menu">
       <ColumnInfo>
         <Column id="LIST_ID" type="STRING" size="256"/>
         <Column id="LIST" type="STRING" size="256"/>
@@ -219,6 +219,13 @@
           <Col id="FORM_URL">Base::frm_ask.xfdl</Col>
         </Row>
       </Rows>
+    </Dataset>
+    <Dataset id="p_openForm">
+      <ColumnInfo>
+        <Column id="LIST_ID" type="STRING" size="256"/>
+        <Column id="LIST" type="STRING" size="256"/>
+        <Column id="FORM_URL" type="STRING" size="256"/>
+      </ColumnInfo>
     </Dataset>
   </Datasets>
   <Variables/>
