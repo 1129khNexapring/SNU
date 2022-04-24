@@ -750,8 +750,7 @@ input::-ms-clear,input::-ms-reveal
 .Tab .tabbuttonitemTab
 {
 	color : #333333;
-	background : #fcfcfc;
-	background : linear-gradient(to top, #fcfcfc, #fafafa);
+	background : #657ec2;
 	border : 1px solid #c7c7c7;
 }
 .DatePickerControl
@@ -1241,8 +1240,7 @@ input::-ms-clear,input::-ms-reveal
 #nexacontainer .Tab .tabbuttonitemTab[status=mouseover]
 {
 	border : 1px solid #b1b1b1;
-	background : #dddcdc;
-	background : linear-gradient(to top, #dddcdc, #fefefe);
+	background : #657ec2;
 }
 #nexacontainer .Tab .tabbuttonitemTab[status=focused]
 {
@@ -1598,7 +1596,7 @@ input::-ms-clear,input::-ms-reveal
 #nexacontainer .Tab .tabbuttonitemTab[userstatus=selected]
 {
 	color : #dee4ef;
-	background : #1055a1;
+	background : #657ec2;
 	border : 1px solid #1055a1;
 }
 #nexacontainer .DatePickerControl .body .weekitem[userstatus=saturday]
@@ -1904,7 +1902,7 @@ input::-ms-clear,input::-ms-reveal
 #nexacontainer .Tab .tabbuttonitemTab[status=disabled]
 {
 	color : #ababab;
-	background : #e7e7e7;
+	background : #657ec2;
 }
 #nexacontainer .Tab .tabbuttonitemTab .tabbuttonitemtext[status=disabled]
 {
@@ -2016,13 +2014,13 @@ input::-ms-clear,input::-ms-reveal
 #nexacontainer .Tab .tabbuttonitemTab[status=focused][userstatus=selected]
 {
 	color : #dee4ef;
-	background : #1055a1;
+	background : #657ec2;
 	border : 1px solid #1055a1;
 }
 #nexacontainer .Tab .tabbuttonitemTab[status=disabled][userstatus=selected]
 {
 	border : 1px solid #c7d4e2;
-	background : #94a9bf;
+	background : #657ec2;
 }
 #nexacontainer .DatePickerControl .body .dayitem[status=mouseover][userstatus=saturday]
 {
