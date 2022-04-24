@@ -1,5 +1,7 @@
 package org.ttt.snu.admin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.ttt.snu.admin.domain.Admin;
 import org.ttt.snu.admin.service.AdminService;
+import org.ttt.snu.student.domain.Student;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 
 @Controller
 public class AdminController {
@@ -38,6 +42,25 @@ public class AdminController {
 		}
 		
 		
+	}
+	
+	@RequestMapping(value="/student/list.snu", method=RequestMethod.GET)
+	public NexacroResult printStudent() {
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Student> studentList = aService.printAllStudent();
+		if(!studentList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_Info", studentList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
 	}
 
 }

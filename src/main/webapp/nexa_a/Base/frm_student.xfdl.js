@@ -23,7 +23,12 @@
 
 
             obj = new Dataset("ds_Info", this);
-            obj._setContents("<ColumnInfo><Column id=\"S_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"S_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"D_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"S_EMAIL\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"sRrn\" type=\"STRING\" size=\"256\"/><Column id=\"sPassword\" type=\"STRING\" size=\"256\"/><Column id=\"sAddress\" type=\"STRING\" size=\"256\"/><Column id=\"sEmail\" type=\"STRING\" size=\"256\"/><Column id=\"sGender\" type=\"STRING\" size=\"256\"/><Column id=\"sPhone\" type=\"STRING\" size=\"256\"/><Column id=\"sAddmission\" type=\"STRING\" size=\"256\"/><Column id=\"absenceYN\" type=\"STRING\" size=\"256\"/><Column id=\"transferYN\" type=\"STRING\" size=\"256\"/><Column id=\"dCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_dept", this);
+            obj._setContents("<ColumnInfo><Column id=\"DEPT_CD\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"DEPT_CD\">D001</Col><Col id=\"DEPT_NAME\">국어국문학과</Col></Row><Row><Col id=\"DEPT_CD\">D002</Col><Col id=\"DEPT_NAME\">영어교육과</Col></Row><Row><Col id=\"DEPT_CD\">D999</Col><Col id=\"DEPT_NAME\">서양조소학과</Col></Row><Row><Col id=\"DEPT_CD\">D201</Col><Col id=\"DEPT_NAME\">수학과</Col></Row><Row><Col id=\"DEPT_CD\">D100</Col><Col id=\"DEPT_NAME\">경영학과</Col></Row><Row><Col id=\"DEPT_CD\">D101</Col><Col id=\"DEPT_NAME\">회계사무학과</Col></Row><Row><Col id=\"DEPT_CD\">D901</Col><Col id=\"DEPT_NAME\">서양화과</Col></Row><Row><Col id=\"DEPT_CD\">D902</Col><Col id=\"DEPT_NAME\">동양화과</Col></Row><Row><Col id=\"DEPT_CD\">D301</Col><Col id=\"DEPT_NAME\">기계공학과</Col></Row><Row><Col id=\"DEPT_CD\">D003</Col><Col id=\"DEPT_NAME\">역사학과</Col></Row><Row><Col id=\"DEPT_CD\">D102</Col><Col id=\"DEPT_NAME\">빅데이터응용학과</Col></Row><Row><Col id=\"DEPT_CD\">D302</Col><Col id=\"DEPT_NAME\">화학공학과</Col></Row><Row><Col id=\"DEPT_CD\">D303</Col><Col id=\"DEPT_NAME\">컴퓨터공학과</Col></Row><Row><Col id=\"DEPT_CD\">D304</Col><Col id=\"DEPT_NAME\">생명공학과</Col></Row><Row><Col id=\"DEPT_CD\">D202</Col><Col id=\"DEPT_NAME\">수학교육과</Col></Row><Row><Col id=\"DEPT_CD\">D305</Col><Col id=\"DEPT_NAME\">전자공학과</Col></Row><Row><Col id=\"DEPT_CD\">D306</Col><Col id=\"DEPT_NAME\">전기공학과</Col></Row><Row><Col id=\"DEPT_CD\">D307</Col><Col id=\"DEPT_NAME\">건축학과</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -31,7 +36,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_Info");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"184\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학생번호\"/><Cell col=\"1\" text=\"학생명\"/><Cell col=\"2\" text=\"학과\"/><Cell col=\"3\" text=\"이메일\"/></Band><Band id=\"body\"><Cell text=\"bind:S_CODE\"/><Cell col=\"1\" text=\"bind:S_NAME\"/><Cell col=\"2\" text=\"bind:D_CODE\"/><Cell col=\"3\" text=\"bind:S_EMAIL\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"184\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학생번호\"/><Cell col=\"1\" text=\"학생명\"/><Cell col=\"2\" text=\"학과\"/><Cell col=\"3\" text=\"이메일\"/></Band><Band id=\"body\"><Cell text=\"bind:sCode\"/><Cell col=\"1\" text=\"bind:sName\"/><Cell col=\"2\" text=\"bind:dCode\" displaytype=\"combotext\" combodataset=\"ds_dept\" combodatacol=\"DEPT_NAME\" combocodecol=\"DEPT_CD\"/><Cell col=\"3\" text=\"bind:sEmail\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Div("Div00","31","393","1031","262",null,null,null,null,null,null,this);
@@ -140,6 +145,11 @@
             obj = new Edit("Edit05","751","190","240","43",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("17");
             this.Div00.addChild(obj.name, obj);
+
+            obj = new Button("Button00","32","91","140","31",null,null,null,null,null,null,this);
+            obj.set_taborder("2");
+            obj.set_text("조회");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,670,this,function(p){});
@@ -162,8 +172,29 @@
         this.registerScript("frm_student.xfdl", function() {
 
 
-        this.frm_student_onload = function(obj,e)
+        this.Button00_onclick = function(obj,e)
         {
+        	this.transaction(
+        		"tr_select"
+        		,"SnuURL::student/list.snu"
+        		,""
+        		,"ds_Info=out_Info"
+        		,""
+        		,"fn_callback_tran"
+        	);
+
+        this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+        {
+        	if(id=="tr_select")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("조회 실패 : "+ sErrorMsg);
+        			return;
+        		}
+        		this.alert("조회 성공 : " + this.ds_Info.getRowCount() + "건");
+        	}
+        }
 
         };
 
@@ -176,6 +207,7 @@
             this.Div00.form.Static00.addEventHandler("onclick",this.Div00_Static00_onclick,this);
             this.Div00.form.MaskEdit00.addEventHandler("onchanged",this.Div00_MaskEdit00_onchanged,this);
             this.Div00.form.Radio00.addEventHandler("onitemchanged",this.Div00_Radio00_onitemchanged,this);
+            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
         };
         this.loadIncludeScript("frm_student.xfdl");
         this.loadPreloadList();
