@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_student" width="1080" height="670" titletext="New Form" onload="frm_student_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="Grid00" taborder="0" left="30" top="132" width="1030" height="218" binddataset="ds_Info" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="184"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학생번호"/>
+                <Cell col="1" text="학생명"/>
+                <Cell col="2" text="학과"/>
+                <Cell col="3" text="이메일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:S_CODE"/>
+                <Cell col="1" text="bind:S_NAME"/>
+                <Cell col="2" text="bind:D_CODE"/>
+                <Cell col="3" text="bind:S_EMAIL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="" left="31" top="393" width="1031" height="262" border="1px solid" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="이름" left="14" top="15" width="84" height="36" onclick="Div00_Static00_onclick" textAlign="center"/>
+              <Edit id="Edit00" taborder="1" left="119" top="9" width="175" height="47"/>
+              <Static id="Static01" taborder="2" text="학번" left="310" top="14" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit01" taborder="3" left="421" top="6" width="175" height="47"/>
+              <Static id="Static02" taborder="4" text="전화번호" left="14" top="106" width="84" height="36" textAlign="center"/>
+              <MaskEdit id="MaskEdit00" taborder="5" left="119" top="101" width="175" height="47" format="###-####-####" type="string" onchanged="Div00_MaskEdit00_onchanged"/>
+              <Static id="Static03" taborder="6" text="이메일" left="14" top="197" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit02" taborder="7" left="119" top="193" width="175" height="47"/>
+              <Static id="Static04" taborder="8" text="학과" left="310" top="105" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit03" taborder="9" left="421" top="98" width="175" height="47"/>
+              <Static id="Static05" taborder="10" text="입학일" left="310" top="196" width="84" height="36" textAlign="center"/>
+              <MaskEdit id="MaskEdit01" taborder="11" left="411" top="190" width="197" height="49" type="string" format="####-##-##"/>
+              <Static id="Static06" taborder="12" text="성별" left="631" top="12" width="84" height="36" textAlign="center"/>
+              <Radio id="Radio00" taborder="13" left="751" top="7" width="219" height="46" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" onitemchanged="Div00_Radio00_onitemchanged">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">M</Col>
+                      <Col id="datacolumn">남</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">W</Col>
+                      <Col id="datacolumn">여</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <Static id="Static07" taborder="14" text="주소" left="631" top="103" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit04" taborder="15" left="751" top="98" width="250" height="43"/>
+              <Static id="Static08" taborder="16" text="주민등록번호" left="631" top="194" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit05" taborder="17" left="751" top="190" width="240" height="43"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="S_CODE" type="STRING" size="256"/>
+          <Column id="S_NAME" type="STRING" size="256"/>
+          <Column id="S_RRN" type="STRING" size="256"/>
+          <Column id="S_PASSWORD" type="STRING" size="256"/>
+          <Column id="S_ADDRESS" type="STRING" size="256"/>
+          <Column id="S_EMAIL" type="STRING" size="256"/>
+          <Column id="S_GENDER" type="STRING" size="256"/>
+          <Column id="S_PHONE" type="STRING" size="256"/>
+          <Column id="S_ADDMISSION" type="STRING" size="256"/>
+          <Column id="ABSENCE_YN" type="STRING" size="256"/>
+          <Column id="TRANSFER_YN" type="STRING" size="256"/>
+          <Column id="D_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_Info">
+        <ColumnInfo>
+          <Column id="S_CODE" type="STRING" size="256"/>
+          <Column id="S_NAME" type="STRING" size="256"/>
+          <Column id="D_CODE" type="STRING" size="256"/>
+          <Column id="S_EMAIL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+
+this.frm_student_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>
