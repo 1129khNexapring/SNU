@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_boardWriteForm" width="1080" height="670" titletext="New Form">
+  <Form id="frm_boardWriteForm" width="1080" height="590" titletext="New Form">
     <Layouts>
-      <Layout height="670" mobileorientation="landscape" width="1080" stepcount="2">
+      <Layout height="590" mobileorientation="landscape" width="1080" stepcount="0">
         <Static id="Static00" taborder="0" text="No" left="340" top="120" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
         <Edit id="edt_boardNo" taborder="1" left="395" top="120" width="145" height="30" borderRadius="4px"/>
-        <Edit id="edt_boardCount" taborder="2" left="595" top="120" width="160" height="30" borderRadius="4px"/>
+        <Edit id="edt_boardCount" taborder="2" left="595" top="120" width="160" height="30" borderRadius="4px" onchanged="edt_boardCount_onchanged"/>
         <Edit id="edt_boardWriter" taborder="3" left="395" top="150" width="145" height="30" borderRadius="4px"/>
         <Edit id="edt_boardWriteDate" taborder="4" left="595" top="150" width="160" height="30" borderRadius="4px"/>
         <Static id="Static04" taborder="5" text="1번 게시글" left="475" top="40" width="190" height="60" onclick="Static04_onclick" font="normal 25pt/normal &quot;Arial&quot;"/>
@@ -25,11 +25,11 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.transaction(
 		"tr_register"  	 	 	 	 	      // 1.ID
-		,"http://127.0.0.1.9999/board/register.snu"   	  // 2.URL
+		,"SnuUrl::board/register.snu?in_var1=1"   	  // 2.URL
 		,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
 		,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
-		,"in_var1=" + nexacro.wrapQuote(name) // 5.InVar : F->S(var)
-		,"fn_callback_tran"    				  // 6.callback function(transaction 완료시 호출되는 함수)
+		,"in_var1=1"  			// 5.InVar : F->S(var)
+		,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
 	);
 };
 
@@ -47,14 +47,5 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 };
 ]]></Script>
     <Objects/>
-    <Bind>
-      <BindItem id="item0" compid="edt_boardNo" propid="value" datasetid="ds_boardList" columnid="boardNo"/>
-      <BindItem id="item1" compid="edt_boardWriter" propid="value" datasetid="ds_boardList" columnid="board_writer"/>
-      <BindItem id="item2" compid="edt_boardCount" propid="value" datasetid="ds_boardList" columnid="board_count"/>
-      <BindItem id="item3" compid="edt_boardWriteDate" propid="value" datasetid="ds_boardList" columnid="board_date"/>
-      <BindItem id="item4" compid="edt_boardTitle" propid="value" datasetid="ds_boardList" columnid="board_title"/>
-      <BindItem id="item5" compid="ta_boardContent" propid="value" datasetid="ds_boardList" columnid="board_content"/>
-      <BindItem id="item6" compid="edt_file" propid="value" datasetid="ds_boardList" columnid="board_fileName"/>
-    </Bind>
   </Form>
 </FDL>
