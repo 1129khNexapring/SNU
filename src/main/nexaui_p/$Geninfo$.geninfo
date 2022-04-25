@@ -11,7 +11,7 @@
     <Info project="C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\" generated="C:\Users\HyoGwang\Documents\nexacro\17.1\outputs\nexaui_p\">
       <File url="environment.xml" checksum="20220421172354" errormsg=""/>
       <File url="typedefinition.xml" checksum="20220425113243" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220425120007" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220425145211" errormsg=""/>
       <File url="_resource_\_theme_\default\theme.xcss" checksum="20220421172355" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
@@ -26,7 +26,7 @@
       <File url="FrameBase\frm_attendance.xfdl" checksum="20220422123749" errormsg=""/>
       <File url="Base\frm_grade.xfdl" checksum="20220422123641" errormsg=""/>
       <File url="Base\frm_attendance.xfdl" checksum="20220422124025" errormsg=""/>
-      <File url="Base\frm_board.xfdl" checksum="20220425113545" errormsg=""/>
+      <File url="Base\frm_board.xfdl" checksum="20220425173343" errormsg=""/>
       <File url="Base\frm_depart.xfdl" checksum="20220422124220" errormsg=""/>
       <File url="Base\frm_deptInfo.xfdl" checksum="20220422124737" errormsg=""/>
       <File url="Base\frm_dept.xfdl" checksum="20220422124737" errormsg=""/>
@@ -42,7 +42,10 @@
       <File url="FrameBase\Form_Work.xfdl" checksum="20220422163539" errormsg=""/>
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220425092214" errormsg=""/>
       <File url="FrameBase\Form_Main.xfdl" checksum="20220422163539" errormsg=""/>
-      <File url="Base\frm_boardWriteForm.xfdl" checksum="20220425123532" errormsg=""/>
+      <File url="Base\frm_boardWriteForm.xfdl" checksum="20220425165606" errormsg=""/>
+      <File url="Base\pagging.xfdl" checksum="20220425152940" errormsg=""/>
+      <File url="Base\pagging.xjs" checksum="20220425152940" errormsg=""/>
+      <File url="Base\frm_boardDetailView.xfdl" checksum="20220425173257" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

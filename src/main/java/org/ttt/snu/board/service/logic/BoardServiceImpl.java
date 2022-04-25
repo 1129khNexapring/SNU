@@ -27,9 +27,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> printAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> printAll(Board board) {
+		List<Board> boardList = bStore.selectAll(sqlSession, board);
+		return boardList;
 	}
 
 	@Override

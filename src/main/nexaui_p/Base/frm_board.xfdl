@@ -3,7 +3,7 @@
   <Form id="frm_board" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="grd_boardList" taborder="0" left="20" top="30" width="1037" height="620" binddataset="ds_boardColumn" autofittype="col" borderRadius="2px">
+        <Grid id="grd_boardList" taborder="0" left="20" top="30" width="1037" height="620" binddataset="ds_boardColumn" autofittype="col" borderRadius="2px" oncelldblclick="grd_boardList_oncelldblclick" cursor="pointer">
           <Formats>
             <Format id="default">
               <Columns>
@@ -51,6 +51,11 @@
 this.btn_boardWrite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.go("Base::frm_boardWriteForm.xfdl");		
+};
+
+this.grd_boardList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.go("Base::frm_boardDetailView.xfdl");
 };
 ]]></Script>
   </Form>

@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +28,27 @@ public class BoardController {
 	@Autowired
 	private BoardServiceImpl bService;
 	
+	// 강의 게시판 조회
+	@RequestMapping(value="/board/list.snu", method=RequestMethod.GET)
+	public NexacroResult boardListView(
+				@ModelAttribute Board board) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Board> boardList = bService.printAll(board);
+		if(!boardList.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addDataSet("out_emp", boardList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
 	// 강의 게시판 등록
 	@RequestMapping(value="/board/register.snu", method=RequestMethod.POST)
 	public NexacroResult registerBoard(
@@ -37,7 +60,6 @@ public class BoardController {
 		int i;
 		int iResult = 0;
 		for(i = 0; i < inBoardList.getRowCount(); i++) {
-			int    rowType          = inBoardList.getRowType(i);
 			int    board_no         = dsGet(inBoardList, i, "board_no") != ""
 						             ? Integer.parseInt(dsGet(inBoardList, i, "board_no")) : 0;
 			String board_title      = dsGet(inBoardList, i, "board_title");
@@ -47,6 +69,8 @@ public class BoardController {
 			String p_code           = dsGet(inBoardList, i, "p_code");
 			String board_fileName   = dsGet(inBoardList, i, "board_fileName");
 			String board_fileReName = dsGet(inBoardList, i, "board_fileReName");
+			String board_writer     = dsGet(inBoardList, i, "board_writer");
+			String board_count      = dsGet(inBoardList, i, "board_count");
 			
 		Board board = new Board(
 					board_no
@@ -56,7 +80,9 @@ public class BoardController {
 				,	b_status
 				,	p_code
 				,	board_fileName
-				,	board_fileReName);
+				,	board_fileReName
+				,   board_writer
+				,	board_count);
 		iResult += bService.registerBoard(board);
 		}
 		if(iResult < 0) {
