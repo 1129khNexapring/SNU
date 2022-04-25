@@ -88,6 +88,7 @@ public class BoardController {
 		if(iResult < 0) {
 			nErrorCode  = -1;
 			strErrorMsg = "FAIL";
+			System.out.println(strErrorMsg);
 		}else {
 			nErrorCode  = 0;
 			strErrorMsg = "SUCC";

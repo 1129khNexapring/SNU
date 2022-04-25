@@ -25,8 +25,8 @@
       <File url="FrameBase\frm_grade.xfdl" checksum="20220422123641" errormsg=""/>
       <File url="FrameBase\frm_attendance.xfdl" checksum="20220422123749" errormsg=""/>
       <File url="Base\frm_grade.xfdl" checksum="20220422123641" errormsg=""/>
-      <File url="Base\frm_attendance.xfdl" checksum="20220422124025" errormsg=""/>
-      <File url="Base\frm_board.xfdl" checksum="20220425173343" errormsg=""/>
+      <File url="Base\frm_attendance.xfdl" checksum="20220425210348" errormsg=""/>
+      <File url="Base\frm_board.xfdl" checksum="20220425191116" errormsg=""/>
       <File url="Base\frm_depart.xfdl" checksum="20220422124220" errormsg=""/>
       <File url="Base\frm_deptInfo.xfdl" checksum="20220422124737" errormsg=""/>
       <File url="Base\frm_dept.xfdl" checksum="20220422124737" errormsg=""/>
@@ -42,7 +42,7 @@
       <File url="FrameBase\Form_Work.xfdl" checksum="20220422163539" errormsg=""/>
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220425092214" errormsg=""/>
       <File url="FrameBase\Form_Main.xfdl" checksum="20220422163539" errormsg=""/>
-      <File url="Base\frm_boardWriteForm.xfdl" checksum="20220425165606" errormsg=""/>
+      <File url="Base\frm_boardWriteForm.xfdl" checksum="20220425200314" errormsg=""/>
       <File url="Base\pagging.xfdl" checksum="20220425152940" errormsg=""/>
       <File url="Base\pagging.xjs" checksum="20220425152940" errormsg=""/>
       <File url="Base\frm_boardDetailView.xfdl" checksum="20220425173257" errormsg=""/>

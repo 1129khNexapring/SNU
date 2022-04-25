@@ -21,6 +21,6 @@
 		SELECT * FROM BOARD ORDER BY BOARD_NO DESC
 	</select>
 	<insert id="insertBoard">
-		INSERT INTO VALUES(B_SEQ_NO.NEXTVAL, #{boardNo}, #{boardTitile}, #{boardContent}, DEFAULT, DEFAULT, #{pCode}, #{boardFileName}, #{boardFileReName})
+		INSERT INTO VALUES(B_SEQ_NO.NEXTVAL, #{board_no}, #{boar_titile}, #{board_content}, DEFAULT, DEFAULT, #{p_code}, #{board_fileName}, #{board_fileReName}, #{board_writer}, #{board_count})
 	</insert>
 </mapper> 

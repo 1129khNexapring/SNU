@@ -13,7 +13,7 @@
             this.set_titletext("New Form");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,670);
+                this._setFormPosition(1080,590);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -120,39 +120,13 @@
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","",1080,670,this,function(p){});
+            obj = new Layout("default","",1080,590,this,function(p){});
             obj.set_mobileorientation("landscape");
-            obj.set_stepcount("2");
+            obj.set_stepcount("0");
             this.addLayout(obj.name, obj);
             
             // BindItem Information
-            obj = new BindItem("item0","edt_boardNo","value","ds_boardList","boardNo");
-            this.addChild(obj.name, obj);
-            obj.bind();
 
-            obj = new BindItem("item1","edt_boardWriter","value","ds_boardList","board_writer");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item2","edt_boardCount","value","ds_boardList","board_count");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item3","edt_boardWriteDate","value","ds_boardList","board_date");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item4","edt_boardTitle","value","ds_boardList","board_title");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item5","ta_boardContent","value","ds_boardList","board_content");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item6","edt_file","value","ds_boardList","board_fileName");
-            this.addChild(obj.name, obj);
-            obj.bind();
             
             // TriggerItem Information
 
@@ -170,11 +144,11 @@
         {
         	this.transaction(
         		"tr_register"  	 	 	 	 	      // 1.ID
-        		,"http://127.0.0.1.9999/board/register.snu"   	  // 2.URL
+        		,"SnuUrl::board/register.snu?in_var1=1"   	  // 2.URL
         		,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
         		,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
-        		,"in_var1=" + nexacro.wrapQuote(name) // 5.InVar : F->S(var)
-        		,"fn_callback_tran"    				  // 6.callback function(transaction 완료시 호출되는 함수)
+        		,"in_var1=1"  			// 5.InVar : F->S(var)
+        		,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
         	);
         };
 
@@ -197,6 +171,7 @@
         this.on_initEvent = function()
         {
             this.Static00.addEventHandler("onclick",this.Static00_onclick,this);
+            this.edt_boardCount.addEventHandler("onchanged",this.edt_boardCount_onchanged,this);
             this.Static04.addEventHandler("onclick",this.Static04_onclick,this);
             this.Static00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.Static00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
