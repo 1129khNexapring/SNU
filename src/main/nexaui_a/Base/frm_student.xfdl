@@ -19,14 +19,14 @@
               <Band id="head">
                 <Cell text="학생번호"/>
                 <Cell col="1" text="학생명"/>
-                <Cell col="2" text="학과"/>
+                <Cell col="2" text="학과명"/>
                 <Cell col="3" text="이메일"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:sCode"/>
-                <Cell col="1" text="bind:sName"/>
-                <Cell col="2" text="bind:dCode" displaytype="combotext" combodataset="ds_dept" combodatacol="DEPT_NAME" combocodecol="DEPT_CD"/>
-                <Cell col="3" text="bind:sEmail"/>
+                <Cell text="bind:sCode" textAlign="center"/>
+                <Cell col="1" text="bind:sName" textAlign="center"/>
+                <Cell col="2" text="bind:dCode" displaytype="combotext" combodataset="ds_dept" combodatacol="DEPT_NAME" combocodecol="DEPT_CD" textAlign="center"/>
+                <Cell col="3" text="bind:sEmail" textAlign="center"/>
               </Band>
             </Format>
           </Formats>
@@ -35,17 +35,17 @@
           <Layouts>
             <Layout>
               <Static id="Static00" taborder="0" text="이름" left="14" top="15" width="84" height="36" onclick="Div00_Static00_onclick" textAlign="center"/>
-              <Edit id="Edit00" taborder="1" left="119" top="9" width="175" height="47"/>
+              <Edit id="Edit00" taborder="1" left="119" top="9" width="175" height="47" readonly="false" enable="true"/>
               <Static id="Static01" taborder="2" text="학번" left="310" top="14" width="84" height="36" textAlign="center"/>
-              <Edit id="Edit01" taborder="3" left="421" top="6" width="175" height="47"/>
+              <Edit id="Edit01" taborder="3" left="421" top="12" width="175" height="47"/>
               <Static id="Static02" taborder="4" text="전화번호" left="14" top="106" width="84" height="36" textAlign="center"/>
               <MaskEdit id="MaskEdit00" taborder="5" left="119" top="101" width="175" height="47" format="###-####-####" type="string" onchanged="Div00_MaskEdit00_onchanged"/>
               <Static id="Static03" taborder="6" text="이메일" left="14" top="197" width="84" height="36" textAlign="center"/>
               <Edit id="Edit02" taborder="7" left="119" top="193" width="175" height="47"/>
               <Static id="Static04" taborder="8" text="학과" left="310" top="105" width="84" height="36" textAlign="center"/>
-              <Edit id="Edit03" taborder="9" left="421" top="98" width="175" height="47"/>
+              <Edit id="Edit03" taborder="9" left="421" top="104" width="175" height="47"/>
               <Static id="Static05" taborder="10" text="입학일" left="310" top="196" width="84" height="36" textAlign="center"/>
-              <MaskEdit id="MaskEdit01" taborder="11" left="411" top="190" width="197" height="49" type="string" format="####-##-##"/>
+              <MaskEdit id="MaskEdit01" taborder="11" left="411" top="196" width="197" height="49" type="string" format="####-##-##"/>
               <Static id="Static06" taborder="12" text="성별" left="631" top="12" width="84" height="36" textAlign="center"/>
               <Radio id="Radio00" taborder="13" left="751" top="7" width="219" height="46" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" onitemchanged="Div00_Radio00_onitemchanged">
                 <Dataset id="innerdataset">
@@ -72,7 +72,25 @@
             </Layout>
           </Layouts>
         </Div>
-        <Button id="Button00" taborder="2" text="조회" left="32" top="91" width="140" height="31" onclick="Button00_onclick"/>
+        <Button id="btn_retrive" taborder="2" text="조회" left="270" top="95" width="140" height="31" onclick="btn_retrive_onclick" onrbuttondown="btn_retrive_onrbuttondown"/>
+        <Combo id="combo_search" taborder="3" text="Combo00" left="30" top="93" width="108" height="32" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">dCode</Col>
+                <Col id="datacolumn">학과명</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="Edit00" taborder="4" left="146" top="95" width="121" height="30"/>
+        <Button id="btn_save" taborder="5" text="Save" left="830" top="94" width="73" height="31" onclick="btn_save_onclick"/>
+        <Button id="btn_add" taborder="6" text="Plus" left="909" top="94" width="73" height="31" onclick="btn_add_onclick"/>
+        <Button id="btn_delete" taborder="7" text="DELETE" left="986" top="94" width="73" height="31" onclick="btn_delete_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -191,7 +209,7 @@
     </Objects>
     <Script type="xscript5.1"><![CDATA[
 
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+this.btn_retrive_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.transaction(
 		"tr_select"
@@ -201,7 +219,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		,""
 		,"fn_callback_tran"
 	);
-
+this.out_var="";
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 {
 	if(id=="tr_select")
@@ -213,9 +231,66 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		}
 		this.alert("조회 성공 : " + this.ds_Info.getRowCount() + "건");
 	}
+	if(id== "tr_save")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("저장 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert(this.out_var + ">>저장성공");
+	}
 }
 
 };
+
+
+
+this.btn_retrive_onrbuttondown = function(obj:nexacro.Button,e:nexacro.MouseEventInfo)
+{	
+	var eValue = this.Edit00.value;
+	var aRow = this.ds_dept.findRow("DEPT_NAME", eValue);
+	var strColId = this.ds_dept.getColumn(aRow, "DEPT_CD");
+	this.ds_Info.filter("dCode=='"+strColId+"'");
+	//eValue가지고 ds_dept에서 DEPT_CD에 해당하는 값을 가져와야되고
+	//그 다음 필터
+	
+};
+
+this.btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var name = this.Div00.form.Edit00.value;
+	this.transaction(
+	"tr_save"
+	,"SnuURL::student/changeInfo.snu"
+	,"in_student=ds_Info:U"
+	,""
+	,"in_var1=" + nexacro.wrapQuote(name)
+	,"fn_callback_tran"
+	)
+};
+
+this.btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_Info.addRow();
+	this.ds_Info.setColumn(this.ds_Info.rowposition, "sAddmission", "20220425");
+};
+
+this.btn_delete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_Info.deleteRow(this.ds_Info.rowposition);
+};
 ]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_Info" columnid="sName"/>
+      <BindItem id="item1" compid="Div00.form.MaskEdit00" propid="value" datasetid="ds_Info" columnid="sPhone"/>
+      <BindItem id="item2" compid="Div00.form.Edit02" propid="value" datasetid="ds_Info" columnid="sEmail"/>
+      <BindItem id="item3" compid="Div00.form.Edit01" propid="value" datasetid="ds_Info" columnid="sCode"/>
+      <BindItem id="item4" compid="Div00.form.Edit03" propid="value" datasetid="ds_Info" columnid="dCode"/>
+      <BindItem id="item5" compid="Div00.form.MaskEdit01" propid="value" datasetid="ds_Info" columnid="sAddmission"/>
+      <BindItem id="item6" compid="Div00.form.Radio00" propid="value" datasetid="ds_Info" columnid="sGender"/>
+      <BindItem id="item7" compid="Div00.form.Edit04" propid="value" datasetid="ds_Info" columnid="sAddress"/>
+      <BindItem id="item8" compid="Div00.form.Edit05" propid="value" datasetid="ds_Info" columnid="sRrn"/>
+    </Bind>
   </Form>
 </FDL>
