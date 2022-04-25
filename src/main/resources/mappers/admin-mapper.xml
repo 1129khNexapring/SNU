@@ -5,23 +5,37 @@
   
 <mapper namespace="AdminMapper">
 	<resultMap type="org.ttt.snu.admin.domain.Admin" id="adminResultMap">
-		<id property="aCode" column="A_CODE"/>
-		<result property="aPassword" column="A_PASSWORD"/>
+		<id property="aCode" 			column="A_CODE"/>
+		<result property="aPassword"    column="A_PASSWORD"/>
 	</resultMap>
 	<resultMap type="org.ttt.snu.student.domain.Student" id="studentResultMap">
-		<id property="sCode" column="S_CODE"/>
-		<result property="sName" column="S_NAME"/>
-		<result property="sRrn" column="S_RRN"/>
-		<result property="sPassword" column="S_PASSWORD"/>
-		<result property="sAddress" column="S_ADDRESS"/>
-		<result property="sEmail" column="S_EMAIL"/>
-		<result property="sGender" column="S_GENDER"/>
-		<result property="sPhone" column="S_PHONE"/>
+		<id property="sCode" 		   column="S_CODE"/>
+		<result property="sName"       column="S_NAME"/>
+		<result property="sRrn"        column="S_RRN"/>
+		<result property="sPassword"   column="S_PASSWORD"/>
+		<result property="sAddress"    column="S_ADDRESS"/>
+		<result property="sEmail"      column="S_EMAIL"/>
+		<result property="sGender"     column="S_GENDER"/>
+		<result property="sPhone"      column="S_PHONE"/>
 		<result property="sAddmission" column="S_ADDMISSION"/>
-		<result property="absenceYN" column="ABSENCE_YN"/>
-		<result property="transferYN" column="TRANSFER_YN"/>
-		<result property="dCode" column="D_CODE"/>
+		<result property="absenceYN"   column="ABSENCE_YN"/>
+		<result property="transferYN"  column="TRANSFER_YN"/>
+		<result property="dCode"       column="D_CODE"/>
 	</resultMap>
+	<resultMap type="org.ttt.snu.professor.domain.Professor" id="professorResultMap">
+		<id property="pCode" 			column="P_CODE"/>
+		<result property="pName"        column="P_NAME"/>
+		<result property="pPassword"    column="P_PASSWORD"/>
+		<result property="pRrn" 		column="P_RRN"/>
+		<result property="pAddress" 	column="P_ADDRESS"/>
+		<result property="pEmail" 		column="P_EMAIL"/>
+		<result property="pGender"      column="P_GENDER"/>
+		<result property="pPhone"       column="P_PHONE"/>
+		<result property="pAddmission"  column="P_ADDMISSION"/>
+		<result property="advisorYN"    column="ADVISOR_YN"/>
+		<result property="dCode" 		column="D_CODE"/>
+	</resultMap>
+	
 		
 	<select id="selectLoginUser" parameterType="org.ttt.snu.admin.domain.Admin" resultMap="adminResultMap">
 		SELECT * FROM ADMIN WHERE A_CODE = #{aCode } AND A_PASSWORD = #{aPassword }
@@ -29,4 +43,15 @@
 	<select id="selectStudentList" resultMap="studentResultMap">
 		SELECT * FROM STUDENT
 	</select>
+	<select id="selectProfessorList" resultMap="professorResultMap">
+		SELECT * FROM PROFESSOR
+	</select>		
+	<insert id="insertStudent">
+		INSERT INTO STUDENT VALUES(#{sCode }, #{sName }, #{sRrn }, #{sPassword }, #{sAddress }, #{sEmail }, #{sGender }, #{sPhone }, DEFAULT, DEFAULT, DEFAULT, #{dCode })
+	</insert>
+	<delete id="deleteStudent" parameterType="string">
+		DELETE FROM STUDENT WHERE S_CODE = #{sCode }
+	</delete>
+	
+	
 </mapper>
