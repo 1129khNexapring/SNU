@@ -48,7 +48,7 @@
         };
         
         // User Script
-        this.registerScript("Form_Work.xfdl", function() {
+        this.registerScript("Form_Main.xfdl", function() {
 
         this.Button00_onclick = function(obj,e)
         {
@@ -64,7 +64,7 @@
         {
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
         };
-        this.loadIncludeScript("Form_Work.xfdl");
+        this.loadIncludeScript("Form_Main.xfdl");
         this.loadPreloadList();
         
         // Remove Reference

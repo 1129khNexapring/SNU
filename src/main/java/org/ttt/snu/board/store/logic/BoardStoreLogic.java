@@ -44,8 +44,8 @@ public class BoardStoreLogic implements BoardStore {
 
 	@Override
 	public int insertBoard(SqlSession sqlSession, Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("BoardMapper.insertBoard", board);
+		return result;
 	}
 
 	@Override
