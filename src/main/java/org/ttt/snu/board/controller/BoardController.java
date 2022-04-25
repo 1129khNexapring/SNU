@@ -9,14 +9,68 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.ttt.snu.board.domain.Board;
 import org.ttt.snu.board.service.logic.BoardServiceImpl;
+
+import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
+import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
+import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
+import com.nexacro17.xapi.data.DataSet;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private BoardServiceImpl bService;
+	
+	// 강의 게시판 등록
+	@RequestMapping(value="/board/register.snu", method=RequestMethod.POST)
+	public NexacroResult registerBoard(
+				  @ParamDataSet  (name="in_boardList") DataSet inBoardList
+				, @ParamVariable(name="in_var1") String inVar1) throws Exception {
+		NexacroResult result = new NexacroResult();
+		int 	nErrorCode  = 0;
+		String  strErrorMsg = "START";
+		int i;
+		int iResult = 0;
+		for(i = 0; i < inBoardList.getRowCount(); i++) {
+			int    rowType          = inBoardList.getRowType(i);
+			int    board_no         = dsGet(inBoardList, i, "board_no") != ""
+						             ? Integer.parseInt(dsGet(inBoardList, i, "board_no")) : 0;
+			String board_title      = dsGet(inBoardList, i, "board_title");
+			String board_content    = dsGet(inBoardList, i, "board_content");
+			String board_date       = dsGet(inBoardList, i, "board_date");
+			String b_status         = dsGet(inBoardList, i, "b_status");
+			String p_code           = dsGet(inBoardList, i, "p_code");
+			String board_fileName   = dsGet(inBoardList, i, "board_fileName");
+			String board_fileReName = dsGet(inBoardList, i, "board_fileReName");
+			
+		Board board = new Board(
+					board_no
+				,	board_title
+				, 	board_content
+				,	board_date
+				,	b_status
+				,	p_code
+				,	board_fileName
+				,	board_fileReName);
+		iResult += bService.registerBoard(board);
+		}
+		if(iResult < 0) {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}else {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("errorMsg", strErrorMsg);
+		result.addVariable("out_var", inVar1);
+		return result;
+	}
 	
 	// 첨부파일 저장
 	public String saveFile1(MultipartFile uploadFile, HttpServletRequest request) {
@@ -44,5 +98,16 @@ public class BoardController {
 		}
 		// 파일명 리턴
 		return renameFileName;
+	}
+	
+	// Dataset value
+	public String dsGet(DataSet ds, int rowNo, String colId) throws Exception {
+		String value;
+		value = ds.getString(rowNo, colId);
+		if(value == null) {
+			return "";
+		}else {
+			return value;
+		}
 	}
 }

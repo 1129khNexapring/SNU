@@ -3,7 +3,7 @@
   <Form id="frm_board" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="grd_board" taborder="0" left="20" top="3" width="1037" height="647" binddataset="ds_boardColumn" autofittype="col">
+        <Grid id="grd_boardList" taborder="0" left="20" top="30" width="1037" height="620" binddataset="ds_boardColumn" autofittype="col" borderRadius="2px">
           <Formats>
             <Format id="default">
               <Columns>
@@ -31,6 +31,7 @@
             </Format>
           </Formats>
         </Grid>
+        <Button id="btn_boardWrite" taborder="1" text="글쓰기" left="22" top="0" width="56" height="25" background="cornflowerblue" borderRadius="6px" onclick="btn_boardWrite_onclick" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -42,14 +43,15 @@
           <Column id="작성자" type="STRING" size="256"/>
         </ColumnInfo>
         <Rows>
-          <Row>
-            <Col id="No">1</Col>
-            <Col id="제목">테스트</Col>
-            <Col id="작성자">장효광</Col>
-            <Col id="작성일">2022.04.22</Col>
-          </Row>
+          <Row/>
         </Rows>
       </Dataset>
     </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_boardWrite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.go("Base::frm_boardWriteForm.xfdl");		
+};
+]]></Script>
   </Form>
 </FDL>

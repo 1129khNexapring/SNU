@@ -16,6 +16,11 @@
             obj = new Dataset("p_openForm", this);
             obj._setContents("<ColumnInfo><Column id=\"MENU_ID\" type=\"STRING\" size=\"256\"/><Column id=\"MENU_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"FORM_URL\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this._addDataset(obj.name, obj);
+
+
+            obj = new Dataset("ds_boardList", this);
+            obj._setContents("<ColumnInfo><Column id=\"boardNo\" type=\"STRING\" size=\"256\"/><Column id=\"boardTitle\" type=\"STRING\" size=\"256\"/><Column id=\"boardContent\" type=\"STRING\" size=\"256\"/><Column id=\"boardDate\" type=\"STRING\" size=\"256\"/><Column id=\"bStatus\" type=\"STRING\" size=\"256\"/><Column id=\"pCode\" type=\"STRING\" size=\"256\"/><Column id=\"boardFileName\" type=\"STRING\" size=\"256\"/><Column id=\"boardFileReName\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this._addDataset(obj.name, obj);
             
             // global variable
 
