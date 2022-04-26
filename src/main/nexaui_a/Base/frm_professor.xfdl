@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_professor" width="1080" height="670" titletext="New Form">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="Grid00" taborder="0" left="30" top="132" width="1030" height="218" binddataset="ds_pInfo" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="68"/>
+                <Column size="80"/>
+                <Column size="71"/>
+                <Column size="153"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="교수번호"/>
+                <Cell col="1" text="교수명"/>
+                <Cell col="2" text="학과명"/>
+                <Cell col="3" text="이메일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:pCode" textAlign="center"/>
+                <Cell col="1" text="bind:pName" textAlign="center"/>
+                <Cell col="2" text="bind:dCode" displaytype="combotext" combodataset="ds_pdept" combocodecol="DEPT_CD" combodatacol="DEPT_NAME" textAlign="center"/>
+                <Cell col="3" text="bind:pEmail" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_pList" taborder="1" text="조회" left="270" top="95" width="140" height="31" onclick="btn_pList_onclick" onrbuttondown="btn_pList_onrbuttondown"/>
+        <Combo id="Combo00" taborder="2" left="30" top="93" width="108" height="32" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">dCode</Col>
+                <Col id="datacolumn">학과명</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="Edit00" taborder="3" left="146" top="95" width="121" height="30"/>
+        <Div id="Div00" taborder="4" text="" left="31" top="393" width="1031" height="262" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="이름" left="14" top="15" width="86" height="36" textAlign="center"/>
+              <Static id="Static01" taborder="1" text="전화번호" left="14" top="106" width="84" height="36" textAlign="center"/>
+              <Static id="Static02" taborder="2" text="이메일" left="14" top="197" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit00" taborder="3" left="119" top="9" width="175" height="47"/>
+              <MaskEdit id="MaskEdit00" taborder="4" left="119" top="101" width="175" height="47" format="###-####-####" type="string"/>
+              <Edit id="Edit01" taborder="5" left="119" top="193" width="175" height="47"/>
+              <Static id="Static03" taborder="6" text="교수번호" left="310" top="14" width="86" height="36" textAlign="center"/>
+              <Static id="Static04" taborder="7" text="학과" left="310" top="105" width="84" height="36" textAlign="center"/>
+              <Static id="Static05" taborder="8" text="임용일" left="310" top="196" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit02" taborder="9" left="421" top="12" width="175" height="47"/>
+              <Edit id="Edit03" taborder="10" left="421" top="104" width="175" height="47"/>
+              <MaskEdit id="MaskEdit01" taborder="11" left="411" top="196" width="197" height="49" format="####-##-##" type="string"/>
+              <Static id="Static06" taborder="12" text="성별" left="631" top="17" width="84" height="36" textAlign="center"/>
+              <Radio id="Radio00" taborder="13" left="751" top="13" width="219" height="46" onitemchanged="Div00_Radio00_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">M</Col>
+                      <Col id="datacolumn">남</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">W</Col>
+                      <Col id="datacolumn">여</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <Static id="Static07" taborder="14" text="주소" left="631" top="103" width="84" height="36" textAlign="center"/>
+              <Edit id="Edit04" taborder="15" left="751" top="104" width="250" height="43"/>
+              <Static id="Static08" taborder="16" text="주민등록번호" left="631" top="194" width="84" height="36"/>
+              <Edit id="Edit05" taborder="17" left="751" top="196" width="240" height="43"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_pSave" taborder="5" text="저장" left="830" top="94" width="73" height="31" onclick="btn_pSave_onclick"/>
+        <Button id="Button00" taborder="6" text="추가" left="909" top="94" width="73" height="31" onclick="Button00_onclick"/>
+        <Button id="btn_pDelete" taborder="7" text="삭제" left="991" top="94" width="70" height="31" onclick="btn_pDelete_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_pInfo">
+        <ColumnInfo>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
+          <Column id="pPassword" type="STRING" size="256"/>
+          <Column id="pRrn" type="STRING" size="256"/>
+          <Column id="pAddress" type="STRING" size="256"/>
+          <Column id="pEmail" type="STRING" size="256"/>
+          <Column id="pGender" type="STRING" size="256"/>
+          <Column id="pPhone" type="STRING" size="256"/>
+          <Column id="pAddmission" type="STRING" size="256"/>
+          <Column id="advisorYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_pdept">
+        <ColumnInfo>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPT_CD">D001</Col>
+            <Col id="DEPT_NAME">국어국문학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D002</Col>
+            <Col id="DEPT_NAME">영여교육과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D999</Col>
+            <Col id="DEPT_NAME">서양조소학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D201</Col>
+            <Col id="DEPT_NAME">수학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D100</Col>
+            <Col id="DEPT_NAME">경영학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D101</Col>
+            <Col id="DEPT_NAME">회계사무학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D901</Col>
+            <Col id="DEPT_NAME">서양화과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D902</Col>
+            <Col id="DEPT_NAME">동양화과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D301</Col>
+            <Col id="DEPT_NAME">기계공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D003</Col>
+            <Col id="DEPT_NAME">역사학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D102</Col>
+            <Col id="DEPT_NAME">빅데이터응용학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D302</Col>
+            <Col id="DEPT_NAME">화학공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D303</Col>
+            <Col id="DEPT_NAME">컴퓨터공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D304</Col>
+            <Col id="DEPT_NAME">생명공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D202</Col>
+            <Col id="DEPT_NAME">수학교육과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D305</Col>
+            <Col id="DEPT_NAME">전자공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D306</Col>
+            <Col id="DEPT_NAME">전기공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D307</Col>
+            <Col id="DEPT_NAME">건축학과</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+
+this.btn_pList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+	"tr_pList"
+	,"SnuURL::professor/list.snu"
+	,""
+	,"ds_pInfo=out_pInfo"
+	,""
+	,"fn_callback_pro"
+	)
+};
+this.out_var="";
+this.fn_callback_pro = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_pList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패:"+sErrorMsg);
+			return;
+		}
+		this.alert("조회 성공:"+ this.ds_pInfo.getRowCount() + "건");
+	}
+	if(id=="tr_pSave")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("저장실패 : " +sErrorMsg);
+			return
+		}
+		this.alert(this.out_var + ">>저장성공");
+	}
+}
+
+this.btn_pList_onrbuttondown = function(obj:nexacro.Button,e:nexacro.MouseEventInfo)
+{
+	var eValue = this.Edit00.value;
+	var aRow = this.ds_pdept.findRow("DEPT_NAME", eValue);
+	var sColId = this.ds_pdept.getColumn(aRow, "DEPT_CD");
+	this.ds_pInfo.filter("dCode=='"+sColId+"'");
+};
+
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_pInfo.addRow();
+	this.ds_pInfo.setColumn(this.ds_pInfo.rowposition, "pAddmission", "20220425");
+};
+
+this.btn_pSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var name = this.Div00.form.Edit00.value;
+	this.transaction(
+	"tr_pSave"
+	,"SnuURL::professor/changeInfo.snu"
+	,"in_professor=ds_pInfo:U"
+	,""
+	,"in_var1="+nexacro.wrapQuote(name)
+	,"fn_callback_pro"
+	)
+};
+
+
+
+this.btn_pDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_pInfo.deleteRow(this.ds_pInfo.rowposition);
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_pInfo" columnid="pName"/>
+      <BindItem id="item1" compid="Div00.form.MaskEdit00" propid="value" datasetid="ds_pInfo" columnid="pPhone"/>
+      <BindItem id="item2" compid="Div00.form.Edit01" propid="value" datasetid="ds_pInfo" columnid="pEmail"/>
+      <BindItem id="item3" compid="Div00.form.Edit02" propid="value" datasetid="ds_pInfo" columnid="pCode"/>
+      <BindItem id="item4" compid="Div00.form.Edit03" propid="value" datasetid="ds_pInfo" columnid="dCode"/>
+      <BindItem id="item5" compid="Div00.form.MaskEdit01" propid="value" datasetid="ds_pInfo" columnid="pAddmission"/>
+      <BindItem id="item6" compid="Div00.form.Radio00" propid="value" datasetid="ds_pInfo" columnid="pGender"/>
+      <BindItem id="item7" compid="Div00.form.Edit04" propid="value" datasetid="ds_pInfo" columnid="pAddress"/>
+      <BindItem id="item8" compid="Div00.form.Edit05" propid="value" datasetid="ds_pInfo" columnid="pRrn"/>
+    </Bind>
+  </Form>
+</FDL>
