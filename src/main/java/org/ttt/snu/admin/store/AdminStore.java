@@ -14,10 +14,14 @@ public interface AdminStore {
 	List<Student> selectStudent(SqlSession sqlSession);
 	//교수리스트
 	List<Professor> selectProfessor(SqlSession sqlSession);
-
+	//학생등록
 	int registerStudent(SqlSession sqlSession, Student student);
-
+	//학생 삭제
 	int deleteStudent(SqlSession sqlSession, String sCode);
+	// 교수등록
+	int registerProfessor(SqlSession sqlSession, Professor professor);
+	//교수 삭제
+	int deleteProfessor(SqlSession sqlSession, String pCode);
 
 
 	

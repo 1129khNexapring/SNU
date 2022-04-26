@@ -17,6 +17,10 @@ public interface AdminService {
 	int registerStudent(Student student);
 	//학생 삭제
 	int removeStudent(String sCode);
+	// 교수등록
+	int registerProfessor(Professor professor);
+	// 교수 삭제
+	int removeProfessor(String pCode);
 	
 	
 

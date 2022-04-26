@@ -22,7 +22,7 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
       <File url="Application_Desktop.xadl" checksum="20220425002610" errormsg=""/>
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220425010926" errormsg=""/>
-      <File url="Base\frm_professor.xfdl" checksum="20220425142402" errormsg=""/>
+      <File url="Base\frm_professor.xfdl" checksum="20220425154106" errormsg=""/>
       <File url="Base\frm_student.xfdl" checksum="20220425123703" errormsg=""/>
       <File url="Base\frm_lecture.xfdl" checksum="20220424214041" errormsg=""/>
       <File url="Base\frm_schoolschedule.xfdl" checksum="20220424222151" errormsg=""/>
@@ -31,7 +31,7 @@
       <File url="Base\frm_transfermajor.xfdl" checksum="20220424222545" errormsg=""/>
       <File url="Base\frm_reservist.xfdl" checksum="20220424222632" errormsg=""/>
       <File url="Base\frm_swsession.xfdl" checksum="20220424222857" errormsg=""/>
-      <File url="Base\frm_volunteer.xfdl" checksum="20220424222938" errormsg=""/>
+      <File url="Base\frm_volunteer.xfdl" checksum="20220425175528" errormsg=""/>
       <File url="Base\frm_scholarship.xfdl" checksum="20220424223006" errormsg=""/>
       <File url="Base\frm_notice.xfdl" checksum="20220424223104" errormsg=""/>
       <File url="Base\frm_suggestion.xfdl" checksum="20220424223142" errormsg=""/>

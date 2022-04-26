@@ -29,17 +29,29 @@ public class AdminStoreLogic implements AdminStore {
 		List<Professor> pList = sqlSession.selectList("AdminMapper.selectProfessorList");
 		return pList;
 	}
-
+	//학생 등록
 	@Override
 	public int registerStudent(SqlSession sqlSession, Student student) {
 		int iResult = sqlSession.insert("AdminMapper.insertStudent", student);
 		return iResult;
 	}
-
+	//학생 삭제
 	@Override
 	public int deleteStudent(SqlSession sqlSession, String sCode) {
 		int reuslt = sqlSession.delete("AdminMapper.deleteStudent", sCode);
 		return reuslt;
+	}
+	// 교수등록
+	@Override
+	public int registerProfessor(SqlSession sqlSession, Professor professor) {
+		int iResult = sqlSession.insert("AdminMapper.insertProfessor", professor);
+		return iResult;
+	}
+	// 교수삭제
+	@Override
+	public int deleteProfessor(SqlSession sqlSession, String pCode) {
+		int result = sqlSession.delete("AdminMapper.deleteProfessor", pCode);
+		return result;
 	}
 
 

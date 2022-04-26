@@ -168,7 +168,7 @@
             obj.set_text("추가");
             this.addChild(obj.name, obj);
 
-            obj = new Button("Button01","991","94","70","31",null,null,null,null,null,null,this);
+            obj = new Button("btn_pDelete","991","94","70","31",null,null,null,null,null,null,this);
             obj.set_taborder("7");
             obj.set_text("삭제");
             this.addChild(obj.name, obj);
@@ -290,6 +290,13 @@
         	)
         };
 
+
+
+        this.btn_pDelete_onclick = function(obj,e)
+        {
+        	this.ds_pInfo.deleteRow(this.ds_pInfo.rowposition);
+        };
+
         });
         
         // Regist UI Components Event
@@ -300,6 +307,7 @@
             this.Div00.form.Radio00.addEventHandler("onitemchanged",this.Div00_Radio00_onitemchanged,this);
             this.btn_pSave.addEventHandler("onclick",this.btn_pSave_onclick,this);
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+            this.btn_pDelete.addEventHandler("onclick",this.btn_pDelete_onclick,this);
         };
         this.loadIncludeScript("frm_professor.xfdl");
         this.loadPreloadList();

@@ -53,5 +53,19 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
+	// 관리자-교수 등록
+	@Override
+	public int registerProfessor(Professor professor) {
+		int iResult = aStore.registerProfessor(sqlSession, professor);
+		return iResult;
+	}
+	
+	// 관리자-교수 삭제
+	@Override
+	public int removeProfessor(String pCode) {
+		int result = aStore.deleteProfessor(sqlSession, pCode);
+		return result;
+	}
+	
 
 }

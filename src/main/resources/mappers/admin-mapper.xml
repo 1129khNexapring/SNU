@@ -52,6 +52,12 @@
 	<delete id="deleteStudent" parameterType="string">
 		DELETE FROM STUDENT WHERE S_CODE = #{sCode }
 	</delete>
+	<insert id="insertProfessor">
+		INSERT INTO PROFESSOR VALUES(#{pCode }, #{pName }, #{pPassword }, #{pRrn }, #{pAddress }, #{pEmail }, #{pGender }, #{pPhone }, DEFAULT, DEFAULT, #{dCode })
+	</insert>
+	<delete id="deleteProfessor" parameterType="string">
+		DELETE FROM PROFESSOR WHERE P_CODE = #{pCode }
+	</delete>
 	
 	
 </mapper>

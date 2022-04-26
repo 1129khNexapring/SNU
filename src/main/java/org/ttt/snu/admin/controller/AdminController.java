@@ -154,9 +154,13 @@ public class AdminController {
 		int i;
 		
 		//DELETE
-		
+		for(i=0; i<inProfessor.getRemovedRowCount(); i++) {
+			String pCode = inProfessor.getRemovedData(i, "pCode").toString();
+			aService.removeProfessor(pCode);
+		}
 		//INSERT
 		//RowType에 따라서 INSERT OR UPDATE
+		int iResult = 0;
 		for(i=0; i<inProfessor.getRowCount(); i++) {
 			int rowType = inProfessor.getRowType(i);
 			String pCode = 		dsGet(inProfessor, i, "pCode");
@@ -165,10 +169,27 @@ public class AdminController {
 			String pRrn = 		dsGet(inProfessor, i, "pRrn");
 			String pAddress = 	dsGet(inProfessor, i, "pAddress");
 			String pEmail = 	dsGet(inProfessor, i, "pEmail");
-			
+			String pGender = 	dsGet(inProfessor, i, "pGender");
+			String pPhone = 	dsGet(inProfessor, i, "pPhone");
+			String pAddmission= dsGet(inProfessor, i, "pAddmission");
+			String advisorYN = "N";
+			String dCode = 		dsGet(inProfessor, i, "dCode");
+			Professor professor = new Professor(pCode, pName, pPassword, pRrn, pAddress, pEmail, pGender, pPhone, pAddmission, advisorYN, dCode);
+			if(rowType == DataSet.ROW_TYPE_INSERTED) {
+				iResult += aService.registerProfessor(professor);
+			}
 		}
-		
-		return null;
+		if(iResult < 0) {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		result.addVariable("out_var", inVar1);
+		return result;
 	}
 		
 		

@@ -90,7 +90,7 @@
         </Div>
         <Button id="btn_pSave" taborder="5" text="저장" left="830" top="94" width="73" height="31" onclick="btn_pSave_onclick"/>
         <Button id="Button00" taborder="6" text="추가" left="909" top="94" width="73" height="31" onclick="Button00_onclick"/>
-        <Button id="Button01" taborder="7" text="삭제" left="991" top="94" width="70" height="31"/>
+        <Button id="btn_pDelete" taborder="7" text="삭제" left="991" top="94" width="70" height="31" onclick="btn_pDelete_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -252,6 +252,13 @@ this.btn_pSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	,"in_var1="+nexacro.wrapQuote(name)
 	,"fn_callback_pro"
 	)
+};
+
+
+
+this.btn_pDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_pInfo.deleteRow(this.ds_pInfo.rowposition);
 };
 ]]></Script>
     <Bind>
