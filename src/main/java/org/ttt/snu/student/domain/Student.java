@@ -11,7 +11,7 @@ public class Student {
 	private String sEmail;
 	private String sGender;
 	private String sPhone;
-	private Date sAddmission;
+	private String sAddmission;
 	private String absenceYN;
 	private String transferYN;
 	private String dCode;
@@ -19,8 +19,12 @@ public class Student {
 	Student() {}
 	
 	
+	
+
+
+
 	public Student(String sCode, String sName, String sRrn, String sPassword, String sAddress, String sEmail,
-			String sGender, String sPhone, Date sAddmission, String absenceYN, String transferYN, String dCode) {
+			String sGender, String sPhone, String sAddmission, String absenceYN, String transferYN, String dCode) {
 		super();
 		this.sCode = sCode;
 		this.sName = sName;
@@ -38,101 +42,226 @@ public class Student {
 
 
 
+
+
+
+	
+
+
 	public String getsCode() {
 		return sCode;
 	}
+
+
+
+
+
 
 	public void setsCode(String sCode) {
 		this.sCode = sCode;
 	}
 
+
+
+
+
+
 	public String getsName() {
 		return sName;
 	}
+
+
+
+
+
 
 	public void setsName(String sName) {
 		this.sName = sName;
 	}
 
+
+
+
+
+
 	public String getsRrn() {
 		return sRrn;
 	}
+
+
+
+
+
 
 	public void setsRrn(String sRrn) {
 		this.sRrn = sRrn;
 	}
 
+
+
+
+
+
 	public String getsPassword() {
 		return sPassword;
 	}
+
+
+
+
+
 
 	public void setsPassword(String sPassword) {
 		this.sPassword = sPassword;
 	}
 
+
+
+
+
+
 	public String getsAddress() {
 		return sAddress;
 	}
+
+
+
+
+
 
 	public void setsAddress(String sAddress) {
 		this.sAddress = sAddress;
 	}
 
+
+
+
+
+
 	public String getsEmail() {
 		return sEmail;
 	}
+
+
+
+
+
 
 	public void setsEmail(String sEmail) {
 		this.sEmail = sEmail;
 	}
 
+
+
+
+
+
 	public String getsGender() {
 		return sGender;
 	}
+
+
+
+
+
 
 	public void setsGender(String sGender) {
 		this.sGender = sGender;
 	}
 
+
+
+
+
+
 	public String getsPhone() {
 		return sPhone;
 	}
+
+
+
+
+
 
 	public void setsPhone(String sPhone) {
 		this.sPhone = sPhone;
 	}
 
-	public Date getsAddmission() {
+
+
+
+
+
+	public String getsAddmission() {
 		return sAddmission;
 	}
 
-	public void setsAddmission(Date sAddmission) {
+
+
+
+
+
+	public void setsAddmission(String sAddmission) {
 		this.sAddmission = sAddmission;
 	}
+
+
+
+
+
 
 	public String getAbsenceYN() {
 		return absenceYN;
 	}
 
+
+
+
+
+
 	public void setAbsenceYN(String absenceYN) {
 		this.absenceYN = absenceYN;
 	}
+
+
+
+
+
 
 	public String getTransferYN() {
 		return transferYN;
 	}
 
+
+
+
+
+
 	public void setTransferYN(String transferYN) {
 		this.transferYN = transferYN;
 	}
+
+
+
+
+
 
 	public String getdCode() {
 		return dCode;
 	}
 
+
+
+
+
+
 	public void setdCode(String dCode) {
 		this.dCode = dCode;
 	}
+
+
+
+
 
 
 	@Override
