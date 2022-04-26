@@ -6,33 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 페이지</title>
-<link rel="stylesheet" href=../resources/css/layout.css>
+<link rel="stylesheet" href="/resources/css/layout.css">
 </head>
 <body>
+	<h1>${loginUser.aCode }</h1>
+	<c:if test="${loginUser ne null}">
+					<a href="/logout.snu" > <span></span> 로그아웃
+					</a>
+				</c:if>
 
-	<header id="header">
-		<div id="header-layer1"></div>
-		<div id="header-layer2"></div>
-		<div id="header-layer3"></div>
-		<div id="header-layer4"></div>
-		<div id="header-layer5">
-			<a href="/login.snu">상남대 학사정보시스템</a>
-		</div>
-	</header>
-	<nav id="navi">
-		<ul>
-			<li><a href="#" target="_blank">상남대 소개</a></li>
-			<li><a href="#" target="_blank">입학안내</a></li>
-			<li><a href="/lecture/list.snu" target="_blank">강의리스트</a></li>
-			<li><a href="#" target="_blank">대학★대학원</a></li>
-			<li><a href="/notice/list.snu" target="_blank">공지사항</a></li>
-		</ul>
-	</nav>
 
-	<main id="main">
-		<img src="../resources/img/campus.png" alt="캠퍼스이미지" height="450px"
-			width="100%">
-	</main>
+	<jsp:include page="../../layout/inc_header.jsp"></jsp:include>
+	<jsp:include page="../../layout/inc_main.jsp"></jsp:include>
+	
 
 	<table align="center" width="600" border="1">
 		<tr>
@@ -55,9 +41,9 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+	 <c:if test="${loginUser.aCode == 'admin' }">
 		<a href="/notice/writeView.snu" style=float:right>글쓰기</a>
-
+	</c:if>
 	</div>
 	<div class="paging" style=text-align:center>
 		<c:if test="${pi.startNavi == 1 }">
@@ -99,9 +85,7 @@
 
 	</div>
 
+<jsp:include page="../../layout/inc_footer.jsp"></jsp:include>
 
-	<footer id="footer">
-		<p>Copyright © 2022 TTT.co.Ltd. All rights reserved.</p>
-	</footer>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href=./resources/css/layout.css>
 </head>
 <body>
+ <h1>${loginUser.aCode}</h1>
 	<%@ include file="/WEB-INF/layout/inc_header.jsp" %>
 		
 	<%@ include file="/WEB-INF/layout/inc_main.jsp" %>

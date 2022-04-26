@@ -110,10 +110,10 @@ public class NoticeController {
 		if (!folder.exists())
 			folder.mkdir();
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
 		String originalFileName = file.getOriginalFilename();
 		String extensionName = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + extensionName;
+		String renameFileName = originalFileName + "." + extensionName;
 
 		filePath = folder + "\\" + renameFileName;
 		fileMap.put("nFilePath", filePath);
