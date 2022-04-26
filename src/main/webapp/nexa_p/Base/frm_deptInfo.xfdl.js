@@ -137,7 +137,6 @@
         			this.alert("조회 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert(this.out_var + " >> 조회 성공");
         	}
 
 
