@@ -5,7 +5,8 @@
 
 <mapper namespace="VolunteerMapper">
 	<resultMap type="org.ttt.snu.volunteer.domain.Volunteer" id="volunteerResultMap">
-		<id property="vName"				column="V_NAME"/>
+		<id property="vCode"				column="V_CODE"/>
+		<result property="vName"			column="V_NAME"/>
 		<result property="vArea"			column="V_AREA"/>
 		<result property="vHour"			column="V_HOUR"/>
 		<result property="vStart" 			column="V_START"/>
@@ -13,12 +14,17 @@
 		<result property="vEnrollDate"		column="V_ENROLL_DATE"/>
 	</resultMap>
 	<insert id="insertVolunteer">
-		INSERT INTO VOLUNTEER VALUES(#{vName }, #{vArea }, #{vHour }, #{vStart }, #{vEnd }, DEFAULT)
+		INSERT INTO VOLUNTEER VALUES(#{vCode },#{vName }, #{vArea }, #{vHour }, #{vStart }, #{vEnd }, DEFAULT)
 	</insert>
 	<select id="selectVolunteerList" resultMap="volunteerResultMap">
 		SELECT * FROM VOLUNTEER 
 	</select>
 	<delete id="deleteVolunteer" parameterType="string">
-		DELETE FROM VOLUNTEER WHERE V_NAME = #{vName }
+		DELETE FROM VOLUNTEER WHERE V_CODE = #{vCode }
 	</delete>
+	<update id="updateVolunteer">
+		UPDATE VOLUNTEER
+		SET V_NAME = #{vName }, V_AREA = #{vArea }, V_HOUR = #{vHour }, 
+		V_START = #{vStart }, V_END = #{vEnd }, V_ENROLL_DATE = DEFAULT WHERE V_CODE = #{vCode }
+	</update>
 </mapper>

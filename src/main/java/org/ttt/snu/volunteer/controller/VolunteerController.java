@@ -32,27 +32,35 @@ public class VolunteerController {
 		int i;
 		//DELETE
 		for(i=0; i<inVolunteer.getRemovedRowCount(); i++) {
-			String vName = inVolunteer.getRemovedData(i, "vName").toString();
-			vService.removeVolunteer(vName);
+			String vCode = inVolunteer.getRemovedData(i, "vCode").toString();
+			vService.removeVolunteer(vCode);
 		}
 		
 		//INSERT, UPDATE
 		int iResult=0;
+		int uResult=0;
 		//int uResult = 0;
 		for(i=0; i<inVolunteer.getRowCount(); i++) {
 			int rowType = inVolunteer.getRowType(i);
+			String vCode = 		dsGet(inVolunteer, i, "vCode");
 			String vName = 		dsGet(inVolunteer, i, "vName");
 			String vArea = 		dsGet(inVolunteer, i, "vArea");
 			String vHour = 		dsGet(inVolunteer, i, "vHour");
 			String vStart= 		dsGet(inVolunteer, i, "vStart");
 			String vEnd  = 		dsGet(inVolunteer, i, "vEnd");
 			String vEnrollDate= dsGet(inVolunteer, i, "vEnrollDate");
-			Volunteer volunteer = new Volunteer(vName, vArea, vHour, vStart, vEnd, vEnrollDate);
+			Volunteer volunteer = new Volunteer(vCode, vName, vArea, vHour, vStart, vEnd, vEnrollDate);
 			if(rowType == DataSet.ROW_TYPE_INSERTED) {
 				iResult += vService.registerVolunteer(volunteer);
+			}else if(rowType == DataSet.ROW_TYPE_UPDATED)
+			{
+				String vOrgCode = inVolunteer.getSavedData(i, "vCode").toString();
+				volunteer.setvCode(vOrgCode);
+				uResult += vService.modifyVolunteer(volunteer);
+				
 			}
 		}
-		if(iResult < 0) {
+		if(iResult < 0 && uResult <0) {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
 		}else {

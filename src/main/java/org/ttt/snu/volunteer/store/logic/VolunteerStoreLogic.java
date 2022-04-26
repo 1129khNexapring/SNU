@@ -22,9 +22,15 @@ public class VolunteerStoreLogic implements VolunteerStore {
 	}
 
 	@Override
-	public int deleteVolunteer(SqlSession sqlSession, String vName) {
-		int result = sqlSession.delete("VolunteerMapper.deleteVolunteer", vName);
+	public int deleteVolunteer(SqlSession sqlSession, String vCode) {
+		int result = sqlSession.delete("VolunteerMapper.deleteVolunteer", vCode);
 		return result;
+	}
+
+	@Override
+	public int updateVolunteer(SqlSession sqlSession, Volunteer volunteer) {
+		int uResult = sqlSession.update("VolunteerMapper.updateVolunteer", volunteer);
+		return uResult;
 	}
 	
 }
