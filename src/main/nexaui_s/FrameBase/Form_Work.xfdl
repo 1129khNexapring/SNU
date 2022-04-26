@@ -1,30 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Work" width="1080" height="650" titletext="Form_Work">
+  <Form id="Form_Work" width="1080" height="650" titletext="Form_Work" onload="Form_Work_onload">
     <Layouts>
       <Layout width="1080" height="650" screenid="Desktop_screen">
-        <Button id="Button00" taborder="0" text="Button00" left="117" top="120" width="226" height="108" onclick="Button00_onclick"/>
-        <Static id="Static00" taborder="1" text="Static00" left="128" top="322" width="348" height="183" onclick="Static00_onclick"/>
-        <Radio id="Radio00" taborder="2" left="566" top="151" width="171" height="140" onitemchanged="Radio00_onitemchanged"/>
+        <Button id="btn_bookmark" taborder="0" text="☆" left="7" top="6" width="23" height="20" font="bold 14px/normal &quot;Malgun Gothic&quot;" onclick="btn_bookmark_onclick"/>
+        <Static id="st_title" taborder="1" text="Static01" left="37" top="5" width="322" height="26"/>
+        <Div id="div_work" taborder="2" text="Div00" left="10" top="33" width="1060" height="608"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+this.fv_key = ""
+this.Form_Work_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
-	var sId = nexacro.getEnvironmentVariable("ev_Val");
-    var sPwd = nexacro.getEnvironmentVariable("ev_Val1");
-    alert(sPwd);
-};
-
-this.Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
-{
+	var objOwnerFrame = this.getOwnerFrame();
+	
+	var sMenuId = objOwnerFrame.openParam.LIST_ID;
+	var sMenuNM = objOwnerFrame.openParam.LIST;
+	var sFormUrl = objOwnerFrame.openParam.FORM_URL;
+	
+	this.div_work.set_url(sFormUrl);
+	
 	
 };
 
-this.Radio00_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
-{
-	
-};
 ]]></Script>
   </Form>
 </FDL>

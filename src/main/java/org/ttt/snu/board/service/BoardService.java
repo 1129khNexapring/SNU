@@ -10,7 +10,7 @@ public interface BoardService {
 	
 	// 게시판 영역
 	public int getListCount();
-	public List<Board> printAll(PageInfo pi);
+	public List<Board> printAll(Board board);
 	public List<Board> printAllSearch(PageInfo pi);
 	public int registerBoard(Board board);
 	public int modifyBoard(Board board);

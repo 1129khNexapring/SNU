@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_volunteer" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280"/>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_volunteer"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+
+	//오늘 날짜구하기
+	//var d = new Date();
+	//var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+	//this.alert(today);
+
+
+
+]]></Script>
+  </Form>
+</FDL>

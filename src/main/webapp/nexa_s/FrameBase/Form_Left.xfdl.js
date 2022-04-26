@@ -24,7 +24,7 @@
             // UI Components Initialize
             obj = new Grid("Grid00","0","100","200","570",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_binddataset("Dataset0");
+            obj.set_binddataset("gds_menu");
             obj.set_autosizingtype("col");
             obj.set_autofittype("col");
             obj.set_treeusecheckbox("false");
@@ -105,6 +105,13 @@
 
         	objChildFrame.set_formurl(sFormUrl);
         	objChildFrame.show();
+
+        	var nRow = objApp.p_openForm.addRow();
+        	objApp.p_openForm.setColumn(nRow, "LIST_ID", sMenuId);
+        	objApp.p_openForm.setColumn(nRow, "LIST", sMenuNM);
+        	objApp.p_openForm.setColumn(nRow, "FORM_URL", sFormUrl);
+
+        	objApp.mainFrame.VFrameSet00.HFrameSet00.VFameSet00.TabFrame.form.fn_addTab(oParam);
         	//한번더
         	//여기까지 화면연결했음
 

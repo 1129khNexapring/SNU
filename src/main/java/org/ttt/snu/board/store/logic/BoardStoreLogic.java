@@ -19,9 +19,9 @@ public class BoardStoreLogic implements BoardStore {
 	}
 
 	@Override
-	public List<Board> selectAll(SqlSession sqlSession, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> selectAll(SqlSession sqlSession, Board board) {
+		List<Board> boardList = sqlSession.selectList("BoardMapper.selectAllBoard", board);
+		return boardList;
 	}
 
 	@Override
@@ -44,8 +44,8 @@ public class BoardStoreLogic implements BoardStore {
 
 	@Override
 	public int insertBoard(SqlSession sqlSession, Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("BoardMapper.insertBoard", board);
+		return result;
 	}
 
 	@Override

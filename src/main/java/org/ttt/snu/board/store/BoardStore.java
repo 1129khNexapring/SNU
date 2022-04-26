@@ -11,7 +11,7 @@ public interface BoardStore {
 	
 	// 게시판 영역
 	public int selectListCount(SqlSession sqlSession, int boardNo);
-	public List<Board> selectAll(SqlSession sqlSession, PageInfo pi);
+	public List<Board> selectAll(SqlSession sqlSession, Board board);
 	public List<Board> selectAllSearch(SqlSession sqlSession, PageInfo pi);
 	public Board selectOneByNo(SqlSession sqlSession, Integer boardNo);
 	public int updateCount(SqlSession sqlSession, Integer boardNo);
