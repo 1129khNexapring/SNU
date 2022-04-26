@@ -10,6 +10,8 @@ public interface VolunteerService {
 	//봉사활동 리스트
 	List<Volunteer> printAllVolunteer();
 	//봉사활동 삭제
-	int removeVolunteer(String vName);
+	int removeVolunteer(String vCode);
+	//봉사활동 수정
+	int modifyVolunteer(Volunteer volunteer);
 
 }

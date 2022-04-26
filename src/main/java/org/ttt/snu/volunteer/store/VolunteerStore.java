@@ -11,6 +11,8 @@ public interface VolunteerStore {
 	//봉사활동 리스트 출력
 	List<Volunteer> selectVolunteer(SqlSession sqlSession);
 	//봉사활동 삭제
-	int deleteVolunteer(SqlSession sqlSession, String vName);
+	int deleteVolunteer(SqlSession sqlSession, String vCode);
+	//봉사활동수정
+	int updateVolunteer(SqlSession sqlSession, Volunteer volunteer);
 	
 }

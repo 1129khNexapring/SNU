@@ -1,6 +1,7 @@
 package org.ttt.snu.volunteer.domain;
 
 public class Volunteer {
+	private String vCode;
 	private String vName;
 	private String vArea;
 	private String vHour;
@@ -10,14 +11,24 @@ public class Volunteer {
 	
 	public Volunteer() {}
 
-	public Volunteer(String vName, String vArea, String vHour, String vStart, String vEnd, String vEnrollDate) {
+	public Volunteer(String vCode, String vName, String vArea, String vHour, String vStart, String vEnd,
+			String vEnrollDate) {
 		super();
+		this.vCode = vCode;
 		this.vName = vName;
 		this.vArea = vArea;
 		this.vHour = vHour;
 		this.vStart = vStart;
 		this.vEnd = vEnd;
 		this.vEnrollDate = vEnrollDate;
+	}
+
+	public String getvCode() {
+		return vCode;
+	}
+
+	public void setvCode(String vCode) {
+		this.vCode = vCode;
 	}
 
 	public String getvName() {
@@ -70,10 +81,11 @@ public class Volunteer {
 
 	@Override
 	public String toString() {
-		return "Volunteer [vName=" + vName + ", vArea=" + vArea + ", vHour=" + vHour + ", vStart=" + vStart + ", vEnd="
-				+ vEnd + ", vEnrollDate=" + vEnrollDate + "]";
+		return "Volunteer [vCode=" + vCode + ", vName=" + vName + ", vArea=" + vArea + ", vHour=" + vHour + ", vStart="
+				+ vStart + ", vEnd=" + vEnd + ", vEnrollDate=" + vEnrollDate + "]";
 	}
 
+	
 	
 	
 	

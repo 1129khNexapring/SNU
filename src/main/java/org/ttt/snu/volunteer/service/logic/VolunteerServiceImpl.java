@@ -29,8 +29,14 @@ public class VolunteerServiceImpl implements VolunteerService {
 	}
 	//관리자 - 봉사활동 삭제
 	@Override
-	public int removeVolunteer(String vName) {
-		int result = vStore.deleteVolunteer(sqlSession, vName);
+	public int removeVolunteer(String vCode) {
+		int result = vStore.deleteVolunteer(sqlSession, vCode);
 		return result;
+	}
+	//관리자-봉사활동 수정
+	@Override
+	public int modifyVolunteer(Volunteer volunteer) {
+		int uResult = vStore.updateVolunteer(sqlSession, volunteer);
+		return uResult;
 	}
 }

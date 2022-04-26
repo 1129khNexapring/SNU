@@ -7,19 +7,21 @@
           <Layouts>
             <Layout>
               <Static id="Static00" taborder="0" text="봉사활동정보" left="125" top="8" width="365" height="78" textAlign="center" font="normal 12pt/normal &quot;Arial&quot;" onclick="Div00_Static00_onclick"/>
-              <Static id="Static01" taborder="1" text="이름" left="25" top="104" width="197" height="50" textAlign="center"/>
-              <Edit id="Edit00" taborder="2" left="261" top="91" width="339" height="70"/>
-              <Static id="Static02" taborder="3" text="장소" left="25" top="214" width="197" height="50" textAlign="center"/>
-              <Edit id="Edit01" taborder="4" left="261" top="198" width="339" height="70"/>
-              <Static id="Static03" taborder="5" text="이수시간" left="25" top="318" width="197" height="50" textAlign="center"/>
-              <Edit id="Edit02" taborder="6" left="261" top="304" width="225" height="70"/>
-              <Static id="Static04" taborder="7" text="시작시간" left="30" top="424" width="180" height="50" textAlign="center"/>
-              <Static id="Static05" taborder="8" text="종료 시간" left="30" top="537" width="180" height="50" textAlign="center"/>
-              <Edit id="Edit03" taborder="9" left="261" top="418" width="246" height="71"/>
-              <Edit id="Edit04" taborder="10" left="261" top="522" width="246" height="71"/>
-              <Static id="Static06" taborder="11" text="등록 날짜" left="29" top="628" width="180" height="50" textAlign="center"/>
-              <Edit id="Edit05" taborder="12" left="259" top="620" width="254" height="57"/>
+              <Static id="Static01" taborder="1" text="봉사활동명" left="35" top="204" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit00" taborder="2" left="260" top="197" width="339" height="50"/>
+              <Static id="Static02" taborder="3" text="장소" left="35" top="284" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit01" taborder="4" left="261" top="274" width="339" height="50"/>
+              <Static id="Static03" taborder="5" text="이수시간" left="35" top="364" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit02" taborder="6" left="261" top="354" width="225" height="50"/>
+              <Static id="Static04" taborder="7" text="시작시간" left="40" top="444" width="180" height="30" textAlign="center"/>
+              <Static id="Static05" taborder="8" text="종료 시간" left="40" top="524" width="180" height="30" textAlign="center"/>
+              <Edit id="Edit03" taborder="9" left="261" top="433" width="246" height="50"/>
+              <Edit id="Edit04" taborder="10" left="261" top="521" width="246" height="50"/>
+              <Static id="Static06" taborder="11" text="등록 날짜" left="39" top="604" width="180" height="30" textAlign="center"/>
+              <Edit id="Edit05" taborder="12" left="259" top="591" width="254" height="50"/>
               <Button id="btn_registerV" taborder="13" text="저장" left="542" top="30" width="65" height="44" onclick="Div00_btn_registerV_onclick"/>
+              <Static id="Static07" taborder="14" text="봉사활동코드" left="35" top="125" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit06" taborder="15" left="260" top="121" width="202" height="44"/>
             </Layout>
           </Layouts>
         </Div>
@@ -62,6 +64,7 @@
     <Objects>
       <Dataset id="ds_volunteer">
         <ColumnInfo>
+          <Column id="vCode" type="STRING" size="256"/>
           <Column id="vName" type="STRING" size="256"/>
           <Column id="vArea" type="STRING" size="256"/>
           <Column id="vHour" type="STRING" size="256"/>
@@ -172,6 +175,7 @@ this.btn_vAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
       <BindItem id="item3" compid="Div00.form.Edit03" propid="value" datasetid="ds_volunteer" columnid="vStart"/>
       <BindItem id="item4" compid="Div00.form.Edit04" propid="value" datasetid="ds_volunteer" columnid="vEnd"/>
       <BindItem id="item5" compid="Div00.form.Edit05" propid="value" datasetid="ds_volunteer" columnid="vEnrollDate"/>
+      <BindItem id="item6" compid="Div00.form.Edit06" propid="value" datasetid="ds_volunteer" columnid="vCode"/>
     </Bind>
   </Form>
 </FDL>

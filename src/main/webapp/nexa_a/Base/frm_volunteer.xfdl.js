@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_volunteer", this);
-            obj._setContents("<ColumnInfo><Column id=\"vName\" type=\"STRING\" size=\"256\"/><Column id=\"vArea\" type=\"STRING\" size=\"256\"/><Column id=\"vHour\" type=\"STRING\" size=\"256\"/><Column id=\"vStart\" type=\"STRING\" size=\"256\"/><Column id=\"vEnd\" type=\"STRING\" size=\"256\"/><Column id=\"vEnrollDate\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"vCode\" type=\"STRING\" size=\"256\"/><Column id=\"vName\" type=\"STRING\" size=\"256\"/><Column id=\"vArea\" type=\"STRING\" size=\"256\"/><Column id=\"vHour\" type=\"STRING\" size=\"256\"/><Column id=\"vStart\" type=\"STRING\" size=\"256\"/><Column id=\"vEnd\" type=\"STRING\" size=\"256\"/><Column id=\"vEnrollDate\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -36,69 +36,79 @@
             obj.set_font("normal 12pt/normal \"Arial\"");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("Static01","25","104","197","50",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static01","35","204","197","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("1");
-            obj.set_text("이름");
+            obj.set_text("봉사활동명");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Edit("Edit00","261","91","339","70",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("Edit00","260","197","339","50",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("2");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("Static02","25","214","197","50",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static02","35","284","197","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("3");
             obj.set_text("장소");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Edit("Edit01","261","198","339","70",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("Edit01","261","274","339","50",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("4");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("Static03","25","318","197","50",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static03","35","364","197","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("5");
             obj.set_text("이수시간");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Edit("Edit02","261","304","225","70",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("Edit02","261","354","225","50",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("6");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("Static04","30","424","180","50",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static04","40","444","180","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("7");
             obj.set_text("시작시간");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("Static05","30","537","180","50",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static05","40","524","180","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("8");
             obj.set_text("종료 시간");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Edit("Edit03","261","418","246","71",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("Edit03","261","433","246","50",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("9");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Edit("Edit04","261","522","246","71",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("Edit04","261","521","246","50",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("10");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Static("Static06","29","628","180","50",null,null,null,null,null,null,this.Div00.form);
+            obj = new Static("Static06","39","604","180","30",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("11");
             obj.set_text("등록 날짜");
             obj.set_textAlign("center");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Edit("Edit05","259","620","254","57",null,null,null,null,null,null,this.Div00.form);
+            obj = new Edit("Edit05","259","591","254","50",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("12");
             this.Div00.addChild(obj.name, obj);
 
             obj = new Button("btn_registerV","542","30","65","44",null,null,null,null,null,null,this.Div00.form);
             obj.set_taborder("13");
             obj.set_text("저장");
+            this.Div00.addChild(obj.name, obj);
+
+            obj = new Static("Static07","35","125","197","30",null,null,null,null,null,null,this.Div00.form);
+            obj.set_taborder("14");
+            obj.set_text("봉사활동코드");
+            obj.set_textAlign("center");
+            this.Div00.addChild(obj.name, obj);
+
+            obj = new Edit("Edit06","260","121","202","44",null,null,null,null,null,null,this.Div00.form);
+            obj.set_taborder("15");
             this.Div00.addChild(obj.name, obj);
 
             obj = new Button("btn_vList","410","10","70","45",null,null,null,null,null,null,this);
@@ -149,6 +159,10 @@
             obj.bind();
 
             obj = new BindItem("item5","Div00.form.Edit05","value","ds_volunteer","vEnrollDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item6","Div00.form.Edit06","value","ds_volunteer","vCode");
             this.addChild(obj.name, obj);
             obj.bind();
             
