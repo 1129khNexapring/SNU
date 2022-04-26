@@ -18,7 +18,7 @@
 {
 		this.transaction(
 		"dept_select"// 1.ID
-		,"snuURL::dept/info.snu"// 2.URL		
+		,"SnuUrl::dept/info.snu"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
 		,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
 		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val") // 5.InVar : F->S(var)
