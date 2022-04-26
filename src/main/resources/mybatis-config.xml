@@ -8,13 +8,18 @@
 		<!-- 만약에 null 데이터가 전달되었으면 빈칸이 아닌 NULL로 인식하도록 설정 -->
 	</settings>
 	<typeAliases>
+		<typeAlias type="org.ttt.snu.board.domain.Board" alias="Board"/>
 		<typeAlias type="org.ttt.snu.board.domain.Comments" alias="Comments"/>
 		<typeAlias type="org.ttt.snu.attendance.domain.Attendance" alias="Attendance"/>
 		<typeAlias type="org.ttt.snu.grade.domain.Grade" alias="Grade"/>
 		<typeAlias type="org.ttt.snu.lecture.domain.Lecture" alias="Lecture"/>
 		<typeAlias type="org.ttt.snu.admin.domain.Admin" alias="Admin"/>
 		<typeAlias type="org.ttt.snu.professor.domain.Professor" alias="Professor"/>
+
 		<typeAlias type="org.ttt.snu.volunteer.domain.Volunteer" alias="Volunteer"/>
+
+		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml"/>
@@ -24,6 +29,10 @@
 		<mapper resource="mappers/lecture-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/professor-mapper.xml"/>
+
 		<mapper resource="mappers/volunteer-mapper.xml"/>
+
+		<mapper resource="mappers/department-mapper.xml"/>
+
 	</mappers>
 </configuration>

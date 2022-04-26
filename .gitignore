@@ -7,5 +7,6 @@
 *.geninfo
 *.xfdl$
 *.xml$
+*/$temporary$/*
 /bin/
 /target/

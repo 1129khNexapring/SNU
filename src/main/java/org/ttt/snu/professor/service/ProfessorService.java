@@ -7,5 +7,7 @@ public interface ProfessorService {
 
 	Professor printProfessorById(String id);
 
+	List<Professor> printProfessorListBydCode(String dCode);
+
 
 }

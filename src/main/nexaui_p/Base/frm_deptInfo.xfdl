@@ -1,10 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_deptInfo" width="1080" height="670" titletext="New Form">
+  <Form id="frm_deptInfo" width="1080" height="670" titletext="New Form" onload="frm_deptInfo_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="172" top="121" width="120" height="50"/>
+        <Static id="Static00" taborder="0" text="학과 정보" left="53" top="62" width="135" height="53" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static00_00" taborder="1" text="학과 사무실" left="50" top="300" width="135" height="53" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="Static00_00_onclick"/>
+        <TextArea id="TextArea00" taborder="2" left="50" top="261" width="981" height="6" background="gray"/>
+        <Edit id="edt_uni" taborder="3" left="185" top="70" width="143" height="37" enable="false" value="상남대학교" text="상남대학교" color="black" textAlign="center"/>
+        <Edit id="edt_field" taborder="4" left="500" top="70" width="143" height="37" enable="false" textAlign="center" color="black"/>
+        <Edit id="edt_dept" taborder="5" left="807" top="70" width="143" height="37" enable="false" color="black" textAlign="center"/>
+        <Edit id="edit_office" taborder="6" left="230" top="308" width="143" height="37" enable="false" textAlign="center" color="black"/>
+        <Static id="Static00_00_00" taborder="7" text="정원" left="480" top="300" width="135" height="53" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="Static00_00_onclick"/>
+        <Edit id="edt_capacity" taborder="8" left="600" top="308" width="143" height="37" enable="false" textAlign="center" color="black"/>
       </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.frm_deptInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+		this.transaction(
+		"dept_select"// 1.ID
+		,"SnuUrl::dept/info.snu"// 2.URL		
+		,"" // 3.InDs : F->S jsp(I,U,D)
+		,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
+		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val") // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+};
+
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "dept_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패 : " + sErrorMsg);
+			return;
+		}
+	}
+	
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+          <Column id="officeName" type="STRING" size="256"/>
+          <Column id="tuitionFee" type="STRING" size="256"/>
+          <Column id="dCapacity" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_field" propid="value" datasetid="ds_dept" columnid="dField"/>
+      <BindItem id="item1" compid="edit_office" propid="value" datasetid="ds_dept" columnid="officeName"/>
+      <BindItem id="item2" compid="edt_capacity" propid="value" datasetid="ds_dept" columnid="dCapacity"/>
+      <BindItem id="item3" compid="edt_dept" propid="value" datasetid="ds_dept" columnid="dName"/>
+    </Bind>
   </Form>
 </FDL>
