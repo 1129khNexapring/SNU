@@ -8,11 +8,15 @@
       <XCSS rule_version="1.04"/>
       <Script rule_version="1.02"/>
     </Rule>
-    <Info project="C:\Users\User\Desktop\SNU\src\main\nexaui_a\" generated="C:\Users\User\Documents\nexacro\17.1\outputs\Admin\">
-      <File url="environment.xml" checksum="20220421185035" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220421185035" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220421185035" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220421185035" errormsg=""/>
+    <Info project="C:\Users\eorhk\git\SNU\src\main\nexaui_a\" generated="C:\Users\eorhk\Documents\nexacro\17.1\outputs\Admin\">
+      <File url="typedefinition.xml" checksum="20220422091236" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220422091234" errormsg=""/>
+      <File url="environment.xml" checksum="20220422091235" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220422091236" errormsg=""/>
+      <File url="Application_Desktop.xadl" checksum="20220422091237" errormsg=""/>
+      <File url="FrameBase\Form_Top.xfdl" checksum="20220422091234" errormsg=""/>
+      <File url="FrameBase\Form_Left.xfdl" checksum="20220422091236" errormsg=""/>
+      <File url="FrameBase\Form_Work.xfdl" checksum="20220422091235" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\CompBase.json" checksum="20211110093724" errormsg=""/>
@@ -20,7 +24,6 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-      <File url="Application_Desktop.xadl" checksum="20220421185035" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

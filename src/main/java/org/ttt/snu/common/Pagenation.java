@@ -2,7 +2,7 @@ package org.ttt.snu.common;
 
 import org.ttt.snu.board.domain.PageInfo;
 
-public class Pagination {
+public class Pagenation {
 	public static PageInfo getPageInfo(int currentPage, int totalCount) {
 		PageInfo pi = null;
 		int boardLimit = 5;

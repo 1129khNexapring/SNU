@@ -22,12 +22,15 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		
+
+
 	</beans:bean>
 	
 	<!-- nexacro platform으로 데이터를 송신하기 위한 org.springframework.web.servlet.View -->
 	<beans:bean id="nexacroView" class="com.nexacro.uiadapter17.spring.core.view.NexacroView">
 		<beans:property name="defaultContentType" value="PlatformXml" />
-		<beans:property name="defaultCharset" value="UTF-8" ></beans:property>
+		<beans:property name="defaultCharset" value="UTF-8" />
 	</beans:bean>
 	
 	<beans:bean class="com.nexacro.uiadapter17.spring.core.resolve.NexacroRequestMappingHandlerAdapter">
