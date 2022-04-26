@@ -62,12 +62,18 @@
         	this.Static00.set_text(name+"님 환영합니다!");
         };
 
+        this.Button01_onclick = function(obj,e)
+        {
+        	href.location="127.0.0.1:8888/login.snu";
+        };
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.Form_Top_onload,this);
+            this.Button01.addEventHandler("onclick",this.Button01_onclick,this);
         };
         this.loadIncludeScript("Form_Top.xfdl");
         this.loadPreloadList();

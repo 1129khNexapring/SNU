@@ -5,7 +5,7 @@
       <Layout width="1280" height="100" screenid="Desktop_screen">
         <Static id="Static00" taborder="0" text="Static00" top="43" width="178" height="50" textAlign="right" right="146"/>
         <Button id="Button00" taborder="1" left="0" top="0" width="270" height="100" background="url('imagerc::SNU_logo.png') no-repeat center top /contain"/>
-        <Button id="Button01" taborder="2" text="로그아웃" top="42" width="122" height="52" right="14"/>
+        <Button id="Button01" taborder="2" text="로그아웃" top="42" width="122" height="52" right="14" onclick="Button01_onclick"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
@@ -13,6 +13,11 @@ this.Form_Top_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var name = nexacro.getEnvironmentVariable("ev_Val1");
 	this.Static00.set_text(name+"님 환영합니다!");
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	href.location="127.0.0.1:8888/login.snu";
 };
 ]]></Script>
   </Form>

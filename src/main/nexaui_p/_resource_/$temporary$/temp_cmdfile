@@ -1,11 +1,11 @@
 ﻿-P
-"C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\nexaui_p.xprj"
+"E:\git\SNU\src\main\nexaui_p\nexaui_p.xprj"
 -O
-"C:\Users\HyoGwang\Documents\nexacro\17.1\outputs\nexaui_p"
+"C:\Users\ian10\OneDrive\문서\nexacro\17.1\outputs\nexaui_p"
 -B
 "C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
 -FILE
-"'C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\environment.xml','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Application_Desktop.xadl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_attendance.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_board.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_dept.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_deptInfo.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_deptPro.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_grade.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_lecture.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_lectureScheduler.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_lectureScore.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_paper.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_proInfo.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_stuIng.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\FrameBase\Form_Left.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\FrameBase\Form_Top.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\FrameBase\Form_Work.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\_resource_\_theme_\default'"
+"'E:\git\SNU\src\main\nexaui_p\environment.xml','E:\git\SNU\src\main\nexaui_p\Application_Desktop.xadl','E:\git\SNU\src\main\nexaui_p\Base\frm_attendance.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_board.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_dept.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_deptInfo.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_deptPro.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_grade.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_lecture.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_lectureScheduler.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_lectureScore.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_paper.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_proInfo.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_stuIng.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Left.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Main.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Mdi.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Top.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Work.xfdl','E:\git\SNU\src\main\nexaui_p\_resource_\_images_\SNU_logo.png','E:\git\SNU\src\main\nexaui_p\_resource_\_theme_\default'"
 -JSVERSION
 "ECMAScript 2015(ES6)"
 -BOOTSTRAP
@@ -13,15 +13,15 @@
 -BROWSER
 NRE,Internet Explorer 11,Internet Explorer 10,Chrome,Safari,
 -D2
-"C:\Users\HyoGwang\git\SNU\src\main\webapp\nexa_p\."
+"E:\git\SNU\src\main\webapp\nexa_p\."
 -DB2
 "C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
 -DT2
 4369
 -DF2
-"'C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\environment.xml','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Application_Desktop.xadl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_attendance.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_board.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_dept.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_deptInfo.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_deptPro.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_grade.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_lecture.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_lectureScheduler.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_lectureScore.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_paper.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_proInfo.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\Base\frm_stuIng.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\FrameBase\Form_Left.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\FrameBase\Form_Top.xfdl','C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\FrameBase\Form_Work.xfdl'"
+"'E:\git\SNU\src\main\nexaui_p\environment.xml','E:\git\SNU\src\main\nexaui_p\Application_Desktop.xadl','E:\git\SNU\src\main\nexaui_p\Base\frm_attendance.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_board.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_dept.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_deptInfo.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_deptPro.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_grade.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_lecture.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_lectureScheduler.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_lectureScore.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_paper.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_proInfo.xfdl','E:\git\SNU\src\main\nexaui_p\Base\frm_stuIng.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Left.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Main.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Mdi.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Top.xfdl','E:\git\SNU\src\main\nexaui_p\FrameBase\Form_Work.xfdl'"
 -IGNORECOMPRESS
-"C:\Users\HyoGwang\git\SNU\src\main\nexaui_p\.ignorecompress"
+"E:\git\SNU\src\main\nexaui_p\.ignorecompress"
 -RTL
 -Q
-921912
+68200
