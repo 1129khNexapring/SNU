@@ -8,4 +8,6 @@ public interface ProfessorStore {
 
 	Professor selectProfessorById(SqlSession sqlSession, String id);
 
+	List<Professor> selectProfessorListBydCode(SqlSession sqlSession, String dCode);
+
 }
