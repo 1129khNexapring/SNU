@@ -24,4 +24,10 @@ public class DepartmentServiceImpl implements DepartmentService{
 		return dept;
 	}
 
+	@Override
+	public Department printDeptBypCode(String profCode) {
+		Department dept = dStore.selectDeptBypCode(sqlSession, profCode);
+		return dept;
+	}
+
 }

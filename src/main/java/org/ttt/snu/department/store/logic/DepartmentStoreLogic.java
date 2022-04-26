@@ -15,6 +15,12 @@ public class DepartmentStoreLogic implements DepartmentStore{
 		Department dept = sqlSession.selectOne("DepartmentMapper.selectDeptByCode", dCode);
 		return dept;
 	}
+
+	@Override
+	public Department selectDeptBypCode(SqlSession sqlSession, String profCode) {
+		Department dept = sqlSession.selectOne("DepartmentMapper.selectDeptBypCode", profCode);
+		return dept;
+	}
 	
 	
 

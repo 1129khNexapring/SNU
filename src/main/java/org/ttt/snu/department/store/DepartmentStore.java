@@ -9,4 +9,6 @@ public interface DepartmentStore {
 
 	Department selectDeptByCode(SqlSession sqlSession, String dCode);
 
+	Department selectDeptBypCode(SqlSession sqlSession, String profCode);
+
 }

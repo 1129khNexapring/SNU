@@ -31,10 +31,9 @@ public class DepartmentController {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		Professor prof = pService.printProfessorById(profCode);
-		Department dept = dService.printDeptByCode(prof.getdCode());
+		Department deptJoin = dService.printDeptBypCode(profCode);
 		List<Department> deptList = new ArrayList<Department>();
-		deptList.add(dept);
+		deptList.add(deptJoin);
 		if(!deptList.isEmpty()) {
 			nErrorCode 	= 0;
 			strErrorMsg = "SUCC";

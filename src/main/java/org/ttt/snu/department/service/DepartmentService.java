@@ -8,4 +8,6 @@ public interface DepartmentService {
 
 	Department printDeptByCode(String getdCode);
 
+	Department printDeptBypCode(String profCode);
+
 }

@@ -16,5 +16,11 @@
 	<select id="selectDeptByCode" parameterType="string" resultMap="departmentResultMap">
 		SELECT * FROM DEPARTMENT WHERE D_CODE = #{dCode }
 	</select>
+	
+	<select id="selectDeptBypCode" parameterType="string" resultMap="departmentResultMap">
+		SELECT D_CODE, D_NAME, D_FIELD, OFFICE_CODE, TUITION_FEE, D_CAPACITY FROM DEPARTMENT
+		JOIN PROFESSOR USING(D_CODE)
+		WHERE P_CODE = #{profCode }
+	</select>
 
 </mapper>
