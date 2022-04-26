@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_boardWriteForm" width="1080" height="590" titletext="New Form">
+    <Layouts>
+      <Layout height="590" mobileorientation="landscape" width="1080" stepcount="0">
+        <Static id="Static00" taborder="0" text="No" left="340" top="120" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Edit id="edt_boardNo" taborder="1" left="395" top="120" width="145" height="30" borderRadius="4px"/>
+        <Edit id="edt_boardCount" taborder="2" left="595" top="120" width="160" height="30" borderRadius="4px" onchanged="edt_boardCount_onchanged"/>
+        <Edit id="edt_boardWriter" taborder="3" left="395" top="150" width="145" height="30" borderRadius="4px"/>
+        <Edit id="edt_boardWriteDate" taborder="4" left="595" top="150" width="160" height="30" borderRadius="4px"/>
+        <Static id="Static04" taborder="5" text="1번 게시글" left="475" top="40" width="190" height="60" onclick="Static04_onclick" font="normal 25pt/normal &quot;Arial&quot;"/>
+        <Edit id="edt_boardTitle" taborder="6" left="395" top="180" width="360" height="30" borderRadius="4px"/>
+        <Static id="Static00_00" taborder="7" text="작성자" left="340" top="150" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Static id="Static00_00_00" taborder="8" text="제목" left="340" top="180" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Static id="Static00_00_01" taborder="9" text="조회수" left="540" top="120" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Static id="Static00_00_01_00" taborder="10" text="작성일" left="540" top="150" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Static id="Static00_00_00_00" taborder="11" text="내용" left="340" top="210" width="55" height="270" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <TextArea id="ta_boardContent" taborder="12" left="395" top="210" width="360" height="270" borderRadius="4px"/>
+        <Edit id="edt_file" taborder="13" left="380" top="490" width="350" height="30" borderRadius="4px"/>
+        <Button id="btn_submit" taborder="14" text="등록하기" left="514" top="528" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_submit_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"tr_register"  	 	 	 	 	      // 1.ID
+		,"SnuUrl::board/register.snu?in_var1=1"   	  // 2.URL
+		,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
+		,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
+		,"in_var1=1"  			// 5.InVar : F->S(var)
+		,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
+	);
+};
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "tr_register") {
+		if(nErrorCode < 0) {
+			this.alert("게시글 등록 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("게시글 등록 성공");
+		this.go("Base::frm_board.xfdl");
+	}
+	
+};
+]]></Script>
+    <Objects/>
+  </Form>
+</FDL>
