@@ -66,14 +66,27 @@
             obj.set_font("normal 700 15pt/normal \"Arial\"");
             this.PopupDiv00.addChild(obj.name, obj);
 
-            obj = new Static("Static01","25","57","581","51",null,null,null,null,null,null,this.PopupDiv00.form);
+            obj = new Edit("Edit00","25","57","415","53",null,null,null,null,null,null,this.PopupDiv00.form);
             obj.set_taborder("2");
-            obj.set_text("Static01");
             this.PopupDiv00.addChild(obj.name, obj);
 
-            obj = new Static("Static02","22","157","650","331",null,null,null,null,null,null,this.PopupDiv00.form);
+            obj = new TextArea("TextArea00","25","161","695","279",null,null,null,null,null,null,this.PopupDiv00.form);
             obj.set_taborder("3");
-            obj.set_text("Static02");
+            this.PopupDiv00.addChild(obj.name, obj);
+
+            obj = new Button("Button00","25","449","205","61",null,null,null,null,null,null,this.PopupDiv00.form);
+            obj.set_taborder("4");
+            obj.set_text("취소");
+            this.PopupDiv00.addChild(obj.name, obj);
+
+            obj = new Button("Button01","270","449","224","61",null,null,null,null,null,null,this.PopupDiv00.form);
+            obj.set_taborder("5");
+            obj.set_text("수정");
+            this.PopupDiv00.addChild(obj.name, obj);
+
+            obj = new Button("Button02","521","449","199","62",null,null,null,null,null,null,this.PopupDiv00.form);
+            obj.set_taborder("6");
+            obj.set_text("삭제");
             this.PopupDiv00.addChild(obj.name, obj);
 
             obj = new Button("Button00","956","621","115","44",null,null,null,null,null,null,this);
@@ -107,7 +120,7 @@
             obj.set_text("취소");
             this.PopupDiv01.addChild(obj.name, obj);
 
-            obj = new Button("Button01","556","463","144","45",null,null,null,null,null,null,this.PopupDiv01.form);
+            obj = new Button("btn_bsInsert","556","463","144","45",null,null,null,null,null,null,this.PopupDiv01.form);
             obj.set_taborder("3");
             obj.set_text("등록");
             this.PopupDiv01.addChild(obj.name, obj);
@@ -120,14 +133,13 @@
             obj.set_taborder("5");
             this.PopupDiv01.addChild(obj.name, obj);
 
-            obj = new Edit("Edit01","71","215","91","75",null,null,null,null,null,null,this);
-            obj.set_taborder("5");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("Button01","75","331","90","61",null,null,null,null,null,null,this);
+            obj = new Edit("Edit02","521","31","201","50",null,null,null,null,null,null,this.PopupDiv01.form);
             obj.set_taborder("6");
-            obj.set_text("Button01");
-            this.addChild(obj.name, obj);
+            this.PopupDiv01.addChild(obj.name, obj);
+
+            obj = new Edit("Edit03","520","97","202","54",null,null,null,null,null,null,this.PopupDiv01.form);
+            obj.set_taborder("7");
+            this.PopupDiv01.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,670,this,function(p){});
@@ -135,7 +147,29 @@
             this.addLayout(obj.name, obj);
             
             // BindItem Information
+            obj = new BindItem("item0","PopupDiv00.form.Edit00","value","ds_book","bsTitle");
+            this.addChild(obj.name, obj);
+            obj.bind();
 
+            obj = new BindItem("item1","PopupDiv00.form.TextArea00","value","ds_book","bsContent");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item2","PopupDiv01.form.Edit00","value","ds_book","bsTitle");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item3","PopupDiv01.form.Edit01","value","ds_book","bsContent");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item4","PopupDiv01.form.Edit02","value","ds_book","bsDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item5","PopupDiv01.form.Edit03","value","ds_book","sCode");
+            this.addChild(obj.name, obj);
+            obj.bind();
             
             // TriggerItem Information
 
@@ -148,6 +182,21 @@
         
         // User Script
         this.registerScript("frm_book.xfdl", function() {
+        var sName = nexacro.getEnvironmentVariable("ev_Val1");
+        var bsCode = nexacro.getEnvironmentVariable("ev_Val");
+        this.out_var="";
+         this.frm_book_onload = function(obj,e)
+                {
+                	this.transaction(
+                		"tr_select"// 1.ID
+                		,"tttUrl::book/list.snu"// 2.URL
+                		,"" // 3.InDs : F->S jsp(I,U,D)
+                		,"ds_book=out_book" // 4.OutDs : S->F jsp(SELECT)
+                		,"" // 5.InVar : F->S(var)
+                		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+                	)
+                };
+
         this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
         {
         	if(id=="tr_select")
@@ -198,6 +247,9 @@
         	var x= -200;
         	var y=- 100;
         	this.PopupDiv01.trackPopupByComponent(obj, x, y);
+        	this.ds_book.addRow();
+                	this.ds_book.setColumn(this.ds_book.rowposition, "bsDate", "20220426");
+        			this.ds_book.setColumn(this.ds_book.rowposition, "sCode", bsCode);
         };
 
 
@@ -216,43 +268,91 @@
         // 	);
         // };
 
-
-
-
-        this.PopupDiv01_Button01_onclick = function(obj,e)
+        this.PopupDiv00_Button02_onclick = function(obj,e)
         {
-        	var bsTitle = this.PopupDiv01.form.Edit00.value;
-        	var bsContent = this.PopupDiv01.form.Edit01.value;
-        	this.alert(bsTitle);
-        	this.transaction(
-        		"tr_register"
-        		,"tttUrl::book/register.snu"
-        		,""
-        		,""
-        		,"inVar1=bsTitle inVar2=bsContent"
-        		,"fn_callback_tran"
-        	)
+        	this.ds_book.deleteRow(this.ds_book.rowposition);
+                		var name = this.PopupDiv01.form.Edit00.value;
+                	this.transaction(
+                		"tr_register"
+                		,"tttUrl::book/register.snu"
+                		,"in_book=ds_book:U"
+                		,""
+                		,"inVar1="+nexacro.wrapQuote(name)
+                		,"fn_callback_tran"
+                	)
+        			this.PopupDiv00.closePopup();
+        			this.reload();
         };
 
+        this.PopupDiv00_Button01_onclick = function(obj,e)
+        {
+        	var row = this.ds_book.rowposition;
+        	var bScode = this.ds_book.getColumn(row, "sCode");
+                this.transaction(
+                	"tr_register"
+                	,"tttUrl::book/register.snu"
+                	,"in_book=ds_book:U"
+                	,""
+                	,"inVar1="
+                	,"fn_callback_tran"
+                )
+        	this.PopupDiv00.closePopup();
+        };
+
+        this.PopupDiv00_Button00_onclick = function(obj,e)
+        {
+        	this.PopupDiv00.closePopup();
+        };
+
+        this.PopupDiv01_Button00_onclick = function(obj,e)
+        {
+        	this.ds_book.deleteRow(this.ds_book.rowposition);
+        	this.PopupDiv01.closePopup();
+        };
+
+        this.PopupDiv01_btn_bsInsert_onclick = function(obj,e)
+        {
+
+                	this.transaction(
+                		"tr_register"
+                		,"tttUrl::book/register.snu"
+                		,"in_book=ds_book:U"
+                		,""
+                		,"inVar1="
+                		,"fn_callback_tran"
+
+               	)
+        		this.PopupDiv01.closePopup();
+        		this.reload();
+        };
+
+        this.PopupDiv01_onpopup = function(obj,e)
+        {
+        	this.PopupDiv01.form.Edit03.set_value(bsCode);
+        };
 
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
+            this.addEventHandler("onload",this.frm_book_onload,this);
             this.Grid00.addEventHandler("oncelldblclick",this.Grid00_oncelldblclick,this);
             this.Edit00.addEventHandler("onchanged",this.Edit00_onchanged,this);
             this.btn_retrieve.addEventHandler("onclick",this.btn_retrieve_onclick,this);
             this.PopupDiv00.addEventHandler("onpopup",this.PopupDiv00_onpopup,this);
             this.PopupDiv00.form.Static00.addEventHandler("onclick",this.PopupDiv00_Static00_onclick,this);
             this.PopupDiv00.form.Static00_00.addEventHandler("onclick",this.PopupDiv00_Static00_onclick,this);
-            this.PopupDiv00.form.Static01.addEventHandler("onclick",this.PopupDiv00_Static01_onclick,this);
+            this.PopupDiv00.form.Button00.addEventHandler("onclick",this.PopupDiv00_Button00_onclick,this);
+            this.PopupDiv00.form.Button01.addEventHandler("onclick",this.PopupDiv00_Button01_onclick,this);
+            this.PopupDiv00.form.Button02.addEventHandler("onclick",this.PopupDiv00_Button02_onclick,this);
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+            this.PopupDiv01.addEventHandler("onpopup",this.PopupDiv01_onpopup,this);
             this.PopupDiv01.form.Static00.addEventHandler("onclick",this.PopupDiv00_Static00_onclick,this);
             this.PopupDiv01.form.Static00_00.addEventHandler("onclick",this.PopupDiv00_Static00_onclick,this);
-            this.PopupDiv01.form.Button01.addEventHandler("onclick",this.PopupDiv01_Button01_onclick,this);
+            this.PopupDiv01.form.Button00.addEventHandler("onclick",this.PopupDiv01_Button00_onclick,this);
+            this.PopupDiv01.form.btn_bsInsert.addEventHandler("onclick",this.PopupDiv01_btn_bsInsert_onclick,this);
             this.PopupDiv01.form.Edit00.addEventHandler("onchanged",this.PopupDiv01_Edit00_onchanged,this);
-            this.Button01.addEventHandler("onclick",this.Button01_onclick,this);
         };
         this.loadIncludeScript("frm_book.xfdl");
         this.loadPreloadList();

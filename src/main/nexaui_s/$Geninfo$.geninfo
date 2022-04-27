@@ -8,12 +8,11 @@
       <XCSS rule_version="1.04"/>
       <Script rule_version="1.02"/>
     </Rule>
-    <Info project="C:\Users\HyoGwang\git\SNU\src\main\nexaui_s\" generated="C:\Users\HyoGwang\Documents\nexacro\17.1\outputs\Student\">
-      <File url="environment.xml" checksum="20220422095814" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220426095544" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220426092330" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220422095814" errormsg=""/>
-      <File url="FrameBase\Form_Tab.xfdl" checksum="20220426092330" errormsg=""/>
+    <Info project="C:\Users\YOUM\git\SNU\src\main\nexaui_s\" generated="C:\Users\YOUM\Documents\nexacro\17.1\outputs\Student\">
+      <File url="environment.xml" checksum="20220422171352" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20220425112244" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220426093004" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220422171352" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\CompBase.json" checksum="20211110093724" errormsg=""/>
@@ -21,8 +20,6 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-      <File url="Application_Desktop.xadl" checksum="20220426092330" errormsg=""/>
-      <File url="Base\frm_book.xfdl" checksum="20220426154426" errormsg=""/>
     </Info>
   </GenInfo>
 </root>
