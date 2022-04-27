@@ -3,7 +3,11 @@
   <Form id="Form_Left" width="200" height="670" titletext="Form_Left">
     <Layouts>
       <Layout width="200" height="670" screenid="Desktop_screen">
-        <Grid id="Grid00" taborder="0" left="0" top="100" width="200" height="570" binddataset="gds_menu" autosizingtype="col" autofittype="col" oncelldblclick="Grid00_oncelldblclick" treeusecheckbox="false">
+
+       
+
+        <Grid id="Grid00" taborder="0" left="0" top="100" width="200" height="570" binddataset="Dataset0" autosizingtype="col" autofittype="col" oncelldblclick="Grid00_oncelldblclick" treeusecheckbox="false">
+
           <Formats>
             <Format id="default">
               <Columns>
@@ -218,6 +222,7 @@ this.fn_openForm = function(obj, e)
 	objChildFrame.set_showtitlebar(false);
 	
 	objChildFrame.set_formurl(sFormUrl);
+
 	objChildFrame.show();
 	
 	var nRow = objApp.p_openForm.addRow();
@@ -226,6 +231,7 @@ this.fn_openForm = function(obj, e)
 	objApp.p_openForm.setColumn(nRow, "FORM_URL", sFormUrl);
 	
 	objApp.mainFrame.VFrameSet00.HFrameSet00.VFameSet00.TabFrame.form.fn_addTab(oParam);
+
 	//한번더
 	//여기까지 화면연결했음
 	

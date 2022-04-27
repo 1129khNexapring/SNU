@@ -1,22 +1,21 @@
 package org.ttt.snu.book.domain;
 
-import java.sql.Date;
 
 public class Book {
 	private int bsNo;
-	private String bsTtitle;
+	private String bsTitle;
 	private String bsContent;
-	private Date bsDate;
+	private String bsDate;
 	private String bsStatus;
 	private int bsCount;
 	private String sCode;
 	
 	Book() {}
 
-	public Book(int bsNo, String bsTtitle, String bsContent, Date bsDate, String bsStatus, int bsCount, String sCode) {
+	public Book(int bsNo, String bsTitle, String bsContent, String bsDate, String bsStatus, int bsCount, String sCode) {
 		super();
 		this.bsNo = bsNo;
-		this.bsTtitle = bsTtitle;
+		this.bsTitle = bsTitle;
 		this.bsContent = bsContent;
 		this.bsDate = bsDate;
 		this.bsStatus = bsStatus;
@@ -32,12 +31,12 @@ public class Book {
 		this.bsNo = bsNo;
 	}
 
-	public String getBsTtitle() {
-		return bsTtitle;
+	public String getBsTitle() {
+		return bsTitle;
 	}
 
-	public void setBsTtitle(String bsTtitle) {
-		this.bsTtitle = bsTtitle;
+	public void setBsTitle(String bsTitle) {
+		this.bsTitle = bsTitle;
 	}
 
 	public String getBsContent() {
@@ -48,11 +47,11 @@ public class Book {
 		this.bsContent = bsContent;
 	}
 
-	public Date getBsDate() {
+	public String getBsDate() {
 		return bsDate;
 	}
 
-	public void setBsDate(Date bsDate) {
+	public void setBsDate(String bsDate) {
 		this.bsDate = bsDate;
 	}
 
@@ -82,7 +81,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [책코드=" + bsNo + ", 책제목=" + bsTtitle + ", 내용=" + bsContent + ", 등록일=" + bsDate
+		return "Book [책코드=" + bsNo + ", 책제목=" + bsTitle + ", 내용=" + bsContent + ", 등록일=" + bsDate
 				+ ", 게시글상태=" + bsStatus + ", 조회수=" + bsCount + ", 학번=" + sCode + "]";
 	}
 	

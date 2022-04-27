@@ -16,4 +16,10 @@ public class ProfessorStoreLogic implements ProfessorStore{
 		return p;
 	}
 
+	@Override
+	public List<Professor> selectProfessorListBydCode(SqlSession sqlSession, String dCode) {
+		List<Professor> pList = sqlSession.selectList("ProfessorMapper.selectProfessorListBydCode", dCode);
+		return pList;
+	}
+
 }

@@ -23,4 +23,10 @@ public class ProfessorServiceImpl implements ProfessorService{
 		return p;
 	}
 
+	@Override
+	public List<Professor> printProfessorListBydCode(String dCode) {
+		List<Professor> pList = pStore.selectProfessorListBydCode(sqlSession, dCode);
+		return pList;
+	}
+
 }

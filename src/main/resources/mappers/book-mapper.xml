@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="BookMapper">
+	<resultMap type="org.ttt.snu.book.domain.Book" id="bookResultMap">
+		<id property="bsNo" column="BS_NO"/>
+		<result property="bsTitle" column="BS_TITLE"/>
+		<result property="bsContent" column="BS_CONTENT"/>
+		<result property="bsDate" column="BS_DATE"/>
+		<result property="bsStatus" column="BS_STATUS"/>
+		<result property="bsCount" column="BS_COUNT"/>
+		<result property="sCode" column="S_CODE"/>
+		
+		
+	</resultMap>
+	<select id="selectAllBook" parameterType="org.ttt.snu.book.domain.Book" resultMap="bookResultMap">
+		SELECT * FROM BS_BOARD
+	</select>
+	<insert id = "insertBook">
+		INSERT INTO BS_BOARD VALUES(BOOK_SEQ.NEXTVAL, #{bsTitle}, #{bsContent}, #{bsDate}, #{bsStatus}, #{bsCount}, #{sCode}))
+	</insert>
+</mapper>

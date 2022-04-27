@@ -27,9 +27,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> printAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Board> printAll() {
+		List<Board> boardList = bStore.selectAll(sqlSession);
+		return boardList;
 	}
 
 	@Override
@@ -58,20 +58,20 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int registerBoard(Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = bStore.insertBoard(sqlSession, board);
+		return result;
 	}
 
 	@Override
 	public int modifyBoard(Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = bStore.updateBoard(sqlSession, board);
+		return result;
 	}
 
 	@Override
-	public int removeBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeBoard(String boardNo) {
+		int result = bStore.deleteBoard(sqlSession, boardNo);
+		return result;
 	}
 
 	@Override
