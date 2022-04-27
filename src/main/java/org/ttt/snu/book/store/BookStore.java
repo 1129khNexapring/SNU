@@ -11,4 +11,8 @@ public interface BookStore {
 
 	int insertBook(SqlSession sqlSession, Book book);
 
+	int deleteBook(SqlSession sqlSession, String dBook);
+
+	int updateBook(SqlSession sqlSession, Book book);
+
 }

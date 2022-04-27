@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="LoaMapper">
+	<resultMap type="org.ttt.snu.loa.domain.Loa" id="loaResultMap">
+		<id property="lNum" column="L_NUM"/>
+		<result property="lReason" column="L_REASON"/>
+		<result property="lRequestDate" column="L_REQUEST_DATE"/>
+		<result property="lStatus" column="L_STATUS"/>
+		<result property="lMsg" column="L_MSG"/>
+		<result property="lSemester" column="L_SEMESTER"/>
+		<result property="sCode" column="S_CODE"/>
+	</resultMap>
+	
+	<insert id = "requestLoa">
+		INSERT INTO LOA VALUES(LOA_SEQ.NEXTVAL, #{lReason}, DEFAULT, DEFAULT, #{lMsg}, #{lSemester}, #{sCode} )
+	</insert>
+
+</mapper>

@@ -30,4 +30,16 @@ public class BookServiceImpl implements BookService {
 		return result;
 	}
 
+	@Override
+	public int removeBook(String dBook) {
+		int result = bStore.deleteBook(sqlSession, dBook);
+		return result;
+	}
+
+	@Override
+	public int modifyBook(Book book) {
+		int result = bStore.updateBook(sqlSession, book);
+		return result;
+	}
+
 }
