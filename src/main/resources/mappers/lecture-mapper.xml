@@ -24,6 +24,9 @@
 	<select id="selectAllLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 	</select>
+	<select id="selectYLectures" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE WHERE L_STATUS = 'Y'
+	</select>
 	
 	
 </mapper>

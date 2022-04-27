@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ScholarshipMapper">
+	<resultMap type="org.ttt.snu.scholarship.domain.Scholarship" id="scholarshipResultMap">
+		<id property="scCode" 			column="SC_CODE"/>
+		<result property="scName" 		column="SC_NAME"/>
+		<result property="amount" 		column="AMOUNT"/>
+		<result property="scCondition"  column="SC_CONDITION"/>
+		<result property="scDate" 		column="SC_DATE"/>
+		<result property="scStatus" 	column="SC_STATUS"/>
+		<result property="dCode" 		column="D_CODE"/>
+		<result property="scEnrollDate" column="SC_ENROLL_DATE"/>
+	</resultMap>
+	<select id="selectScholarshipList" resultMap="scholarshipResultMap">
+		SELECT * FROM SCHOLARSHIP
+	</select>
+	<insert id="insertScholarship">
+		INSERT INTO SCHOLARSHIP VALUES(#{scCode }, #{scName }, #{amount }, #{scCondition }, DEFAULT, DEFAULT, #{dCode }, DEFAULT)
+	</insert>
+	<delete id="deleteScholarship" parameterType="string">
+		DELETE FROM SCHOLARSHIP WHERE SC_CODE = #{scCode }
+	</delete>
+	<update id="updateScholarship">
+		UPDATE SCHOLARSHIP
+		SET SC_NAME = #{scName }, AMOUNT = #{amount }, SC_CONDITION = #{scCondition }, 
+		SC_DATE = DEFAULT,SC_STATUS = DEFAULT, D_CODE = #{dCode }, SC_ENROLL_DATE = DEFAULT WHERE SC_CODE = #{scCode }
+	</update>
+</mapper>  

@@ -23,5 +23,11 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> lList = lStore.selectAllLectures(sqlSession);
 		return lList;
 	}
+	//관리자 승인된 계획서
+	@Override
+	public List<Lecture> printYLecture() {
+		List<Lecture> lList = lStore.selectYLecture(sqlSession);
+		return lList;
+	}
 
 }

@@ -18,7 +18,11 @@
 
 		<typeAlias type="org.ttt.snu.volunteer.domain.Volunteer" alias="Volunteer"/>
 
+		<typeAlias type="org.ttt.snu.scholarship.domain.Scholarship" alias="Scholarship"/>
+
+
 		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
+
 
 	</typeAliases>
 	<mappers>
@@ -32,7 +36,11 @@
 
 		<mapper resource="mappers/volunteer-mapper.xml"/>
 
+		<mapper resource="mappers/scholarship-mapper.xml"/>
+
+
 		<mapper resource="mappers/department-mapper.xml"/>
+
 
 	</mappers>
 </configuration>
