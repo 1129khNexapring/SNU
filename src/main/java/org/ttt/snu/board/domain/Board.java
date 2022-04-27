@@ -1,6 +1,5 @@
 package org.ttt.snu.board.domain;
 
-import java.sql.Date;
 
 public class Board {
 	

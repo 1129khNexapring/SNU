@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_board" width="1080" height="670" titletext="New Form">
+  <Form id="frm_board" width="1080" height="670" titletext="New Form" onload="frm_board_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="grd_boardList" taborder="0" left="20" top="30" width="1037" height="620" binddataset="ds_boardColumn" autofittype="col" borderRadius="2px" oncelldblclick="grd_boardList_oncelldblclick" cursor="pointer">
+        <Grid id="grd_boardList" taborder="0" left="20" top="30" width="1037" height="620" binddataset="ds_boardList" autofittype="col" borderRadius="2px" oncelldblclick="grd_boardList_oncelldblclick" cursor="pointer">
           <Formats>
             <Format id="default">
               <Columns>
                 <Column size="80"/>
                 <Column size="80"/>
-                <Column size="80"/>
+                <Column size="85"/>
                 <Column size="80"/>
               </Columns>
               <Rows>
-                <Row band="head" size="24"/>
+                <Row size="24" band="head"/>
                 <Row size="24"/>
               </Rows>
               <Band id="head">
@@ -23,28 +23,58 @@
                 <Cell col="3" text="작성자"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:No"/>
-                <Cell col="1" text="bind:제목"/>
-                <Cell col="2" text="bind:작성일"/>
-                <Cell col="3" text="bind:작성자"/>
+                <Cell text="bind:board_no"/>
+                <Cell col="1" text="bind:board_title"/>
+                <Cell col="2" text="bind:board_date"/>
+                <Cell col="3" text="bind:board_writer"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
         <Button id="btn_boardWrite" taborder="1" text="글쓰기" left="22" top="0" width="56" height="25" background="cornflowerblue" borderRadius="6px" onclick="btn_boardWrite_onclick" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <PopupDiv id="popDetail" text="PopupDiv00" visible="false" left="30" top="25" width="1030" height="700" background="aliceblue">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="No" left="340" top="130" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+              <Edit id="edt_boardNo" taborder="1" left="395" top="130" width="145" height="30" borderRadius="4px"/>
+              <Edit id="edt_boardCount" taborder="2" left="595" top="130" width="160" height="30" borderRadius="4px"/>
+              <Edit id="edt_boardWriter" taborder="3" left="395" top="160" width="145" height="30" borderRadius="4px"/>
+              <Edit id="edt_boardWriteDate" taborder="4" left="595" top="160" width="160" height="30" borderRadius="4px"/>
+              <Static id="Static04" taborder="5" text="1번 게시글" left="475" top="40" width="190" height="60" onclick="Static04_onclick" font="normal 25pt/normal &quot;Arial&quot;"/>
+              <Edit id="edt_boardTitle" taborder="6" left="395" top="190" width="360" height="30" borderRadius="4px"/>
+              <Static id="Static00_00" taborder="7" text="작성자" left="340" top="160" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+              <Static id="Static00_00_00" taborder="8" text="제목" left="340" top="190" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+              <Static id="Static00_00_01" taborder="9" text="조회수" left="540" top="130" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+              <Static id="Static00_00_01_00" taborder="10" text="작성일" left="540" top="160" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+              <Static id="Static00_00_00_00" taborder="11" text="내용" left="340" top="220" width="55" height="270" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+              <TextArea id="ta_boardContent" taborder="12" left="395" top="220" width="360" height="270" borderRadius="4px"/>
+              <Edit id="edt_file" taborder="13" left="340" top="500" width="325" height="30" borderRadius="4px"/>
+              <Button id="btn_commentSubmit" taborder="14" text="댓글등록" left="517" top="650" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_commentSubmit_onclick"/>
+              <Edit id="edt_comment" taborder="15" left="345" top="565" width="405" height="65" borderRadius="4px"/>
+              <Button id="btn_update" taborder="16" text="수정하기" left="550" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_update_onclick"/>
+              <Button id="btn_popUpBack" taborder="17" text="이전으로" left="690" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_popUpBack_onclick"/>
+              <Button id="btn_remove" taborder="18" text="삭제하기" left="620" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_remove_onclick"/>
+              <FileDownload id="FileDownload00" taborder="19" text="File Download" left="665" top="500" width="94" height="30" borderRadius="5px"/>
+              <Button id="btn_popUpClose" taborder="20" text="X" left="1000" top="5" width="20" height="25" background="dodgerblue" font="normal bold 10pt/normal &quot;Arial&quot;" cursor="pointer" onclick="popDetail_btn_popUpClose_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
       </Layout>
     </Layouts>
     <Objects>
-      <Dataset id="ds_boardColumn">
+      <Dataset id="ds_boardList">
         <ColumnInfo>
-          <Column id="No" type="STRING" size="256"/>
-          <Column id="제목" type="STRING" size="256"/>
-          <Column id="작성일" type="STRING" size="256"/>
-          <Column id="작성자" type="STRING" size="256"/>
+          <Column id="board_no" type="STRING" size="256"/>
+          <Column id="board_title" type="STRING" size="256"/>
+          <Column id="board_content" type="STRING" size="256"/>
+          <Column id="board_date" type="STRING" size="256"/>
+          <Column id="b_status" type="STRING" size="256"/>
+          <Column id="p_code" type="STRING" size="256"/>
+          <Column id="board_fileName" type="STRING" size="256"/>
+          <Column id="board_fileReName" type="STRING" size="256"/>
+          <Column id="board_writer" type="STRING" size="256"/>
+          <Column id="board_count" type="STRING" size="256"/>
         </ColumnInfo>
-        <Rows>
-          <Row/>
-        </Rows>
       </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[
@@ -53,10 +83,134 @@ this.btn_boardWrite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventIn
 	this.go("Base::frm_boardWriteForm.xfdl");		
 };
 
+
 this.grd_boardList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+	this.popDetail.trackPopupByComponent(obj, "3000000%", "3000000%");
+};
+
+
+
+// this.frm_boardDetailView_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+// {
+// 	var row = this.ds_boardList.rowposition;
+// 	trace(this.ds_boardList);
+// 	
+// 	var bNo       = this.ds_boardList.getColumn(row, "board_no");
+// 	var bTitle    = this.ds_boardList.getColumn(row, "board_title");
+// 	var bContent  = this.ds_boardList.getColumn(row, "board_content");
+// 	var bDate     = this.ds_boardList.getColumn(row, "board_WriteDate");
+// 	var bWriter   = this.ds_boardList.getColumn(row, "board_writer");
+// 	var bCount    = this.ds_boardList.getColumn(row, "board_count");
+// 	
+// 	this.frm_boardDetailView.edt_boardNo.set_text(bNo);
+// 	this.frm_boardDetailView.edt_boardCount.set_text(bCount);
+// 	this.frm_boardDetailView.edt_boardWriter.set_text(bWriter);
+// 	this.frm_boardDetailView.edt_boardWriteDate.set_text(bDate);
+// 	this.frm_boardDetailView.edt_boardTitle.set_text(bTitle);
+// 	this.frm_boarddetailView.ta_boardContent.set_text(bContent);
+// }
+
+this.frm_board_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
-	this.go("Base::frm_boardDetailView.xfdl");
+	this.transaction(
+			"tr_bList" 					  	  // 1. ID
+			, "SnuUrl::board/list.snu" 		  // 2. URL
+			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+			, "ds_boardList=out_emp" 	  // 4. OutDs : S -> F jsp(SELECT)
+	        , ""							  // 5. InVar : F -> S(var)
+			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+		)
+		
+};
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "tr_bList") {
+		if(nErrorCode < 0) {
+			this.alert("게시글 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("게시글 조회 성공");
+	}
+	
+	if(id == "tr_bUpdate") {
+		if(nErrorCode < 0) {
+			this.alert("게시글 수정 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("게시글 수정 성공");
+	}
+	
+	if(id == "tr_bDelete") {
+		if(nErrorCode < 0) {
+			this.alert("게시글 삭제 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("게시글 삭제 성공");
+	}
+	
+};
+
+
+
+
+
+
+this.popDetail_btn_popUpClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+	var arrRtn = "";
+	var nRow = this.ds_boardList.rowposition;
+	arrRtn = this.ds_boardList.getColumn(nRow, "board_no");
+	arrRtn += ":" +  this.ds_boardList.getColumn(nRow, "board_count");
+	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_writer");
+	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_date");
+	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_title");
+	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_content");
+	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "edt_file");
+	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "edt_comment");
+	
+	this.close(arrRtn);
+};
+
+this.popDetail_btn_popUpBack_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close("popDetail");
+};
+
+this.popDetail_btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		  "tr_bUpdate"
+		, "SnuUrl::board/register.snu"
+		, "in_boardList=ds_boardList:U"
+		, ""
+		, "in_var1=" + nexacro.wrapQuote(name)
+		, "fn_callback_tran"
+	);
+};
+
+this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"tr_bDelete"
+		, "SnuUrl::board/register.snu"
+		, "in_boardList=ds_boardList:D"
+		, ""
+		, "in_var1=" + nexacro.wrapQuote(name)
+		, "fn_callback_tran"
+	)
 };
 ]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="popDetail.form.edt_boardNo" propid="value" datasetid="ds_boardList" columnid="board_no"/>
+      <BindItem id="item1" compid="popDetail.form.edt_boardCount" propid="value" datasetid="ds_boardList" columnid="board_count"/>
+      <BindItem id="item2" compid="popDetail.form.edt_boardWriter" propid="value" datasetid="ds_boardList" columnid="board_writer"/>
+      <BindItem id="item3" compid="popDetail.form.edt_boardWriteDate" propid="value" datasetid="ds_boardList" columnid="board_date"/>
+      <BindItem id="item4" compid="popDetail.form.edt_boardTitle" propid="value" datasetid="ds_boardList" columnid="board_title"/>
+      <BindItem id="item5" compid="popDetail.form.ta_boardContent" propid="value" datasetid="ds_boardList" columnid="board_content"/>
+      <BindItem id="item6" compid="popDetail.form.edt_file" propid="value" datasetid="ds_boardList" columnid="board_fileName"/>
+    </Bind>
   </Form>
 </FDL>

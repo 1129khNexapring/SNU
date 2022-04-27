@@ -30,12 +30,11 @@ public class BoardController {
 	
 	// 강의 게시판 조회
 	@RequestMapping(value="/board/list.snu", method=RequestMethod.GET)
-	public NexacroResult boardListView(
-				@ModelAttribute Board board) {
+	public NexacroResult boardListView() {
 		int    nErrorCode  = 0;
 		String strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		List<Board> boardList = bService.printAll(board);
+		List<Board> boardList = bService.printAll();
 		if(!boardList.isEmpty()) {
 			nErrorCode  = 0;
 			strErrorMsg = "SUCC";
@@ -53,13 +52,33 @@ public class BoardController {
 	@RequestMapping(value="/board/register.snu", method=RequestMethod.POST)
 	public NexacroResult registerBoard(
 				  @ParamDataSet  (name="in_boardList") DataSet inBoardList
-				, @ParamVariable(name="in_var1") String inVar1) throws Exception {
+				, @ParamVariable(name="in_var1") String inVar1
+				, @ParamVariable(name="file_up", required=false) MultipartFile fileUp
+				, HttpServletRequest request) throws Exception {
+		try {
+			if(!fileUp.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile(fileUp, request);
+				if(renameFileName != null) {
+					
+				}
+			}
+		}catch(Exception e) {
+			
+		}
 		NexacroResult result = new NexacroResult();
 		int 	nErrorCode  = 0;
 		String  strErrorMsg = "START";
 		int i;
+		// 강의게시판 삭제
+		for(i = 0; i < inBoardList.getRemovedRowCount(); i++) {
+				String bId = inBoardList.getRemovedData(i, "board_no").toString();
+				bService.removeBoard(bId);
+		}			
+		
 		int iResult = 0;
+		int uResult = 0;
 		for(i = 0; i < inBoardList.getRowCount(); i++) {
+			int    rowType          = inBoardList.getRowType(i);
 			int    board_no         = dsGet(inBoardList, i, "board_no") != ""
 						             ? Integer.parseInt(dsGet(inBoardList, i, "board_no")) : 0;
 			String board_title      = dsGet(inBoardList, i, "board_title");
@@ -83,12 +102,17 @@ public class BoardController {
 				,	board_fileReName
 				,   board_writer
 				,	board_count);
-		iResult += bService.registerBoard(board);
+			if(rowType == DataSet.ROW_TYPE_INSERTED) {
+				iResult += bService.registerBoard(board);
+			}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+				String boardId= inBoardList.getSavedData(i, "board_no").toString();
+				board.setBoard_no(Integer.parseInt(boardId));
+				uResult += bService.modifyBoard(board);
+			}
 		}
-		if(iResult < 0) {
+		if(iResult < 0 && uResult < 0) {
 			nErrorCode  = -1;
 			strErrorMsg = "FAIL";
-			System.out.println(strErrorMsg);
 		}else {
 			nErrorCode  = 0;
 			strErrorMsg = "SUCC";
@@ -99,8 +123,28 @@ public class BoardController {
 		return result;
 	}
 	
+	// 강의 게시판 삭제
+	@RequestMapping(value="/board/delete.snu", method=RequestMethod.GET)
+	public NexacroResult removeBoard(
+				  @ParamDataSet(name="in_boardList") DataSet inBoardList
+				, @ParamVariable(name="in_var1") String inVar1) {
+		int     nErrorCode  = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		int i;
+		
+		for(i = 0; i < inBoardList.getRemovedRowCount(); i++) {
+			String boardNo = inBoardList.getRemovedData(i, "board_no").toString();
+			// bService.removeBoard(boardNo);
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		result.addVariable("out_var", inVar1);
+		return result;
+	}
+	
 	// 첨부파일 저장
-	public String saveFile1(MultipartFile uploadFile, HttpServletRequest request) {
+	public String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
 		// 파일 경로
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "//buploadFiles";

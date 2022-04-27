@@ -17,7 +17,9 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-
+            obj = new Dataset("ds_boardList", this);
+            obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileName\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileReName\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Static("Static00","340","130","55","30",null,null,null,null,null,null,this);
@@ -104,7 +106,7 @@
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
 
-            obj = new Edit("edt_file","380","500","350","30",null,null,null,null,null,null,this);
+            obj = new Edit("edt_file","340","500","325","30",null,null,null,null,null,null,this);
             obj.set_taborder("13");
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
@@ -124,7 +126,7 @@
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_update","550","98","66","32",null,null,null,null,null,null,this);
+            obj = new Button("btn_updat","550","98","66","32",null,null,null,null,null,null,this);
             obj.set_taborder("16");
             obj.set_text("수정하기");
             obj.set_background("cornflowerblue");
@@ -153,6 +155,12 @@
             obj.set_color("white");
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
+
+            obj = new FileDownload("FileDownload00","665","500","94","30",null,null,null,null,null,null,this);
+            obj.set_taborder("19");
+            obj.set_text("File Download");
+            obj.set_borderRadius("5px");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,850,this,function(p){});
@@ -160,7 +168,33 @@
             this.addLayout(obj.name, obj);
             
             // BindItem Information
+            obj = new BindItem("item0","edt_boardNo","value","ds_boardList","board_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
 
+            obj = new BindItem("item1","edt_boardCount","value","ds_boardList","board_count");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item2","edt_boardWriter","value","ds_boardList","board_writer");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item3","edt_boardWriteDate","value","ds_boardList","board_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item4","edt_boardTitle","value","ds_boardList","board_title");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item5","ta_boardContent","value","ds_boardList","board_content");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item6","edt_file","value","ds_boardList","board_fileName");
+            this.addChild(obj.name, obj);
+            obj.bind();
             
             // TriggerItem Information
 
@@ -173,11 +207,6 @@
         
         // User Script
         this.registerScript("frm_boardDetailView.xfdl", function() {
-
-        this.btn_back_onclick = function(obj,e)
-        {
-        	this.go("Base::frm_board.xfdl");
-        };
 
         });
         
@@ -193,6 +222,7 @@
             this.Static00_00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.btn_commentSubmit.addEventHandler("onclick",this.btn_commentSubmit_onclick,this);
             this.btn_back.addEventHandler("onclick",this.btn_back_onclick,this);
+            this.btn_remove.addEventHandler("onclick",this.btn_remove_onclick,this);
         };
         this.loadIncludeScript("frm_boardDetailView.xfdl");
         this.loadPreloadList();

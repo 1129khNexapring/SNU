@@ -17,7 +17,9 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-
+            obj = new Dataset("ds_boardList", this);
+            obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileName\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileReName\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Static("Static00","340","120","55","30",null,null,null,null,null,null,this);
@@ -104,19 +106,25 @@
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
 
-            obj = new Edit("edt_file","380","490","350","30",null,null,null,null,null,null,this);
+            obj = new Button("btn_submit","517","544","66","32",null,null,null,null,null,null,this);
             obj.set_taborder("13");
-            obj.set_borderRadius("4px");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_submit","514","528","66","32",null,null,null,null,null,null,this);
-            obj.set_taborder("14");
             obj.set_text("등록하기");
             obj.set_background("cornflowerblue");
             obj.set_borderRadius("6px");
             obj.set_cursor("pointer");
             obj.set_color("white");
             obj.set_font("normal bold 10pt/normal \"Arial\"");
+            this.addChild(obj.name, obj);
+
+            obj = new FileUpload("file_up","430","495","250","30",null,null,null,null,null,null,this);
+            obj.set_taborder("14");
+            obj.set_borderRadius("4px");
+            obj.set_edge("");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_addFile","685","495","55","20",null,null,null,null,null,null,this);
+            obj.set_taborder("15");
+            obj.set_text("Add File");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -126,7 +134,29 @@
             this.addLayout(obj.name, obj);
             
             // BindItem Information
+            obj = new BindItem("item0","edt_boardNo","value","ds_boardList","board_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
 
+            obj = new BindItem("item1","edt_boardCount","value","ds_boardList","board_count");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item2","edt_boardWriter","value","ds_boardList","board_writer");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item3","edt_boardWriteDate","value","ds_boardList","board_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item4","edt_boardTitle","value","ds_boardList","board_title");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item5","ta_boardContent","value","ds_boardList","board_content");
+            this.addChild(obj.name, obj);
+            obj.bind();
             
             // TriggerItem Information
 
@@ -142,12 +172,13 @@
 
         this.btn_submit_onclick = function(obj,e)
         {
+
         	this.transaction(
         		"tr_register"  	 	 	 	 	      // 1.ID
-        		,"SnuUrl::board/register.snu?in_var1=1"   	  // 2.URL
+        		,"SnuUrl::board/register.snu"   	  // 2.URL
         		,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
         		,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
-        		,"in_var1=1"  			// 5.InVar : F->S(var)
+        		,"in_var1=" + nexacro.wrapQuote(name) 			// 5.InVar : F->S(var)
         		,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
         	);
         };
@@ -165,11 +196,26 @@
 
         };
 
+        this.frm_boardWriteForm_onload = function(obj,e)
+        {
+        	var d = new Date();
+        	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+
+        	this.ds_boardList.addRow();
+        	this.ds_boardList.setColumn(this.ds_boardList, "board_date", today);
+        };
+
+        this.btn_addFile_onclick = function(obj,e)
+        {
+        	this.file_up.appendItem();
+        };
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
+            this.addEventHandler("onload",this.frm_boardWriteForm_onload,this);
             this.Static00.addEventHandler("onclick",this.Static00_onclick,this);
             this.edt_boardCount.addEventHandler("onchanged",this.edt_boardCount_onchanged,this);
             this.Static04.addEventHandler("onclick",this.Static04_onclick,this);
@@ -179,6 +225,7 @@
             this.Static00_00_01_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.Static00_00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.btn_submit.addEventHandler("onclick",this.btn_submit_onclick,this);
+            this.btn_addFile.addEventHandler("onclick",this.btn_addFile_onclick,this);
         };
         this.loadIncludeScript("frm_boardWriteForm.xfdl");
         this.loadPreloadList();
