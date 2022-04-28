@@ -17,8 +17,9 @@
         <Static id="Static00_00_00_00" taborder="11" text="내용" left="340" top="210" width="55" height="270" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
         <TextArea id="ta_boardContent" taborder="12" left="395" top="210" width="360" height="270" borderRadius="4px"/>
         <Button id="btn_submit" taborder="13" text="등록하기" left="517" top="544" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_submit_onclick"/>
-        <FileUpload id="file_up" taborder="14" left="430" top="495" width="250" height="30" borderRadius="4px" edge=""/>
-        <Button id="btn_addFile" taborder="15" text="Add File" left="685" top="495" width="55" height="20" onclick="btn_addFile_onclick"/>
+        <FileUpload id="file_up" taborder="14" left="430" top="495" width="250" height="30" borderRadius="4px" edge="" visible="false"/>
+        <Button id="btn_addFile" taborder="15" text="Add File" left="685" top="495" width="55" height="20" onclick="btn_addFile_onclick" visible="false"/>
+        <Edit id="Edit00" taborder="16" left="485" top="520" width="140" height="20"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
@@ -85,6 +86,7 @@ this.btn_addFile_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
       <BindItem id="item3" compid="edt_boardWriteDate" propid="value" datasetid="ds_boardList" columnid="board_date"/>
       <BindItem id="item4" compid="edt_boardTitle" propid="value" datasetid="ds_boardList" columnid="board_title"/>
       <BindItem id="item5" compid="ta_boardContent" propid="value" datasetid="ds_boardList" columnid="board_content"/>
+      <BindItem id="item6" compid="Edit00" propid="value" datasetid="ds_boardList" columnid="board_fileName"/>
     </Bind>
   </Form>
 </FDL>
