@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="lectureDetail" width="480" height="600" titletext="New Form" onload="lectureDetail_onload">
+    <Layouts>
+      <Layout height="600" width="480">
+        <Div id="Div00" taborder="0" text="" left="9" top="40" width="460" height="554" border="1px solid black" background="#ffffff"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[// function fn_CreateDataset()
+// {
+// 	var objDs = new Dataset();
+// 	objDs.name = "ds_ldetail";
+// 	
+// 	objDs.addColumn("lName", 		"string");
+// 	objDs.addColumn("lObjective",   "string");
+// 	objDs.addColumn("lContents",    "string");
+// 	objDs.addColumn("textbook",     "string");
+// 	objDs.addCOlumn("lCapacity",    "string");
+// 	
+// 	this.addChild("ds_ldetail", objDs);
+// 	objDs.addRow();
+// 	objDs.setColumn(this.parent.lName, this.parent.lObjective, this.parent.lContents, this.parent.textbook, this.parent.lCapacity);
+// }
+
+
+
+this.lectureDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+// 	var lName 		= this.parent.lName;
+// 	var lObjective  = this.parent.lObjective;
+// 	var	lContents   = this.parent.lContents;
+// 	var	textbook    = this.parent.textbook;
+// 	var	lCapacity   = this.parent.lCapacity;
+	function fn_CreateDataset()
+	{
+	var objDs = new Dataset();
+	objDs.name = "ds_ldetail";
+	
+	objDs.addColumn("lName", 		"string");
+	objDs.addColumn("lObjective",   "string");
+	objDs.addColumn("lContents",    "string");
+	objDs.addColumn("textbook",     "string");
+	objDs.addCOlumn("lCapacity",    "string");
+	
+	this.addChild("ds_ldetail", objDs);
+	objDs.addRow();
+	objDs.setColumn(this.parent.lName, this.parent.lObjective, this.parent.lContents, this.parent.textbook, this.parent.lCapacity);
+	}
+	
+};
+]]></Script>
+  </Form>
+</FDL>
