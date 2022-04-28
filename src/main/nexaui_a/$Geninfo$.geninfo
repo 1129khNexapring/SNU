@@ -24,7 +24,7 @@
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220425010926" errormsg=""/>
       <File url="Base\frm_professor.xfdl" checksum="20220425154106" errormsg=""/>
       <File url="Base\frm_student.xfdl" checksum="20220425123703" errormsg=""/>
-      <File url="Base\frm_lecture.xfdl" checksum="20220427173119" errormsg=""/>
+      <File url="Base\frm_lecture.xfdl" checksum="20220427205847" errormsg=""/>
       <File url="Base\frm_schoolschedule.xfdl" checksum="20220424222151" errormsg=""/>
       <File url="Base\frm_absenceschool.xfdl" checksum="20220424222418" errormsg=""/>
       <File url="Base\frm_returnschool.xfdl" checksum="20220424222507" errormsg=""/>

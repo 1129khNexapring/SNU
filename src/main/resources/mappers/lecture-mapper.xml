@@ -24,8 +24,22 @@
 	<select id="selectAllLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 	</select>
-	<select id="selectYLectures" resultMap="lectureResultMap">
-		SELECT * FROM LECTURE WHERE L_STATUS = 'Y'
+	<select id="selectAllYLectures" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE
+	<where>
+		<if test="dCode != 'undefined'.toString()">
+			D_CODE LIKE #{dCode }||'%' 
+		</if>
+		<if test="lType != 'undefined'.toString()">
+			AND L_TYPE = #{lType } 
+		</if>
+		<if test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
+			AND L_STATUS = 'Y'
+		</if>
+		<if test="dCode == 'undefined'.toString() and lType == 'undefined'.toString()">
+			L_STATUS = 'Y'
+		</if>
+	</where>		
 	</select>
 	
 	

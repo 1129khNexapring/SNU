@@ -2,7 +2,135 @@
 <FDL version="2.1">
   <Form id="frm_lecture" width="1080" height="670" titletext="New Form">
     <Layouts>
-      <Layout height="670" mobileorientation="landscape" width="1080"/>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="Grid00" taborder="0" left="38" top="85" width="801" height="184" binddataset="ds_lecture" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="227"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="강의코드"/>
+                <Cell col="1" text="구분"/>
+                <Cell col="2" text="강의명"/>
+                <Cell col="3" text="정원"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lCode"/>
+                <Cell col="1" text="bind:lType"/>
+                <Cell col="2" text="bind:lName"/>
+                <Cell col="3" text="bind:lCapacity"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_lList" taborder="1" text="조회" left="287" top="41" width="63" height="39" onclick="btn_lList_onclick"/>
+        <Combo id="com_Field" taborder="2" text="Combo00" left="39" top="44" width="114" height="32" innerdataset="ds_field" codecolumn="dCode" datacolumn="dField"/>
+        <Combo id="com_Type" taborder="3" text="Combo01" left="165" top="44" width="114" height="32" innerdataset="ds_lType" datacolumn="lType" codecolumn="lType"/>
+      </Layout>
     </Layouts>
+    <Objects>
+      <Dataset id="ds_lecture">
+        <ColumnInfo>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="STRING" size="256"/>
+          <Column id="credit" type="STRING" size="256"/>
+          <Column id="lYear" type="STRING" size="256"/>
+          <Column id="lSemester" type="STRING" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_field">
+        <ColumnInfo>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="dCode">D0</Col>
+            <Col id="dField">문과대학</Col>
+          </Row>
+          <Row>
+            <Col id="dCode">D1</Col>
+            <Col id="dField">경영대학</Col>
+          </Row>
+          <Row>
+            <Col id="dCode">D2</Col>
+            <Col id="dField">이과대학</Col>
+          </Row>
+          <Row>
+            <Col id="dCode">D3</Col>
+            <Col id="dField">공과대학</Col>
+          </Row>
+          <Row>
+            <Col id="dCode">D9</Col>
+            <Col id="dField">예술대학</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_lType">
+        <ColumnInfo>
+          <Column id="lType" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="lType">전공선택</Col>
+          </Row>
+          <Row>
+            <Col id="lType">전공필수</Col>
+          </Row>
+          <Row>
+            <Col id="lType">교양선택</Col>
+          </Row>
+          <Row>
+            <Col id="lType">교양필수</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_lList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//this.alert(this.com_Field.value);
+	//this.alert(this.com_Type.value);
+	var in_Field = this.com_Field.value;
+	var in_Type = this.com_Type.value;
+	this.transaction(
+ 	"tr_lList"
+ 	,"SnuURL::Ylecture/list.snu"
+	,""
+ 	,"ds_lecture=out_lecture"
+ 	,"in_Var1="+in_Field+" in_Var2="+in_Type+""
+	,"fn_callback_le"
+	)
+};
+
+this.fn_callback_le = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_lList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패");
+			return;
+		}
+		this.alert("조회 결과"+this.ds_lecture.getRowCount()+"건");
+	}
+}]]></Script>
   </Form>
 </FDL>
