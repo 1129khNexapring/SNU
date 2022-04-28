@@ -1,81 +1,82 @@
 package org.ttt.snu.board.domain;
 
-import java.sql.Date;
 
 public class Comments {
 	
-	private int commentNo;
-	private String commentContent;
-	private Date commentDate;
-	public String pCode;
-	public String sCode;
-	public int boardNo;
+	private int comment_no;
+	private String comment_content;
+	private String comment_date;
+	public String p_code;
+	public String s_sode;
+	public int board_no;
 	
 	public Comments() {}
 
-	public Comments(int commentNo, String commentContent, Date commentDate, String pCode, String sCode, int boardNo) {
+	public Comments(int comment_no, String comment_content, String comment_date, String p_code, String s_sode,
+			int board_no) {
 		super();
-		this.commentNo = commentNo;
-		this.commentContent = commentContent;
-		this.commentDate = commentDate;
-		this.pCode = pCode;
-		this.sCode = sCode;
-		this.boardNo = boardNo;
+		this.comment_no = comment_no;
+		this.comment_content = comment_content;
+		this.comment_date = comment_date;
+		this.p_code = p_code;
+		this.s_sode = s_sode;
+		this.board_no = board_no;
 	}
 
-	public int getCommentNo() {
-		return commentNo;
+	public int getComment_no() {
+		return comment_no;
 	}
 
-	public void setCommentNo(int commentNo) {
-		this.commentNo = commentNo;
+	public void setComment_no(int comment_no) {
+		this.comment_no = comment_no;
 	}
 
-	public String getCommentContent() {
-		return commentContent;
+	public String getComment_content() {
+		return comment_content;
 	}
 
-	public void setCommentContent(String commentContent) {
-		this.commentContent = commentContent;
+	public void setComment_content(String comment_content) {
+		this.comment_content = comment_content;
 	}
 
-	public Date getCommentDate() {
-		return commentDate;
+	public String getComment_date() {
+		return comment_date;
 	}
 
-	public void setCommentDate(Date commentDate) {
-		this.commentDate = commentDate;
+	public void setComment_date(String comment_date) {
+		this.comment_date = comment_date;
 	}
 
-	public String getpCode() {
-		return pCode;
+	public String getP_code() {
+		return p_code;
 	}
 
-	public void setpCode(String pCode) {
-		this.pCode = pCode;
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
 	}
 
-	public String getsCode() {
-		return sCode;
+	public String getS_sode() {
+		return s_sode;
 	}
 
-	public void setsCode(String sCode) {
-		this.sCode = sCode;
+	public void setS_sode(String s_sode) {
+		this.s_sode = s_sode;
 	}
 
-	public int getBoardNo() {
-		return boardNo;
+	public int getBoard_no() {
+		return board_no;
 	}
 
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
 	}
 
 	@Override
 	public String toString() {
-		return "Comments [commentNo=" + commentNo + ", commentContent=" + commentContent + ", commentDate="
-				+ commentDate + ", pCode=" + pCode + ", sCode=" + sCode + ", boardNo=" + boardNo + "]";
+		return "Comments [comment_no=" + comment_no + ", comment_content=" + comment_content + ", comment_date="
+				+ comment_date + ", p_code=" + p_code + ", s_sode=" + s_sode + ", board_no=" + board_no + "]";
 	}
+
 	
 	
 }

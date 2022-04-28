@@ -2,6 +2,8 @@ package org.ttt.snu.board.store.logic;
 
 import java.util.List;
 
+import javax.xml.stream.events.Comment;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.ttt.snu.board.domain.Board;
@@ -61,15 +63,15 @@ public class BoardStoreLogic implements BoardStore {
 	}
 
 	@Override
-	public List<Comments> selectAllComments(SqlSession sqlSession, Comments comments) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo) {
+		List<Comments> cList = sqlSession.selectList("BoardMapper.selectAllComments", boardNo);
+		return cList;
 	}
 
 	@Override
 	public int insertComments(SqlSession sqlSession, Comments comments) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("BoardMapper.insertComments", comments);
+		return result;
 	}
 
 	@Override

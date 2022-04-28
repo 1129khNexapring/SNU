@@ -17,7 +17,7 @@
         <Static id="Static00_00_00_00" taborder="11" text="내용" left="340" top="220" width="55" height="270" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
         <TextArea id="ta_boardContent" taborder="12" left="395" top="220" width="360" height="270" borderRadius="4px"/>
         <Edit id="edt_file" taborder="13" left="340" top="500" width="325" height="30" borderRadius="4px"/>
-        <Button id="btn_commentSubmit" taborder="14" text="댓글등록" left="517" top="650" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_commentSubmit_onclick"/>
+        <Button id="btn_commentSubm" taborder="14" text="댓글등록" left="517" top="650" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_commentSubmit_onclick"/>
         <Edit id="edt_comment" taborder="15" left="345" top="565" width="405" height="65" borderRadius="4px"/>
         <Button id="btn_updat" taborder="16" text="수정하기" left="550" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
         <Button id="btn_back" taborder="17" text="이전으로" left="690" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_back_onclick"/>

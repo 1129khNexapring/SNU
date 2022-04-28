@@ -32,14 +32,14 @@
           </Formats>
         </Grid>
         <Button id="btn_boardWrite" taborder="1" text="글쓰기" left="22" top="0" width="56" height="25" background="cornflowerblue" borderRadius="6px" onclick="btn_boardWrite_onclick" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
-        <PopupDiv id="popDetail" text="PopupDiv00" visible="false" left="30" top="25" width="1030" height="700" background="aliceblue">
+        <PopupDiv id="popDetail" text="PopupDiv00" visible="false" left="30" top="25" width="1030" height="825" background="aliceblue" onpopup="popDetail_onpopup">
           <Layouts>
             <Layout>
               <Static id="Static00" taborder="0" text="No" left="340" top="130" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
               <Edit id="edt_boardNo" taborder="1" left="395" top="130" width="145" height="30" borderRadius="4px"/>
               <Edit id="edt_boardCount" taborder="2" left="595" top="130" width="160" height="30" borderRadius="4px"/>
               <Edit id="edt_boardWriter" taborder="3" left="395" top="160" width="145" height="30" borderRadius="4px"/>
-              <Edit id="edt_boardWriteDate" taborder="4" left="595" top="160" width="160" height="30" borderRadius="4px"/>
+              <Edit id="edt_boardWriteDate" taborder="4" left="595" top="160" width="160" height="30" borderRadius="4px" onchanged="popDetail_edt_boardWriteDate_onchanged"/>
               <Static id="Static04" taborder="5" text="1번 게시글" left="475" top="40" width="190" height="60" onclick="Static04_onclick" font="normal 25pt/normal &quot;Arial&quot;"/>
               <Edit id="edt_boardTitle" taborder="6" left="395" top="190" width="360" height="30" borderRadius="4px"/>
               <Static id="Static00_00" taborder="7" text="작성자" left="340" top="160" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
@@ -49,13 +49,41 @@
               <Static id="Static00_00_00_00" taborder="11" text="내용" left="340" top="220" width="55" height="270" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
               <TextArea id="ta_boardContent" taborder="12" left="395" top="220" width="360" height="270" borderRadius="4px"/>
               <Edit id="edt_file" taborder="13" left="340" top="500" width="325" height="30" borderRadius="4px"/>
-              <Button id="btn_commentSubmit" taborder="14" text="댓글등록" left="517" top="650" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_commentSubmit_onclick"/>
+              <Button id="btn_commentSubmit" taborder="14" text="댓글등록" left="517" top="650" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_commentSubmit_onclick"/>
               <Edit id="edt_comment" taborder="15" left="345" top="565" width="405" height="65" borderRadius="4px"/>
               <Button id="btn_update" taborder="16" text="수정하기" left="550" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_update_onclick"/>
               <Button id="btn_popUpBack" taborder="17" text="이전으로" left="690" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_popUpBack_onclick"/>
               <Button id="btn_remove" taborder="18" text="삭제하기" left="620" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_remove_onclick"/>
               <FileDownload id="FileDownload00" taborder="19" text="File Download" left="665" top="500" width="94" height="30" borderRadius="5px"/>
               <Button id="btn_popUpClose" taborder="20" text="X" left="1000" top="5" width="20" height="25" background="dodgerblue" font="normal bold 10pt/normal &quot;Arial&quot;" cursor="pointer" onclick="popDetail_btn_popUpClose_onclick"/>
+              <Edit id="edt_commentDate" taborder="21" left="610" top="545" width="140" height="20" borderRadius="4px" enable="true" enableevent="true" visible="false"/>
+              <Edit id="edt_commentNo" taborder="22" left="800" top="535" width="140" height="20" visible="false"/>
+              <Edit id="edt_cBoardNo" taborder="23" left="810" top="565" width="140" height="20" visible="false"/>
+              <Grid id="grd_comment" taborder="24" left="345" top="695" width="411" height="100" binddataset="ds_comments">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="67"/>
+                      <Column size="262"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="작성자"/>
+                      <Cell col="1" text="내용"/>
+                      <Cell col="2" text="작성일"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:s_code"/>
+                      <Cell col="1" text="bind:comment_content"/>
+                      <Cell col="2" text="bind:comment_date"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
             </Layout>
           </Layouts>
         </PopupDiv>
@@ -76,17 +104,29 @@
           <Column id="board_count" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
+      <Dataset id="ds_comments">
+        <ColumnInfo>
+          <Column id="comment_no" type="STRING" size="256"/>
+          <Column id="comment_content" type="STRING" size="256"/>
+          <Column id="s_code" type="STRING" size="256"/>
+          <Column id="p_code" type="STRING" size="256"/>
+          <Column id="board_no" type="STRING" size="256"/>
+          <Column id="comment_date" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
     </Objects>
-    <Script type="xscript5.1"><![CDATA[
+    <Script type="xscript5.1"><![CDATA[var currentboardNo = 0;
+
 this.btn_boardWrite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.go("Base::frm_boardWriteForm.xfdl");		
+	this.go("Base::frm_boardWriteForm.xfdl");	
 };
 
 
 this.grd_boardList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {	
-	this.popDetail.trackPopupByComponent(obj, "3000000%", "3000000%");
+	currentboardNo = e.row;
+	this.popDetail.trackPopupByComponent(obj, obj.getOffsetWidth(), obj.getOffsetHeight(), 1200, 800);
 };
 
 
@@ -150,12 +190,23 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		this.alert("게시글 삭제 성공");
 	}
 	
+	if(id == "tr_cRegister") {
+		if(nErrorCode < 0) {
+			this.alert("댓글 등록 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("댓글 등록 성공");
+	}
+	
+	if(id == "tr_cList") {
+		if(nErrorCode) {
+			this.alert("댓글 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("댓글 조회 성공");
+	}
+	
 };
-
-
-
-
-
 
 this.popDetail_btn_popUpClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
@@ -193,15 +244,56 @@ this.popDetail_btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
 
 this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
 	this.transaction(
 		"tr_bDelete"
 		, "SnuUrl::board/register.snu"
 		, "in_boardList=ds_boardList:D"
 		, ""
-		, "in_var1=" + nexacro.wrapQuote(name)
+		, "in_var1=" + boardNo
 		, "fn_callback_tran"
-	)
+	);
 };
+
+this.popDetail_btn_commentSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_comments.addRow();
+	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	this.ds_comments.setColumn(this.ds_comments.rowposition);
+	this.transaction(
+		"tr_cRegister"
+		, "SnuUrl::comments/changeComments.snu"
+		, "in_comments=ds_comments:U"
+		, ""
+		, "in_var1=" + boardNo
+	);
+};
+
+this.popDetail_onpopup = function(obj:nexacro.PopupDiv,e:nexacro.EventInfo)
+{
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+	this.ds_comments.addRow();
+	this.ds_comments.setColumn(this.ds_comments, "commentDate", today);
+
+	this.commentsList(currentboardNo);
+};
+
+this.commentsList = function(currentboardNo)
+{
+	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	this.transaction(
+		"tr_cList"
+		, "SnuUrl::comment/list.snu"
+		, ""
+		, "ds_comments=out_emp"
+		, "in_var1=" + boardNo
+	);
+}
+
+
+
+
 ]]></Script>
     <Bind>
       <BindItem id="item0" compid="popDetail.form.edt_boardNo" propid="value" datasetid="ds_boardList" columnid="board_no"/>
@@ -211,6 +303,10 @@ this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
       <BindItem id="item4" compid="popDetail.form.edt_boardTitle" propid="value" datasetid="ds_boardList" columnid="board_title"/>
       <BindItem id="item5" compid="popDetail.form.ta_boardContent" propid="value" datasetid="ds_boardList" columnid="board_content"/>
       <BindItem id="item6" compid="popDetail.form.edt_file" propid="value" datasetid="ds_boardList" columnid="board_fileName"/>
+      <BindItem id="item7" compid="popDetail.form.edt_comment" propid="value" datasetid="ds_comments" columnid="comment_content"/>
+      <BindItem id="item8" compid="popDetail.form.edt_commentDate" propid="value" datasetid="ds_comments" columnid="comment_date"/>
+      <BindItem id="item9" compid="popDetail.form.edt_commentNo" propid="value" datasetid="ds_comments" columnid="comment_no"/>
+      <BindItem id="item10" compid="popDetail.form.edt_cBoardNo" propid="value" datasetid="ds_comments" columnid="board_no"/>
     </Bind>
   </Form>
 </FDL>
