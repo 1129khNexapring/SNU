@@ -20,7 +20,7 @@
 
             
             // UI Components Initialize
-            obj = new ImageViewer("ImageViewer00","0","0","270","100",null,null,null,null,null,null,this);
+            obj = new ImageViewer("ImageViewer00","0","0","200","100",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("");
             obj.set_background("url(\'theme::default/images/img_WF_Nexacro.png\') no-repeat left top /contain");
