@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.ttt.snu.board.domain.Board;
+import org.ttt.snu.board.domain.Comments;
 import org.ttt.snu.board.service.logic.BoardServiceImpl;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
@@ -53,6 +55,7 @@ public class BoardController {
 	public NexacroResult registerBoard(
 				  @ParamDataSet  (name="in_boardList") DataSet inBoardList
 				, @ParamVariable(name="in_var1") String inVar1
+				, @ParamVariable(name="in_var1") int board_no
 				, @ParamVariable(name="file_up", required=false) MultipartFile fileUp
 				, HttpServletRequest request) throws Exception {
 		try {
@@ -79,8 +82,6 @@ public class BoardController {
 		int uResult = 0;
 		for(i = 0; i < inBoardList.getRowCount(); i++) {
 			int    rowType          = inBoardList.getRowType(i);
-			int    board_no         = dsGet(inBoardList, i, "board_no") != ""
-						             ? Integer.parseInt(dsGet(inBoardList, i, "board_no")) : 0;
 			String board_title      = dsGet(inBoardList, i, "board_title");
 			String board_content    = dsGet(inBoardList, i, "board_content");
 			String board_date       = dsGet(inBoardList, i, "board_date");
@@ -123,23 +124,94 @@ public class BoardController {
 		return result;
 	}
 	
-	// 강의 게시판 삭제
-	@RequestMapping(value="/board/delete.snu", method=RequestMethod.GET)
-	public NexacroResult removeBoard(
-				  @ParamDataSet(name="in_boardList") DataSet inBoardList
-				, @ParamVariable(name="in_var1") String inVar1) {
-		int     nErrorCode  = 0;
-		String  strErrorMsg = "START";
+//	// 강의 게시판 삭제
+//	@RequestMapping(value="/board/delete.snu", method=RequestMethod.GET)
+//	public NexacroResult removeBoard(
+//				  @ParamDataSet(name="in_boardList") DataSet inBoardList
+//				, @ParamVariable(name="in_var1") String inVar1) {
+//		int     nErrorCode  = 0;
+//		String  strErrorMsg = "START";
+//		NexacroResult result = new NexacroResult();
+//		int i;
+//		
+//		for(i = 0; i < inBoardList.getRemovedRowCount(); i++) {
+//			String boardNo = inBoardList.getRemovedData(i, "board_no").toString();
+//			// bService.removeBoard(boardNo);
+//		}
+//		result.addVariable("ErrorCode", nErrorCode);
+//		result.addVariable("ErrorMsg", strErrorMsg);
+//		result.addVariable("out_var", inVar1);
+//		return result;
+//	}
+	
+	// 강의 게시판 댓글 조회
+		@RequestMapping(value="/comment/list.snu", method=RequestMethod.POST)
+		public NexacroResult commentListView(
+					@ParamVariable(name="in_var1") int boardNo) {
+			int    nErrorCode  = 0;
+			String strErrorMsg = "START";
+			NexacroResult result = new NexacroResult();
+			List<Comments> commentList = bService.printAllComments(boardNo);
+			if(!commentList.isEmpty()) {
+				nErrorCode  = 0;
+				strErrorMsg = "SUCC";
+			}else {
+				nErrorCode  = -1;
+				strErrorMsg = "FAIL";
+			}
+			result.addDataSet("out_emp", commentList);
+			result.addVariable("ErrorCode", nErrorCode);
+			result.addVariable("ErrorMsg", strErrorMsg);
+			return result;
+		}
+	
+	// 강의 게시판 댓글 영역
+	@RequestMapping(value="/comments/changeComments.snu", method=RequestMethod.POST)
+	public NexacroResult changeComments(
+				    @ParamDataSet(name="in_comments") DataSet inComments
+				  , @ParamVariable(name="in_var1") int board_no) throws Exception {
 		NexacroResult result = new NexacroResult();
+		int 	nErrorCode  = 0;
+		String  strErrorMsg = "START";
 		int i;
 		
-		for(i = 0; i < inBoardList.getRemovedRowCount(); i++) {
-			String boardNo = inBoardList.getRemovedData(i, "board_no").toString();
-			// bService.removeBoard(boardNo);
+		
+		// INSERT, UPDATE
+		// RowType에 따라서 INSERT OR UPDATE
+		int iResult = 0;
+		int uResult = 0;
+		for(i = 0; i < inComments.getRowCount(); i++) {
+			int rowType = inComments.getRowType(i);
+			int    comment_no       = dsGet(inComments, i, "comment_no") != ""
+		             ? Integer.parseInt(dsGet(inComments, i, "comment_no")) : 0;
+			String comment_content = dsGet(inComments, i, "comment_content");
+			String comment_date    = dsGet(inComments, i, "comment_date");
+			String s_code          = dsGet(inComments, i, "s_code");
+			String p_code          = dsGet(inComments, i, "p_code");
+			Comments comments = new Comments(
+						 	comment_no
+						,	comment_content
+						,	comment_date
+						, 	s_code
+						, 	p_code
+						, 	board_no);
+			if(rowType == DataSet.ROW_TYPE_INSERTED) {
+				iResult += bService.registerComments(comments);
+			}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+				String commentId = inComments.getSavedData(i, "comment_no").toString();
+				comments.setComment_no(Integer.parseInt(commentId));
+				uResult += bService.modifyComments(comments);
+			}
+		}
+		if(iResult < 0 && uResult < 0) {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}else {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
 		}
 		result.addVariable("ErrorCode", nErrorCode);
-		result.addVariable("ErrorMsg", strErrorMsg);
-		result.addVariable("out_var", inVar1);
+		result.addVariable("errorMsg", strErrorMsg);
 		return result;
 	}
 	

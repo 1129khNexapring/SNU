@@ -21,7 +21,7 @@ public interface BoardStore {
 	public int deleteBoard(SqlSession sqlSession, String boardNo);
 	
 	// 댓글 영역
-	public List<Comments> selectAllComments(SqlSession sqlSession, Comments comments);
+	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo);
 	
 	public int insertComments(SqlSession sqlSession, Comments comments);
 	public int updateComments(SqlSession sqlSesion, Comments comments);
