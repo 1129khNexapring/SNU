@@ -1,16 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_hhrequest" width="1080" height="670" titletext="New Form">
+  <Form id="frm_hhrequest" width="1080" height="670" titletext="New Form" onload="frm_hhrequest_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="152" top="237" width="188" height="65" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="0" left="130" top="11" width="815" height="444"/>
+        <Static id="Static00" taborder="1" text="학번" left="146" top="38" width="94" height="42" font="normal 700 13pt/normal &quot;Arial&quot;" textAlign="center"/>
+        <Edit id="Edit00" taborder="2" left="232" top="36" width="158" height="47"/>
+        <Static id="Static01" taborder="3" text="성명" left="421" top="35" width="80" height="45" font="normal 700 13pt/normal &quot;Arial&quot;" textAlign="center" onclick="Static01_onclick"/>
+        <Static id="Static02" taborder="4" text="신청일" left="130" top="147" width="126" height="53" font="normal 700 13pt/normal &quot;Arial&quot;" textAlign="center"/>
+        <Static id="Static03" taborder="5" text="휴학학기" left="482" top="145" width="199" height="57" font="normal 700 13pt/normal &quot;Arial&quot;" textAlign="center"/>
+        <Static id="Static04" taborder="6" text="사유" left="144" top="268" width="99" height="68" font="normal 700 13pt/normal &quot;Arial&quot;" textAlign="center"/>
+        <Static id="Static05" taborder="7" text="복학예정학기" left="480" top="268" width="203" height="77" font="normal 700 13pt/normal &quot;Arial&quot;" textAlign="center"/>
+        <Edit id="Edit01" taborder="8" left="500" top="35" width="160" height="50"/>
+        <Edit id="Edit02" taborder="9" left="231" top="145" width="160" height="55"/>
+        <TextArea id="TextArea00" taborder="10" left="232" top="290" width="225" height="152"/>
+        <Static id="Static06" taborder="11" text="2022년" left="650" top="139" width="70" height="69" font="normal 700 17px/normal &quot;Gulim&quot;"/>
+        <Edit id="Edit03" taborder="12" left="713" top="155" width="35" height="39"/>
+        <Static id="Static07" taborder="13" text="학기" left="751" top="157" width="65" height="36" font="normal bold 17px/normal &quot;Arial&quot;"/>
+        <Button id="btn_request" taborder="14" text="신청" left="810" top="466" width="140" height="64" font="bold 12pt &quot;Arial&quot;" background="RGB(101,126,194)" color="#fcfafe" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
+this.Edit01.set_value(sName);
+
+
+
 this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	this.transaction(
+        	"tr_register"
+        	,"tttUrl::loa/request.snu"
+        	,"in_loa=ds_loa:U"
+        	,""
+        	,"inVar1="
+        	,"fn_callback_tran"
+        )
+};
+
+
+
+this.frm_hhrequest_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
 	
+	this.ds_loa.addRow();
+	this.ds_loa.setColumn(this.ds_loa.rowposition, "lRequestDate", today);
+	this.ds_loa.setColumn(this.ds_loa.rowposition, "sCode", sCode);
 };
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_loa">
+        <ColumnInfo>
+          <Column id="lNum" type="INT" size="256"/>
+          <Column id="lReason" type="STRING" size="256"/>
+          <Column id="lRequestDate" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="lMsg" type="STRING" size="256"/>
+          <Column id="lSemester" type="INT" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_loa" columnid="sCode"/>
+      <BindItem id="item1" compid="TextArea00" propid="value" datasetid="ds_loa" columnid="lReason"/>
+      <BindItem id="item2" compid="Edit03" propid="value" datasetid="ds_loa" columnid="lSemester"/>
+      <BindItem id="item3" compid="Edit02" propid="value" datasetid="ds_loa" columnid="lRequestDate"/>
+    </Bind>
   </Form>
 </FDL>

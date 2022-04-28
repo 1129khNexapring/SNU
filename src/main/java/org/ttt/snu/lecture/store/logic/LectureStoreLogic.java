@@ -1,6 +1,8 @@
 package org.ttt.snu.lecture.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,13 @@ public class LectureStoreLogic implements LectureStore{
 		List<Lecture> lList = sqlSession.selectList("LectureMapper.selectAllLectures");
 		return lList;
 	}
+
+	@Override
+	public List<Lecture> selectAllYLectures(SqlSession sqlSession, Lecture lecture) {
+		List<Lecture> lList = sqlSession.selectList("LectureMapper.selectAllYLectures", lecture);
+		return lList;
+	}
+	
 	
 
 }
