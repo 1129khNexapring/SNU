@@ -202,11 +202,13 @@
         	var nLeft = system.clientToScreenX(this, 10);
         	var nTop  = system.clientToScreenY(this, 10);
         	// ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight, [,nRight, nBottom, [,strUrl]])
-        	var objChild = new ChildFrame("popLectureDetail", 0, 0, 480, 600);
+        	var objChild = new ChildFrame("popLectureDetail", nLeft, nTop, 480, 600);
         	objChild.set_formurl("Popup::lectureDetail.xfdl");
         	objChild.set_openalign("center middle");
         	objChild.set_dragmovetype("normal");
-        	objChild.showModal(this.getOwnerFrame(), objParam,  this, "fn_popupCallback");
+        	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popupCallback");
+        	trace("Popup::lectureDetail.xfdl");
+
 
         };
 
@@ -218,7 +220,7 @@
         	}
         	if(strPopupId == "popLectureDetail")
         	{
-        		this.alert("Return Value : " + strReturn);
+        		return;
         	}
         }
         });
