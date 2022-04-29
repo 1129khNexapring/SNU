@@ -111,7 +111,7 @@
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_commentSubmit","517","650","66","32",null,null,null,null,null,null,this);
+            obj = new Button("btn_commentSubm","517","650","66","32",null,null,null,null,null,null,this);
             obj.set_taborder("14");
             obj.set_text("댓글등록");
             obj.set_background("cornflowerblue");
@@ -146,7 +146,7 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_remove","620","98","66","32",null,null,null,null,null,null,this);
+            obj = new Button("btn_remo","620","98","66","32",null,null,null,null,null,null,this);
             obj.set_taborder("18");
             obj.set_text("삭제하기");
             obj.set_background("cornflowerblue");
@@ -220,9 +220,9 @@
             this.Static00_00_01.addEventHandler("onclick",this.Static00_onclick,this);
             this.Static00_00_01_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.Static00_00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
-            this.btn_commentSubmit.addEventHandler("onclick",this.btn_commentSubmit_onclick,this);
+            this.btn_commentSubm.addEventHandler("onclick",this.btn_commentSubmit_onclick,this);
             this.btn_back.addEventHandler("onclick",this.btn_back_onclick,this);
-            this.btn_remove.addEventHandler("onclick",this.btn_remove_onclick,this);
+            this.btn_remo.addEventHandler("onclick",this.btn_remove_onclick,this);
         };
         this.loadIncludeScript("frm_boardDetailView.xfdl");
         this.loadPreloadList();

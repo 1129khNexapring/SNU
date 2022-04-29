@@ -51,8 +51,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Comments> printAllComments(int boardNo) {
-		List<Comments> cList = bStore.selectAllComments(sqlSession, boardNo);
+	public List<Comments> printAllComments(int boardNo, String sCode) {
+		List<Comments> cList = bStore.selectAllComments(sqlSession, boardNo, sCode);
 		return cList;
 	}
 
@@ -82,14 +82,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int modifyComments(Comments comments) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = bStore.updateComments(sqlSession, comments);
+		return result;
 	}
 
 	@Override
 	public int removeComments(int commentNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = bStore.deleteComments(sqlSession, commentNo);
+		return result;
 	}
 
 }
