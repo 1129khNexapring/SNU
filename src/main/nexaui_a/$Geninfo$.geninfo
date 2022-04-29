@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+ <?xml version="1.0" encoding="utf-8"?>
 <root>
   <GenInfo version="1.1">
     <Rule>
@@ -8,11 +8,13 @@
       <XCSS rule_version="1.04"/>
       <Script rule_version="1.02"/>
     </Rule>
-    <Info project="C:\Users\User\Desktop\SNU\src\main\nexaui_a\" generated="C:\Users\User\Documents\nexacro\17.1\outputs\Admin\">
-      <File url="environment.xml" checksum="20220429091056" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220429091056" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220429091054" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220429091056" errormsg=""/>
+
+    <Info project="C:\Users\YOUM\git\SNU\src\main\nexaui_a\" generated="C:\Users\YOUM\Documents\nexacro\17.1\outputs\Admin\">
+      <File url="environment.xml" checksum="20220422171352" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20220426093004" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220426093004" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220426093004" errormsg=""/>
+
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\CompBase.json" checksum="20211110093724" errormsg=""/>
@@ -20,6 +22,9 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
+
+      <File url="Application_Desktop.xadl" checksum="20220426093004" errormsg=""/>
+
       <File url="Application_Desktop.xadl" checksum="20220429091057" errormsg=""/>
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="Base\frm_professor.xfdl" checksum="20220429091056" errormsg=""/>
@@ -40,6 +45,7 @@
       <File url="FrameBase\Form_Top.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Work.xfdl" checksum="20220429091055" errormsg=""/>
       <File url="Popup\lectureDetail.xfdl" checksum="20220429135840" errormsg=""/>
+
     </Info>
   </GenInfo>
 </root>

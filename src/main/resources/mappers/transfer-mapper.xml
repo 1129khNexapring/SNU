@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TransferMapper">
+	<resultMap type="org.ttt.snu.student.domain.Student"
+		id="studentResultMap">
+		<id property="sCode" column="S_CODE" />
+		<result property="sName" column="S_NAME" />
+		<result property="sRrn" column="S_RRN" />
+		<result property="sPassword" column="S_PASSWORD" />
+		<result property="sAddress" column="S_ADDRESS" />
+		<result property="sEmail" column="S_EMAIL" />
+		<result property="sGender" column="S_GENDER" />
+		<result property="sPhone" column="S_PHONE" />
+		<result property="sAddmission" column="S_ADDMISSION" />
+		<result property="absenceYN" column="ABSENCE_YN" />
+		<result property="transferYN" column="TRANSFER_YN" />
+		<result property="dCode" column="D_CODE" />
+	</resultMap>
+
+	<resultMap type="Department" id="departmentResultMap">
+		<id property="dCode" column="D_CODE" />
+		<result property="dName" column="D_NAME" />
+		<result property="dField" column="D_FIELD" />
+		<result property="officeName" column="OFFICE_CODE" />
+		<result property="tuitionFee" column="TUITION_FEE" />
+		<result property="dCapacity" column="D_CAPACITY" />
+	</resultMap>
+
+
+
+	<select id="selectAllDept"
+		parameterType="org.ttt.snu.department.domain.Department"
+		resultMap="departmentResultMap">
+		SELECT D_NAME FROM
+		DEPARTMENT D
+		JOIN STUDENT S ON (D.D_CODE = S.D_CODE)
+		WHERE S.S_CODE = #{sCode}
+	</select>
+	
+	<select id="selectListDept" parameterType="org.ttt.snu.department.domain.Department" resultMap="departmentResultMap">
+		SELECT * FROM DEPARTMENT
+	</select>
+</mapper>

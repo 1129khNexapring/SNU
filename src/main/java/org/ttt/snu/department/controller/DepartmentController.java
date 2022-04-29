@@ -46,5 +46,6 @@ public class DepartmentController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-
+	
+	
 }
