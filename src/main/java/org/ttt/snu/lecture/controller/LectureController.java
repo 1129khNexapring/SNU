@@ -40,25 +40,51 @@ public class LectureController {
 	//관리자-승인된 강의계획서 조회
 	@RequestMapping(value="/Ylecture/list.snu", method=RequestMethod.POST)
 	public NexacroResult printLecture(
-			@ParamVariable(name="in_Var1") String inVar1
+			 @ParamVariable(name="in_Var1") String inVar1
 			,@ParamVariable(name="in_Var2") String inVar2) {
 		Lecture lecture = new Lecture();
-		// undefined undefined
-		// 1 undefined
-		// undefined 2
-		// 1 2
-		
 		lecture.setdCode(inVar1);
 		lecture.setlType(inVar2);	
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("inVar1", inVar1);
-//		map.put("inVar2", inVar2);
-//		int 	nErrorCode = 0;
+		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
 		List<Lecture> lList = lService.printAllYLecture(lecture);
-		System.out.println(lList);
-		return null;
+		if(!lList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_lecture", lList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	//관리자-미승인 강의계획서조회
+	@RequestMapping(value="/Nlecture/list.snu", method=RequestMethod.POST)
+	public NexacroResult printNLecture(
+			 @ParamVariable(name="in_Var1") String inVar1
+			,@ParamVariable(name="in_Var2") String inVar2) {
+		Lecture lecture = new Lecture();
+		lecture.setdCode(inVar1);
+		lecture.setlType(inVar2);
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Lecture> lList = lService.printAllNLecture(lecture);
+		if(!lList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_Nlecture", lList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
 	}
 
 		

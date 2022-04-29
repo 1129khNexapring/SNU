@@ -3,13 +3,13 @@
   <Form id="frm_lecture" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="Grid00" taborder="0" left="38" top="85" width="801" height="184" binddataset="ds_lecture" autofittype="col">
+        <Grid id="Grid00" taborder="0" left="38" top="85" width="801" height="184" binddataset="ds_Ylecture" autofittype="col">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="227"/>
+                <Column size="69"/>
+                <Column size="68"/>
+                <Column size="256"/>
                 <Column size="80"/>
               </Columns>
               <Rows>
@@ -17,7 +17,7 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="강의코드"/>
+                <Cell text="학과코드"/>
                 <Cell col="1" text="구분"/>
                 <Cell col="2" text="강의명"/>
                 <Cell col="3" text="정원"/>
@@ -34,10 +34,41 @@
         <Button id="btn_lList" taborder="1" text="조회" left="287" top="41" width="63" height="39" onclick="btn_lList_onclick"/>
         <Combo id="com_Field" taborder="2" text="Combo00" left="39" top="44" width="114" height="32" innerdataset="ds_field" codecolumn="dCode" datacolumn="dField"/>
         <Combo id="com_Type" taborder="3" text="Combo01" left="165" top="44" width="114" height="32" innerdataset="ds_lType" datacolumn="lType" codecolumn="lType"/>
+        <Grid id="Grid01" taborder="4" left="38" top="356" width="801" height="274" binddataset="ds_Nlecture" autofittype="col" oncelldblclick="Grid01_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="70"/>
+                <Column size="80"/>
+                <Column size="207"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학과"/>
+                <Cell col="1" text="교수명"/>
+                <Cell col="2" text="강의명"/>
+                <Cell col="3" text="처리상태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:dCode" displaytype="combotext" combodataset="ds_pdept" combodatacol="DEPT_NAME" combocodecol="DEPT_CD"/>
+                <Cell col="1" text="bind:pCode" displaytype="combotext" combodataset="ds_professor" combodatacol="pName" combocodecol="pCode"/>
+                <Cell col="2" text="bind:lName" textAlign="center"/>
+                <Cell col="3" text="bind:lStatus" textAlign="center" displaytype="combotext" combodataset="ds_status" combodatacol="lMsg" combocodecol="lStatus"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_retrieveNL" taborder="5" text="조회" left="290" top="313" width="71" height="37" onclick="btn_retrieveNL_onclick"/>
+        <Combo id="comb_Field" taborder="6" text="Combo00" left="44" top="318" width="107" height="30" innerdataset="ds_field" codecolumn="dCode" datacolumn="dField"/>
+        <Combo id="comb_Type" taborder="7" text="Combo01" left="161" top="319" width="99" height="31" innerdataset="ds_lType" codecolumn="lType" datacolumn="lType"/>
       </Layout>
     </Layouts>
     <Objects>
-      <Dataset id="ds_lecture">
+      <Dataset id="ds_Ylecture">
         <ColumnInfo>
           <Column id="lCode" type="STRING" size="256"/>
           <Column id="lType" type="STRING" size="256"/>
@@ -102,6 +133,180 @@
           </Row>
         </Rows>
       </Dataset>
+      <Dataset id="ds_Nlecture">
+        <ColumnInfo>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="STRING" size="256"/>
+          <Column id="credit" type="STRING" size="256"/>
+          <Column id="lYear" type="STRING" size="256"/>
+          <Column id="lSemester" type="STRING" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_pdept">
+        <ColumnInfo>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPT_CD">D001</Col>
+            <Col id="DEPT_NAME">국어국문학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D002</Col>
+            <Col id="DEPT_NAME">영여교육과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D999</Col>
+            <Col id="DEPT_NAME">서양조소학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D201</Col>
+            <Col id="DEPT_NAME">수학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D100</Col>
+            <Col id="DEPT_NAME">경영학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D101</Col>
+            <Col id="DEPT_NAME">회계사무학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D901</Col>
+            <Col id="DEPT_NAME">서양화과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D902</Col>
+            <Col id="DEPT_NAME">동양화과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D301</Col>
+            <Col id="DEPT_NAME">기계공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D003</Col>
+            <Col id="DEPT_NAME">역사학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D102</Col>
+            <Col id="DEPT_NAME">빅데이터응용학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D302</Col>
+            <Col id="DEPT_NAME">화학공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D303</Col>
+            <Col id="DEPT_NAME">컴퓨터공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D304</Col>
+            <Col id="DEPT_NAME">생명공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D202</Col>
+            <Col id="DEPT_NAME">수학교육과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D305</Col>
+            <Col id="DEPT_NAME">전자공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D306</Col>
+            <Col id="DEPT_NAME">전기공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D307</Col>
+            <Col id="DEPT_NAME">건축학과</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_professor">
+        <ColumnInfo>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="pCode">P901</Col>
+            <Col id="pName">김병수</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P060</Col>
+            <Col id="pName">김진섭</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P002</Col>
+            <Col id="pName">김제니</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P009</Col>
+            <Col id="pName">고출봉</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P061</Col>
+            <Col id="pName">한상훈</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P902</Col>
+            <Col id="pName">이철헌</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P100</Col>
+            <Col id="pName">김병국</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P062</Col>
+            <Col id="pName">함덕수</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P101</Col>
+            <Col id="pName">지경노</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P030</Col>
+            <Col id="pName">이철용</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P031</Col>
+            <Col id="pName">권백중</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P032</Col>
+            <Col id="pName">박주희</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P033</Col>
+            <Col id="pName">김기백</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P034</Col>
+            <Col id="pName">황태석</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_status">
+        <ColumnInfo>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="lMsg" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="lStatus">N</Col>
+            <Col id="lMsg">승인대기중</Col>
+          </Row>
+        </Rows>
+      </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[
 this.btn_lList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -114,7 +319,7 @@ this.btn_lList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
  	"tr_lList"
  	,"SnuURL::Ylecture/list.snu"
 	,""
- 	,"ds_lecture=out_lecture"
+ 	,"ds_Ylecture=out_lecture"
  	,"in_Var1="+in_Field+" in_Var2="+in_Type+""
 	,"fn_callback_le"
 	)
@@ -129,7 +334,72 @@ this.fn_callback_le = function(id, nErrorCode, sErrorMsg)
 			this.alert("조회 실패");
 			return;
 		}
-		this.alert("조회 결과"+this.ds_lecture.getRowCount()+"건");
+		this.alert("조회 결과"+this.ds_Ylecture.getRowCount()+"건");
+	}
+	if(id=="tr_nlList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패");
+			return;
+		}
+		this.alert("조회 결과"+this.ds_Nlecture.getRowCount()+"건");
+	}
+}
+
+
+
+
+this.btn_retrieveNL_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	var out_Field = this.comb_Field.value;
+	var out_Type = this.comb_Type.value;
+	
+	this.transaction(
+	"tr_nlList"
+	,"SnuURL::Nlecture/list.snu"
+	,""
+	,"ds_Nlecture=out_Nlecture"
+	,"in_Var1="+out_Field+" in_Var2="+out_Type+""
+	,"fn_callback_le"
+	)
+};
+// 상세페이지로 이동
+this.Grid01_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nRow = this.ds_Nlecture.rowposition;
+	//var lName = this.ds_Nlecture.getColumn(nRow, "lName");
+	//var lObjective = this.ds_Nlecture.getColumn(nRow, "lObjective");
+	//var lContents = this.ds_Nlecture.getColumn(nRow, "lContents");
+	//var textbook = this.ds_Nlecture.getColumn(nRow, "textbook");
+	//var lCapacity = this.ds_Nlecture.getColumn(nRow, "lCapacity");
+	
+	var objParam = {lName: this.ds_Nlecture.getColumn(nRow, "lName")
+					,lObjective: this.ds_Nlecture.getColumn(nRow, "lObjective")
+					,lContents: this.ds_Nlecture.getColumn(nRow, "lContents")
+					,textbook: this.ds_Nlecture.getColumn(nRow, "textbook")
+					,lCapacity: this.ds_Nlecture.getColumn(nRow, "lCapacity")};
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop  = system.clientToScreenY(this, 10);
+	// ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight, [,nRight, nBottom, [,strUrl]])
+	var objChild = new ChildFrame("popLectureDetail", 0, 0, 480, 600);
+	objChild.set_formurl("Popup::lectureDetail.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), objParam,  this, "fn_popupCallback");
+	
+};
+
+this.fn_popupCallback = function(strPopupId, strReturn)
+{
+	if(strReturn == undefined) 
+	{
+	return;
+	}
+	if(strPopupId == "popLectureDetail")
+	{
+		this.alert("Return Value : " + strReturn);
 	}
 }]]></Script>
   </Form>
