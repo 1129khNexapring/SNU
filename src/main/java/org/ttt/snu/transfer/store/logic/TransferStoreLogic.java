@@ -24,4 +24,10 @@ public class TransferStoreLogic implements TransferStore{
 		return dList;
 	}
 
+	@Override
+	public int requestTran(SqlSession sqlSession, Transfer transfer) {
+		int result = sqlSession.insert("TransferMapper.requestTransfer", transfer);
+		return result;
+	}
+
 }
