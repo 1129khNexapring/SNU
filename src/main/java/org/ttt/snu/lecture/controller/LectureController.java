@@ -86,6 +86,26 @@ public class LectureController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
+	
+	@RequestMapping(value="/lecture/approve.snu" , method=RequestMethod.POST)
+	public NexacroResult approveLecture(
+			@ParamVariable(name="in_Var1") String inVar1) {
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		int uResult = lService.modifyLectureStatus(inVar1);
+		if(uResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		//result.addDataSet();
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
 
 		
 		

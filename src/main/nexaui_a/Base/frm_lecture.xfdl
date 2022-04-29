@@ -17,7 +17,7 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="학과코드"/>
+                <Cell text="강의코드"/>
                 <Cell col="1" text="구분"/>
                 <Cell col="2" text="강의명"/>
                 <Cell col="3" text="정원"/>
@@ -378,16 +378,19 @@ this.Grid01_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 					,lObjective: this.ds_Nlecture.getColumn(nRow, "lObjective")
 					,lContents: this.ds_Nlecture.getColumn(nRow, "lContents")
 					,textbook: this.ds_Nlecture.getColumn(nRow, "textbook")
-					,lCapacity: this.ds_Nlecture.getColumn(nRow, "lCapacity")};
+					,lCapacity: this.ds_Nlecture.getColumn(nRow, "lCapacity")
+					,lCode: this.ds_Nlecture.getColumn(nRow, "lCode")};
 	
 	var nLeft = system.clientToScreenX(this, 10);
 	var nTop  = system.clientToScreenY(this, 10);
 	// ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight, [,nRight, nBottom, [,strUrl]])
-	var objChild = new ChildFrame("popLectureDetail", 0, 0, 480, 600);
+	var objChild = new ChildFrame("popLectureDetail", nLeft, nTop, 480, 600);
 	objChild.set_formurl("Popup::lectureDetail.xfdl");
 	objChild.set_openalign("center middle");
 	objChild.set_dragmovetype("normal");
-	objChild.showModal(this.getOwnerFrame(), objParam,  this, "fn_popupCallback");
+	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popupCallback");
+	trace("Popup::lectureDetail.xfdl");
+	
 	
 };
 
@@ -399,7 +402,7 @@ this.fn_popupCallback = function(strPopupId, strReturn)
 	}
 	if(strPopupId == "popLectureDetail")
 	{
-		this.alert("Return Value : " + strReturn);
+		return;
 	}
 }]]></Script>
   </Form>

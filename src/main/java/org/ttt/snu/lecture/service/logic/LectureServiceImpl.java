@@ -37,6 +37,12 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> YList = lStore.selectAllNLectures(sqlSession, lecture);
 		return YList;
 	}
+	//관리자 - 계획승인
+	@Override
+	public int modifyLectureStatus(String inVar1) {
+		int result = lStore.updateLectureStatus(sqlSession, inVar1);
+		return result;
+	}
 	
 
 }
