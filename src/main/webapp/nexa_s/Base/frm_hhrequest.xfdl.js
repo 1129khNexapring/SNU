@@ -30,7 +30,7 @@
             obj = new Static("Static00","146","38","94","42",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("학번");
-            obj.set_font("normal 700 13pt/normal \"Arial\"");
+            obj.set_font("bold 15pt \"Arial\"");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
@@ -38,71 +38,64 @@
             obj.set_taborder("2");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static01","421","35","80","45",null,null,null,null,null,null,this);
+            obj = new Static("Static01","539","38","80","45",null,null,null,null,null,null,this);
             obj.set_taborder("3");
             obj.set_text("성명");
-            obj.set_font("normal 700 13pt/normal \"Arial\"");
+            obj.set_font("bold 15pt \"Arial\"");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
             obj = new Static("Static02","130","147","126","53",null,null,null,null,null,null,this);
             obj.set_taborder("4");
             obj.set_text("신청일");
-            obj.set_font("normal 700 13pt/normal \"Arial\"");
+            obj.set_font("bold 15pt \"Arial\"");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static03","482","145","199","57",null,null,null,null,null,null,this);
+            obj = new Static("Static03","480","145","199","57",null,null,null,null,null,null,this);
             obj.set_taborder("5");
             obj.set_text("휴학학기");
-            obj.set_font("normal 700 13pt/normal \"Arial\"");
+            obj.set_font("bold 15pt \"Arial\"");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
             obj = new Static("Static04","144","268","99","68",null,null,null,null,null,null,this);
             obj.set_taborder("6");
             obj.set_text("사유");
-            obj.set_font("normal 700 13pt/normal \"Arial\"");
+            obj.set_font("bold 15pt \"Arial\"");
             obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static05","480","268","203","77",null,null,null,null,null,null,this);
+            obj = new Edit("Edit01","633","35","160","50",null,null,null,null,null,null,this);
             obj.set_taborder("7");
-            obj.set_text("복학예정학기");
-            obj.set_font("normal 700 13pt/normal \"Arial\"");
-            obj.set_textAlign("center");
             this.addChild(obj.name, obj);
 
-            obj = new Edit("Edit01","500","35","160","50",null,null,null,null,null,null,this);
+            obj = new Edit("Edit02","232","145","160","55",null,null,null,null,null,null,this);
             obj.set_taborder("8");
             this.addChild(obj.name, obj);
 
-            obj = new Edit("Edit02","231","145","160","55",null,null,null,null,null,null,this);
+            obj = new TextArea("TextArea00","232","290","278","152",null,null,null,null,null,null,this);
             obj.set_taborder("9");
             this.addChild(obj.name, obj);
 
-            obj = new TextArea("TextArea00","232","290","225","152",null,null,null,null,null,null,this);
-            obj.set_taborder("10");
-            this.addChild(obj.name, obj);
-
             obj = new Static("Static06","650","139","70","69",null,null,null,null,null,null,this);
-            obj.set_taborder("11");
+            obj.set_taborder("10");
             obj.set_text("2022년");
-            obj.set_font("normal 700 17px/normal \"Gulim\"");
+            obj.set_font("bold 15pt \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new Edit("Edit03","713","155","35","39",null,null,null,null,null,null,this);
+            obj = new Edit("Edit03","731","155","35","39",null,null,null,null,null,null,this);
+            obj.set_taborder("11");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07","765","154","65","36",null,null,null,null,null,null,this);
             obj.set_taborder("12");
-            this.addChild(obj.name, obj);
-
-            obj = new Static("Static07","751","157","65","36",null,null,null,null,null,null,this);
-            obj.set_taborder("13");
             obj.set_text("학기");
-            obj.set_font("normal bold 17px/normal \"Arial\"");
+            obj.set_font("bold 15pt \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_request","810","466","140","64",null,null,null,null,null,null,this);
-            obj.set_taborder("14");
+            obj = new Button("btn_request","805","458","140","64",null,null,null,null,null,null,this);
+            obj.set_taborder("13");
             obj.set_text("신청");
             obj.set_font("bold 12pt \"Arial\"");
             obj.set_background("RGB(101,126,194)");
@@ -170,6 +163,7 @@
         	this.ds_loa.addRow();
         	this.ds_loa.setColumn(this.ds_loa.rowposition, "lRequestDate", today);
         	this.ds_loa.setColumn(this.ds_loa.rowposition, "sCode", sCode);
+
         };
 
         });
