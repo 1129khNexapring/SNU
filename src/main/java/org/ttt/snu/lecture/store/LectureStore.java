@@ -15,6 +15,8 @@ public interface LectureStore {
 
 	List<Lecture> selectAllNLectures(SqlSession sqlSession, Lecture lecture);
 
+	int updateLectureStatus(SqlSession sqlSession, String inVar1);
+
 	
 
 }

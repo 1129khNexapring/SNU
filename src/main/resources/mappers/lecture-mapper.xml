@@ -63,4 +63,7 @@
 			</choose>
 		</where>
 	</select>
+	<update id="updateLectureStatus">
+		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE = #{inVar1 }
+	</update>
 </mapper>

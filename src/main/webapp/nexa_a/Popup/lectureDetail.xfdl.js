@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_ldetail", this);
-            obj._setContents("<ColumnInfo><Column id=\"lName\" type=\"STRING\" size=\"256\"/><Column id=\"lObjective\" type=\"STRING\" size=\"256\"/><Column id=\"lContents\" type=\"STRING\" size=\"256\"/><Column id=\"textbook\" type=\"STRING\" size=\"256\"/><Column id=\"lCapacity\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"lName\" type=\"STRING\" size=\"256\"/><Column id=\"lObjective\" type=\"STRING\" size=\"256\"/><Column id=\"lContents\" type=\"STRING\" size=\"256\"/><Column id=\"textbook\" type=\"STRING\" size=\"256\"/><Column id=\"lCapacity\" type=\"STRING\" size=\"256\"/><Column id=\"lCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -74,14 +74,9 @@
             obj.set_taborder("9");
             this.Div00.addChild(obj.name, obj);
 
-            obj = new Button("Button00","324","564","146","30",null,null,null,null,null,null,this);
+            obj = new Button("btn_approval","324","564","146","30",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("승인");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("Button01","11","564","146","30",null,null,null,null,null,null,this);
-            obj.set_taborder("2");
-            obj.set_text("반려");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -152,10 +147,41 @@
         	this.ds_ldetail.setColumn(0, "lContents",	 this.parent.lContents);
         	this.ds_ldetail.setColumn(0, "textbook",	 this.parent.textbook);
         	this.ds_ldetail.setColumn(0, "lCapacity",  this.parent.lCapacity);
+        	this.ds_ldetail.setColumn(0, "lCode", this.parent.lCode);
         	//this.ds_ldetail.rowposition
 
 
         };
+
+        this.btn_approval_onclick = function(obj,e)
+        {
+        	var rtn = this.confirm("승인하시겠습니까?", "승인 창");
+        	if(rtn == true)
+        	{
+        		var lectureCode = this.ds_ldetail.getColumn(0, "lCode");
+        		this.transaction(
+        		"tr_approve"
+        		,"SnuURL::lecture/approve.snu"
+        		,""
+        		,"ds_ldetail=out_ldetail"
+        		,"in_Var1="+lectureCode+""
+        		,"fn_callback_ap"
+        		)
+        	}
+        };
+
+        this.fn_callback_ap = function(id, nErrorCode, sErrorMsg)
+        {
+        	if(id=="tr_approve")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("승인 실패");
+        			return;
+        		}
+        		this.alert("승인 성공");
+        	}
+        }
 
         });
         
@@ -163,6 +189,7 @@
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.lectureDetail_onload,this);
+            this.btn_approval.addEventHandler("onclick",this.btn_approval_onclick,this);
         };
         this.loadIncludeScript("lectureDetail.xfdl");
         this.loadPreloadList();
