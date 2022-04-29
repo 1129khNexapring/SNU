@@ -7,10 +7,12 @@ public class Transfer {
 	private String tMsg;
 	private String sCode;
 	private String dCode;
+	private String tdCode;
 	
 	public Transfer() {}
 
-	public Transfer(int tNo, String tRequestDate, String tStatus, String tMsg, String sCode, String dCode) {
+	public Transfer(int tNo, String tRequestDate, String tStatus, String tMsg, String sCode, String dCode,
+			String tdCode) {
 		super();
 		this.tNo = tNo;
 		this.tRequestDate = tRequestDate;
@@ -18,6 +20,7 @@ public class Transfer {
 		this.tMsg = tMsg;
 		this.sCode = sCode;
 		this.dCode = dCode;
+		this.tdCode = tdCode;
 	}
 
 	public int gettNo() {
@@ -68,13 +71,20 @@ public class Transfer {
 		this.dCode = dCode;
 	}
 
+	public String getTdCode() {
+		return tdCode;
+	}
+
+	public void setTdCode(String tdCode) {
+		this.tdCode = tdCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Transfer [tNo=" + tNo + ", tRequestDate=" + tRequestDate + ", tStatus=" + tStatus + ", tMsg=" + tMsg
-				+ ", sCode=" + sCode + ", dCode=" + dCode + "]";
+				+ ", sCode=" + sCode + ", dCode=" + dCode + ", tdCode=" + tdCode + "]";
 	}
-	
-	
+
 	
 
 }
