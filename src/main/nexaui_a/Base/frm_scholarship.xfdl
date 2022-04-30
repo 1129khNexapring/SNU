@@ -3,12 +3,12 @@
   <Form id="frm_scholarship" width="1280" height="720" titletext="New Form">
     <Layouts>
       <Layout height="720" width="1280">
-        <Grid id="Grid00" taborder="0" left="23" top="160" width="887" height="212" binddataset="ds_scholarship" autofittype="col">
+        <Grid id="Grid00" taborder="0" left="23" top="160" width="807" height="212" binddataset="ds_scholarship" autofittype="col" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="68"/>
-                <Column size="64"/>
+                <Column size="49"/>
+                <Column size="73"/>
                 <Column size="58"/>
                 <Column size="263"/>
               </Columns>
@@ -31,9 +31,9 @@
             </Format>
           </Formats>
         </Grid>
-        <Button id="btn_scRetrieve" taborder="1" text="조회" left="652" top="117" width="81" height="38" onclick="btn_scRetrieve_onclick"/>
-        <Button id="btn_addScholar" taborder="2" text="등록" left="741" top="117" width="81" height="38" onclick="btn_addScholar_onclick"/>
-        <Div id="Div00" taborder="3" text="" left="23" top="432" width="887" height="212" border="1px solid" background="#ffffff">
+        <Button id="btn_scRetrieve" taborder="1" text="조회" left="572" top="117" width="81" height="38" onclick="btn_scRetrieve_onclick"/>
+        <Button id="btn_addScholar" taborder="2" text="등록" left="661" top="117" width="81" height="38" onclick="btn_addScholar_onclick"/>
+        <Div id="Div00" taborder="3" text="" left="23" top="432" width="807" height="212" border="1px solid" background="#ffffff">
           <Layouts>
             <Layout>
               <Static id="Static00" taborder="0" text="장학금코드" left="12" top="17" width="64" height="32"/>
@@ -51,8 +51,39 @@
             </Layout>
           </Layouts>
         </Div>
-        <Button id="btn_registerSc" taborder="4" text="저장" left="828" top="389" width="81" height="38" onclick="btn_registerSc_onclick"/>
-        <Button id="btn_deleteSc" taborder="5" text="삭제" left="828" top="117" width="81" height="38" onclick="btn_deleteSc_onclick"/>
+        <Button id="btn_registerSc" taborder="4" text="저장" left="748" top="389" width="81" height="38" onclick="btn_registerSc_onclick"/>
+        <Button id="btn_deleteSc" taborder="5" text="삭제" left="748" top="117" width="81" height="38" onclick="btn_deleteSc_onclick"/>
+        <Grid id="Grid01" taborder="6" left="849" top="160" width="411" height="210" binddataset="ds_requestScholarship" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학번"/>
+                <Cell col="1" text="이름"/>
+                <Cell col="2" text="계열"/>
+                <Cell col="3" text="학과명"/>
+                <Cell col="4" text="장학금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:sCode"/>
+                <Cell col="1" text="bind:sName"/>
+                <Cell col="2" text="bind:dField"/>
+                <Cell col="3" text="bind:dName"/>
+                <Cell col="4" text="bind:amount"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
     <Objects>
@@ -148,6 +179,15 @@
           </Row>
         </Rows>
       </Dataset>
+      <Dataset id="ds_requestScholarship">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="amount" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[
 this.btn_scRetrieve_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -182,6 +222,16 @@ this.fn_callback_sc = function(id, nErrorCode, sErrorMsg)
 		}
 		this.alert("저장 성공");
 	}
+	if(id=="tr_rsList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("해당 학생이 없습니다.");
+			return;
+		}
+		this.alert("해당 학생:"+this.ds_requestScholarship.getRowCount()+"명");
+	}
+	
 }
 
 
@@ -209,6 +259,22 @@ this.btn_registerSc_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventIn
 this.btn_deleteSc_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.ds_scholarship.deleteRow(this.ds_scholarship.rowposition);
+};
+
+
+//해당 장학금 셀을 눌렀을 때 그것을 신청한 학생들을 보여주는 기능
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var scCode = this.ds_scholarship.getColumn(e.row, "scCode");
+	//alert(scCode);
+	this.transaction(
+	"tr_rsList"
+	,"SnuURL::requestScholarship/list.snu"
+	,""
+	,"ds_requestScholarship=out_List"
+	,"in_Var1="+scCode+""
+	,"fn_callback_sc"
+	)
 };
 ]]></Script>
     <Bind>
