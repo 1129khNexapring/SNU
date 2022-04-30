@@ -35,6 +35,11 @@
             obj = new Dataset("ds_allDept", this);
             obj._setContents("<ColumnInfo><Column id=\"dCode\" type=\"STRING\" size=\"256\"/><Column id=\"dName\" type=\"STRING\" size=\"256\"/><Column id=\"dField\" type=\"STRING\" size=\"256\"/><Column id=\"officeName\" type=\"STRING\" size=\"256\"/><Column id=\"tuitionFee\" type=\"INT\" size=\"256\"/><Column id=\"dCapacity\" type=\"INT\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_tran", this);
+            obj._setContents("<ColumnInfo><Column id=\"tNo\" type=\"INT\" size=\"256\"/><Column id=\"tRequestDate\" type=\"STRING\" size=\"256\"/><Column id=\"tStatus\" type=\"STRING\" size=\"256\"/><Column id=\"tMsg\" type=\"STRING\" size=\"256\"/><Column id=\"sCode\" type=\"STRING\" size=\"256\"/><Column id=\"dCode\" type=\"STRING\" size=\"256\"/><Column id=\"tdCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Grid("Grid00","70","20","800","440",null,null,null,null,null,null,this);
@@ -114,19 +119,27 @@
         
         // User Script
         this.registerScript("frm_moverequest.xfdl", function() {
-        var newCode = 0;
         var sName = nexacro.getEnvironmentVariable("ev_Val1");
         var sCode = nexacro.getEnvironmentVariable("ev_Val");
-
         this.Edit00_02.set_value(sName);
         this.Edit00.set_value(sCode);
 
-
+        this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+        {
+        	if(id=="tr_requestTransfer")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("신청 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("신청 성공 :  " );
+        	}
+        }
 
 
         this.frm_moverequest_onload = function(obj,e)
         {
-
         	this.transaction(
                 	"tr_select"// 1.ID
                 	,"tttUrl::movedept/list.snu"// 2.URL
@@ -135,22 +148,46 @@
                 	,"inVar1=" + sCode // 5.InVar : F->S(var)
                 	,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
                 	)
-
-
-
         };
-
 
 
         this.Combo00_onmouseenter = function(obj,e)
         {
         	this.transaction(
-        		"tr_selectDept"
-        		,"tttUrl:allDept/list.snu"
-        		,""
-        		,"ds_allDept=outDept"
-        		,""
-        		,"fn_callback_tran"
+        			"tr_selectDept"
+        			,"tttUrl::allDept/list.snu"
+        			,""
+        			,"ds_allDept=outDept"
+        			,""
+        			,"fn_callback_tran"
+        			)
+        };
+
+        this.Button00_onclick = function(obj,e)
+        {
+        	//var aRow = this.ds_pdept.findRow("DEPT_NAME", eValue);
+        	//var sColId = this.ds_pdept.getColumn(aRow, "DEPT_CD");
+        	//var eValue = this.Edit00.value;
+
+        	var dValue = this.Edit00_00.value; //국어국문학과
+        	var dRow = this.ds_dept.findRow("dName", dValue); //dept데이터셋에 국어국문학과인 로우를
+        	var dCode = this.ds_dept.getColumn(dRow, "dCode");
+        	var tdValue = this.Combo00.value;
+        	var tdRow = this.ds_allDept.findRow("dName", tdValue);
+        	var tdCode = this.ds_allDept.getColumn(tdRow, "dCode");
+
+        	this.ds_tran.addRow();
+        	this.ds_tran.setColumn(0, "sCode", sCode);
+        	this.ds_tran.setColumn(0, "dCode", dCode);
+        	this.ds_tran.setColumn(0, "tdCode", tdCode);
+
+        	this.transaction(
+        			"tr_requestTransfer"
+        			,"tttUrl::requestTran/list.snu"
+        			,"in_tran=ds_tran:U"
+        			,""
+        			,""
+        			,"fn_callback_tran"
         		)
         };
 

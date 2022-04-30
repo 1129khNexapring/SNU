@@ -12,5 +12,7 @@ public interface TransferService {
 
 	List<Department> printAllDept();
 
+	int requestTransfer(Transfer transfer);
+
 
 }

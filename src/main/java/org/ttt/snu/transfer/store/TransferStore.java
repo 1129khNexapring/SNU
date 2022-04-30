@@ -13,4 +13,6 @@ public interface TransferStore {
 
 	List<Department> selectDept(SqlSession sqlSession);
 
+	int requestTran(SqlSession sqlSession, Transfer transfer);
+
 }

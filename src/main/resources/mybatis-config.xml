@@ -19,9 +19,13 @@
 		<typeAlias type="org.ttt.snu.transfer.domain.Transfer" alias="Transfer"/>
 		<typeAlias type="org.ttt.snu.scholarship.domain.Scholarship" alias="Scholarship"/>
 		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
+		<typeAlias type="org.ttt.snu.student.domain.Student" alias="Student"/>
 		<typeAlias type="org.ttt.snu.book.domain.Book" alias="Book"/>
+
 		
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
+
+
 
 
 

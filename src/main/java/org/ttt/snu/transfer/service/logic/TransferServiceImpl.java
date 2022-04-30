@@ -32,4 +32,10 @@ public class TransferServiceImpl implements TransferService {
 		return dList;
 	}
 
+	@Override
+	public int requestTransfer(Transfer transfer) {
+		int result = tStore.requestTran(sqlSession, transfer);
+		return result;
+	}
+
 }
