@@ -19,8 +19,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Button id="Button00" taborder="1" text="승인" left="324" top="564" width="146" height="30"/>
-        <Button id="Button01" taborder="2" text="반려" left="11" top="564" width="146" height="30"/>
+        <Button id="btn_approval" taborder="1" text="승인" left="324" top="564" width="146" height="30" onclick="btn_approval_onclick"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[// function fn_CreateDataset()
@@ -55,10 +54,41 @@ this.lectureDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	this.ds_ldetail.setColumn(0, "lContents",	 this.parent.lContents);
 	this.ds_ldetail.setColumn(0, "textbook",	 this.parent.textbook);
 	this.ds_ldetail.setColumn(0, "lCapacity",  this.parent.lCapacity);
+	this.ds_ldetail.setColumn(0, "lCode", this.parent.lCode);
 	//this.ds_ldetail.rowposition
 	
 	
 };
+
+this.btn_approval_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rtn = this.confirm("승인하시겠습니까?", "승인 창");
+	if(rtn == true)
+	{
+		var lectureCode = this.ds_ldetail.getColumn(0, "lCode");
+		this.transaction(
+		"tr_approve"
+		,"SnuURL::lecture/approve.snu"
+		,""
+		,"ds_ldetail=out_ldetail"
+		,"in_Var1="+lectureCode+""
+		,"fn_callback_ap"
+		)
+	}
+};
+
+this.fn_callback_ap = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_approve")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("승인 실패");
+			return;
+		}
+		this.alert("승인 성공");
+	}
+}
 ]]></Script>
     <Bind>
       <BindItem id="item1" compid="Div00.form.Edit01" propid="value" datasetid="ds_ldetail" columnid="lObjective"/>
@@ -75,6 +105,7 @@ this.lectureDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
           <Column id="lContents" type="STRING" size="256"/>
           <Column id="textbook" type="STRING" size="256"/>
           <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
     </Objects>

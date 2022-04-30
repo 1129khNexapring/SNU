@@ -12,10 +12,13 @@
 		<result property="lMsg" column="L_MSG"/>
 		<result property="lSemester" column="L_SEMESTER"/>
 		<result property="sCode" column="S_CODE"/>
+		<result property="lReturnMsg" column="L_RETURN_MSG"/>
 	</resultMap>
 	
 	<insert id = "requestLoa">
-		INSERT INTO LOA VALUES(LOA_SEQ.NEXTVAL, #{lReason}, DEFAULT, DEFAULT, #{lMsg}, #{lSemester}, #{sCode} )
+		INSERT INTO LOA VALUES(LOA_SEQ.NEXTVAL, #{lReason}, DEFAULT, DEFAULT, #{lMsg}, #{lSemester}, #{sCode}, #{lReturnMSg } )
 	</insert>
-
+	<select id="selectLoaList" resultMap="loaResultMap">
+		SELECT * FROM LOA WHERE L_STATUS = 'N'
+	</select>
 </mapper>

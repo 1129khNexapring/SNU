@@ -8,11 +8,12 @@ public class Loa {
 	private String lMsg;
 	private int lSemester;
 	private String sCode;
+	private String lReturnMsg;
 	
 	public Loa() {}
 
-	public Loa(int lNum, String lReason, String lRequestDate, String lStatus, String lMsg, int lSemester,
-			String sCode) {
+	public Loa(int lNum, String lReason, String lRequestDate, String lStatus, String lMsg, int lSemester, String sCode,
+			String lReturnMsg) {
 		super();
 		this.lNum = lNum;
 		this.lReason = lReason;
@@ -21,6 +22,7 @@ public class Loa {
 		this.lMsg = lMsg;
 		this.lSemester = lSemester;
 		this.sCode = sCode;
+		this.lReturnMsg = lReturnMsg;
 	}
 
 	public int getlNum() {
@@ -79,11 +81,22 @@ public class Loa {
 		this.sCode = sCode;
 	}
 
+	public String getlReturnMsg() {
+		return lReturnMsg;
+	}
+
+	public void setlReturnMsg(String lReturnMsg) {
+		this.lReturnMsg = lReturnMsg;
+	}
+
 	@Override
 	public String toString() {
 		return "Loa [lNum=" + lNum + ", lReason=" + lReason + ", lRequestDate=" + lRequestDate + ", lStatus=" + lStatus
-				+ ", lMsg=" + lMsg + ", lSemester=" + lSemester + ", sCode=" + sCode + "]";
+				+ ", lMsg=" + lMsg + ", lSemester=" + lSemester + ", sCode=" + sCode + ", lReturnMsg=" + lReturnMsg
+				+ "]";
 	}
+
+	
 
 	
 

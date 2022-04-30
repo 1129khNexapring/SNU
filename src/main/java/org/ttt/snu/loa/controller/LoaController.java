@@ -2,6 +2,7 @@ package org.ttt.snu.loa.controller;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,14 +46,8 @@ public class LoaController {
 		int lSemester = dsGet(inLoa, i, "lSemester") != ""
 				? Integer.parseInt(dsGet(inLoa, i, "lSemester")) : 0;
 		String sCode = dsGet(inLoa, i, "sCode");
-		Loa loa = new Loa(
-				lNum
-				,	lReason
-				,	lRequestDate
-				,	lStatus
-				,	lMsg
-				,	lSemester
-				,	sCode);
+		String lReturnMsg = dsGet(inLoa, i, "lReturnMsg");
+		Loa loa = new Loa(lNum, lReason, lRequestDate, lStatus, lMsg, lSemester, sCode, lReturnMsg);
 			if(rowType == DataSet.ROW_TYPE_INSERTED) {
 				iResult += lService.requestLoa(loa);
 			} /*
@@ -74,6 +69,19 @@ public class LoaController {
 		
 		return result;
 	}
+	//관리자 - 휴학신청리스트 조회
+	@RequestMapping(value="/loaStudent/list.snu", method=RequestMethod.GET)
+	public NexacroResult printALlRequestLoaStudent() {
+		//System.out.println("연결완료");
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		List<Loa> lList = lService.printRequestList();
+		
+		return null;
+	}
+	
+	
 
 	public DataSet RsToDs(ResultSet rs, String dsID) throws Exception {
 		int i;
