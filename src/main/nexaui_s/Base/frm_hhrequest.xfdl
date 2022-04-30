@@ -60,6 +60,7 @@ this.frm_hhrequest_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
           <Column id="lMsg" type="STRING" size="256"/>
           <Column id="lSemester" type="INT" size="256"/>
           <Column id="sCode" type="STRING" size="256"/>
+          <Column id="lReturnMsg" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
     </Objects>

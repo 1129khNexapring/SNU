@@ -21,7 +21,7 @@
 		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
 		<typeAlias type="org.ttt.snu.student.domain.Student" alias="Student"/>
 		<typeAlias type="org.ttt.snu.book.domain.Book" alias="Book"/>
-
+		<typeAlias type="org.ttt.snu.loa.domain.Loa" alias="Loa"/>
 		
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
 
@@ -44,6 +44,6 @@
 		<mapper resource="mappers/scholarship-mapper.xml"/>
 		<mapper resource="mappers/department-mapper.xml"/>
 		<mapper resource="mappers/requestScholarship-mapper.xml"/>
-
+		<mapper resource="mappers/loa-mapper.xml"/>
 	</mappers>
 </configuration>
