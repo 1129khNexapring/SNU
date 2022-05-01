@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.ttt.snu.book.domain.Book;
 import org.ttt.snu.loa.domain.Loa;
 import org.ttt.snu.loa.service.LoaService;
+import org.ttt.snu.student.domain.Student;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
@@ -77,9 +78,70 @@ public class LoaController {
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();
 		List<Loa> lList = lService.printRequestList();
-		
-		return null;
+		List<Student> sList = lService.printStudentName();
+		if(!lList.isEmpty() && !sList.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_list", lList);
+		result.addDataSet("out_sList", sList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
 	}
+	
+	//관리자- 휴학 승인
+	@RequestMapping(value="/loa/approve.snu", method=RequestMethod.POST)
+	public NexacroResult approveLoa(
+			@ParamVariable(name="in_Var1") String inVar1) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		Loa loa = new Loa();
+		loa.setsCode(inVar1);
+		NexacroResult result = new NexacroResult();
+		int uResult = lService.modifyStatus(loa);
+		if(uResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "승인이 완료됐습니다";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "오류가 발생했습니다";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	//관리자 휴학 반려
+	@RequestMapping(value="/loa/updateMsg.snu", method=RequestMethod.POST)
+	public NexacroResult rejectLoa(
+			@ParamVariable(name="in_Var1") String inVar1
+			,@ParamVariable(name="in_Var2") String inVar2) 	{
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		System.out.println(inVar2);
+		Loa loa = new Loa();
+		loa.setsCode(inVar1);
+		loa.setlReturnMsg(inVar2);
+		int uResult = lService.modifyMsg(loa);
+		if(uResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "성공적으로 메시지가 전송됐습니다!";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "오류가 발생했습니다!";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+		
+		
+	}
+	
 	
 	
 
