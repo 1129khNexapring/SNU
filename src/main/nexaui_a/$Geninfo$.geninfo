@@ -23,7 +23,7 @@
       <File url="Popup\lectureDetail.xfdl" checksum="20220429165208" errormsg=""/>
       <File url="Application_Desktop.xadl" checksum="20220429091057" errormsg=""/>
       <File url="Base\frm_lecture.xfdl" checksum="20220429165451" errormsg=""/>
-      <File url="Base\frm_absenceschool.xfdl" checksum="20220430202704" errormsg=""/>
+      <File url="Base\frm_absenceschool.xfdl" checksum="20220501223017" errormsg=""/>
       <File url="Base\frm_notice.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="Base\frm_professor.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\frm_reservist.xfdl" checksum="20220429091057" errormsg=""/>
@@ -40,6 +40,7 @@
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Top.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Work.xfdl" checksum="20220429091055" errormsg=""/>
+      <File url="Popup\loaReturnMsg.xfdl" checksum="20220501233601" errormsg=""/>
     </Info>
   </GenInfo>
 </root>
