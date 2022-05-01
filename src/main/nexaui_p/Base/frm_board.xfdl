@@ -56,15 +56,14 @@
               <Button id="btn_remove" taborder="18" text="삭제하기" left="620" top="98" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_remove_onclick"/>
               <FileDownload id="FileDownload00" taborder="19" text="File Download" left="665" top="500" width="94" height="30" borderRadius="5px"/>
               <Button id="btn_popUpClose" taborder="20" text="X" left="1000" top="5" width="20" height="25" background="dodgerblue" font="normal bold 10pt/normal &quot;Arial&quot;" cursor="pointer" onclick="popDetail_btn_popUpClose_onclick"/>
-              <Edit id="edt_commentDate" taborder="21" left="610" top="545" width="140" height="20" borderRadius="4px" enable="true" enableevent="true" visible="false"/>
-              <Edit id="edt_commentNo" taborder="22" left="800" top="535" width="140" height="20" visible="false"/>
-              <Edit id="edt_cBoardNo" taborder="23" left="810" top="565" width="140" height="20" visible="false"/>
-              <Grid id="grd_comment" taborder="24" left="308" top="695" width="492" height="130" binddataset="ds_comments" oncelldblclick="popDetail_grd_comment_oncelldblclick" cursor="pointer">
+              <Edit id="edt_cBoardNo" taborder="21" left="810" top="565" width="140" height="20" visible="false"/>
+              <Grid id="grd_comment" taborder="22" left="308" top="695" width="492" height="130" binddataset="ds_comments" oncelldblclick="popDetail_grd_comment_oncelldblclick" cursor="pointer">
                 <Formats>
                   <Format id="default">
                     <Columns>
+                      <Column size="48"/>
                       <Column size="85"/>
-                      <Column size="324"/>
+                      <Column size="280"/>
                       <Column size="79"/>
                     </Columns>
                     <Rows>
@@ -72,19 +71,21 @@
                       <Row size="24"/>
                     </Rows>
                     <Band id="head">
-                      <Cell text="작성자"/>
-                      <Cell col="1" text="내용"/>
-                      <Cell col="2" text="작성일"/>
+                      <Cell text="No"/>
+                      <Cell col="1" text="작성자"/>
+                      <Cell col="2" text="내용"/>
+                      <Cell col="3" text="작성일"/>
                     </Band>
                     <Band id="body">
-                      <Cell text="bind:s_name"/>
-                      <Cell col="1" text="bind:comment_content"/>
-                      <Cell col="2" text="bind:comment_date"/>
+                      <Cell text="bind:comment_no"/>
+                      <Cell col="1" text="bind:s_name"/>
+                      <Cell col="2" text="bind:comment_content"/>
+                      <Cell col="3" text="bind:comment_date"/>
                     </Band>
                   </Format>
                 </Formats>
               </Grid>
-              <Button id="btn_cRemove" taborder="25" text="삭제하기" left="870" top="695" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_cRemove_onclick"/>
+              <Button id="btn_cRemove" taborder="23" text="삭제하기" left="870" top="695" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_cRemove_onclick"/>
               <PopupDiv id="popComments" text="PopupDiv00" visible="false" left="450" top="705" width="220" height="55" background="cornsilk">
                 <Layouts>
                   <Layout>
@@ -126,6 +127,7 @@
       </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[var currentboardNo = 0;
+var currentCommentNo = 0;
 
 this.btn_boardWrite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
@@ -270,13 +272,13 @@ this.popDetail_btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
 
 this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
 	this.transaction(
 		"tr_bDelete"
 		, "SnuUrl::board/register.snu"
 		, "in_boardList=ds_boardList:D"
 		, ""
-		, "in_var1=" + boardNo
+		, "in_var1=" + board_no
 		, "fn_callback_tran"
 	);
 };
@@ -284,13 +286,13 @@ this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
 this.popDetail_btn_commentSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	
-	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
 	this.transaction(
 		"tr_cRegister"
 		, "SnuUrl::comments/changeComments.snu"
 		, "in_comments=ds_comments:U"
 		, ""
-		, "in_var1=" + boardNo
+		, "in_var1=" + board_no
 	);
 };
 
@@ -313,27 +315,26 @@ this.popDetail_edt_comment_oneditclick = function(obj:nexacro.Edit,e:nexacro.Edi
 var sCode = "S001";
 this.commentsList = function(currentboardNo)
 {
-	trace(sCode);
-	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
 	this.transaction(
 		"tr_cList"
 		, "SnuUrl::comment/list.snu"
 		, ""
 		,"ds_comments=out_comments" // 4.OutDs : S->F jsp(SELECT)
-		,"in_var1="+boardNo+" in_var2="+sCode // 5.InVar : F->S(var)
+		,"in_var1="+board_no+" in_var2="+sCode // 5.InVar : F->S(var)
 	);
 }
 
 this.popDetail_btn_cRemove_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.ds_comments.deleteRow(this.ds_comments.rowposition);
-	var commentNo = this.ds_comments.getColumn(e.row, "comment_no");
+	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
 	this.transaction(
 		"tr_cRemove"
 		, "SnuUrl::comments/changeComments.snu"
 		, "in_comments=ds_comments:D"
 		, ""
-		, "in_var1=" + commentNo
+		, "in_var2=" + comment_no
 		, "fn_callback_tran"
 	);
 };
@@ -344,18 +345,22 @@ this.popDetail_grd_comment_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.
 	comment.set_value("");
 	var nRow = this.ds_comments.rowposition;
 	this.popDetail.form.popComments.trackPopupByComponent(obj, 100, 100, 270, 100);
+	currentCommentNo = e.row;
 	
 };
 
 this.popDetail_popComments_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var commentNo = this.ds_comments.getColumn(e.row, "comment_no");
+	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
+	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	trace(comment_no);
+	trace(board_no);
 	this.transaction(
 		  "tr_cUpdate"
 		, "SnuUrl::comments/changeComments.snu"
 		, "in_comments=ds_comments:U"
 		, ""
-		, "in_var1=" + commentNo
+		, "in_var1="+board_no+" in_var2="+comment_no
 		, "fn_callback_tran"
 	);
 };
@@ -369,8 +374,6 @@ this.popDetail_popComments_Button00_onclick = function(obj:nexacro.Button,e:nexa
       <BindItem id="item5" compid="popDetail.form.ta_boardContent" propid="value" datasetid="ds_boardList" columnid="board_content"/>
       <BindItem id="item6" compid="popDetail.form.edt_file" propid="value" datasetid="ds_boardList" columnid="board_fileName"/>
       <BindItem id="item7" compid="popDetail.form.edt_comment" propid="value" datasetid="ds_comments" columnid="comment_content"/>
-      <BindItem id="item8" compid="popDetail.form.edt_commentDate" propid="value" datasetid="ds_comments" columnid="comment_date"/>
-      <BindItem id="item9" compid="popDetail.form.edt_commentNo" propid="value" datasetid="ds_comments" columnid="comment_no"/>
       <BindItem id="item10" compid="popDetail.form.edt_cBoardNo" propid="value" datasetid="ds_comments" columnid="board_no"/>
       <BindItem id="item11" compid="popDetail.form.popComments.form.Edit00" propid="value" datasetid="ds_comments" columnid="comment_content"/>
     </Bind>

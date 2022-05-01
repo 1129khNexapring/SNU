@@ -184,8 +184,6 @@ public class BoardController {
 			result.addDataSet("out_comments", commentList);
 			result.addVariable("ErrorCode", nErrorCode);
 			result.addVariable("ErrorMsg", strErrorMsg);
-			System.out.println(inVar1);
-			System.out.println(inVar2);
 			return result;
 		}
 	
@@ -193,8 +191,8 @@ public class BoardController {
 	@RequestMapping(value="/comments/changeComments.snu", method=RequestMethod.POST)
 	public NexacroResult changeComments(
 				    @ParamDataSet(name="in_comments") DataSet inComments
-				  , @ParamVariable(name="in_var1") int board_no
-				  , @ParamVariable(name="in_var1") String comment_no) throws Exception {
+				  , @ParamVariable(name="in_var1") String board_no
+				  , @ParamVariable(name="in_var2") String comment_no) throws Exception {
 		NexacroResult result = new NexacroResult();
 		int 	nErrorCode  = 0;
 		String  strErrorMsg = "START";
@@ -222,7 +220,7 @@ public class BoardController {
 						,	comment_date
 						, 	s_code
 						, 	p_code
-						, 	board_no);
+						, 	Integer.parseInt(board_no));
 			if(rowType == DataSet.ROW_TYPE_INSERTED) {
 				iResult += bService.registerComments(comments);
 			}else if(rowType == DataSet.ROW_TYPE_UPDATED) {

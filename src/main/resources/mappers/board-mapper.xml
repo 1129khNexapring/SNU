@@ -42,14 +42,14 @@
 	
 	<select id="selectAllComments" resultMap="commentsResultMap">
 		SELECT * FROM
-		(SELECT S_NAME, COMMENT_CONTENT, COMMENT_DATE, S_CODE, BOARD_NO FROM COMMENTS JOIN STUDENT USING(S_CODE))
+		(SELECT COMMENT_NO, S_NAME, COMMENT_CONTENT, COMMENT_DATE, S_CODE, BOARD_NO FROM COMMENTS JOIN STUDENT USING(S_CODE))
 		WHERE BOARD_NO = #{boardNo} AND S_CODE = #{sCode}
 	</select>
 	<insert id="insertComments">
 		INSERT INTO COMMENTS VALUES(C_SEQ_NO.NEXTVAL, #{comment_content}, SYSDATE, 'S001', null, #{board_no})
 	</insert>
 	<update id="updateComments">
-		UPDATE COMMENTS SET COMMENT_CONTENT = #{comment_content} WHERE COMMENT_NO = #{comment_no} AND BOARD_NO = #{board_no}
+		UPDATE COMMENTS SET COMMENT_CONTENT = #{comment_content} WHERE COMMENT_NO = #{comment_no}
 	</update>
 	<delete id="deleteComments">
 		DELETE FROM COMMENTS WHERE COMMENT_NO = #{comment_no}

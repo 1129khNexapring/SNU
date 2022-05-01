@@ -46,6 +46,8 @@
           <Column id="과목명" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
+      <Dataset id="Dataset00"/>
+      <Dataset id="Dataset01"/>
     </Objects>
     <Script type="xscript5.1"><![CDATA[
 this.btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
