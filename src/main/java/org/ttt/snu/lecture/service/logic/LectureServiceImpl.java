@@ -1,6 +1,8 @@
 package org.ttt.snu.lecture.service.logic;
 
+import java.util.HashMap;
 import java.util.List;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,24 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> lList = lStore.selectAllLectures(sqlSession);
 		return lList;
 	}
+	//관리자 -승인 계획서 조회
+	@Override
+	public List<Lecture> printAllYLecture(Lecture lecture) {
+		List<Lecture> lList = lStore.selectAllYLectures(sqlSession, lecture);
+		return lList;
+	}
+	//관리자 - 미승인 계획서 조회
+	@Override
+	public List<Lecture> printAllNLecture(Lecture lecture) {
+		List<Lecture> YList = lStore.selectAllNLectures(sqlSession, lecture);
+		return YList;
+	}
+	//관리자 - 계획승인
+	@Override
+	public int modifyLectureStatus(String inVar1) {
+		int result = lStore.updateLectureStatus(sqlSession, inVar1);
+		return result;
+	}
+	
 
 }

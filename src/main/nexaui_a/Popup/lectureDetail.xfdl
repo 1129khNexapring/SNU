@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="lectureDetail" width="480" height="600" titletext="New Form" onload="lectureDetail_onload">
+    <Layouts>
+      <Layout height="600" width="480">
+        <Div id="Div00" taborder="0" text="" left="10" top="10" width="460" height="550" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="강의명" left="21" top="34" width="50" height="50"/>
+              <Static id="Static01" taborder="1" text="강의목표" left="21" top="134" width="50" height="50"/>
+              <Static id="Static02" taborder="2" text="강의내용" left="21" top="254" width="50" height="50"/>
+              <TextArea id="TextArea00" taborder="3" left="107" top="197" width="340" height="164"/>
+              <Static id="Static03" taborder="4" text="교재" left="21" top="384" width="50" height="50"/>
+              <Static id="Static04" taborder="5" text="희망정원" left="21" top="484" width="50" height="50"/>
+              <Edit id="Edit00" taborder="6" left="107" top="34" width="340" height="64"/>
+              <Edit id="Edit01" taborder="7" left="107" top="124" width="340" height="55"/>
+              <Edit id="Edit02" taborder="8" left="107" top="381" width="340" height="63"/>
+              <Edit id="Edit03" taborder="9" left="107" top="487" width="129" height="42"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_approval" taborder="1" text="승인" left="324" top="564" width="146" height="30" onclick="btn_approval_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[// function fn_CreateDataset()
+// {
+// 	var objDs = new Dataset();
+// 	objDs.name = "ds_ldetail";
+// 	
+// 	objDs.addColumn("lName", 		"string");
+// 	objDs.addColumn("lObjective",   "string");
+// 	objDs.addColumn("lContents",    "string");
+// 	objDs.addColumn("textbook",     "string");
+// 	objDs.addCOlumn("lCapacity",    "string");
+// 	
+// 	this.addChild("ds_ldetail", objDs);
+// 	objDs.addRow();
+// 	objDs.setColumn(this.parent.lName, this.parent.lObjective, this.parent.lContents, this.parent.textbook, this.parent.lCapacity);
+// }
+
+
+
+this.lectureDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+//   	var lName 		= this.parent.lName;
+//  	var lObjective  = this.parent.lObjective;
+// 	var	lContents   = this.parent.lContents;
+//   	var	textbook    = this.parent.textbook;
+//   	var	lCapacity   = this.parent.lCapacity;
+//  	alert(lName + lObjective + lContents + textbook + lCapacity);
+	this.ds_ldetail.addRow();
+	this.ds_ldetail.setColumn(0, "lName", 	 this.parent.lName);
+	this.ds_ldetail.setColumn(0, "lObjective", this.parent.lObjective);
+	this.ds_ldetail.setColumn(0, "lContents",	 this.parent.lContents);
+	this.ds_ldetail.setColumn(0, "textbook",	 this.parent.textbook);
+	this.ds_ldetail.setColumn(0, "lCapacity",  this.parent.lCapacity);
+	this.ds_ldetail.setColumn(0, "lCode", this.parent.lCode);
+	//this.ds_ldetail.rowposition
+	
+	
+};
+
+this.btn_approval_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rtn = this.confirm("승인하시겠습니까?", "승인 창");
+	if(rtn == true)
+	{
+		var lectureCode = this.ds_ldetail.getColumn(0, "lCode");
+		this.transaction(
+		"tr_approve"
+		,"SnuURL::lecture/approve.snu"
+		,""
+		,"ds_ldetail=out_ldetail"
+		,"in_Var1="+lectureCode+""
+		,"fn_callback_ap"
+		)
+	}
+};
+
+this.fn_callback_ap = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_approve")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("승인 실패");
+			return;
+		}
+		this.alert("승인 성공");
+	}
+}
+]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="Div00.form.Edit01" propid="value" datasetid="ds_ldetail" columnid="lObjective"/>
+      <BindItem id="item2" compid="Div00.form.TextArea00" propid="value" datasetid="ds_ldetail" columnid="lContents"/>
+      <BindItem id="item3" compid="Div00.form.Edit02" propid="value" datasetid="ds_ldetail" columnid="textbook"/>
+      <BindItem id="item4" compid="Div00.form.Edit03" propid="value" datasetid="ds_ldetail" columnid="lCapacity"/>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_ldetail" columnid="lName"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_ldetail">
+        <ColumnInfo>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

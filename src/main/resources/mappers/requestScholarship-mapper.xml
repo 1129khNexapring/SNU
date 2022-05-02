@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="requestScholarshipMapper">
+	<resultMap type="org.ttt.snu.requestScholarship.domain.RequestScholarship" id="requestScholarshipResultMap">
+		<id property="sCode"		column="S_CODE"/>
+		<result property="sName" 	column="S_NAME"/>
+		<result property="amount" 	column="AMOUNT"/>
+		<result property="dName" 	column="D_NAME"/>
+		<result property="dField" 	column="D_FIELD"/>
+	</resultMap>
+	<select id="selectScholarshipStudent" resultMap="requestScholarshipResultMap">
+		SELECT S_CODE,  S_NAME, AMOUNT, DEPARTMENT.D_NAME, DEPARTMENT.D_FIELD FROM SCHOLARSHIP
+		JOIN REQUEST_SCHOLARSHIP USING(SC_CODE)
+		JOIN STUDENT  USING(S_CODE)
+		JOIN DEPARTMENT  ON STUDENT.D_CODE = DEPARTMENT.D_CODE
+		WHERE SC_CODE = #{inVar1 }
+	</select>
+
+</mapper>

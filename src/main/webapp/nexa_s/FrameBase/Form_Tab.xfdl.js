@@ -20,9 +20,6 @@
 
             
             // UI Components Initialize
-
-
-
             obj = new Tab("tab_mdi","57","1","413","29",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_tabindex("0");
@@ -31,7 +28,6 @@
             obj = new Tabpage("Tabpage2",this.tab_mdi);
             obj.set_text("Tabpage2");
             this.tab_mdi.addChild(obj.name, obj);
-
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,30,this,function(p){});
@@ -51,7 +47,6 @@
         };
         
         // User Script
-
         this.registerScript("Form_Tab.xfdl", function() {
 
         this.Form_Tab_onload = function(obj,e)
@@ -91,16 +86,13 @@
         };
 
         });
-
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-
             this.addEventHandler("onload",this.Form_Tab_onload,this);
             this.tab_mdi.addEventHandler("onchanged",this.tab_mdi_onchanged,this);
             this.tab_mdi.addEventHandler("onextrabuttonclick",this.tab_mdi_onextrabuttonclick,this);
-
         };
         this.loadIncludeScript("Form_Tab.xfdl");
         this.loadPreloadList();

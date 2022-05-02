@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="RehabMapper">
+	<resultMap type="org.ttt.snu.rehabilitation.domain.Rehabilitation" id="rehabResultMap">
+		<id property="rNum" column="R_NUM"/>
+		<result property="rReason" column="R_REASON"/>
+		<result property="rSemester" column="R_SEMESTER"/>
+		<result property="rYear" column="R_YEAR"/>
+		<result property="rStatus" column="R_STATUS"/>
+		<result property="rRequestDate" column="R_REQUEST_DATE"/>
+		<result property="rMsg" column="R_MSG"/>
+		<result property="sCode" column="S_CODE"/>
+	</resultMap>
+	
+	<insert id = "requestRehab">
+		INSERT INTO REHABILITATION VALUES(REHAB_SEQ.NEXTVAL, #{rReason}, #{rSemester}, #{rYear}, DEFAULT, #{rRequestDate}, #{rMsg}, #{sCode} )
+	</insert>
+
+</mapper>

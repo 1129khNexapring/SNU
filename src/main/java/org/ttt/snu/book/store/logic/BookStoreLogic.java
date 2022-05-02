@@ -22,4 +22,15 @@ public class BookStoreLogic implements BookStore {
 		return result;
 	}
 
+	@Override
+	public int deleteBook(SqlSession sqlSession, String dBook) {
+		int result = sqlSession.delete("BookMapper.deleteBook", dBook);
+		return result;
+	}
+
+	@Override
+	public int updateBook(SqlSession sqlSession, Book book) {
+		int result = sqlSession.update("BookMapper.updateBook", book);
+		return result;
+	}
 }

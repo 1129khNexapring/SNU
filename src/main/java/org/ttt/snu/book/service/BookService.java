@@ -10,4 +10,8 @@ public interface BookService {
 
 	int registerBook(Book book);
 
+	int removeBook(String dBook);
+
+	int modifyBook(Book book);
+
 }
