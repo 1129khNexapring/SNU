@@ -7,39 +7,36 @@
         <Combo id="cb_year" taborder="1" text="2021" left="128" top="48" width="70" height="30" borderRadius="4px"/>
         <Combo id="cb_year00" taborder="2" text="1학기" left="208" top="48" width="80" height="30" borderRadius="4px"/>
         <Static id="static_00" taborder="3" text="담당 교과목" left="83" top="93" width="120" height="35" border="1px solid lightgray" borderRadius="4px" textAlign="center" font="normal 10pt/normal &quot;Arial&quot;"/>
-        <Grid id="Grid00" taborder="4" left="63" top="135" width="987" height="105" binddataset="ds_attList" autofittype="col">
+        <Grid id="Grid00" taborder="4" left="63" top="135" width="945" height="105" binddataset="ds_lecture" autofittype="col">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
+                <Column size="41"/>
+                <Column size="319"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="61"/>
+                <Column size="82"/>
               </Columns>
               <Rows>
-                <Row band="head" size="24"/>
+                <Row size="24" band="head"/>
                 <Row size="24"/>
               </Rows>
               <Band id="head">
                 <Cell text="이수구분"/>
                 <Cell col="1" text="교과목명"/>
                 <Cell col="2" text="학점"/>
-                <Cell col="3" text="이론"/>
-                <Cell col="4" text="실습"/>
-                <Cell col="5" text="수강인원"/>
-                <Cell col="6" text="출결제출"/>
+                <Cell col="3" text="총 강의일수"/>
+                <Cell col="4" text="수강정원"/>
+                <Cell col="5" text="출결제출"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:이수구분"/>
-                <Cell col="1" text="bind:교과목명"/>
-                <Cell col="2" text="bind:학점"/>
-                <Cell col="3" text="bind:이론"/>
-                <Cell col="4" text="bind:실습"/>
-                <Cell col="5" text="bind:수강인원"/>
-                <Cell col="6" text="bind:출결제출"/>
+                <Cell text="bind:lType"/>
+                <Cell col="1" text="bind:lName"/>
+                <Cell col="2" text="bind:credit"/>
+                <Cell col="3" text="bind:lDays"/>
+                <Cell col="4" text="bind:lCapacity"/>
+                <Cell col="5" displaytype="combocontrol" edittype="combo"/>
               </Band>
             </Format>
           </Formats>
@@ -97,15 +94,23 @@ this.btn_close_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 };
 ]]></Script>
     <Objects>
-      <Dataset id="ds_attInfo">
+      <Dataset id="ds_lecture">
         <ColumnInfo>
-          <Column id="이수구분" type="STRING" size="256"/>
-          <Column id="교과목명" type="STRING" size="256"/>
-          <Column id="학점" type="STRING" size="256"/>
-          <Column id="이론" type="STRING" size="256"/>
-          <Column id="실습" type="STRING" size="256"/>
-          <Column id="수강인원" type="STRING" size="256"/>
-          <Column id="출결제출" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="STRING" size="256"/>
+          <Column id="credit" type="STRING" size="256"/>
+          <Column id="lYear" type="STRING" size="256"/>
+          <Column id="lSemester" type="STRING" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_attList">

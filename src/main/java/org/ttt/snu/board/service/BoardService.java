@@ -19,7 +19,7 @@ public interface BoardService {
 	// 댓글 영역
 	public int printOneByNo(Integer boardNo);
 	public int viewCount(Integer boardNo);
-	public List<Comments> printAllComments(int boardNo);
+	public List<Comments> printAllComments(int boardNo, String sCode);
 	public int registerComments(Comments comments);
 	public int modifyComments(Comments comments);
 	public int removeComments(int commentNo);

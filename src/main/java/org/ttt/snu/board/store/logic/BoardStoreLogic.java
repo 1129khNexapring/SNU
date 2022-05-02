@@ -1,6 +1,8 @@
 package org.ttt.snu.board.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.stream.events.Comment;
 
@@ -63,8 +65,12 @@ public class BoardStoreLogic implements BoardStore {
 	}
 
 	@Override
-	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo) {
-		List<Comments> cList = sqlSession.selectList("BoardMapper.selectAllComments", boardNo);
+	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo, String sCode) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("boardNo", boardNo);
+		paramMap.put("sCode", sCode);
+		List<Comments> cList = sqlSession.selectList("BoardMapper.selectAllComments", paramMap); 
+		//selectList("BoardMapper.selectAllComments", boardNo, sCode);
 		return cList;
 	}
 
@@ -75,15 +81,15 @@ public class BoardStoreLogic implements BoardStore {
 	}
 
 	@Override
-	public int updateComments(SqlSession sqlSesion, Comments comments) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateComments(SqlSession sqlSession, Comments comments) {
+		int result = sqlSession.update("BoardMapper.updateComments", comments);
+		return result;
 	}
 
 	@Override
 	public int deleteComments(SqlSession sqlSession, int commentNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.delete("BoardMapper.deleteComments", commentNo);
+		return result;
 	}
 
 }

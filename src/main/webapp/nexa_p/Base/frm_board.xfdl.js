@@ -20,6 +20,11 @@
             obj = new Dataset("ds_boardList", this);
             obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileName\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileReName\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_comments", this);
+            obj._setContents("<ColumnInfo><Column id=\"comment_no\" type=\"STRING\" size=\"256\"/><Column id=\"comment_content\" type=\"STRING\" size=\"256\"/><Column id=\"s_code\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"comment_date\" type=\"STRING\" size=\"256\"/><Column id=\"s_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Grid("grd_boardList","20","30","1037","620",null,null,null,null,null,null,this);
@@ -41,7 +46,7 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new PopupDiv("popDetail","30","25","1030","700",null,null,null,null,null,null,this);
+            obj = new PopupDiv("popDetail","30","25","1030","825",null,null,null,null,null,null,this);
             obj.set_text("PopupDiv00");
             obj.set_visible("false");
             obj.set_background("aliceblue");
@@ -194,6 +199,47 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             obj.set_cursor("pointer");
             this.popDetail.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cBoardNo","810","565","140","20",null,null,null,null,null,null,this.popDetail.form);
+            obj.set_taborder("21");
+            obj.set_visible("false");
+            this.popDetail.addChild(obj.name, obj);
+
+            obj = new Grid("grd_comment","308","695","492","130",null,null,null,null,null,null,this.popDetail.form);
+            obj.set_taborder("22");
+            obj.set_binddataset("ds_comments");
+            obj.set_cursor("pointer");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"48\"/><Column size=\"85\"/><Column size=\"280\"/><Column size=\"79\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"작성자\"/><Cell col=\"2\" text=\"내용\"/><Cell col=\"3\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:comment_no\"/><Cell col=\"1\" text=\"bind:s_name\"/><Cell col=\"2\" text=\"bind:comment_content\"/><Cell col=\"3\" text=\"bind:comment_date\"/></Band></Format></Formats>");
+            this.popDetail.addChild(obj.name, obj);
+
+            obj = new Button("btn_cRemove","870","695","66","32",null,null,null,null,null,null,this.popDetail.form);
+            obj.set_taborder("23");
+            obj.set_text("삭제하기");
+            obj.set_background("cornflowerblue");
+            obj.set_borderRadius("6px");
+            obj.set_cursor("pointer");
+            obj.set_color("white");
+            obj.set_font("normal bold 10pt/normal \"Arial\"");
+            this.popDetail.addChild(obj.name, obj);
+
+            obj = new PopupDiv("popComments","450","705","220","55",null,null,null,null,null,null,this.popDetail.form);
+            obj.set_text("PopupDiv00");
+            obj.set_visible("false");
+            obj.set_background("cornsilk");
+            this.popDetail.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00","0","0","220","20",null,null,null,null,null,null,this.popDetail.form.popComments.form);
+            obj.set_taborder("0");
+            obj.set_borderRadius("5px");
+            this.popDetail.form.popComments.addChild(obj.name, obj);
+
+            obj = new Button("Button00","70","24","80","26",null,null,null,null,null,null,this.popDetail.form.popComments.form);
+            obj.set_taborder("1");
+            obj.set_text("수정완료");
+            obj.set_borderRadius("5px");
+            obj.set_background("royalblue");
+            obj.set_color("white");
+            this.popDetail.form.popComments.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,670,this,function(p){});
@@ -228,6 +274,18 @@
             obj = new BindItem("item6","popDetail.form.edt_file","value","ds_boardList","board_fileName");
             this.addChild(obj.name, obj);
             obj.bind();
+
+            obj = new BindItem("item7","popDetail.form.edt_comment","value","ds_comments","comment_content");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item10","popDetail.form.edt_cBoardNo","value","ds_comments","board_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item11","popDetail.form.popComments.form.Edit00","value","ds_comments","comment_content");
+            this.addChild(obj.name, obj);
+            obj.bind();
             
             // TriggerItem Information
 
@@ -240,6 +298,8 @@
         
         // User Script
         this.registerScript("frm_board.xfdl", function() {
+        var currentboardNo = 0;
+        var currentCommentNo = 0;
 
         this.btn_boardWrite_onclick = function(obj,e)
         {
@@ -249,7 +309,8 @@
 
         this.grd_boardList_oncelldblclick = function(obj,e)
         {
-        	this.popDetail.trackPopupByComponent(obj, "3000000%", "3000000%");
+        	currentboardNo = e.row;
+        	this.popDetail.trackPopupByComponent(obj, obj.getOffsetWidth(), obj.getOffsetHeight(), 1200, 800);
         };
 
 
@@ -294,7 +355,7 @@
         			this.alert("게시글 조회 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert("게시글 조회 성공");
+        		// this.alert("게시글 조회 성공");
         	}
 
         	if(id == "tr_bUpdate") {
@@ -305,12 +366,47 @@
         		this.alert("게시글 수정 성공");
         	}
 
+        	if(id == "tr_bDelete") {
+        		if(nErrorCode < 0) {
+        			this.alert("게시글 삭제 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("게시글 삭제 성공");
+        	}
+
+        	if(id == "tr_cRegister") {
+        		if(nErrorCode < 0) {
+        			this.alert("댓글 등록 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("댓글 등록 성공");
+        	}
+
+        	if(id == "tr_cList") {
+        		if(nErrorCode) {
+        			this.alert("댓글 조회 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("댓글 조회 성공");
+        	}
+
+        	if(id == "tr_cRemove") {
+        		if(nErrorCode) {
+        			this.alert("댓글 삭제 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("댓글 삭제 성공");
+        	}
+
+        	if(id == "tr_cUpdate") {
+        		if(nErrorCode) {
+        			this.alert("댓글 수정 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.popDetail.form.popComments.closePopup();
+        	}
+
         };
-
-
-
-
-
 
         this.popDetail_btn_popUpClose_onclick = function(obj,e)
         {
@@ -346,6 +442,101 @@
         	);
         };
 
+        this.popDetail_btn_remove_onclick = function(obj,e)
+        {
+        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	this.transaction(
+        		"tr_bDelete"
+        		, "SnuUrl::board/register.snu"
+        		, "in_boardList=ds_boardList:D"
+        		, ""
+        		, "in_var1=" + board_no
+        		, "fn_callback_tran"
+        	);
+        };
+
+        this.popDetail_btn_commentSubmit_onclick = function(obj,e)
+        {
+
+        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	this.transaction(
+        		"tr_cRegister"
+        		, "SnuUrl::comments/changeComments.snu"
+        		, "in_comments=ds_comments:U"
+        		, ""
+        		, "in_var1=" + board_no
+        	);
+        };
+
+        this.popDetail_onpopup = function(obj,e)
+        {
+
+        	this.commentsList();
+
+        };
+
+        this.popDetail_edt_comment_oneditclick = function(obj,e)
+        {
+        	var d = new Date();
+        	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+        	this.ds_comments.addRow();
+        	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
+        };
+
+        // var sCode = nexacro.getEnvironmentVariable("ev_Val");
+        var sCode = "S001";
+        this.commentsList = function(currentboardNo)
+        {
+        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	this.transaction(
+        		"tr_cList"
+        		, "SnuUrl::comment/list.snu"
+        		, ""
+        		,"ds_comments=out_comments" // 4.OutDs : S->F jsp(SELECT)
+        		,"in_var1="+board_no+" in_var2="+sCode // 5.InVar : F->S(var)
+        	);
+        }
+
+        this.popDetail_btn_cRemove_onclick = function(obj,e)
+        {
+        	this.ds_comments.deleteRow(this.ds_comments.rowposition);
+        	var comment_no = this.ds_comments.getColumn(e.row, "comment_no");
+        	this.transaction(
+        		"tr_cRemove"
+        		, "SnuUrl::comments/changeComments.snu"
+        		, "in_comments=ds_comments:D"
+        		, ""
+        		, "in_var1=" + comment_no
+        		, "fn_callback_tran"
+        	);
+        };
+
+        this.popDetail_grd_comment_oncelldblclick = function(obj,e)
+        {
+        	var comment = this.popDetail.form.edt_comment;
+        	comment.set_value("");
+        	var nRow = this.ds_comments.rowposition;
+        	this.popDetail.form.popComments.trackPopupByComponent(obj, 100, 100, 270, 100);
+        	currentCommentNo = e.row;
+
+        };
+
+        this.popDetail_popComments_Button00_onclick = function(obj,e)
+        {
+        	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
+        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	trace(comment_no);
+        	trace(board_no);
+        	this.transaction(
+        		  "tr_cUpdate"
+        		, "SnuUrl::comments/changeComments.snu"
+        		, "in_comments=ds_comments:U"
+        		, ""
+        		, "in_var1=" + comment_no
+        		, "fn_callback_tran"
+        	);
+        };
+
         });
         
         // Regist UI Components Event
@@ -354,18 +545,26 @@
             this.addEventHandler("onload",this.frm_board_onload,this);
             this.grd_boardList.addEventHandler("oncelldblclick",this.grd_boardList_oncelldblclick,this);
             this.btn_boardWrite.addEventHandler("onclick",this.btn_boardWrite_onclick,this);
+            this.popDetail.addEventHandler("onpopup",this.popDetail_onpopup,this);
             this.popDetail.form.Static00.addEventHandler("onclick",this.Static00_onclick,this);
+            this.popDetail.form.edt_boardWriteDate.addEventHandler("onchanged",this.popDetail_edt_boardWriteDate_onchanged,this);
             this.popDetail.form.Static04.addEventHandler("onclick",this.Static04_onclick,this);
             this.popDetail.form.Static00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.popDetail.form.Static00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.popDetail.form.Static00_00_01.addEventHandler("onclick",this.Static00_onclick,this);
             this.popDetail.form.Static00_00_01_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.popDetail.form.Static00_00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
-            this.popDetail.form.btn_commentSubmit.addEventHandler("onclick",this.btn_commentSubmit_onclick,this);
+            this.popDetail.form.btn_commentSubmit.addEventHandler("onclick",this.popDetail_btn_commentSubmit_onclick,this);
+            this.popDetail.form.edt_comment.addEventHandler("onsetfocus",this.popDetail_edt_comment_onsetfocus,this);
+            this.popDetail.form.edt_comment.addEventHandler("oneditclick",this.popDetail_edt_comment_oneditclick,this);
             this.popDetail.form.btn_update.addEventHandler("onclick",this.popDetail_btn_update_onclick,this);
             this.popDetail.form.btn_popUpBack.addEventHandler("onclick",this.popDetail_btn_popUpBack_onclick,this);
-            this.popDetail.form.btn_remove.addEventHandler("onclick",this.btn_remove_onclick,this);
+            this.popDetail.form.btn_remove.addEventHandler("onclick",this.popDetail_btn_remove_onclick,this);
             this.popDetail.form.btn_popUpClose.addEventHandler("onclick",this.popDetail_btn_popUpClose_onclick,this);
+            this.popDetail.form.grd_comment.addEventHandler("oncelldblclick",this.popDetail_grd_comment_oncelldblclick,this);
+            this.popDetail.form.btn_cRemove.addEventHandler("onclick",this.popDetail_btn_cRemove_onclick,this);
+            this.popDetail.form.popComments.form.Edit00.addEventHandler("onchanged",this.popDetail_popComments_Edit00_onchanged,this);
+            this.popDetail.form.popComments.form.Button00.addEventHandler("onclick",this.popDetail_popComments_Button00_onclick,this);
         };
         this.loadIncludeScript("frm_board.xfdl");
         this.loadPreloadList();

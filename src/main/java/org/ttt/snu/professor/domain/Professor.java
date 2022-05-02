@@ -1,6 +1,5 @@
 package org.ttt.snu.professor.domain;
 
-import java.sql.Date;
 
 public class Professor {
 	

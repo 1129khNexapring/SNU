@@ -120,11 +120,17 @@
             obj.set_taborder("14");
             obj.set_borderRadius("4px");
             obj.set_edge("");
+            obj.set_visible("false");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_addFile","685","495","55","20",null,null,null,null,null,null,this);
             obj.set_taborder("15");
             obj.set_text("Add File");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00","485","520","140","20",null,null,null,null,null,null,this);
+            obj.set_taborder("16");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -155,6 +161,10 @@
             obj.bind();
 
             obj = new BindItem("item5","ta_boardContent","value","ds_boardList","board_content");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item6","Edit00","value","ds_boardList","board_fileName");
             this.addChild(obj.name, obj);
             obj.bind();
             

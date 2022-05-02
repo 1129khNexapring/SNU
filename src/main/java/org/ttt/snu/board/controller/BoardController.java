@@ -145,21 +145,43 @@ public class BoardController {
 //	}
 	
 	// 강의 게시판 댓글 조회
+//		@RequestMapping(value="/comment/list.snu", method=RequestMethod.POST)
+//		public NexacroResult commentListView(
+//					  @ParamDataSet(name="in_emp") DataSet inEmp
+//					, @ParamVariable(name="in_var1") int inVar1) {
+//			int    nErrorCode  = 0;
+//			String strErrorMsg = "START";
+//			NexacroResult result = new NexacroResult();
+//			List<Comments> commentList = bService.printAllComments(inVar1, "S001");
+//			if(!commentList.isEmpty()) {
+//				nErrorCode  = 0;
+//				strErrorMsg = "SUCC";
+//			}else {
+//				nErrorCode  = -1;
+//				strErrorMsg = "FAIL";
+//			}	
+//			result.addDataSet("out_comments", commentList);
+//			result.addVariable("ErrorCode", nErrorCode);
+//			result.addVariable("ErrorMsg", strErrorMsg);
+//			return result;
+//		}
+		
 		@RequestMapping(value="/comment/list.snu", method=RequestMethod.POST)
-		public NexacroResult commentListView(
-					@ParamVariable(name="in_var1") int boardNo) {
+		public NexacroResult commentsList(
+					  @ParamVariable(name="in_var1") String inVar1
+					, @ParamVariable(name="in_var2") String inVar2) {
 			int    nErrorCode  = 0;
 			String strErrorMsg = "START";
 			NexacroResult result = new NexacroResult();
-			List<Comments> commentList = bService.printAllComments(boardNo);
+			List<Comments> commentList = bService.printAllComments(Integer.parseInt(inVar1), inVar2);
 			if(!commentList.isEmpty()) {
 				nErrorCode  = 0;
 				strErrorMsg = "SUCC";
 			}else {
 				nErrorCode  = -1;
 				strErrorMsg = "FAIL";
-			}
-			result.addDataSet("out_emp", commentList);
+			}	
+			result.addDataSet("out_comments", commentList);
 			result.addVariable("ErrorCode", nErrorCode);
 			result.addVariable("ErrorMsg", strErrorMsg);
 			return result;
@@ -169,12 +191,18 @@ public class BoardController {
 	@RequestMapping(value="/comments/changeComments.snu", method=RequestMethod.POST)
 	public NexacroResult changeComments(
 				    @ParamDataSet(name="in_comments") DataSet inComments
-				  , @ParamVariable(name="in_var1") int board_no) throws Exception {
+				  , @ParamVariable(name="in_var1") String board_no
+				  , @ParamVariable(name="in_var2") String comment_no) throws Exception {
 		NexacroResult result = new NexacroResult();
 		int 	nErrorCode  = 0;
 		String  strErrorMsg = "START";
 		int i;
 		
+		// 강의게시판 삭제
+		for(i = 0; i < inComments.getRemovedRowCount(); i++) {
+				String cId = inComments.getRemovedData(i, "comment_no").toString();
+				bService.removeComments(Integer.parseInt(cId));
+		}
 		
 		// INSERT, UPDATE
 		// RowType에 따라서 INSERT OR UPDATE
@@ -182,19 +210,17 @@ public class BoardController {
 		int uResult = 0;
 		for(i = 0; i < inComments.getRowCount(); i++) {
 			int rowType = inComments.getRowType(i);
-			int    comment_no       = dsGet(inComments, i, "comment_no") != ""
-		             ? Integer.parseInt(dsGet(inComments, i, "comment_no")) : 0;
 			String comment_content = dsGet(inComments, i, "comment_content");
 			String comment_date    = dsGet(inComments, i, "comment_date");
 			String s_code          = dsGet(inComments, i, "s_code");
 			String p_code          = dsGet(inComments, i, "p_code");
 			Comments comments = new Comments(
-						 	comment_no
+						 	Integer.parseInt(comment_no)
 						,	comment_content
 						,	comment_date
 						, 	s_code
 						, 	p_code
-						, 	board_no);
+						, 	Integer.parseInt(board_no));
 			if(rowType == DataSet.ROW_TYPE_INSERTED) {
 				iResult += bService.registerComments(comments);
 			}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
