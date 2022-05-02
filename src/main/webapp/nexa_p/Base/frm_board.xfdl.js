@@ -500,13 +500,13 @@
         this.popDetail_btn_cRemove_onclick = function(obj,e)
         {
         	this.ds_comments.deleteRow(this.ds_comments.rowposition);
-        	var comment_no = this.ds_comments.getColumn(e.row, "comment_no");
+        	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
         	this.transaction(
         		"tr_cRemove"
         		, "SnuUrl::comments/changeComments.snu"
         		, "in_comments=ds_comments:D"
         		, ""
-        		, "in_var1=" + comment_no
+        		, "in_var2=" + comment_no
         		, "fn_callback_tran"
         	);
         };
@@ -532,7 +532,7 @@
         		, "SnuUrl::comments/changeComments.snu"
         		, "in_comments=ds_comments:U"
         		, ""
-        		, "in_var1=" + comment_no
+        		, "in_var1="+board_no+" in_var2="+comment_no
         		, "fn_callback_tran"
         	);
         };

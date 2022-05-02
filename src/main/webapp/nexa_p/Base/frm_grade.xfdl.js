@@ -20,6 +20,16 @@
             obj = new Dataset("ds_grade", this);
             obj._setContents("<ColumnInfo><Column id=\"Column0\" type=\"STRING\" size=\"256\"/><Column id=\"학생이름\" type=\"STRING\" size=\"256\"/><Column id=\"과목명\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("Dataset00", this);
+            obj._setContents("");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("Dataset01", this);
+            obj._setContents("");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Grid("grd_grade","60","40","970","370",null,null,null,null,null,null,this);

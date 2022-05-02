@@ -4,7 +4,7 @@
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
         <Static id="static_00" taborder="0" text="담당 교과목" left="83" top="93" width="120" height="35" border="1px solid lightgray" borderRadius="4px" textAlign="center" font="normal 10pt/normal &quot;Arial&quot;"/>
-        <Grid id="grd_lectureList" taborder="1" left="63" top="135" width="977" height="105" binddataset="ds_lecture" autofittype="col" cursor="pointer" oncellclick="grd_lectureList_oncellclick">
+        <Grid id="grd_lectureList" taborder="1" left="63" top="135" width="977" height="105" binddataset="ds_lecture" autofittype="col" cursor="pointer" oncellclick="grd_lectureList_oncellclick" onheadclick="grd_lectureList_onheadclick">
           <Formats>
             <Format id="default">
               <Columns>
@@ -51,7 +51,7 @@
         <Static id="Static00" taborder="2" text="&gt;" left="65" top="95" width="18" height="30" onclick="Static00_onclick" font="bold 12px/normal &quot;Gulim&quot;"/>
         <Static id="static_00_00" taborder="3" text="출석부" left="83" top="272" width="120" height="35" border="1px solid lightgray" borderRadius="4px" textAlign="center" font="normal 10pt/normal &quot;Arial&quot;" onclick="static_00_00_onclick"/>
         <Static id="Static00_00" taborder="4" text="&gt;" left="65" top="274" width="18" height="30" onclick="Static00_onclick" font="bold 12px/normal &quot;Gulim&quot;"/>
-        <Grid id="grd_attList" taborder="5" left="63" top="317" width="307" height="270" binddataset="ds_enrollLectureDomain" autofittype="col" oncellclick="grd_attList_oncellclick">
+        <Grid id="grd_attList" taborder="5" left="63" top="317" width="307" height="270" binddataset="ds_enrollLectureDomain" autofittype="col" oncloseup="grd_attList_oncloseup">
           <Formats>
             <Format id="default">
               <Columns>
@@ -156,6 +156,79 @@ this.btn_attSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
 		)
 };
+
+this.grd_attList_oncloseup = function(obj:nexacro.Grid,e:nexacro.GridEditEventInfo)
+{
+	this.alert(this.grd_attList.getCellText(2, e.cell));
+};
+
+this.grd_lectureList_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fn_CheckAll(obj, e);
+	this.fn_sort(obj, e);
+};
+
+this.fn_CheckAll = function(obj, e)
+	{
+		if(obj.getCellProperty("head", e.cell, "displaytype")=="checkboxcontrol")
+		{
+			var objDs = obj.getBindDataset();
+			var nVal = obj.getCellText(-1, e.cell);
+			nVal = (nVal=="1"?"0":"1");
+			
+			// Head
+			obj.setCellProperty("Head", e.cell, "text", nVal);
+			// Body
+			for(var i=0; i<this.ds_lecture.getRowCount(); i++)
+			{
+				objDs.setColumn(i, "lCode", nVal);
+			}
+		}
+		this.fn_sort(obj, e);
+	}
+	
+this.CONST_ASC_MARK = "↑";
+this.CONST_DESC_MARK = "↓";
+this.nPrevCell = -1;
+this.fn_sort = function(obj, e)
+{
+	if(obj.getCellProperty("head",e.cell, "displaytype")=="checkboxcontrol") return;
+	//Column ID -> bind:ColumnID -> split
+	var ObjDs = obj.getBindDataset();
+	var sColId = obj.getCellProperty("body", e.cell, "text").split(":");
+	
+	var HeadText ="";
+	var sKeyString = "";
+	var HeadVal = obj.getCellText(-1, e.cell);
+	var HeadMark = HeadVal.substr(HeadVal.length-1);
+
+	if(HeadMark==this.CONST_ASC_MARK) {
+		HeadText = HeadVal.substr(0, HeadVal.length-1) + this.CONST_DESC_MARK;
+		sKeyString = "S:-";
+	} else if(HeadMark==this.CONST_DESC_MARK) {
+		HeadText = HeadVal.substr(0, HeadVal.length-1) + this.CONST_ASC_MARK;
+		sKeyString = "S:+";
+	} else {
+		HeadText = HeadVal + this.CONST_ASC_MARK;
+		sKeyString = "S:+";
+	}
+	
+	obj.setCellProperty("head", e.cell, "text" , HeadText);
+	// this.fn_sort(obj, e)에 정렬된 헤드의 글자색만 빨간색으로 바뀌도록
+	obj.setCellProperty("head", e.cell, "color" , "red");	
+	ObjDs.set_keystring(sKeyString + sColId[1]);
+	
+	if(this.nPrevCell>-1 && this.nPrevCell != e.cell)
+	{
+		var sPrevText = obj.getCellText(-1, this.nPrevCell);
+		obj.setCellProperty("head", this.nPrevCell, "text" , sPrevText.substr(0, sPrevText.length-1));
+		// this.fn_sort(obj, e)에 정렬된 헤드의 글자색만 빨간색으로 바뀌도록(쓰지않으면 클릭한곳은 다 빨간색으로 남음)
+		obj.setCellProperty("head", this.nPrevCell, "color" , "#2f2f2f");
+	}	
+	this.nPrevCell = e.cell;
+};
+
+
 
 ]]></Script>
     <Objects>
