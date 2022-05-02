@@ -3,4 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="AttendanceMapper"></mapper> 
+<mapper namespace="AttendanceMapper">
+	<resultMap type="Lecture" id="LectureResultMap">
+		<id property="lCode"           column="l_CODE"/>
+		<result property="lType"       column="L_TYPE"/>
+		<result property="lName"       column="L_NAME"/>
+		<result property="lObjective"  column="L_OBJECTIVE"/>
+		<result property="lContents"   column="L_CONTENTS"/>
+		<result property="textbook"    column="TEXTBOOK"/>
+		<result property="lDays"       column="L_DAYS"/>
+		<result property="credit"      column="CREDIT"/>
+		<result property="lYear"       column="L_YEAR"/>
+		<result property="lSemester"   column="L_SEMESTER"/>
+		<result property="lCapacity"   column="L_CAPACITY"/>
+		<result property="lStatus"     column="L_STATUS"/>
+		<result property="pCode"       column="P_CODE"/>
+		<result property="dCode"       column="D_CODE"/>
+	</resultMap>
+	<select id="selectAllLectureList" resultMap="LectureResultMap">
+		SELECT L_TYPE, L_NAME, CREDIT, L_DAYS, L_CAPACITY FROM LECTURE
+	</select>
+</mapper> 
