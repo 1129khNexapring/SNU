@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.ttt.snu.attendance.service.logic.AttendanceServiceImpl;
+import org.ttt.snu.enrollLecture.domain.EnrollLecture;
 import org.ttt.snu.lecture.domain.Lecture;
 
+import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 
 @Controller
@@ -35,6 +37,34 @@ public class AttendanceController {
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
+	}
+	
+	// 출석부 조회
+	@RequestMapping(value="/attendance/enLectureList.snu", method=RequestMethod.POST)
+	public NexacroResult enLectureListView(
+				@ParamVariable(name="in_var1") String lCode) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<EnrollLecture> enLectureList = aService.printEnLectureList(lCode);
+		if(!enLectureList.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC"; 
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addDataSet("out_enLectureList", enLectureList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	// 출석부 저장
+	@RequestMapping(value="/attendance/save.snu", method=RequestMethod.POST)
+	public NexacroResult attendanceSave() {
+		
+		return null;
 	}
 	
 }

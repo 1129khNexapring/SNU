@@ -17,6 +17,8 @@
 		<typeAlias type="org.ttt.snu.professor.domain.Professor" alias="Professor"/>
 		<typeAlias type="org.ttt.snu.volunteer.domain.Volunteer" alias="Volunteer"/>
 		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
+		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLecture" alias="EnrollLecture"/>
+		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLectureDomain" alias="EnrollLectureDomain"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml"/>
