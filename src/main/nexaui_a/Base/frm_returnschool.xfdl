@@ -1,8 +1,178 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_returnschool" width="1280" height="720" titletext="New Form">
+  <Form id="frm_returnschool" width="1280" height="720" titletext="New Form" onload="frm_returnschool_onload">
     <Layouts>
-      <Layout height="720" width="1280"/>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="0" left="81" top="65" width="399" height="183" binddataset="ds_rehabilitation" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="88"/>
+                <Column size="60"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="신청번호"/>
+                <Cell col="1" text="학번"/>
+                <Cell col="2" text="이름"/>
+                <Cell col="3" text="신청날짜"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rNum" textAlign="center"/>
+                <Cell col="1" text="bind:sCode" textAlign="center"/>
+                <Cell col="2" text="bind:sCode" displaytype="combotext" combodataset="ds_student" combodatacol="sName" combocodecol="sCode" textAlign="center"/>
+                <Cell col="3" text="bind:rRequestDate" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="" left="500" top="68" width="410" height="579" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학생 정보" left="14" top="6" width="183" height="36" font="normal 700 15pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static01" taborder="1" text="학번" left="14" top="55" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_00" taborder="2" text="이름" left="14" top="120" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_01" taborder="3" text="신청사항" left="14" top="224" width="125" height="36" font="normal bold 15pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static01_02" taborder="4" text="복학년도" left="14" top="300" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_03" taborder="5" text="복학학기" left="14" top="356" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_04" taborder="6" text="복학사유" left="14" top="412" width="83" height="36" textAlign="center"/>
+              <Edit id="Edit00" taborder="7" left="126" top="57" width="101" height="35"/>
+              <Edit id="Edit01" taborder="8" left="126" top="120" width="101" height="35"/>
+              <Edit id="Edit02" taborder="9" left="126" top="300" width="101" height="35"/>
+              <Edit id="Edit03" taborder="10" left="126" top="362" width="101" height="35"/>
+              <TextArea id="TextArea00" taborder="11" left="126" top="421" width="255" height="141"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_appRehab" taborder="2" text="승인" left="501" top="655" width="123" height="39" onclick="btn_appRehab_onclick"/>
+        <Button id="btn_rejectRehab" taborder="3" text="반려" left="791" top="655" width="123" height="39" onclick="btn_rejectRehab_onclick"/>
+      </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[//폼이 로드됐을 때 복학리스트, 학생리스트 가져오기
+this.frm_returnschool_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+	"tr_rsList"
+	,"SnuURL::returnschool/list.snu"
+	,""
+	,"ds_rehabilitation=out_reList ds_student=out_sList"
+	,""
+	,"fn_callback_rs"
+	)
+};
+
+
+this.fn_callback_rs = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_reList")
+	{
+		
+	}
+	if(id=="tr_appRehab")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+			return;
+		}
+		this.alert(sErrorMsg);
+	}
+}
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nRow = this.ds_rehabilitation.rowposition;
+	var sCode = this.ds_rehabilitation.getColumn(nRow, "sCode");
+	var sName="";
+	var sRow = this.ds_student.getRowCount();
+	for(var i = 0; i<sRow; i++)
+	{
+		if(this.ds_student.getColumn(i, "sCode") == sCode)
+		{
+			this.Div00.form.Edit01.set_value(this.ds_student.getColumn(i, "sName"));
+		}
+	}
+};
+
+
+	
+this.btn_appRehab_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rtn = this.confirm("승인하시겠습니까?", "승인 창");
+	if(rtn == true)
+	{
+		var lRow = this.ds_rehabilitation.rowposition
+		var sCode = this.ds_rehabilitation.getColumn(lRow, "sCode");
+		this.transaction(
+		"tr_appRehab"
+		,"SnuURL::rehabilitation/approve.snu"
+		,""
+		,""
+		,"in_Var1="+sCode+""
+		,"fn_callback_rs"
+		)
+	}
+};
+//복학반려 -> 반려작성 팝업창을 띄운다.
+this.btn_rejectRehab_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_rehabilitation.rowposition;
+	var objParam = {sCode : this.ds_rehabilitation.getColumn(nRow, "sCode")
+					,rMsg : this.ds_rehabilitation.getColumn(nRow, "rMsg")};
+	var nLeft = system.clientToScreenX(this,10);
+	var nTop =  system.clientToScreenY(this,10);
+	var objChild = new ChildFrame("popRehabReturnMsg", nLeft, nTop, 350, 350);
+	objChild.set_formurl("Popup::rehabReturnMsg.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popRehabCallback");
+					
+};
+
+this.fn_popRehabCallback = function(strPopId, strReturn)
+{
+	
+}
+]]></Script>
+    <Objects>
+      <Dataset id="ds_rehabilitation">
+        <ColumnInfo>
+          <Column id="rNum" type="INT" size="256"/>
+          <Column id="rReason" type="STRING" size="256"/>
+          <Column id="rSemester" type="INT" size="256"/>
+          <Column id="rYear" type="INT" size="256"/>
+          <Column id="rStatus" type="STRING" size="256"/>
+          <Column id="rRequestDate" type="STRING" size="256"/>
+          <Column id="rMsg" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="sRrn" type="STRING" size="256"/>
+          <Column id="sPassword" type="STRING" size="256"/>
+          <Column id="sAddress" type="STRING" size="256"/>
+          <Column id="sEmail" type="STRING" size="256"/>
+          <Column id="sGender" type="STRING" size="256"/>
+          <Column id="sPhone" type="STRING" size="256"/>
+          <Column id="sAddmission" type="STRING" size="256"/>
+          <Column id="absenceYN" type="STRING" size="256"/>
+          <Column id="transferYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_rehabilitation" columnid="sCode"/>
+      <BindItem id="item1" compid="Div00.form.Edit02" propid="value" datasetid="ds_rehabilitation" columnid="rYear"/>
+      <BindItem id="item2" compid="Div00.form.Edit03" propid="value" datasetid="ds_rehabilitation" columnid="rSemester"/>
+      <BindItem id="item3" compid="Div00.form.TextArea00" propid="value" datasetid="ds_rehabilitation" columnid="rReason"/>
+    </Bind>
   </Form>
 </FDL>

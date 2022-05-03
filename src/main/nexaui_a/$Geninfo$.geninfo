@@ -27,20 +27,22 @@
       <File url="Base\frm_notice.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="Base\frm_professor.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\frm_reservist.xfdl" checksum="20220429091057" errormsg=""/>
-      <File url="Base\frm_returnschool.xfdl" checksum="20220429091055" errormsg=""/>
+      <File url="Base\frm_returnschool.xfdl" checksum="20220502153603" errormsg=""/>
       <File url="Base\frm_scholarship.xfdl" checksum="20220430192907" errormsg=""/>
       <File url="Base\frm_schoolmsg.xfdl" checksum="20220429091057" errormsg=""/>
       <File url="Base\frm_schoolschedule.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\frm_student.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\frm_suggestion.xfdl" checksum="20220429091057" errormsg=""/>
       <File url="Base\frm_swsession.xfdl" checksum="20220429091056" errormsg=""/>
-      <File url="Base\frm_transfermajor.xfdl" checksum="20220429091055" errormsg=""/>
+      <File url="Base\frm_transfermajor.xfdl" checksum="20220502174747" errormsg=""/>
       <File url="Base\frm_volunteer.xfdl" checksum="20220429091057" errormsg=""/>
       <File url="FrameBase\Form_Left.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Top.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Work.xfdl" checksum="20220429091055" errormsg=""/>
-      <File url="Popup\loaReturnMsg.xfdl" checksum="20220501233601" errormsg=""/>
+      <File url="Popup\loaReturnMsg.xfdl" checksum="20220502122901" errormsg=""/>
+      <File url="Popup\rehabReturnMsg.xfdl" checksum="20220502123123" errormsg=""/>
+      <File url="Popup\TransferReturnMsg.xfdl" checksum="20220503151948" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

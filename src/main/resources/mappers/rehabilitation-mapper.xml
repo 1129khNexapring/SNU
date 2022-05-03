@@ -14,9 +14,37 @@
 		<result property="rMsg" column="R_MSG"/>
 		<result property="sCode" column="S_CODE"/>
 	</resultMap>
+	<resultMap type="org.ttt.snu.student.domain.Student" id="studentResultMap">
+		<id property="sCode" column="S_CODE"/>
+		<result property="sName" column="S_NAME"/>
+		<result property="sRrn" column="S_RRN"/>
+		<result property="sPassword" column="S_PASSWORD"/>
+		<result property="sAddress" column="S_ADDRESS"/>
+		<result property="sEmail" column="S_EMAIL"/>
+		<result property="sGender" column="S_GENDER"/>
+		<result property="sPhone" column="S_PHONE"/>
+		<result property="sAddmission" column="S_ADDMISSION"/>
+		<result property="absenceYN" column="ABSENCE_YN"/>
+		<result property="transferYN" column="TRANSFER_YN"/>
+		<result property="dCode" column="D_CODE"/>
+	</resultMap>
 	
 	<insert id = "requestRehab">
 		INSERT INTO REHABILITATION VALUES(REHAB_SEQ.NEXTVAL, #{rReason}, #{rSemester}, #{rYear}, DEFAULT, #{rRequestDate}, #{rMsg}, #{sCode} )
 	</insert>
+	
+	<select id="printStudent" resultMap="studentResultMap">
+		SELECT S_CODE, S_NAME FROM STUDENT
+	</select>
+	
+	<select id="printRehabilitationList" resultMap="rehabResultMap">
+		SELECT * FROM REHABILITATION WHERE R_STATUS = 'N'
+	</select>
+	<update id="approveRehabilitation">
+		UPDATE REHABILITATION SET R_STATUS = 'Y' WHERE S_CODE = #{sCode }
+	</update>
+	<update id="updateRehabMsg">
+		UPDATE REHABILITATION SET R_MSG = #{rMsg } WHERE S_CODE = #{sCode }
+	</update>
 
 </mapper>

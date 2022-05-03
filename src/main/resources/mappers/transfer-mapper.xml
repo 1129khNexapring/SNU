@@ -4,6 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="TransferMapper">
+	<resultMap type="org.ttt.snu.transfer.domain.Transfer" id="transferResultMap">
+		<id property="tNo" 				column="T_NO"/>
+		<result property="tRequestDate" column="T_REQUEST_DATE"/>
+		<result property="tStatus" 		column="T_STATUS"/>
+		<result property="tMsg" 		column="T_MSG"/>
+		<result property="sCode" 		column="S_CODE"/>
+		<result property="dCode" 		column="D_CODE"/>
+		<result property="tdCode" 		column="TD_CODE"/>
+	</resultMap>
+
 	<resultMap type="org.ttt.snu.student.domain.Student"
 		id="studentResultMap">
 		<id property="sCode" column="S_CODE" />
@@ -29,10 +39,6 @@
 		<result property="dCapacity" column="D_CAPACITY" />
 	</resultMap>
 	
-
-
-
-
 	<select id="selectAllDept"
 		parameterType="org.ttt.snu.department.domain.Department"
 		resultMap="departmentResultMap">
@@ -50,4 +56,19 @@
 	<!-- 전과번호, 전과신청일, 전과상태, 반려사유, 학생코드, 학과코드, 희망학과코드 -->
 		INSERT INTO TRANSFER VALUES(TRAN_SEQ.NEXTVAL, DEFAULT, DEFAULT, #{tMsg}, #{sCode}, #{dCode}, #{tdCode})
 	</insert>
+	
+	<select id="selectStudentList" resultMap="studentResultMap">
+		SELECT S_CODE, S_NAME FROM STUDENT
+	</select>
+	
+	<select id="selectTransferList" resultMap="transferResultMap">
+		SELECT * FROM TRANSFER WHERE T_STATUS = 'N'
+	</select>
+	<update id="approveTransfer">
+		UPDATE TRANSFER SET T_STATUS = 'Y' WHERE S_CODE = #{sCode }
+	</update>
+	<update id="rejectTransfer">
+		UPDATE TRANSFER SET T_MSG = #{tMsg } WHERE S_CODE = #{sCode }
+	</update>
+
 </mapper>

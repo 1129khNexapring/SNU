@@ -29,5 +29,30 @@ public class TransferStoreLogic implements TransferStore{
 		int result = sqlSession.insert("TransferMapper.requestTransfer", transfer);
 		return result;
 	}
+	//관리자 학생-전체출력
+	@Override
+	public List<Student> selectStudent(SqlSession sqlSession) {
+		List<Student> sList = sqlSession.selectList("TransferMapper.selectStudentList");
+		return sList;
+	}
+	//관리자 전과 리스트 출력
+	@Override
+	public List<Transfer> selectTransferList(SqlSession sqlSession) {
+		List<Transfer> trList = sqlSession.selectList("TransferMapper.selectTransferList");
+		return trList;
+	}
+	//관리자-전과승인
+	@Override
+	public int updateStatus(SqlSession sqlSession, Transfer transfer) {
+		int uResult = sqlSession.update("TransferMapper.approveTransfer", transfer);
+		return uResult;
+	}
+	//관리자-전과반려
+	@Override
+	public int updateMsg(SqlSession sqlSession, Transfer transfer) {
+		int uResult = sqlSession.update("TransferMapper.rejectTransfer", transfer);
+		System.out.println(uResult);
+		return uResult;
+	}
 
 }
