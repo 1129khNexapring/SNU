@@ -45,5 +45,6 @@
 		<mapper resource="mappers/department-mapper.xml"/>
 		<mapper resource="mappers/requestScholarship-mapper.xml"/>
 		<mapper resource="mappers/loa-mapper.xml"/>
+		<mapper resource="mappers/rehabilitation-mapper.xml"/>
 	</mappers>
 </configuration>

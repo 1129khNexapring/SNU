@@ -15,4 +15,12 @@ public interface TransferStore {
 
 	int requestTran(SqlSession sqlSession, Transfer transfer);
 
+	List<Student> selectStudent(SqlSession sqlSession);
+
+	List<Transfer> selectTransferList(SqlSession sqlSession);
+
+	int updateStatus(SqlSession sqlSession, Transfer transfer);
+
+	int updateMsg(SqlSession sqlSession, Transfer transfer);
+
 }

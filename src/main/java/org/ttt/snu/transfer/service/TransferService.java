@@ -14,5 +14,13 @@ public interface TransferService {
 
 	int requestTransfer(Transfer transfer);
 
+	List<Student> printStudentName();
+
+	List<Transfer> printTrList();
+
+	int modifyStatus(Transfer transfer);
+
+	int modifyMsg(Transfer transfer);
+
 
 }
