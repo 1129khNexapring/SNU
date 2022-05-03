@@ -26,7 +26,7 @@
       <File url="Base\frm_absenceschool.xfdl" checksum="20220501223017" errormsg=""/>
       <File url="Base\frm_notice.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="Base\frm_professor.xfdl" checksum="20220429091056" errormsg=""/>
-      <File url="Base\frm_reservist.xfdl" checksum="20220429091057" errormsg=""/>
+      <File url="Base\frm_reservist.xfdl" checksum="20220504030840" errormsg=""/>
       <File url="Base\frm_returnschool.xfdl" checksum="20220502153603" errormsg=""/>
       <File url="Base\frm_scholarship.xfdl" checksum="20220430192907" errormsg=""/>
       <File url="Base\frm_schoolmsg.xfdl" checksum="20220429091057" errormsg=""/>
