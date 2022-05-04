@@ -42,5 +42,15 @@ public class LoaStoreLogic implements LoaStore {
 		int result = sqlSession.update("LoaMapper.updateloaMsg", loa);
 		return result;
 	}
+	@Override
+	public List<Loa> selectLoaList(SqlSession sqlSession, String sCode) {
+		List<Loa> slList = sqlSession.selectList("LoaMapper.selectLoa", sCode); 
+		return slList;
+	}
+	@Override
+	public int deleteLoa(SqlSession sqlSession, String lDelete) {
+		int result = sqlSession.delete("LoaMapper.deleteLoa", lDelete);
+		return result;
+	}
 
 }

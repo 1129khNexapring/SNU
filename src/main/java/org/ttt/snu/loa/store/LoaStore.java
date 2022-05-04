@@ -18,4 +18,8 @@ public interface LoaStore {
 
 	int updateMsg(SqlSession sqlSession, Loa loa);
 
+	List<Loa> selectLoaList(SqlSession sqlSession, String sCode);
+
+	int deleteLoa(SqlSession sqlSession, String lDelete);
+
 }

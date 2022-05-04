@@ -14,5 +14,7 @@ public interface TransferService {
 
 	int requestTransfer(Transfer transfer);
 
+	List<Transfer> moveList(String sCode);
+
 
 }

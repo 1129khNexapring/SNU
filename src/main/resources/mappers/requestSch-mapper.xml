@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RequestSchMapper">
+	<resultMap type="org.ttt.snu.requestSch.domain.RequestSch" id="requestSchResultMap">
+		<id property="sCode"		column="S_CODE"/>
+		<result property="scCode" 	column="SC_CODE"/>
+	</resultMap>
+	
+	<insert id="requestSch">
+		INSERT INTO REQUEST_SCHOLARSHIP VALUES(#{sCode}, #{scCode})
+	</insert>
+</mapper>

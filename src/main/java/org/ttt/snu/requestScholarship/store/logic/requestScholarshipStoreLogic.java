@@ -15,5 +15,5 @@ public class requestScholarshipStoreLogic implements requestScholarshipStore {
 		List<RequestScholarship> rsList = sqlSession.selectList("requestScholarshipMapper.selectScholarshipStudent", inVar1);
 		return rsList;
 	}
-	
+
 }

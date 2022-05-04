@@ -9,4 +9,5 @@ public interface requestScholarshipStore {
 	//해당 장학금 학생 리스트 출력
 	List<RequestScholarship> selectStudentList(SqlSession sqlSession, String inVar1);
 
+
 }

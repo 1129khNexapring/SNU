@@ -40,5 +40,16 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 		int uResult = scStore.updateScholarship(sqlSession, scholarship);
 		return uResult;
 	}
+	@Override
+	public List<Scholarship> printAllSch() {
+		List<Scholarship> schList = scStore.selectSch(sqlSession);
+		return schList;
+	}
+	//신청한 장학금리스트 출력
+	@Override
+	public List<Scholarship> printRequestSch(String sCode) {
+		List<Scholarship> schList = scStore.selectRequestSch(sqlSession, sCode);
+		return schList;
+	}
 
 }

@@ -14,4 +14,8 @@ public interface ScholarshipService {
 
 	int modifyScholarship(Scholarship scholarship);
 
+	List<Scholarship> printAllSch();
+
+	List<Scholarship> printRequestSch(String sCode);
+
 }

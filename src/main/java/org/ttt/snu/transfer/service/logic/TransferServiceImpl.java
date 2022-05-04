@@ -38,4 +38,10 @@ public class TransferServiceImpl implements TransferService {
 		return result;
 	}
 
+	@Override
+	public List<Transfer> moveList(String sCode) {
+		List<Transfer> tList = tStore.requestMoveList(sqlSession, sCode);
+		return tList;
+	}
+
 }

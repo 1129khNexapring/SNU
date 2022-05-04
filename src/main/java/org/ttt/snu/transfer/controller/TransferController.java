@@ -68,6 +68,26 @@ public class TransferController {
 		return result;
 	}
 	
+	@RequestMapping(value="/request/movelist.snu", method=RequestMethod.POST)
+	public NexacroResult moveList(
+			@ParamVariable(name="inVar1") String sCode)  {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Transfer> tList = tService.moveList(sCode);
+		if(!tList.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addDataSet("out_tran", tList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
 	@RequestMapping(value="/requestTran/list.snu", method=RequestMethod.POST)
 	public NexacroResult requestTransfer(
 			@ParamDataSet(name="in_tran") DataSet inTran) throws Exception {

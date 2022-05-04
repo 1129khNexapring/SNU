@@ -16,5 +16,8 @@ public interface LoaService {
 	int modifyStatus(Loa loa);
 	//관리자 휴학반려
 	int modifyMsg(Loa loa);
+	//학생 휴학신청리스트
+	List<Loa> printLoa(String sCode);
+	int removeLoa(String lDelete);
 
 }

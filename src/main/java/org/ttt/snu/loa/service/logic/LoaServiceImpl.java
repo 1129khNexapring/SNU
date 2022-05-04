@@ -50,4 +50,16 @@ public class LoaServiceImpl implements LoaService {
 		return result;
 	}
 
+	@Override
+	public List<Loa> printLoa(String sCode) {
+		List<Loa> slList = lStore.selectLoaList(sqlSession, sCode);
+		return slList;
+	}
+
+	@Override
+	public int removeLoa(String lDelete) {
+		int result = lStore.deleteLoa(sqlSession, lDelete);
+		return result;
+	}
+
 }

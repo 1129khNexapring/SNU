@@ -42,7 +42,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Grid("Grid00","70","20","800","440",null,null,null,null,null,null,this);
+            obj = new Grid("Grid00","70","27","800","440",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("ds_dept");
             obj._setContents("<Formats><Format id=\"default\"/></Formats>");
@@ -186,7 +186,7 @@
         			,"tttUrl::requestTran/list.snu"
         			,"in_tran=ds_tran:U"
         			,""
-        			,""
+        			,"inVar1="
         			,"fn_callback_tran"
         		)
         };
