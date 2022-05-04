@@ -34,8 +34,8 @@ public class LectureServiceImpl implements LectureService{
 	//관리자 - 미승인 계획서 조회
 	@Override
 	public List<Lecture> printAllNLecture(Lecture lecture) {
-		List<Lecture> YList = lStore.selectAllNLectures(sqlSession, lecture);
-		return YList;
+		List<Lecture> NList = lStore.selectAllNLectures(sqlSession, lecture);
+		return NList;
 	}
 	//관리자 - 계획승인
 	@Override

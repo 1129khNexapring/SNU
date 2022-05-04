@@ -6,6 +6,7 @@ import java.sql.ResultSetMetaData;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.ttt.snu.admin.domain.Admin;
 import org.ttt.snu.admin.service.AdminService;
 import org.ttt.snu.professor.domain.Professor;
@@ -42,7 +44,9 @@ public class AdminController {
 							,@RequestParam("admin_pwd") String aPassword) {		
 		admin.setaCode(aCode);
 		admin.setaPassword(aPassword);
+		HttpSession session = request.getSession();
 		Admin loginUser = aService.checklogin(admin);
+		session.setAttribute("loginUser", loginUser);
 		if(loginUser != null) {
 			Gson gson = new GsonBuilder().create();
 			return gson.toJson(loginUser);
@@ -52,6 +56,15 @@ public class AdminController {
 		
 		
 	}
+	
+	@RequestMapping("/logout")
+    public ModelAndView logout(HttpSession session) {
+        session.invalidate();
+        ModelAndView mv = new ModelAndView("redirect:/");
+        return mv;
+    }
+
+
 	// 관리자 학생 리스트 조회
 	@RequestMapping(value="/student/list.snu", method=RequestMethod.GET)
 	public NexacroResult printStudent() {

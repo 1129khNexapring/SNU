@@ -15,6 +15,9 @@
 		<typeAlias type="org.ttt.snu.lecture.domain.Lecture" alias="Lecture"/>
 		<typeAlias type="org.ttt.snu.admin.domain.Admin" alias="Admin"/>
 		<typeAlias type="org.ttt.snu.professor.domain.Professor" alias="Professor"/>
+		<typeAlias type="org.ttt.snu.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="org.ttt.snu.info.domain.Info" alias="Info"/>
+		<typeAlias type="org.ttt.snu.academicCaldedar.domain.AcademicCalendar" alias="AcademicCalendar"/>
 		<typeAlias type="org.ttt.snu.volunteer.domain.Volunteer" alias="Volunteer"/>
 		<typeAlias type="org.ttt.snu.transfer.domain.Transfer" alias="Transfer"/>
 		<typeAlias type="org.ttt.snu.scholarship.domain.Scholarship" alias="Scholarship"/>
@@ -28,6 +31,7 @@
 		<typeAlias type="org.ttt.snu.student.domain.Student" alias="Student"/>
 		<typeAlias type="org.ttt.snu.book.domain.Book" alias="Book"/>
 		<typeAlias type="org.ttt.snu.loa.domain.Loa" alias="Loa"/>
+		<typeAlias type="org.ttt.snu.reserveforce.domain.Reserveforce" alias="Reserveforce"/>
 		
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
 		<typeAlias type="org.ttt.snu.requestSch.domain.RequestSch" alias="RequestSch"/>
@@ -47,6 +51,9 @@
 		<mapper resource="mappers/lecture-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/professor-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/info-mapper.xml"/>
+		<mapper resource="mappers/academicCalendar-mapper.xml"/>
 		<mapper resource="mappers/volunteer-mapper.xml"/>
 		<mapper resource="mappers/transfer-mapper.xml"/>
 		<mapper resource="mappers/scholarship-mapper.xml"/>
@@ -54,7 +61,9 @@
 		<mapper resource="mappers/requestScholarship-mapper.xml"/>
 		<mapper resource="mappers/requestSch-mapper.xml"/>
 		<mapper resource="mappers/loa-mapper.xml"/>
+
 		<mapper resource="mappers/reserveforce-mapper.xml"/>
 		<mapper resource="mappers/rehabilitation-mapper.xml"/>
+
 	</mappers>
 </configuration>

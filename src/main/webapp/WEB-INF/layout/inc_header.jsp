@@ -14,7 +14,7 @@
             <li><a href="#" target="_blank">상남대 소개</a></li>
             <li><a href="#" target="_blank">입학안내</a></li>
             <li><a href="#" target="_blank">대학★대학원</a></li>
-            <li><a href="#" target="_blank">공지사항</a></li>
+            <li><a href="/notice/list.snu" >공지사항</a></li>
         </ul>
     </nav>
 </body>

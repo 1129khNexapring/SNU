@@ -133,6 +133,76 @@ public class TransferController {
 		return result;
 	}
 
+	//관리자 전과요청리스트 조회
+	@RequestMapping(value="/transfer/list.snu", method=RequestMethod.GET)
+	public NexacroResult printAllRequestTransfer() {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		List<Student> sList = tService.printStudentName();
+		List<Transfer> tList = tService.printTrList();
+		List<Department> dList = tService.printAllDept();
+		if(!sList.isEmpty() && !tList.isEmpty() && !dList.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_dList", dList);
+		result.addDataSet("out_tList", tList);
+		result.addDataSet("out_sList", sList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	//관리자 전과 승인
+	@RequestMapping(value="/transfer/approve.snu", method=RequestMethod.POST)
+	public NexacroResult approveTransfer(
+			@ParamVariable(name="in_Var1") String inVar1){
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		Transfer transfer = new Transfer();
+		transfer.setsCode(inVar1);
+		int uResult = tService.modifyStatus(transfer);
+		if(uResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "승인이 완료됐습니다!";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "오류가 발생했습니다";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	//관리자 전과 반려
+	@RequestMapping(value="/transfer/updateMsg.snu", method=RequestMethod.POST)
+	public NexacroResult rejectTransfer(
+			@ParamVariable(name="in_Var1") String inVar1
+		   ,@ParamVariable(name="in_Var2") String inVar2) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		Transfer transfer = new Transfer();
+		transfer.setsCode(inVar1);
+		transfer.settMsg(inVar2);
+		int uResult = tService.modifyMsg(transfer);
+		if(uResult>0) {
+			nErrorCode = 0;
+			strErrorMsg = "성공적으로 메시지가 전송됐습니다!";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "오류가 발생했습니다!";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	
 	public DataSet RsToDs(ResultSet rs, String dsID) throws Exception {
 		int i;
 		int iColCnt;

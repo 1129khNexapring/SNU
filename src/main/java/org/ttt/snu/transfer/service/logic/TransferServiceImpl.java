@@ -37,6 +37,30 @@ public class TransferServiceImpl implements TransferService {
 		int result = tStore.requestTran(sqlSession, transfer);
 		return result;
 	}
+	// 관리자 - 학생이름조회
+	@Override
+	public List<Student> printStudentName() {
+		List<Student> sList =  tStore.selectStudent(sqlSession);
+		return sList;
+	}
+	//관리자-전과리스트 조회
+	@Override
+	public List<Transfer> printTrList() {
+		List<Transfer> trList = tStore.selectTransferList(sqlSession);
+		return trList;
+	}
+	//관리자 - 전과승인
+	@Override
+	public int modifyStatus(Transfer transfer) {
+		int uResult = tStore.updateStatus(sqlSession, transfer);
+		return uResult;
+	}
+	//관리자 - 전과반려
+	@Override
+	public int modifyMsg(Transfer transfer) {
+		int uResult = tStore.updateMsg(sqlSession, transfer);
+		return uResult;
+	}
 
 	@Override
 	public List<Transfer> moveList(String sCode) {

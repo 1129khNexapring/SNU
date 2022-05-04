@@ -1,0 +1,12 @@
+1. kh_nexacro
+- docs.tobesoft.com/kh_edu -> 데이터 통신
+- jsp(Servlet 코드 작성) -> 서버 구현,
+  /select_emp.jsp, /save_emp.jsp, /select_code.jsp
+
+2. kh_backxacro
+- jsp -> Servlet로 바꿔서 서버 구현
+- url을 통한 데이터 송수신, /emp/list, /emp/save, /code/list
+
+3. kh_nexapring
+- Servlet -> Controller로 바꿔서 서버 구현
+- /emp/list.nexa, /emp/save.nexa, /code/list.nexa

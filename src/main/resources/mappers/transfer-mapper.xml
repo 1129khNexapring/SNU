@@ -13,6 +13,7 @@
 		<result property="sCode" column="S_CODE" />
 		<result property="dCode" column="D_CODE" />
 		<result property="tdCode" column="TD_CODE" />
+
 	</resultMap>
 
 	<resultMap type="org.ttt.snu.student.domain.Student"
@@ -62,6 +63,7 @@
 		#{tMsg}, #{sCode}, #{dCode}, #{tdCode})
 	</insert>
 
+
 	<select id="selectStudentList" resultMap="studentResultMap">
 		SELECT S_CODE, S_NAME
 		FROM STUDENT
@@ -83,5 +85,6 @@
 		SELECT * FROM TRANSFER
 		WHERE (T_STATUS = 'Y' AND S_CODE = #{sCode})
 	</select>
+
 
 </mapper>

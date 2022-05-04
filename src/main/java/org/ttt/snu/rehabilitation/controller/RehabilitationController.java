@@ -2,6 +2,7 @@ package org.ttt.snu.rehabilitation.controller;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.ttt.snu.rehabilitation.domain.Rehabilitation;
 import org.ttt.snu.rehabilitation.service.RehabilitationService;
+import org.ttt.snu.student.domain.Student;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
@@ -100,6 +102,74 @@ public class RehabilitationController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		result.addVariable("outVar", inVar1);
 		
+		return result;
+	}
+	
+	//관리자 복학신청 리스트 조회&학생전체이름 조회
+	@RequestMapping(value="/returnschool/list.snu", method=RequestMethod.GET)
+	public NexacroResult printAllRequestRehabilitation()
+	{
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		List<Student> sList = rService.printStudentName();
+		List<Rehabilitation> reList = rService.printReList();
+		if(!sList.isEmpty() && !reList.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_sList", sList);
+		result.addDataSet("out_reList", reList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	//관리자 복학 승인
+	@RequestMapping(value="/rehabilitation/approve.snu", method=RequestMethod.POST)
+	public NexacroResult approveRehabilitation(
+			@ParamVariable(name="in_Var1") String inVar1) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		Rehabilitation rehab = new Rehabilitation();
+		rehab.setsCode(inVar1);
+		int uResult = rService.modifyStatus(rehab);
+		if(uResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "승인이 완료됐습니다.";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "오류가 발생했습니다";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	//관리자 복학반려
+	@RequestMapping(value="/rehabilitation/updateMsg.snu", method=RequestMethod.POST)
+	public NexacroResult rejectRehabilitation(
+			 @ParamVariable(name="in_Var1") String inVar1
+			,@ParamVariable(name="in_Var2") String inVar2) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		Rehabilitation rehab = new Rehabilitation();
+		rehab.setsCode(inVar1);
+		rehab.setrMsg(inVar2);
+		int uResult = rService.modifyMsg(rehab);
+		if(uResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "성공적으로 메시지가 전송됐습니다!";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "오류가 발생했습니다!";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 

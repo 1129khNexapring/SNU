@@ -26,8 +26,8 @@ public class LectureStoreLogic implements LectureStore{
 	//관리자-미승인 강의 조회
 	@Override
 	public List<Lecture> selectAllNLectures(SqlSession sqlSession, Lecture lecture) {
-		List<Lecture> YList = sqlSession.selectList("LectureMapper.selectAllNLectures", lecture);
-		return YList;
+		List<Lecture> NList = sqlSession.selectList("LectureMapper.selectAllNLectures", lecture);
+		return NList;
 	}
 	//관리자-계획서승인
 	@Override

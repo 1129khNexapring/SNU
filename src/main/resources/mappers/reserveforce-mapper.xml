@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
   
 <mapper namespace="ReserveforceMapper">
 	<resultMap type="Department" id="departmentResultMap">
@@ -49,6 +50,15 @@
 	<insert id="requestMil">
 		INSERT INTO RESERVEFORCE VALUES(SEQ_RF.NEXTVAL, DEFAULT, #{musterDate}, DEFAULT, #{rfMsg}, #{military}, #{rank}, #{sCode} )
 	</insert>
+<select id="selectRfList" resultMap="reserveforceResultMap">
+		SELECT * FROM RESERVEFORCE WHERE RF_STATUS = 'N'
+	</select>
+	<select id="selectStudent" resultMap="studentResultMap">
+		SELECT * FROM STUDENT
+	</select>
+	<update id="approveReserveforce">
+		UPDATE RESERVEFORCE SET RF_STATUS = 'Y' WHERE S_CODE = #{sCode }
+	</update>
 	
 	<!-- 신청한 예비군 -->
 	<select id="requestMilList" resultMap="reserveforceResultMap">
@@ -57,3 +67,4 @@
 	
 
 </mapper>
+
