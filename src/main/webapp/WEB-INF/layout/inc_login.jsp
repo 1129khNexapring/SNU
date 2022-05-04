@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <div id="container">
+    
         <h2>상남대 학사정보시스템</h2>
         <br><br><br><br><br><br><br><br><br><br>
         <ul class="tab">
