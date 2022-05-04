@@ -30,7 +30,7 @@
 			success : function(loginUser) {
 				if(loginUser != null) {
 					//console.log(loginUser);
-					location.href='/index.jsp?ev_Val='+loginUser.sCode+'&ev_Val1='+loginUser.sName+'';
+					location.href='/nexa_s/index.html?ev_Val='+loginUser.sCode+'&ev_Val1='+loginUser.sName+'';
 
 				}				
 			},
@@ -75,7 +75,7 @@
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-					location.href='/index.jsp?ev_Val='+loginUser.aCode+'';
+					location.href='/nexa_p/index.html?ev_Val='+loginUser.aCode+'';
 					
 				}
 			},

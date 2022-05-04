@@ -11,9 +11,9 @@
 <body>
 	
 	<jsp:include page="../../layout/inc_header.jsp"></jsp:include>
-	<jsp:include page="../../layout/inc_main.jsp"></jsp:include>
+
 	
-	<h1 align="center">공지사항 수정하기</h1>
+	
 
 	<form action="/notice/update.snu" method="post" enctype="multipart/form-data">
 	<input type="hidden"  name="noticeNo"value="${notice.noticeNo }">
@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="noticeWriter" value="${notice.noticeWriter }" readonly></td>
+				<td><input type="hidden" name="noticeWriter" value="${loginUser.aCode }" readonly>${loginUser.aCode }</td>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -42,12 +42,13 @@
 				<td><input type="file" name="reloadFile"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="수정하기">
-				</td>
+			
+					
+				
 				
 			</tr>
 		</table>
+		<input type="submit" value="수정하기" style=float:right>
 	</form>
 		<jsp:include page="../../layout/inc_footer.jsp"></jsp:include>
 </body>

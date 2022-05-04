@@ -10,7 +10,7 @@
 </head>
 <body>
 	<jsp:include page="../../layout/inc_header.jsp"></jsp:include>
-	<jsp:include page="../../layout/inc_main.jsp"></jsp:include>
+	
     	
     	<table align="center" width="600" border="1">
 								<thead>
@@ -56,8 +56,8 @@
 				<c:url var="nDelete" value="/notice/delete.snu">
 					<c:param name="noticeNo" value="${notice.noticeNo }"></c:param>
 				</c:url>
-				<a href="${nModify }">수정</a>
-				<a href="${nDelete }">삭제</a>
+				<a href="${nDelete }" style=float:right>삭제</a>
+				<a href="${nModify }" style=float:right style=padding:10px;>수정</a>
 			</td>
 		</tr>
 	

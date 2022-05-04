@@ -7,9 +7,13 @@
 <meta charset="UTF-8">
 <title>공지사항 페이지</title>
 <link rel="stylesheet" href="/resources/css/layout.css">
+
+<style>
+	
+</style>
 </head>
 <body>
-	<h1>${loginUser.aCode }</h1>
+	
 	<c:if test="${loginUser ne null}">
 					<a href="/logout.snu" > <span></span> 로그아웃
 					</a>
@@ -17,7 +21,7 @@
 
 
 	<jsp:include page="../../layout/inc_header.jsp"></jsp:include>
-	<jsp:include page="../../layout/inc_main.jsp"></jsp:include>
+	
 	
 
 	<table align="center" width="600" border="1">
@@ -41,10 +45,10 @@
 			</tr>
 		</c:forEach>
 	</table>
-	 <c:if test="${loginUser.aCode == 'admin' }">
-		<a href="/notice/writeView.snu" style=float:right>글쓰기</a>
-	</c:if>
-	</div>
+<%-- 	 <c:if test="${loginUser.aCode == 'admin' }"> --%>
+<div>	<a href="/notice/writeView.snu" style=float:right>글쓰기</a></div>	
+<%-- 	</c:if> --%>
+	
 	<div class="paging" style=text-align:center>
 		<c:if test="${pi.startNavi == 1 }">
 			<a href="/notice/list.snu?page=1"> <i >

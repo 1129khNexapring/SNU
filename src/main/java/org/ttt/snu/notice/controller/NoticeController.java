@@ -39,7 +39,7 @@ public class NoticeController {
 		if (!nList.isEmpty()) {
 			model.addAttribute("nList", nList);
 			model.addAttribute("pi", pi);
-			return "notice/noticeListView";
+			return "/notice/noticeListView";
 		} else {
 			model.addAttribute("msg", "공지사항 조회실패");
 			return "common/errorpage";

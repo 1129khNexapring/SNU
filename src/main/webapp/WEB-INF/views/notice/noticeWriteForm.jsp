@@ -10,7 +10,7 @@
 <body>
 
 	<jsp:include page="../../layout/inc_header.jsp"></jsp:include>
-	<jsp:include page="../../layout/inc_main.jsp"></jsp:include>
+	
 	
 	<br><br>
 	<form action="/notice/register.snu" method="post" enctype="multipart/form-data">
@@ -33,14 +33,16 @@
 			</tr>
 			
 			<tr>
-				<td>
-					<input type="submit" value="등록">
-					<input type="reset" value="취소">
-				</td>
+				
+			
 				
 			</tr>
 		</table>
+		
 	</form>
+	
+					<input type="reset" value="취소" style=float:right;>
+					<input type="submit" value="등록" style=float:right;>
 	
   <jsp:include page="../../layout/inc_footer.jsp"></jsp:include>
 </body>
