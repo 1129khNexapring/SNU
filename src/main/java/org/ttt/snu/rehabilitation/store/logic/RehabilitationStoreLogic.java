@@ -21,6 +21,7 @@ public class RehabilitationStoreLogic implements RehabilitationStore {
 	public List<Rehabilitation> selectRehabList(SqlSession sqlSession, String sCode) {
 		List<Rehabilitation> rList = sqlSession.selectList("RehabMapper.selectRehab", sCode);
 		return rList;
+	}
 	//관리자 학생 이름 출력
 	@Override
 	public List<Student> selectStudent(SqlSession sqlSession) {

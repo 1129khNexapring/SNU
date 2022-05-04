@@ -65,10 +65,4 @@ public class AcademicCalendar {
 		return "AcademicCalendar [acNo=" + acNo + ", aCode=" + aCode + ", acTitle=" + acTitle + ", startDate="
 				+ startDate + ", endDate=" + endDate + "]";
 	}
-
-
-	
-	
-public class AcademicCalendar {
-
 }

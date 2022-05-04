@@ -42,11 +42,6 @@ public class ReserveforceStoreLogic implements ReserveforceStore {
 //		return map;
 //	}
 
-	
-
-@Repository
-public class ReserveforceStoreLogic implements ReserveforceStore {
-
 	@Override
 	public List<Student> selectAllRf(SqlSession sqlSession, String sCode) {
 		List<Student> msList = sqlSession.selectList("ReserveforceMapper.selectReserveforce", sCode);
@@ -65,3 +60,5 @@ public class ReserveforceStoreLogic implements ReserveforceStore {
 		return rfList;
 	}
 }
+
+

@@ -41,37 +41,29 @@ public class ReserveforceServiceImpl implements ReserveforceService {
 		List<Reserveforce> rfList = rfStore.requestMilList(sqlSession, sCode);
 		return rfList;
 	}
-=======
-@Service
-public class ReserveforceServiceImpl implements ReserveforceService {
-	
-	@Autowired
-	private ReserveforceStore rfStore;
-	@Autowired
-	private SqlSession sqlSession;
-	//관리자 예비군 리스트 조회
-	@Override
-	public List<Reserveforce> printRfList() {
-		List<Reserveforce> rfList = rfStore.selectRfList(sqlSession);
-		return rfList;
-	}
-//	@Override
-//	public List<HashMap<String, Object>> printStudent() {
-//		List<HashMap<String, Object>> map = rfStore.selectStudent(sqlSession);
-//		return map;
-//	}
-	//관리자 학생 이름 조회
-	@Override
-	public List<Student> printStudent() {
-		List<Student> sList = rfStore.selectStudent(sqlSession);
-		return sList;
-	}
-	//관리자 예비군 승인
-	@Override
-	public int modifyStatus(Reserveforce reserveforce) {
-		int uResult = rfStore.updateStatus(sqlSession, reserveforce);
-		return uResult;
-	}
-	
 
+	//관리자 예비군 리스트 조회
+		@Override
+		public List<Reserveforce> printRfList() {
+			List<Reserveforce> rfList = rfStore.selectRfList(sqlSession);
+			return rfList;
+		}
+//		@Override
+//		public List<HashMap<String, Object>> printStudent() {
+//			List<HashMap<String, Object>> map = rfStore.selectStudent(sqlSession);
+//			return map;
+//		}
+		//관리자 학생 이름 조회
+		@Override
+		public List<Student> printStudent() {
+			List<Student> sList = rfStore.selectStudent(sqlSession);
+			return sList;
+		}
+		//관리자 예비군 승인
+		@Override
+		public int modifyStatus(Reserveforce reserveforce) {
+			int uResult = rfStore.updateStatus(sqlSession, reserveforce);
+			return uResult;
+		}
 }
+		

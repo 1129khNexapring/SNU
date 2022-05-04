@@ -9,7 +9,3 @@ public interface AcademicCalendarStore {
 
 
 }
- 
-public interface AcademicCalendarStore {
-
-}
