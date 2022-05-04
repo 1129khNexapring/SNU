@@ -30,6 +30,7 @@
 		<typeAlias type="org.ttt.snu.loa.domain.Loa" alias="Loa"/>
 		
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
+		<typeAlias type="org.ttt.snu.requestSch.domain.RequestSch" alias="RequestSch"/>
 
 
 
@@ -51,6 +52,7 @@
 		<mapper resource="mappers/scholarship-mapper.xml"/>
 		<mapper resource="mappers/department-mapper.xml"/>
 		<mapper resource="mappers/requestScholarship-mapper.xml"/>
+		<mapper resource="mappers/requestSch-mapper.xml"/>
 		<mapper resource="mappers/loa-mapper.xml"/>
 		<mapper resource="mappers/reserveforce-mapper.xml"/>
 		<mapper resource="mappers/rehabilitation-mapper.xml"/>
