@@ -50,5 +50,10 @@
 		INSERT INTO RESERVEFORCE VALUES(SEQ_RF.NEXTVAL, DEFAULT, #{musterDate}, DEFAULT, #{rfMsg}, #{military}, #{rank}, #{sCode} )
 	</insert>
 	
+	<!-- 신청한 예비군 -->
+	<select id="requestMilList" resultMap="reserveforceResultMap">
+		SELECT * FROM RESERVEFORCE WHERE RF_STATUS = 'Y' AND S_CODE = #{sCode}
+	</select>
+	
 
 </mapper>

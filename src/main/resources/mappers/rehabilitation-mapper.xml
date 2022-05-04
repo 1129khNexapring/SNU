@@ -18,5 +18,9 @@
 	<insert id = "requestRehab">
 		INSERT INTO REHABILITATION VALUES(REHAB_SEQ.NEXTVAL, #{rReason}, #{rSemester}, #{rYear}, DEFAULT, #{rRequestDate}, #{rMsg}, #{sCode} )
 	</insert>
+		<select id = "selectRehab" resultMap="rehabResultMap">
+		SELECT * FROM REHABILITATION WHERE S_CODE = #{sCode}
+	</select>
+	
 
 </mapper>

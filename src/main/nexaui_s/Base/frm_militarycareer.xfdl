@@ -1,16 +1,145 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_militarycareer" width="1080" height="670" titletext="New Form">
+  <Form id="frm_militarycareer" width="1080" height="670" titletext="New Form" onload="frm_militarycareer_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="165" top="216" width="145" height="57" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="0" left="15" top="20" width="1055" height="440" binddataset="ds_mil" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="신청일"/>
+                <Cell col="1" text="군구분"/>
+                <Cell col="2" text="집합일"/>
+                <Cell col="3" text="처리상태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rfRequestDate" textAlign="center"/>
+                <Cell col="1" text="bind:military" textAlign="center"/>
+                <Cell col="2" text="bind:musterDate" textAlign="center"/>
+                <Cell col="3" text="bind:rfStatus" textAlign="center" displaytype="combotext" combodataset="ds_approve" combocodecol="id" combodatacol="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
+this.frm_militarycareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
-	
+		this.transaction(
+		"tr_select"
+		,"tttUrl::request/milList.snu"
+		,""
+		,"ds_mil=out_mil"
+		,"inVar1=" + sCode
+		,"fn_callback_tran"
+	)
 };
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+          <Column id="officeName" type="STRING" size="256"/>
+          <Column id="tuitionFee" type="INT" size="256"/>
+          <Column id="dCapacity" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="sRrn" type="STRING" size="256"/>
+          <Column id="sPassword" type="STRING" size="256"/>
+          <Column id="sAddress" type="STRING" size="256"/>
+          <Column id="sEmail" type="STRING" size="256"/>
+          <Column id="sGender" type="STRING" size="256"/>
+          <Column id="sPhone" type="STRING" size="256"/>
+          <Column id="sAddmission" type="STRING" size="256"/>
+          <Column id="absenceYN" type="STRING" size="256"/>
+          <Column id="transferYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mil">
+        <ColumnInfo>
+          <Column id="rfNum" type="STRING" size="256"/>
+          <Column id="rfRequestDate" type="STRING" size="256"/>
+          <Column id="musterDate" type="STRING" size="256"/>
+          <Column id="rfStatus" type="STRING" size="256"/>
+          <Column id="rfMsg" type="STRING" size="256"/>
+          <Column id="military" type="STRING" size="256"/>
+          <Column id="rank" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_level">
+        <ColumnInfo>
+          <Column id="level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="level">이병</Col>
+          </Row>
+          <Row>
+            <Col id="level">일병</Col>
+          </Row>
+          <Row>
+            <Col id="level">상병</Col>
+          </Row>
+          <Row>
+            <Col id="level">병장</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_type">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">육군</Col>
+          </Row>
+          <Row>
+            <Col id="type">해군</Col>
+          </Row>
+          <Row>
+            <Col id="type">공군</Col>
+          </Row>
+          <Row>
+            <Col id="type">공익</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_approve">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="text" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">Y</Col>
+            <Col id="text">승인</Col>
+          </Row>
+          <Row>
+            <Col id="id">N</Col>
+            <Col id="text">승인대기중</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>
