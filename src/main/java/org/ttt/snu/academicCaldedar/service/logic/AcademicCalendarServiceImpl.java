@@ -31,9 +31,4 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService{
 		
 		return dao.showSchedule();
 	}
-
-	
-	
-public class AcademicCalendarServiceImpl {
-
 }

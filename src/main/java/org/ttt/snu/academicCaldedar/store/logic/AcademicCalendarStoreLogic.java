@@ -9,7 +9,4 @@ import org.ttt.snu.academicCaldedar.store.AcademicCalendarStore;
 @Repository
 public class AcademicCalendarStoreLogic implements AcademicCalendarStore{
 
-
-public class AcademicCalendarStoreLogic {
-
 }

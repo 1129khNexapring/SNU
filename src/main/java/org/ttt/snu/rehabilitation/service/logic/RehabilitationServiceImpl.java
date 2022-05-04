@@ -26,11 +26,11 @@ public class RehabilitationServiceImpl implements RehabilitationService{
 		return result;
 	}
 
-
 	@Override
 	public List<Rehabilitation> printRehab(String sCode) {
 		List<Rehabilitation> rList = rStore.selectRehabList(sqlSession, sCode);
 		return rList;
+	}
 	//학생전체이름조회
 	@Override
 	public List<Student> printStudentName() {

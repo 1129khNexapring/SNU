@@ -36,7 +36,5 @@ public class AcademicCalendarController {
 		
 		return "academicCalendar/schedule";
 	}
-	
-public class AcademicCalendarController {
-
 }
+	

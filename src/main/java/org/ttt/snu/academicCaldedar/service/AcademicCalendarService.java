@@ -11,12 +11,5 @@ public interface AcademicCalendarService {
 	void addSchedule(AcademicCalendar calendar);
 
 	List<AcademicCalendar> showSchedule();
-
-	
-
-	
-	
-	
-public interface AcademicCalendarService {
-
 }
+
