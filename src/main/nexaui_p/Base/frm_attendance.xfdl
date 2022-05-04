@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_attendance" width="1080" height="670" titletext="New Form" onload="frm_attendance_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Static id="static_00" taborder="0" text="담당 교과목" left="83" top="93" width="120" height="35" border="1px solid lightgray" borderRadius="4px" textAlign="center" font="normal 10pt/normal &quot;Arial&quot;"/>
+        <Grid id="grd_lectureList" taborder="1" left="63" top="135" width="977" height="105" binddataset="ds_lecture" autofittype="col" cursor="pointer" oncellclick="grd_lectureList_oncellclick" onheadclick="grd_lectureList_onheadclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="50"/>
+                <Column size="45"/>
+                <Column size="33"/>
+                <Column size="319"/>
+                <Column size="32"/>
+                <Column size="52"/>
+                <Column size="48"/>
+                <Column size="2"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="이수구분"/>
+                <Cell col="1" text="년도"/>
+                <Cell col="2" text="학기"/>
+                <Cell col="3" text="교과목명"/>
+                <Cell col="4" text="학점"/>
+                <Cell col="5" text="총 강의일수"/>
+                <Cell col="6" colspan="2">
+                  <Cell text="수강정원"/>
+                  <Cell col="1" displaytype="none"/>
+                </Cell>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lType"/>
+                <Cell col="1" text="bind:lYear"/>
+                <Cell col="2" text="bind:lSemester"/>
+                <Cell col="3" text="bind:lName"/>
+                <Cell col="4" text="bind:credit"/>
+                <Cell col="5" text="bind:lDays"/>
+                <Cell col="6" colspan="2">
+                  <Cell text="bind:lCapacity"/>
+                  <Cell col="1" text="bind:lCode"/>
+                </Cell>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="2" text="&gt;" left="65" top="95" width="18" height="30" onclick="Static00_onclick" font="bold 12px/normal &quot;Gulim&quot;"/>
+        <Static id="static_00_00" taborder="3" text="출석부" left="83" top="272" width="120" height="35" border="1px solid lightgray" borderRadius="4px" textAlign="center" font="normal 10pt/normal &quot;Arial&quot;" onclick="static_00_00_onclick"/>
+        <Static id="Static00_00" taborder="4" text="&gt;" left="65" top="274" width="18" height="30" onclick="Static00_onclick" font="bold 12px/normal &quot;Gulim&quot;"/>
+        <Grid id="grd_attList" taborder="5" left="63" top="317" width="307" height="270" binddataset="ds_enrollLectureDomain" autofittype="col" oncloseup="grd_attList_oncloseup">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="69"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학과"/>
+                <Cell col="1" text="이름"/>
+                <Cell col="2" text="출결사항"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:dName"/>
+                <Cell col="1" text="bind:sName"/>
+                <Cell col="2" displaytype="combocontrol" edittype="combo" combodataset="ds_attStatus" combodatacol="CONTENT" combocodecol="CODE" combotype="dropdown"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="static_00_00_00" taborder="6" text="수강신청학생" left="483" top="315" width="120" height="35" border="1px solid lightgray" borderRadius="4px" textAlign="center" font="normal 10pt/normal &quot;Arial&quot;" onclick="static_00_00_onclick"/>
+        <Static id="Static00_00_00" taborder="7" text="&gt;" left="465" top="317" width="18" height="30" onclick="Static00_onclick" font="bold 12px/normal &quot;Gulim&quot;"/>
+        <ImageViewer id="ImageViewer00" taborder="8" text="" left="485" top="360" width="120" height="120" background="url('..\..\..\..\..\..\Desktop\99EA8C3359DC92641A.png') no-repeat center center /contain" borderRadius="5px"/>
+        <Static id="st_year00_00" taborder="9" text="성명" left="630" top="410" width="55" height="30" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Static id="st_year00_01" taborder="10" text="학과" left="630" top="380" width="55" height="30" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
+        <Edit id="edt_boardNo00" taborder="11" left="700" top="410" width="145" height="30" borderRadius="4px"/>
+        <Edit id="edt_boardNo01" taborder="12" left="700" top="380" width="145" height="30" borderRadius="4px"/>
+        <Static id="Static01" taborder="13" text="※ 출석을 모두 입력하고 저장버튼을 눌러주십시오." left="760" top="85" width="281" height="20" border="1px solid lightgray" borderRadius="5px" color="darkred"/>
+        <Button id="btn_attSubmit" taborder="14" text="출석부 저장" left="960" top="50" width="80" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_attSubmit_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "tr_lectureList") {
+		if(nErrorCode < 0) {
+			this.alert("교과목 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		// this.alert("교과목 조회 성공");
+	}
+	
+	if(id == "tr_enLectureList") {
+		if(nErrorCode < 0) {
+			this.alert("수강하는 학생이 없습니다.");
+			return;
+		}
+		// this.alert("출석부 조회 성공");
+	}
+	
+	if(id == "tr_attendanceSumbit") {
+		if(nErrorCode < 0) {
+			this.alert("출석부 저장 실패");
+			return;
+		}
+		this.alert("출석부 저장 성공");
+	}
+};
+
+var currentEnLecture = 0;
+this.frm_attendance_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+			"tr_lectureList" 					  	  // 1. ID
+			, "SnuUrl::attendance/list.snu" 		  // 2. URL
+			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+			, "ds_lecture=out_lectureList" 	  // 4. OutDs : S -> F jsp(SELECT)
+	        , ""							  // 5. InVar : F -> S(var)
+			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+		)
+};
+
+this.grd_lectureList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	currentEnLecture = e.row;
+	var lCode = this.ds_lecture.getColumn(currentEnLecture, "lCode");
+	this.transaction(
+			"tr_enLectureList" 					  	  // 1. ID
+			, "SnuUrl::attendance/enLectureList.snu" 		  // 2. URL
+			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+			, "ds_enrollLectureDomain=out_enLectureList"	  // 4. OutDs : S -> F jsp(SELECT)
+	        , "in_var1=" + lCode +""						  // 5. InVar : F -> S(var)
+			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+		)
+};
+
+this.btn_attSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var comboData = this.ds_attStatus.rowposition;
+	var comboText = this.ds_attStatus.getColum(comboData, "출결사항");
+	alert(comboText.value);
+	this.transaction(
+			"tr_attendanceSumbit" 					  	  // 1. ID
+			, "SnuUrl::attendance/save.snu" 		  // 2. URL
+			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+			, ""	  // 4. OutDs : S -> F jsp(SELECT)
+	        , ""						  // 5. InVar : F -> S(var)
+			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+		)
+};
+
+this.grd_attList_oncloseup = function(obj:nexacro.Grid,e:nexacro.GridEditEventInfo)
+{
+	this.alert(this.grd_attList.getCellText(2, e.cell));
+};
+
+this.grd_lectureList_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fn_CheckAll(obj, e);
+	this.fn_sort(obj, e);
+};
+
+this.fn_CheckAll = function(obj, e)
+	{
+		if(obj.getCellProperty("head", e.cell, "displaytype")=="checkboxcontrol")
+		{
+			var objDs = obj.getBindDataset();
+			var nVal = obj.getCellText(-1, e.cell);
+			nVal = (nVal=="1"?"0":"1");
+			
+			// Head
+			obj.setCellProperty("Head", e.cell, "text", nVal);
+			// Body
+			for(var i=0; i<this.ds_lecture.getRowCount(); i++)
+			{
+				objDs.setColumn(i, "lCode", nVal);
+			}
+		}
+		this.fn_sort(obj, e);
+	}
+	
+this.CONST_ASC_MARK = "↑";
+this.CONST_DESC_MARK = "↓";
+this.nPrevCell = -1;
+this.fn_sort = function(obj, e)
+{
+	if(obj.getCellProperty("head",e.cell, "displaytype")=="checkboxcontrol") return;
+	//Column ID -> bind:ColumnID -> split
+	var ObjDs = obj.getBindDataset();
+	var sColId = obj.getCellProperty("body", e.cell, "text").split(":");
+	
+	var HeadText ="";
+	var sKeyString = "";
+	var HeadVal = obj.getCellText(-1, e.cell);
+	var HeadMark = HeadVal.substr(HeadVal.length-1);
+
+	if(HeadMark==this.CONST_ASC_MARK) {
+		HeadText = HeadVal.substr(0, HeadVal.length-1) + this.CONST_DESC_MARK;
+		sKeyString = "S:-";
+	} else if(HeadMark==this.CONST_DESC_MARK) {
+		HeadText = HeadVal.substr(0, HeadVal.length-1) + this.CONST_ASC_MARK;
+		sKeyString = "S:+";
+	} else {
+		HeadText = HeadVal + this.CONST_ASC_MARK;
+		sKeyString = "S:+";
+	}
+	
+	obj.setCellProperty("head", e.cell, "text" , HeadText);
+	// this.fn_sort(obj, e)에 정렬된 헤드의 글자색만 빨간색으로 바뀌도록
+	obj.setCellProperty("head", e.cell, "color" , "red");	
+	ObjDs.set_keystring(sKeyString + sColId[1]);
+	
+	if(this.nPrevCell>-1 && this.nPrevCell != e.cell)
+	{
+		var sPrevText = obj.getCellText(-1, this.nPrevCell);
+		obj.setCellProperty("head", this.nPrevCell, "text" , sPrevText.substr(0, sPrevText.length-1));
+		// this.fn_sort(obj, e)에 정렬된 헤드의 글자색만 빨간색으로 바뀌도록(쓰지않으면 클릭한곳은 다 빨간색으로 남음)
+		obj.setCellProperty("head", this.nPrevCell, "color" , "#2f2f2f");
+	}	
+	this.nPrevCell = e.cell;
+};
+
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="ds_lecture">
+        <ColumnInfo>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="STRING" size="256"/>
+          <Column id="credit" type="STRING" size="256"/>
+          <Column id="lYear" type="STRING" size="256"/>
+          <Column id="lSemester" type="INT" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
+          <Column id="attendanceStatus" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_enrollLectureDomain">
+        <ColumnInfo>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_attendance">
+        <ColumnInfo>
+          <Column id="lDate" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="attendanceStatus" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_attStatus">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">출석</Col>
+            <Col id="CONTENT">출석</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">지각</Col>
+            <Col id="CONTENT">지각</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">결석</Col>
+            <Col id="CONTENT">결석</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_boardNo01" propid="value" datasetid="ds_enrollLectureDomain" columnid="dName"/>
+      <BindItem id="item1" compid="edt_boardNo00" propid="value" datasetid="ds_enrollLectureDomain" columnid="sName"/>
+    </Bind>
+  </Form>
+</FDL>

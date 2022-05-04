@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_grade" width="1080" height="670" titletext="New Form" onload="frm_grade_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="grd_grade" taborder="0" left="60" top="40" width="970" height="370" binddataset="ds_grade" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="34"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell/>
+                <Cell col="1" text="학생이름"/>
+                <Cell col="2" text="과목명"/>
+                <Cell col="3" text="과목명"/>
+                <Cell col="4" text="과목명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:학생이름"/>
+                <Cell col="2" text="bind:과목명"/>
+                <Cell col="3" text="bind:과목명"/>
+                <Cell col="4" text="bind:과목명"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_save" taborder="1" text="저장하기" left="890" top="4" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Button id="btn_add" taborder="2" text="추가하기" left="964" top="4" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_add_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_grade">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="학생이름" type="STRING" size="256"/>
+          <Column id="과목명" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset00"/>
+      <Dataset id="Dataset01"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_grade.addRow();
+};
+
+this.frm_grade_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

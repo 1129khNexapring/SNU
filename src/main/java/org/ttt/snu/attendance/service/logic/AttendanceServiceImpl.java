@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import org.ttt.snu.attendance.domain.Attendance;
 import org.ttt.snu.attendance.service.AttendanceService;
 import org.ttt.snu.attendance.store.AttendanceStore;
+import org.ttt.snu.enrollLecture.domain.EnrollLecture;
+import org.ttt.snu.lecture.domain.Lecture;
+import org.ttt.snu.lecture.store.LectureStore;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -18,10 +21,23 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
+	@Override
+	public List<Lecture> printLecture() {
+		List<Lecture> lectureList = aStore.selectLectureAll(sqlSession);
+		return lectureList;
+	}
+	
+	@Override
+	public List<EnrollLecture> printEnLectureList(String lCode) {
+		List<EnrollLecture> enLectureList = aStore.selectEnLectureAll(sqlSession, lCode);
+		return enLectureList;
+	}
+
 
 	@Override
 	public List<Attendance> printAll(Attendance attendance) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -33,8 +49,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 	@Override
 	public int modifyAttendance(Attendance attendance) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
+
+	
+	
 
 }

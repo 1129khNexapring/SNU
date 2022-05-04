@@ -34,6 +34,6 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService{
 
 	
 	
-	
+public class AcademicCalendarServiceImpl {
 
 }

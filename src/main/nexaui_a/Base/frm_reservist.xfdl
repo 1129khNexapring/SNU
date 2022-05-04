@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_reservist" width="1280" height="720" titletext="New Form" onload="frm_reservist_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="0" left="81" top="65" width="399" height="183" binddataset="ds_force" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="65"/>
+                <Column size="59"/>
+                <Column size="55"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="신청번호"/>
+                <Cell col="1" text="학번"/>
+                <Cell col="2" text="이름"/>
+                <Cell col="3" text="신청일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rfNum" textAlign="center"/>
+                <Cell col="1" text="bind:sCode" textAlign="center"/>
+                <Cell col="2" text="bind:sCode" displaytype="combotext" combodataset="ds_student" combodatacol="sName" combocodecol="sCode" textAlign="center"/>
+                <Cell col="3" text="bind:rfRequestDate" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="" left="500" top="68" width="410" height="362" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학생 정보" left="14" top="6" width="183" height="36" font="normal 700 15pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static01" taborder="1" text="학번" left="14" top="55" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_00" taborder="2" text="이름" left="14" top="120" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_01" taborder="3" text="신청사항" left="14" top="224" width="125" height="36" font="normal bold 15pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static01_02" taborder="4" text="희망날짜" left="14" top="300" width="83" height="36" textAlign="center"/>
+              <Edit id="Edit00" taborder="5" left="126" top="57" width="101" height="35"/>
+              <Edit id="Edit01" taborder="6" left="126" top="120" width="101" height="35"/>
+              <Edit id="Edit02" taborder="7" left="126" top="300" width="101" height="35"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_approveRf" taborder="2" text="승인" left="818" top="442" width="91" height="35" onclick="btn_approveRf_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_force">
+        <ColumnInfo>
+          <Column id="rfNum" type="INT" size="256"/>
+          <Column id="rfRequestDate" type="STRING" size="256"/>
+          <Column id="muterDate" type="STRING" size="256"/>
+          <Column id="rfStatus" type="STRING" size="256"/>
+          <Column id="rfMsg" type="STRING" size="256"/>
+          <Column id="military" type="STRING" size="256"/>
+          <Column id="rank" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="sRrn" type="STRING" size="256"/>
+          <Column id="sPassword" type="STRING" size="256"/>
+          <Column id="sAddress" type="STRING" size="256"/>
+          <Column id="sEmail" type="STRING" size="256"/>
+          <Column id="sGender" type="STRING" size="256"/>
+          <Column id="sPhone" type="STRING" size="256"/>
+          <Column id="sAddmission" type="STRING" size="256"/>
+          <Column id="absenceYN" type="STRING" size="256"/>
+          <Column id="transferYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_map">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//폼이 로드됐을 떄 예비군 신청목록과 맵핑시킬 학생 리스트를 가져와야함
+this.frm_reservist_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+	"tr_rfList"
+	,"SnuURL::reservist/list.snu"
+	,""
+	,"ds_force=out_rfList ds_student=out_sList"
+	,""
+	,"fn_callback_rf"
+	)
+};
+
+this.fn_callback_rf = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_rfList")
+	{
+		
+	}
+	if(id=="tr_appRf")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+			return;
+		}
+		this.alert(sErrorMsg);
+	}
+}
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nRow = this.ds_force.rowposition
+	var sCode = this.ds_force.getColumn(nRow, "sCode");
+	var sName="";
+	var sRow = this.ds_student.getRowCount();
+	for(var i = 0; i<sRow; i++)
+	{
+		if(this.ds_student.getColumn(i, "sCode") == sCode)
+		{
+			this.Div00.form.Edit01.set_value(this.ds_student.getColumn(i, "sName"));
+		}
+	}
+};
+
+this.btn_approveRf_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rtn = this.confirm("승인하시겠습니까?","승인 창");
+	if(rtn == true)
+	{
+		var nRow = this.ds_force.rowposition
+		var sCode = this.ds_force.getColumn(nRow, "sCode");
+		this.transaction(
+		"tr_appRf"
+		,"SnuURL::reserveforce/approve.snu"
+		,""
+		,""
+		,"in_Var1="+sCode+""
+		,"fn_callback_rf"
+		)
+	}
+	
+	
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_force" columnid="sCode"/>
+      <BindItem id="item1" compid="Div00.form.Edit02" propid="value" datasetid="ds_force" columnid="muterDate"/>
+    </Bind>
+  </Form>
+</FDL>

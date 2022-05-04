@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_volunteer" width="1280" height="720" titletext="New Form" onload="frm_volunteer_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="Div00" taborder="1" text="" left="650" top="10" width="617" height="700" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="봉사활동정보" left="125" top="8" width="365" height="78" textAlign="center" font="normal 12pt/normal &quot;Arial&quot;" onclick="Div00_Static00_onclick"/>
+              <Static id="Static01" taborder="1" text="봉사활동명" left="35" top="204" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit00" taborder="2" left="260" top="197" width="339" height="50"/>
+              <Static id="Static02" taborder="3" text="장소" left="35" top="284" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit01" taborder="4" left="261" top="274" width="339" height="50"/>
+              <Static id="Static03" taborder="5" text="이수시간" left="35" top="364" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit02" taborder="6" left="261" top="354" width="225" height="50"/>
+              <Static id="Static04" taborder="7" text="시작시간" left="40" top="444" width="180" height="30" textAlign="center"/>
+              <Static id="Static05" taborder="8" text="종료 시간" left="40" top="524" width="180" height="30" textAlign="center"/>
+              <Edit id="Edit03" taborder="9" left="261" top="433" width="246" height="50"/>
+              <Edit id="Edit04" taborder="10" left="261" top="521" width="246" height="50"/>
+              <Static id="Static06" taborder="11" text="등록 날짜" left="39" top="604" width="180" height="30" textAlign="center"/>
+              <Edit id="Edit05" taborder="12" left="259" top="591" width="254" height="50"/>
+              <Button id="btn_registerV" taborder="13" text="저장" left="542" top="30" width="65" height="44" onclick="Div00_btn_registerV_onclick"/>
+              <Static id="Static07" taborder="14" text="봉사활동코드" left="35" top="125" width="197" height="30" textAlign="center"/>
+              <Edit id="Edit06" taborder="15" left="260" top="121" width="202" height="44"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_vList" taborder="1" text="조회" left="410" top="10" width="70" height="45" onclick="btn_vList_onclick"/>
+        <Grid id="Grid00" taborder="2" left="24" top="77" width="610" height="626" binddataset="ds_volunteer" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="봉사활동명"/>
+                <Cell col="1" text="장소"/>
+                <Cell col="2" text="이수시간"/>
+                <Cell col="3" text="시작시간"/>
+                <Cell col="4" text="종료시간"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:vName" textAlign="center"/>
+                <Cell col="1" text="bind:vArea" textAlign="center"/>
+                <Cell col="2" text="bind:vHour" textAlign="center"/>
+                <Cell col="3" text="bind:vStart" textAlign="center"/>
+                <Cell col="4" text="bind:vEnd" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_vDelete" taborder="3" text="삭제" left="564" top="10" width="70" height="45" onclick="btn_vDelete_onclick"/>
+        <Button id="btn_vAdd" taborder="4" text="등록" left="487" top="10" width="70" height="45" onclick="btn_vAdd_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_volunteer">
+        <ColumnInfo>
+          <Column id="vCode" type="STRING" size="256"/>
+          <Column id="vName" type="STRING" size="256"/>
+          <Column id="vArea" type="STRING" size="256"/>
+          <Column id="vHour" type="STRING" size="256"/>
+          <Column id="vStart" type="STRING" size="256"/>
+          <Column id="vEnd" type="STRING" size="256"/>
+          <Column id="vEnrollDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+
+	//오늘 날짜구하기
+	//var d = new Date();
+	//var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+	//this.alert(today);
+
+//추가버튼시 이벤트걸어놨었음
+// 	var d = new Date();
+// 	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+// 	
+// 	this.ds_volunteer.addRow();
+// 	this.ds_volunteer.setColumn(this.ds_volunteer, "vEnrollDate", today);
+
+var sName =  nexacro.getEnvironmentVariable("ev_Val");
+// this.frm_volunteer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+// {
+// 	var d = new Date();
+// 	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+// 	
+// 	
+// 	
+// 	this.ds_volunteer.addRow();
+// 	this.ds_volunteer.setColumn(this.ds_volunteer, "vEnrollDate", today);
+// };
+
+this.Div00_btn_registerV_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	//var name = this.Div00.form.Edit00.value;
+	//alert(name);
+	this.transaction(
+	"tr_vSave"
+	,"SnuURL::volunteer/changeInfo.snu"
+	,"in_volunteer=ds_volunteer:U"
+	,""
+	,"fn_callback_v"
+	)
+};
+
+this.out_var="";
+this.fn_callback_v = function(id, nErrorCode, sErrorMsg)
+{
+		if(id=="tr_vSave")
+		{
+			if(nErrorCode < 0)
+			{
+				this.alert("저장 실패:"+sErrorMsg);
+				return;
+			}
+			this.alert(this.out_var + ">>저장성공");
+		}
+		if(id=="tr_vList")
+		{
+			if(nErrorCode < 0)
+			{
+				this.alert("조회 실패:"+sErrorMsg);
+				return;
+			}
+			this.alert("조회 성공"+ this.ds_volunteer.getRowCount() + "건");
+		}
+}
+
+
+
+this.btn_vList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+	"tr_vList"
+	,"SnuURL::volunteer/list.snu"
+	,""
+	,"ds_volunteer=out_volunteer"
+	,""
+	,"fn_callback_v"
+	)
+};
+
+
+
+this.btn_vDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_volunteer.deleteRow(this.ds_volunteer.rowposition);
+};
+
+
+
+this.btn_vAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+		
+	this.ds_volunteer.addRow();
+	this.ds_volunteer.setColumn(this.ds_volunteer.rowposition, "vEnrollDate", today);
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_volunteer" columnid="vName"/>
+      <BindItem id="item1" compid="Div00.form.Edit01" propid="value" datasetid="ds_volunteer" columnid="vArea"/>
+      <BindItem id="item2" compid="Div00.form.Edit02" propid="value" datasetid="ds_volunteer" columnid="vHour"/>
+      <BindItem id="item3" compid="Div00.form.Edit03" propid="value" datasetid="ds_volunteer" columnid="vStart"/>
+      <BindItem id="item4" compid="Div00.form.Edit04" propid="value" datasetid="ds_volunteer" columnid="vEnd"/>
+      <BindItem id="item5" compid="Div00.form.Edit05" propid="value" datasetid="ds_volunteer" columnid="vEnrollDate"/>
+      <BindItem id="item6" compid="Div00.form.Edit06" propid="value" datasetid="ds_volunteer" columnid="vCode"/>
+    </Bind>
+  </Form>
+</FDL>

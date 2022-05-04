@@ -13,29 +13,31 @@
             this.set_titletext("Form_Work");
             if (Form == this.constructor)
             {
-                this._setFormPosition(1080,670);
+                this._setFormPosition(1080,650);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
 
             
             // UI Components Initialize
-            obj = new Button("Button00","117","120","226","108",null,null,null,null,null,null,this);
+            obj = new Button("btn_bookmark","7","6","23","20",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_text("Button00");
+            obj.set_text("☆");
+            obj.set_font("bold 14px/normal \"Malgun Gothic\"");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static00","128","322","348","183",null,null,null,null,null,null,this);
+            obj = new Static("st_title","37","5","322","26",null,null,null,null,null,null,this);
             obj.set_taborder("1");
-            obj.set_text("Static00");
+            obj.set_text("Static01");
             this.addChild(obj.name, obj);
 
-            obj = new Radio("Radio00","566","151","171","140",null,null,null,null,null,null,this);
+            obj = new Div("div_work","10","33","1060","608",null,null,null,null,null,null,this);
             obj.set_taborder("2");
+            obj.set_text("Div00");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",1080,670,this,function(p){});
+            obj = new Layout("default","Desktop_screen",1080,650,this,function(p){});
             this.addLayout(obj.name, obj);
             
             // BindItem Information
@@ -53,31 +55,28 @@
         // User Script
         this.registerScript("Form_Work.xfdl", function() {
 
-        this.Button00_onclick = function(obj,e)
+        this.fv_key = ""
+        this.Form_Work_onload = function(obj,e)
         {
-        	var sId = nexacro.getEnvironmentVariable("ev_Val");
-            var sPwd = nexacro.getEnvironmentVariable("ev_Val1");
-            alert(sPwd);
+        	var objOwnerFrame = this.getOwnerFrame();
+
+        	var sMenuId = objOwnerFrame.openParam.LIST_ID;
+        	var sMenuNM = objOwnerFrame.openParam.LIST;
+        	var sFormUrl = objOwnerFrame.openParam.FORM_URL;
+
+        	this.div_work.set_url(sFormUrl);
+
+
         };
 
-        this.Static00_onclick = function(obj,e)
-        {
-
-        };
-
-        this.Radio00_onitemchanged = function(obj,e)
-        {
-
-        };
 
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
-            this.Static00.addEventHandler("onclick",this.Static00_onclick,this);
-            this.Radio00.addEventHandler("onitemchanged",this.Radio00_onitemchanged,this);
+            this.addEventHandler("onload",this.Form_Work_onload,this);
+            this.btn_bookmark.addEventHandler("onclick",this.btn_bookmark_onclick,this);
         };
         this.loadIncludeScript("Form_Work.xfdl");
         this.loadPreloadList();

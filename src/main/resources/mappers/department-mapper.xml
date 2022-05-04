@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ 
+<mapper namespace="DepartmentMapper">
+	<resultMap type="Department" id="departmentResultMap">
+		<id property="dCode" column="D_CODE"/>
+		<result property="dName" column="D_NAME"/>
+		<result property="dField" column="D_FIELD"/>
+		<result property="officeName" column="OFFICE_CODE"/>
+		<result property="tuitionFee" column="TUITION_FEE"/>
+		<result property="dCapacity" column="D_CAPACITY"/>
+	</resultMap>
+	
+	<select id="selectDeptByCode" parameterType="string" resultMap="departmentResultMap">
+		SELECT * FROM DEPARTMENT WHERE D_CODE = #{dCode }
+	</select>
+	
+	<select id="selectDeptBypCode" parameterType="string" resultMap="departmentResultMap">
+		SELECT D_CODE, D_NAME, D_FIELD, OFFICE_CODE, TUITION_FEE, D_CAPACITY FROM DEPARTMENT
+		JOIN PROFESSOR USING(D_CODE)
+		WHERE P_CODE = #{profCode }
+
+	</select>
+
+</mapper>

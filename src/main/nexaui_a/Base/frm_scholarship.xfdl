@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_scholarship" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="0" left="23" top="160" width="807" height="212" binddataset="ds_scholarship" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="49"/>
+                <Column size="73"/>
+                <Column size="58"/>
+                <Column size="263"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학과명"/>
+                <Cell col="1" text="장학금명"/>
+                <Cell col="2" text="금액"/>
+                <Cell col="3" text="장학 조건"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:dCode" displaytype="combotext" combodataset="ds_dept" combodatacol="DEPT_NAME" combocodecol="DEPT_CD"/>
+                <Cell col="1" text="bind:scName"/>
+                <Cell col="2" text="bind:amount"/>
+                <Cell col="3" text="bind:scCondition"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_scRetrieve" taborder="1" text="조회" left="572" top="117" width="81" height="38" onclick="btn_scRetrieve_onclick"/>
+        <Button id="btn_addScholar" taborder="2" text="등록" left="661" top="117" width="81" height="38" onclick="btn_addScholar_onclick"/>
+        <Div id="Div00" taborder="3" text="" left="23" top="432" width="807" height="212" border="1px solid" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="장학금코드" left="12" top="17" width="64" height="32"/>
+              <Edit id="Edit00" taborder="1" left="93" top="13" width="111" height="41"/>
+              <Static id="Static01" taborder="2" text="장학금명" left="10" top="79" width="50" height="33"/>
+              <Edit id="Edit01" taborder="3" left="93" top="74" width="111" height="44"/>
+              <Static id="Static02" taborder="4" text="금액" left="7" top="142" width="50" height="44" textAlign="center"/>
+              <Edit id="Edit02" taborder="5" left="93" top="145" width="111" height="44"/>
+              <Static id="Static03" taborder="6" text="등록날짜" left="245" top="12" width="77" height="42"/>
+              <Edit id="Edit03" taborder="7" left="338" top="7" width="128" height="43"/>
+              <Static id="Static04" taborder="8" text="학과코드" left="245" top="84" width="81" height="43"/>
+              <Edit id="Edit04" taborder="9" left="338" top="73" width="128" height="47"/>
+              <Static id="Static05" taborder="10" text="장학금조건" left="245" top="157" width="79" height="36"/>
+              <TextArea id="TextArea00" taborder="11" left="338" top="135" width="445" height="67"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_registerSc" taborder="4" text="저장" left="748" top="389" width="81" height="38" onclick="btn_registerSc_onclick"/>
+        <Button id="btn_deleteSc" taborder="5" text="삭제" left="748" top="117" width="81" height="38" onclick="btn_deleteSc_onclick"/>
+        <Grid id="Grid01" taborder="6" left="849" top="160" width="411" height="210" binddataset="ds_requestScholarship" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학번"/>
+                <Cell col="1" text="이름"/>
+                <Cell col="2" text="계열"/>
+                <Cell col="3" text="학과명"/>
+                <Cell col="4" text="장학금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:sCode"/>
+                <Cell col="1" text="bind:sName"/>
+                <Cell col="2" text="bind:dField"/>
+                <Cell col="3" text="bind:dName"/>
+                <Cell col="4" text="bind:amount"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_scholarship">
+        <ColumnInfo>
+          <Column id="scCode" type="STRING" size="256"/>
+          <Column id="scName" type="STRING" size="256"/>
+          <Column id="amount" type="INT" size="256"/>
+          <Column id="scCondition" type="STRING" size="256"/>
+          <Column id="scDate" type="STRING" size="256"/>
+          <Column id="scStatus" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="scEnrollDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPT_CD">D001</Col>
+            <Col id="DEPT_NAME">국어국문학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D002</Col>
+            <Col id="DEPT_NAME">영어교육과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D999</Col>
+            <Col id="DEPT_NAME">서양조소학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D201</Col>
+            <Col id="DEPT_NAME">수학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D100</Col>
+            <Col id="DEPT_NAME">경영학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D101</Col>
+            <Col id="DEPT_NAME">회계사무학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D901</Col>
+            <Col id="DEPT_NAME">서양화과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D902</Col>
+            <Col id="DEPT_NAME">동양화과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D301</Col>
+            <Col id="DEPT_NAME">기계공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D003</Col>
+            <Col id="DEPT_NAME">역사학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D102</Col>
+            <Col id="DEPT_NAME">빅데이터응용학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D302</Col>
+            <Col id="DEPT_NAME">화학공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D303</Col>
+            <Col id="DEPT_NAME">컴퓨터공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D304</Col>
+            <Col id="DEPT_NAME">생명공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D202</Col>
+            <Col id="DEPT_NAME">수학교육과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D305</Col>
+            <Col id="DEPT_NAME">전자공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D306</Col>
+            <Col id="DEPT_NAME">전기공학과</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CD">D307</Col>
+            <Col id="DEPT_NAME">건축학과</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_requestScholarship">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="amount" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_scRetrieve_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+	"tr_scList"
+	,"SnuURL::scholarship/list.snu"
+	,""
+	,"ds_scholarship=out_scholarship"
+	,""
+	,"fn_callback_sc"
+	)
+};
+this.out_var="";
+this.fn_callback_sc = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_scList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패!"+sErrorMsg);
+			return;
+		}
+		this.alert("조회 성공"+this.ds_scholarship.getRowCount()+"건");
+	}
+	if(id=="tr_scSave")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("저장 실패:"+sErrorMsg);
+			return;
+		}
+		this.alert("저장 성공");
+	}
+	if(id=="tr_rsList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("해당 학생이 없습니다.");
+			return;
+		}
+		this.alert("해당 학생:"+this.ds_requestScholarship.getRowCount()+"명");
+	}
+	
+}
+
+
+
+this.btn_addScholar_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+	
+	this.ds_scholarship.addRow();
+	this.ds_scholarship.setColumn(this.ds_scholarship.rowposition, "scEnrollDate", today);
+};
+
+this.btn_registerSc_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+	"tr_scSave"
+	,"SnuURL::scholarship/changeInfo.snu"
+	,"in_scholarship=ds_scholarship:U"
+	,""
+	,"fn_callback_sc"
+	)
+};
+
+this.btn_deleteSc_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_scholarship.deleteRow(this.ds_scholarship.rowposition);
+};
+
+
+//해당 장학금 셀을 눌렀을 때 그것을 신청한 학생들을 보여주는 기능
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var scCode = this.ds_scholarship.getColumn(e.row, "scCode");
+	//alert(scCode);
+	this.transaction(
+	"tr_rsList"
+	,"SnuURL::requestScholarship/list.snu"
+	,""
+	,"ds_requestScholarship=out_List"
+	,"in_Var1="+scCode+""
+	,"fn_callback_sc"
+	)
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_scholarship" columnid="scCode"/>
+      <BindItem id="item1" compid="Div00.form.Edit01" propid="value" datasetid="ds_scholarship" columnid="scName"/>
+      <BindItem id="item2" compid="Div00.form.Edit02" propid="value" datasetid="ds_scholarship" columnid="amount"/>
+      <BindItem id="item3" compid="Div00.form.Edit03" propid="value" datasetid="ds_scholarship" columnid="scEnrollDate"/>
+      <BindItem id="item4" compid="Div00.form.Edit04" propid="value" datasetid="ds_scholarship" columnid="dCode"/>
+      <BindItem id="item5" compid="Div00.form.TextArea00" propid="value" datasetid="ds_scholarship" columnid="scCondition"/>
+    </Bind>
+  </Form>
+</FDL>

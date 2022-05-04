@@ -3,4 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="BoardMapper"></mapper> 
+<mapper namespace="BoardMapper">
+	<resultMap type="Board" id="boardResultMap">
+		<id property="board_no" 			column="BOARD_NO"/>
+		<result property="board_title"      column="BOARD_TITLE"/>
+		<result property="board_content"    column="BOARD_CONTENT"/>
+		<result property="board_date"       column="BOARD_DATE"/>
+		<result property="b_status"         column="B_STATUS"/>
+		<result property="p_code"           column="P_CODE"/>
+		<result property="board_fileName"   column="BOARD_FILENAME"/>
+		<result property="board_fileReName" column="BOARD_FILERENAME"/>
+		<result property="board_writer"     column="BOARD_WRITER"/>
+		<result property="board_count"      column="BOARD_COUNT"/>
+	</resultMap>
+	<resultMap type="Comments" id="commentsResultMap">
+		<id property="comment_no" 			 column="COMMENT_NO"/>
+		<result property="comment_content"   column="COMMENT_CONTENT"/>
+		<result property="comment_date"      column="COMMENT_DATE"/>
+		<result property="p_code"      		 column="P_CODE"/>
+		<result property="s_sode"      		 column="S_CODE"/>
+		<result property="board_no"      	 column="BOARD_NO"/>
+	</resultMap>
+	
+	<select id="selectAllBoard" resultMap="boardResultMap">
+		SELECT * FROM BOARD 
+	</select>
+	<insert id="insertBoard">
+		INSERT INTO BOARD VALUES(B_SEQ_NO.NEXTVAL, #{board_title}, #{board_content}, DEFAULT, DEFAULT, 'P901', #{board_fileName}, #{board_fileReName}, #{board_writer}, #{board_count})
+	</insert>
+	<update id="updateBoard">
+		UPDATE BOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
+	</update>
+	<delete id="deleteBoard">
+		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+	
+	
+	<select id="selectAllComments" resultMap="commentsResultMap">
+		SELECT * FROM
+		(SELECT COMMENT_NO, S_NAME, COMMENT_CONTENT, COMMENT_DATE, S_CODE, BOARD_NO FROM COMMENTS JOIN STUDENT USING(S_CODE))
+		WHERE BOARD_NO = #{boardNo} AND S_CODE = #{sCode}
+	</select>
+	<insert id="insertComments">
+		INSERT INTO COMMENTS VALUES(C_SEQ_NO.NEXTVAL, #{comment_content}, SYSDATE, 'S001', null, #{board_no})
+	</insert>
+	<update id="updateComments">
+		UPDATE COMMENTS SET COMMENT_CONTENT = #{comment_content} WHERE COMMENT_NO = #{comment_no}
+	</update>
+	<delete id="deleteComments">
+		DELETE FROM COMMENTS WHERE COMMENT_NO = #{comment_no}
+	</delete>
+	
+</mapper> 

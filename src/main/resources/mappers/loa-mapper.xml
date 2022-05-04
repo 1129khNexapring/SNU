@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="LoaMapper">
+	<resultMap type="org.ttt.snu.loa.domain.Loa" id="loaResultMap">
+		<id property="lNum" column="L_NUM"/>
+		<result property="lReason" column="L_REASON"/>
+		<result property="lRequestDate" column="L_REQUEST_DATE"/>
+		<result property="lStatus" column="L_STATUS"/>
+		<result property="lMsg" column="L_MSG"/>
+		<result property="lSemester" column="L_SEMESTER"/>
+		<result property="sCode" column="S_CODE"/>
+		<result property="lReturnMsg" column="L_RETURN_MSG"/>
+	</resultMap>
+	<resultMap type="org.ttt.snu.student.domain.Student" id="studentResultMap">
+		<id property="sCode" column="S_CODE"/>
+		<result property="sName" column="S_NAME"/>
+		<result property="sRrn" column="S_RRN"/>
+		<result property="sPassword" column="S_PASSWORD"/>
+		<result property="sAddress" column="S_ADDRESS"/>
+		<result property="sEmail" column="S_EMAIL"/>
+		<result property="sGender" column="S_GENDER"/>
+		<result property="sPhone" column="S_PHONE"/>
+		<result property="sAddmission" column="S_ADDMISSION"/>
+		<result property="absenceYN" column="ABSENCE_YN"/>
+		<result property="transferYN" column="TRANSFER_YN"/>
+		<result property="dCode" column="D_CODE"/>
+	</resultMap>
+	
+	<insert id = "requestLoa">
+		INSERT INTO LOA VALUES(LOA_SEQ.NEXTVAL, #{lReason}, DEFAULT, DEFAULT, #{lMsg}, #{lSemester}, #{sCode}, #{lReturnMSg } )
+	</insert>
+	<select id="selectLoaList" resultMap="loaResultMap">
+		SELECT * FROM LOA WHERE L_STATUS = 'N'
+	</select>
+	<select id="selectStudentList" resultMap="studentResultMap">
+		SELECT S_CODE, S_NAME FROM STUDENT
+	</select>
+	<update id="updateloaStatus">
+		UPDATE LOA SET L_STATUS = 'Y' WHERE S_CODE = #{sCode }
+	</update>
+	<update id="updateloaMsg">
+		UPDATE LOA SET L_RETURN_MSG = #{lReturnMsg } WHERE S_CODE = #{sCode }
+	</update>
+</mapper>

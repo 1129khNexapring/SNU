@@ -1,8 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Left" width="200" height="670" titletext="Form_Left">
+  <Form id="Form_Left" width="200" height="620" titletext="Form_Left">
     <Layouts>
-      <Layout width="200" height="670" screenid="Desktop_screen"/>
+      <Layout width="200" height="620" screenid="Desktop_screen">
+        <Grid id="Grid00" taborder="0" left="0" width="200" binddataset="p_menu" treeusecheckbox="false" autofittype="col" oncelldblclick="Grid00_oncelldblclick" top="100" bottom="0">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="182"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:MENU_NAME" edittype="tree" displaytype="treeitemcontrol" treelevel="bind:MENU_LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="1" text="교수 종합 정보" left="0" top="0" width="200" height="100" textAlign="center" background="#657ec2" color="#ffffff"/>
+      </Layout>
     </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fn_openForm(obj, e);
+};
+
+
+this. fn_openForm = function(obj, e)
+{
+
+	nexacro.getApplication().mainframe.VFrameSet00.HFrameSet00.VFrameSet00.set_separatesize("30,*,0");
+	
+	var objDs = obj.getBindDataset();
+	var sMenuId = objDs.getColumn(e.row, "MENU_ID");
+	var sMenuNM = objDs.getColumn(e.row, "MENU_NAME");
+	var sFormUrl = objDs.getColumn(e.row, "FORM_URL");
+	
+	if(sFormUrl.length <= 0) return;
+	
+	var objApp = nexacro.getApplication();
+	var sWorkFramePath = objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame;
+	
+	var arrObj = sWorkFramePath.all;
+	for(var i=0; i<arrObj.length; i++)
+	{
+		if(arrObj[i].name == sMenuId)
+		{
+			arrObj[i].setFocus();
+			return;
+		}
+	}
+	
+	var nWidth = sWorkFramePath.getOffsetWidth();
+	var nHeight = sWorkFramePath.getOffsetHeight();
+	
+	var objChildFrame = new ChildFrame(sMenuId, 0, 0, nWidth, nHeight);
+	sWorkFramePath.addChild(sMenuId, objChildFrame);
+	
+	var oParam = {
+					MENU_ID : sMenuId,
+					MENU_NAME : sMenuNM,
+					FORM_URL : sFormUrl
+				};
+				
+	objChildFrame.openParam = oParam;
+	
+	objChildFrame.set_resizable(true);
+	objChildFrame.set_openstatus("maximize");
+	objChildFrame.set_showtitlebar(false);
+	
+	objChildFrame.set_formurl("FrameBase::Form_Work.xfdl");
+	objChildFrame.show();
+	
+	var nRow = objApp.p_openForm.addRow();
+	objApp.p_openForm.setColumn(nRow, "MENU_ID"  , sMenuId);
+	objApp.p_openForm.setColumn(nRow, "MENU_NAME", sMenuNM);
+	objApp.p_openForm.setColumn(nRow, "FORM_URL" , sFormUrl);
+
+	objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.TabFrame.form.fn_addTab(oParam);
+	
+	
+	
+}]]></Script>
   </Form>
 </FDL>

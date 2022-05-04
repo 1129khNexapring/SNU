@@ -24,6 +24,46 @@
 	<select id="selectAllLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 	</select>
+	<select id="selectAllYLectures" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE
+	<where>
+	<choose>
+		<when test="dCode != 'undefined'.toString()" >
+			D_CODE LIKE #{dCode }||'%' AND L_STATUS = 'Y'
+		</when>
+		<when test="lType != 'undefined'.toString()">
+			L_TYPE = #{lType } AND L_STATUS = 'Y'
+		</when>
+		<when test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
+			D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS = 'Y'
+		</when>
+		<otherwise>
+			L_STATUS = 'Y'
+		</otherwise>
+	</choose>
+	</where>	
+	</select>
 	
-	
+	<select id="selectAllNLectures" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE
+		<where>
+			<choose>
+				<when test="dCode != 'undefined'.toString()">
+					D_CODE LIKE #{dCode }||'%' AND L_STATUS = 'N'
+				</when>
+				<when test="lType != 'undefined'.toString()">
+					L_TYPE = #{lType } AND L_STATUS = 'N'
+				</when>
+				<when test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
+					D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS = 'N'
+				</when>
+				<otherwise>
+					L_STATUS = 'N'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	<update id="updateLectureStatus">
+		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE = #{inVar1 }
+	</update>
 </mapper>

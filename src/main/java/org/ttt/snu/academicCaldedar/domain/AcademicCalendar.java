@@ -69,4 +69,6 @@ public class AcademicCalendar {
 
 	
 	
+public class AcademicCalendar {
+
 }

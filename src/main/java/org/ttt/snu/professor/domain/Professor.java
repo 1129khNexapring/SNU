@@ -1,6 +1,5 @@
 package org.ttt.snu.professor.domain;
 
-import java.sql.Date;
 
 public class Professor {
 	
@@ -12,14 +11,14 @@ public class Professor {
 	private String pEmail;
 	private String pGender;
 	private String pPhone;
-	private Date pAddmission;
+	private String pAddmission;
 	private String advisorYN;
 	private String dCode;
 	
 	public Professor() {}
 	
 	public Professor(String pCode, String pName, String pPassword, String pRrn, String pAddress, String pEmail,
-			String pGender, String pPhone, Date pAddmission, String advisorYN, String dCode) {
+			String pGender, String pPhone, String pAddmission, String advisorYN, String dCode) {
 		super();
 		this.pCode = pCode;
 		this.pName = pName;
@@ -98,11 +97,11 @@ public class Professor {
 		this.pPhone = pPhone;
 	}
 
-	public Date getpAddmission() {
+	public String getpAddmission() {
 		return pAddmission;
 	}
 
-	public void setpAddmission(Date pAddmission) {
+	public void setpAddmission(String pAddmission) {
 		this.pAddmission = pAddmission;
 	}
 

@@ -18,10 +18,31 @@
 		<typeAlias type="org.ttt.snu.notice.domain.Notice" alias="Notice"/>
 		<typeAlias type="org.ttt.snu.info.domain.Info" alias="Info"/>
 		<typeAlias type="org.ttt.snu.academicCaldedar.domain.AcademicCalendar" alias="AcademicCalendar"/>
+		<typeAlias type="org.ttt.snu.volunteer.domain.Volunteer" alias="Volunteer"/>
+		<typeAlias type="org.ttt.snu.transfer.domain.Transfer" alias="Transfer"/>
+		<typeAlias type="org.ttt.snu.scholarship.domain.Scholarship" alias="Scholarship"/>
+		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
+
+		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLecture" alias="EnrollLecture"/>
+		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLectureDomain" alias="EnrollLectureDomain"/>
+
+		<typeAlias type="org.ttt.snu.student.domain.Student" alias="Student"/>
+		<typeAlias type="org.ttt.snu.book.domain.Book" alias="Book"/>
+		<typeAlias type="org.ttt.snu.loa.domain.Loa" alias="Loa"/>
+		<typeAlias type="org.ttt.snu.reserveforce.domain.Reserveforce" alias="Reserveforce"/>
+		
+		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
+
+
+
+
+
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/student-mapper.xml"/>
+		<mapper resource="mappers/book-mapper.xml"/>		
 		<mapper resource="mappers/attendance-mapper.xml"/>
 		<mapper resource="mappers/grade-mapper.xml"/>
 		<mapper resource="mappers/lecture-mapper.xml"/>
@@ -30,5 +51,13 @@
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/info-mapper.xml"/>
 		<mapper resource="mappers/academicCalendar-mapper.xml"/>
+		<mapper resource="mappers/volunteer-mapper.xml"/>
+		<mapper resource="mappers/transfer-mapper.xml"/>
+		<mapper resource="mappers/scholarship-mapper.xml"/>
+		<mapper resource="mappers/department-mapper.xml"/>
+		<mapper resource="mappers/requestScholarship-mapper.xml"/>
+		<mapper resource="mappers/loa-mapper.xml"/>
+		<mapper resource="mappers/rehabilitation-mapper.xml"/>
+		<mapper resource="mappers/reserveforce-mapper.xml"/>
 	</mappers>
 </configuration>

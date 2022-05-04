@@ -10,5 +10,6 @@ import org.ttt.snu.academicCaldedar.store.AcademicCalendarStore;
 public class AcademicCalendarStoreLogic implements AcademicCalendarStore{
 
 
+public class AcademicCalendarStoreLogic {
 
 }
