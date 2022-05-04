@@ -55,4 +55,10 @@ public class TransferStoreLogic implements TransferStore{
 		return uResult;
 	}
 
+	@Override
+	public List<Transfer> requestMoveList(SqlSession sqlSession, String sCode) {
+		List<Transfer> tList = sqlSession.selectList("TransferMapper.requestMoveList", sCode);
+		return tList;
+	}
+
 }

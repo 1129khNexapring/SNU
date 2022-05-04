@@ -30,7 +30,7 @@
 	</resultMap>
 	
 	<insert id = "requestLoa">
-		INSERT INTO LOA VALUES(LOA_SEQ.NEXTVAL, #{lReason}, DEFAULT, DEFAULT, #{lMsg}, #{lSemester}, #{sCode}, #{lReturnMSg } )
+		INSERT INTO LOA VALUES(LOA_SEQ.NEXTVAL, #{lReason}, DEFAULT, DEFAULT, #{lMsg}, #{lSemester}, #{sCode}, #{lReturnMsg } )
 	</insert>
 	<select id="selectLoaList" resultMap="loaResultMap">
 		SELECT * FROM LOA WHERE L_STATUS = 'N'
@@ -38,10 +38,17 @@
 	<select id="selectStudentList" resultMap="studentResultMap">
 		SELECT S_CODE, S_NAME FROM STUDENT
 	</select>
+	<!-- 학생 휴학신청리스트 -->
+	<select id="selectLoa" resultMap="loaResultMap">
+		SELECT * FROM LOA WHERE S_CODE = #{sCode}
+	</select>
 	<update id="updateloaStatus">
 		UPDATE LOA SET L_STATUS = 'Y' WHERE S_CODE = #{sCode }
 	</update>
 	<update id="updateloaMsg">
 		UPDATE LOA SET L_RETURN_MSG = #{lReturnMsg } WHERE S_CODE = #{sCode }
 	</update>
+	<delete id="deleteLoa">
+		DELETE FROM LOA WHERE S_CODE = #{sCode}
+	</delete>
 </mapper>

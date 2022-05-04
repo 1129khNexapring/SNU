@@ -22,7 +22,9 @@
 		<typeAlias type="org.ttt.snu.transfer.domain.Transfer" alias="Transfer"/>
 		<typeAlias type="org.ttt.snu.scholarship.domain.Scholarship" alias="Scholarship"/>
 		<typeAlias type="org.ttt.snu.department.domain.Department" alias="Department"/>
-
+		<typeAlias type="org.ttt.snu.reserveforce.domain.Reserveforce" alias="Reserveforce"/>
+		<typeAlias type="org.ttt.snu.rehabilitation.domain.Rehabilitation" alias="Rehabilitation"/>
+		
 		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLecture" alias="EnrollLecture"/>
 		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLectureDomain" alias="EnrollLectureDomain"/>
 
@@ -32,6 +34,7 @@
 		<typeAlias type="org.ttt.snu.reserveforce.domain.Reserveforce" alias="Reserveforce"/>
 		
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
+		<typeAlias type="org.ttt.snu.requestSch.domain.RequestSch" alias="RequestSch"/>
 
 
 
@@ -56,8 +59,11 @@
 		<mapper resource="mappers/scholarship-mapper.xml"/>
 		<mapper resource="mappers/department-mapper.xml"/>
 		<mapper resource="mappers/requestScholarship-mapper.xml"/>
+		<mapper resource="mappers/requestSch-mapper.xml"/>
 		<mapper resource="mappers/loa-mapper.xml"/>
-		<mapper resource="mappers/rehabilitation-mapper.xml"/>
+
 		<mapper resource="mappers/reserveforce-mapper.xml"/>
+		<mapper resource="mappers/rehabilitation-mapper.xml"/>
+
 	</mappers>
 </configuration>

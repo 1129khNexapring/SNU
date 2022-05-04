@@ -32,7 +32,11 @@
 	<insert id = "requestRehab">
 		INSERT INTO REHABILITATION VALUES(REHAB_SEQ.NEXTVAL, #{rReason}, #{rSemester}, #{rYear}, DEFAULT, #{rRequestDate}, #{rMsg}, #{sCode} )
 	</insert>
-	
+
+		<select id = "selectRehab" resultMap="rehabResultMap">
+		SELECT * FROM REHABILITATION WHERE S_CODE = #{sCode}
+	</select>
+
 	<select id="printStudent" resultMap="studentResultMap">
 		SELECT S_CODE, S_NAME FROM STUDENT
 	</select>
@@ -46,5 +50,6 @@
 	<update id="updateRehabMsg">
 		UPDATE REHABILITATION SET R_MSG = #{rMsg } WHERE S_CODE = #{sCode }
 	</update>
+
 
 </mapper>

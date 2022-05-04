@@ -9,6 +9,9 @@ public interface RehabilitationService {
 
 	int requestRehab(Rehabilitation rehab);
 
+
+	List<Rehabilitation> printRehab(String sCode);
+
 	List<Student> printStudentName();
 
 	List<Rehabilitation> printReList();

@@ -15,4 +15,8 @@ public interface ScholarshipStore {
 
 	int updateScholarship(SqlSession sqlSession, Scholarship scholarship);
 
+	List<Scholarship> selectSch(SqlSession sqlSession);
+
+	List<Scholarship> selectRequestSch(SqlSession sqlSession, String sCode);
+
 }

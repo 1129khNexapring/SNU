@@ -25,6 +25,30 @@ public class RehabilitationController {
 	@Autowired
 	private RehabilitationService rService;
 	
+	//학생 - 휴학신청리스트 조회
+		@RequestMapping(value="/bb/list.snu", method=RequestMethod.POST)
+		public NexacroResult printRehab(
+				@ParamVariable(name="inVar1") String sCode) throws Exception {
+			int nErrorCode = 0;
+			String strErrorMsg = "";
+			NexacroResult result = new NexacroResult();
+			List<Rehabilitation> rList = rService.printRehab(sCode);
+			System.out.println(rList);
+			if(!rList.isEmpty())
+			{
+				nErrorCode = 0;
+				strErrorMsg = "SUCC";
+			}else {
+				nErrorCode = 0;
+				strErrorMsg = "Fail";
+			}
+			result.addDataSet("out_rehab", rList);
+			result.addVariable("ErrorCode", nErrorCode);
+			result.addVariable("ErrorMsg", strErrorMsg);
+			return result;
+		}
+	
+	
 
 	@RequestMapping(value="/rehab/request.snu", method=RequestMethod.POST)
 	public NexacroResult requestRehab(

@@ -10,6 +10,7 @@ public interface RehabilitationStore {
 
 	int requestRehab(SqlSession sqlSession, Rehabilitation rehab);
 
+	List<Rehabilitation> selectRehabList(SqlSession sqlSession, String sCode);
 	List<Student> selectStudent(SqlSession sqlSession);
 
 	List<Rehabilitation> selectReList(SqlSession sqlSession);

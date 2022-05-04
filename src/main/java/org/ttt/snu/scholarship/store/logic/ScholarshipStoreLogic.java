@@ -33,5 +33,15 @@ public class ScholarshipStoreLogic implements ScholarshipStore {
 		int uResult = sqlSession.update("ScholarshipMapper.updateScholarship", scholarship);
 		return uResult;
 	}
+	@Override
+	public List<Scholarship> selectSch(SqlSession sqlSession) {
+		List<Scholarship> schList = sqlSession.selectList("ScholarshipMapper.selectMoneyList");
+		return schList;
+	}
+	@Override
+	public List<Scholarship> selectRequestSch(SqlSession sqlSession, String sCode) {
+		List<Scholarship> schList = sqlSession.selectList("ScholarshipMapper.selectRequestList", sCode);
+		return schList;
+	}
 
 }

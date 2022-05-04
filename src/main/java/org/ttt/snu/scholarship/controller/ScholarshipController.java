@@ -10,6 +10,7 @@ import org.ttt.snu.scholarship.domain.Scholarship;
 import org.ttt.snu.scholarship.service.ScholarshipService;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
+import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 import com.nexacro17.xapi.data.DataSet;
 
@@ -17,6 +18,48 @@ import com.nexacro17.xapi.data.DataSet;
 public class ScholarshipController {
 	@Autowired
 	private ScholarshipService scService;
+	
+	@RequestMapping(value="/money/list.snu", method=RequestMethod.GET)
+	public NexacroResult printSch() {
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Scholarship> schList = scService.printAllSch();
+		if(!schList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_sch", schList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	@RequestMapping(value="/request/schlist.snu", method=RequestMethod.POST)
+	public NexacroResult printRequestSch(
+			@ParamVariable(name="inVar1") String sCode) {
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Scholarship> schList = scService.printRequestSch(sCode);
+		System.out.println(schList);
+		if(!schList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_sch", schList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+
 	
 	@RequestMapping(value="/scholarship/list.snu", method=RequestMethod.GET)
 	public NexacroResult printScholarship() {
@@ -36,6 +79,8 @@ public class ScholarshipController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
+	
+	
 	
 	@RequestMapping(value="/scholarship/changeInfo.snu", method=RequestMethod.POST)
 	public NexacroResult changeScholarshipInfo(

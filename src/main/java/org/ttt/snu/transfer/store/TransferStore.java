@@ -15,6 +15,9 @@ public interface TransferStore {
 
 	int requestTran(SqlSession sqlSession, Transfer transfer);
 
+
+	List<Transfer> requestMoveList(SqlSession sqlSession, String sCode);
+
 	List<Student> selectStudent(SqlSession sqlSession);
 
 	List<Transfer> selectTransferList(SqlSession sqlSession);

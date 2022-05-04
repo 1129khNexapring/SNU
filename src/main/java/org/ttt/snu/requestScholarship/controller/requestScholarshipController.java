@@ -1,5 +1,7 @@
 package org.ttt.snu.requestScholarship.controller;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.ttt.snu.requestScholarship.domain.RequestScholarship;
 import org.ttt.snu.requestScholarship.service.requestScholarshipService;
 
+import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
+import com.nexacro17.xapi.data.DataSet;
+import com.nexacro17.xapi.data.DataTypes;
 
 @Controller
 public class requestScholarshipController {

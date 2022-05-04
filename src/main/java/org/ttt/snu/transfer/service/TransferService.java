@@ -14,6 +14,9 @@ public interface TransferService {
 
 	int requestTransfer(Transfer transfer);
 
+
+	List<Transfer> moveList(String sCode);
+
 	List<Student> printStudentName();
 
 	List<Transfer> printTrList();
@@ -21,6 +24,7 @@ public interface TransferService {
 	int modifyStatus(Transfer transfer);
 
 	int modifyMsg(Transfer transfer);
+
 
 
 }

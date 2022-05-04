@@ -62,4 +62,10 @@ public class TransferServiceImpl implements TransferService {
 		return uResult;
 	}
 
+	@Override
+	public List<Transfer> moveList(String sCode) {
+		List<Transfer> tList = tStore.requestMoveList(sqlSession, sCode);
+		return tList;
+	}
+
 }

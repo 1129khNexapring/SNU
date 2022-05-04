@@ -3,14 +3,27 @@
   <Form id="frm_mypage" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="150" top="176" width="184" height="68" onclick="Button00_onclick"/>
+        <Div id="Div00" taborder="0" text="Div00" left="11" top="15" width="859" height="475" background="#ffffff" border="1px solid">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="ImageViewer00" taborder="0" text="ImageViewer00" left="41" top="60" width="119" height="102" onclick="Div00_ImageViewer00_onclick"/>
+              <Static id="Static00" taborder="1" text="학번" left="220" top="30" width="78" height="46"/>
+              <Static id="Static00_00" taborder="2" text="성명" left="220" top="86" width="78" height="46"/>
+              <Static id="Static00_01" taborder="3" text="소속" left="220" top="142" width="78" height="46"/>
+              <Edit id="Edit00" taborder="4" left="268" top="30" width="180" height="47"/>
+              <Edit id="Edit00_00" taborder="5" left="268" top="88" width="180" height="47"/>
+              <Edit id="Edit00_01" taborder="6" left="268" top="144" width="180" height="47"/>
+              <Static id="Static00_02" taborder="7" text="전화번호" left="548" top="30" width="78" height="46"/>
+              <Static id="Static00_00_00" taborder="8" text="주소" left="548" top="88" width="78" height="46"/>
+              <Static id="Static00_01_00" taborder="9" text="이메일" left="548" top="142" width="78" height="46"/>
+              <Edit id="Edit00_02" taborder="10" left="618" top="30" width="180" height="47"/>
+              <Edit id="Edit00_00_00" taborder="11" left="618" top="88" width="180" height="47"/>
+              <Edit id="Edit00_01_00" taborder="12" left="618" top="144" width="180" height="47"/>
+            </Layout>
+          </Layouts>
+        </Div>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	
-};
-]]></Script>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
   </Form>
 </FDL>

@@ -22,4 +22,7 @@ public class requestScholarshipServiceImpl implements requestScholarshipService 
 		return rsList;
 	}
 
+
+
+
 }

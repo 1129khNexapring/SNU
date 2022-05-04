@@ -8,4 +8,6 @@ public interface requestScholarshipService {
 	//해당장학금학생리스트
 	List<RequestScholarship> printStudentList(String inVar1);
 
+
+
 }

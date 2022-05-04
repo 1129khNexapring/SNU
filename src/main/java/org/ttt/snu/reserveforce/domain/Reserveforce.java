@@ -1,9 +1,9 @@
 package org.ttt.snu.reserveforce.domain;
 
 public class Reserveforce {
-	private int rfNum;
+	private String rfNum;
 	private String rfRequestDate;
-	private String muterDate;
+	private String musterDate;
 	private String rfStatus;
 	private String rfMsg;
 	private String military;
@@ -12,12 +12,12 @@ public class Reserveforce {
 	
 	public Reserveforce() {}
 
-	public Reserveforce(int rfNum, String rfRequestDate, String muterDate, String rfStatus, String rfMsg,
+	public Reserveforce(String rfNum, String rfRequestDate, String musterDate, String rfStatus, String rfMsg,
 			String military, String rank, String sCode) {
 		super();
 		this.rfNum = rfNum;
 		this.rfRequestDate = rfRequestDate;
-		this.muterDate = muterDate;
+		this.musterDate = musterDate;
 		this.rfStatus = rfStatus;
 		this.rfMsg = rfMsg;
 		this.military = military;
@@ -25,11 +25,11 @@ public class Reserveforce {
 		this.sCode = sCode;
 	}
 
-	public int getRfNum() {
+	public String getRfNum() {
 		return rfNum;
 	}
 
-	public void setRfNum(int rfNum) {
+	public void setRfNum(String rfNum) {
 		this.rfNum = rfNum;
 	}
 
@@ -41,12 +41,12 @@ public class Reserveforce {
 		this.rfRequestDate = rfRequestDate;
 	}
 
-	public String getMuterDate() {
-		return muterDate;
+	public String getMusterDate() {
+		return musterDate;
 	}
 
-	public void setMuterDate(String muterDate) {
-		this.muterDate = muterDate;
+	public void setMusterDate(String musterDate) {
+		this.musterDate = musterDate;
 	}
 
 	public String getRfStatus() {
@@ -91,10 +91,10 @@ public class Reserveforce {
 
 	@Override
 	public String toString() {
-		return "Reserveforce [rfNum=" + rfNum + ", rfRequestDate=" + rfRequestDate + ", muterDate=" + muterDate
+		return "Reserveforce [rfNum=" + rfNum + ", rfRequestDate=" + rfRequestDate + ", musterDate=" + musterDate
 				+ ", rfStatus=" + rfStatus + ", rfMsg=" + rfMsg + ", military=" + military + ", rank=" + rank
 				+ ", sCode=" + sCode + "]";
-	}
+	};
 	
 	
 }

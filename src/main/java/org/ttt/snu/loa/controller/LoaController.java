@@ -34,6 +34,11 @@ public class LoaController {
 		NexacroResult result = new NexacroResult();
 		int i;
 		
+		for(i=0; i< inLoa.getRemovedRowCount(); i++) {
+			String lDelete = inLoa.getRemovedData(i, "sCode").toString();
+			lService.removeLoa(lDelete);
+		}
+		
 		int iResult = 0;
 		//int uResult = 0;
 		for(i=0; i<inLoa.getRowCount(); i++) {
@@ -70,6 +75,30 @@ public class LoaController {
 		
 		return result;
 	}
+	
+	//학생 - 휴학신청리스트 조회
+	@RequestMapping(value="/hh/list.snu", method=RequestMethod.POST)
+	public NexacroResult printLoa(
+			@ParamVariable(name="inVar1") String sCode) throws Exception {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		List<Loa> slList = lService.printLoa(sCode);
+		System.out.println(slList);
+		if(!slList.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = 0;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_loa", slList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
 	//관리자 - 휴학신청리스트 조회
 	@RequestMapping(value="/loaStudent/list.snu", method=RequestMethod.GET)
 	public NexacroResult printALlRequestLoaStudent() {
@@ -123,7 +152,6 @@ public class LoaController {
 		int nErrorCode = 0;
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();
-		System.out.println(inVar2);
 		Loa loa = new Loa();
 		loa.setsCode(inVar1);
 		loa.setlReturnMsg(inVar2);
