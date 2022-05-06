@@ -54,6 +54,6 @@ public class AcademicCalendarController {
 			
 		}
 		
-	}
+	}//커밋용 변경추가
 	
 }
