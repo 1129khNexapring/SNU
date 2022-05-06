@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>학사일정</title>
  <style>
  .add-button{
  position: absolute;
@@ -65,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
       %>
       		{
       		   title : 'defult',
-      		   start : "2019-01-01",
-      		   end : "2019-01-01"
+      		   start : "2022-05-18",
+      		   end : "2022-05-19T23:59:59"
       		  }
         ]
       });

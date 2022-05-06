@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.ttt.snu.academicCaldedar.domain.AcademicCalendar;
 import org.ttt.snu.academicCaldedar.service.AcademicCalendarService;
 
@@ -30,7 +31,8 @@ public class AcademicCalendarController {
 		}
 	
 	//일정추가 버튼클릭 
-	@RequestMapping(value="/addSchedule.snu", method = RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping(value="/addSchedule.snu", method = RequestMethod.POST, produces="application/json;charset=utf-8")
 	public Map<Object,Object> addSchedule(@RequestBody AcademicCalendar calendar) {
 		Map<Object,Object> map = new HashMap<Object,Object>();
 		
@@ -39,6 +41,7 @@ public class AcademicCalendarController {
 		return map;
 	}
 	//일정 출력
+	
 	@RequestMapping(value = "/schedule.snu", method=RequestMethod.GET)
 	public String schdule(Model model) {
 		List<AcademicCalendar> aList = aService.showSchedule();

@@ -5,11 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>일정 추가</title>
-
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<!-- datepicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- custom -->
 	<script src="../../resources/js/schedule.js" type="text/javascript"></script>
 
 </head>
@@ -21,7 +23,7 @@
 	<div class = "group-body">
 	<form id = "scheduleData">
 		<div class = "top">
-			<input class = "subject" id = "subject" type = "text" name = "subject" placeholder="제목을 입력해주세요">
+			<input class = "title" id = "title" type = "text" name = "title" placeholder="제목을 입력해주세요">
 		</div>
 		<div class = "domain">
 			<h3 class = "zTree-h3"> 시작 </h3>
@@ -37,7 +39,7 @@
 		</div>
 		
 	</form>
-		<button class = "ok-button" type= "button" onclick="click_ok();">확인</button>
+		<button class ="ok-button" type="button" onclick="click_ok();">확인</button>
 	</div>	
 	
 	

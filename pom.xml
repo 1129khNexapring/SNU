@@ -32,6 +32,7 @@
 			<artifactId>uiadapter17-spring-core</artifactId>
 			<version>${nexacro.uiadapter.version}</version>
 		</dependency>
+		
 		<!-- oracle driver -->
 		<dependency>
 		    <groupId>oracle</groupId>

@@ -19,7 +19,7 @@
   
   <insert id="addSchedule" parameterType="AcademicCalendar">
   	INSERT INTO ACADEMIC_CALENDAR(AC_NO, A_CODE, TITLE, START_DATE, END_DATE)
-  			VALUES(AC_NO.NEXTVAL, 'eorhkd', #{title}, #{startDate}, #{endDate )
+  			VALUES(AC_NO.NEXTVAL, 'admin', #{title}, #{startDate}, #{endDate} )
   </insert>
   </mapper>
 
