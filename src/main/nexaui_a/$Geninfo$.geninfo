@@ -8,15 +8,6 @@
       <XCSS rule_version="1.04"/>
       <Script rule_version="1.02"/>
     </Rule>
-    <Info project="C:\Users\eorhk\git\SNU\src\main\nexaui_a\" generated="C:\Users\eorhk\Documents\nexacro\17.1\outputs\Admin\">
-      <File url="typedefinition.xml" checksum="20220422091236" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220422091234" errormsg=""/>
-      <File url="environment.xml" checksum="20220422091235" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220422091236" errormsg=""/>
-      <File url="Application_Desktop.xadl" checksum="20220422091237" errormsg=""/>
-      <File url="FrameBase\Form_Top.xfdl" checksum="20220422091234" errormsg=""/>
-      <File url="FrameBase\Form_Left.xfdl" checksum="20220422091236" errormsg=""/>
-      <File url="FrameBase\Form_Work.xfdl" checksum="20220422091235" errormsg=""/>
     <Info project="C:\Users\User\Desktop\SNU\src\main\nexaui_a\" generated="C:\Users\User\Documents\nexacro\17.1\outputs\Admin\">
       <File url="environment.xml" checksum="20220429091056" errormsg=""/>
       <File url="typedefinition.xml" checksum="20220429091056" errormsg=""/>
@@ -29,11 +20,10 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-      <File url="Popup\lectureDetail.xfdl" checksum="20220429165208" errormsg=""/>
       <File url="Application_Desktop.xadl" checksum="20220429091057" errormsg=""/>
-      <File url="Base\frm_lecture.xfdl" checksum="20220429165451" errormsg=""/>
+      <File url="Base\frm_notice.xfdl" checksum="20220506124736" errormsg=""/>
       <File url="Base\frm_absenceschool.xfdl" checksum="20220501223017" errormsg=""/>
-      <File url="Base\frm_notice.xfdl" checksum="20220429091054" errormsg=""/>
+      <File url="Base\frm_lecture.xfdl" checksum="20220429165451" errormsg=""/>
       <File url="Base\frm_professor.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\frm_reservist.xfdl" checksum="20220504030840" errormsg=""/>
       <File url="Base\frm_returnschool.xfdl" checksum="20220502153603" errormsg=""/>
@@ -49,6 +39,7 @@
       <File url="FrameBase\Form_Mdi.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Top.xfdl" checksum="20220429091054" errormsg=""/>
       <File url="FrameBase\Form_Work.xfdl" checksum="20220429091055" errormsg=""/>
+      <File url="Popup\lectureDetail.xfdl" checksum="20220429165208" errormsg=""/>
       <File url="Popup\loaReturnMsg.xfdl" checksum="20220502122901" errormsg=""/>
       <File url="Popup\rehabReturnMsg.xfdl" checksum="20220502123123" errormsg=""/>
       <File url="Popup\TransferReturnMsg.xfdl" checksum="20220503151948" errormsg=""/>

@@ -23,6 +23,8 @@ import org.ttt.snu.notice.domain.Notice;
 import org.ttt.snu.notice.domain.PageInfo;
 import org.ttt.snu.notice.service.NoticeService;
 
+import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
+
 @Controller
 public class NoticeController {
 
@@ -208,6 +210,31 @@ public class NoticeController {
 			return "common/errorPage";
 		}
 
+	}
+	//관리자 넥사크로 게시글 리스트 조회
+	@RequestMapping(value="/notice/nList.snu", method=RequestMethod.GET)
+	public NexacroResult printNoticeList() 
+	{
+		int nErrorCode = 0;
+		String strErrorMsg="";
+		
+		NexacroResult result = new NexacroResult();
+		List<Notice> nList = nService.printAllNotice();
+
+		if(!nList.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+			
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_notice", nList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+		
 	}
 
 }

@@ -75,7 +75,7 @@
 			dataType : "json",
 			success : function(loginUser) {
 				if(loginUser != null) {
-					location.href='/nexa_p/index.html?ev_Val='+loginUser.aCode+'';
+					location.href='/nexa_a/index.html?ev_Val='+loginUser.aCode+'';
 					
 				}
 			},

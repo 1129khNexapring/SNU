@@ -67,7 +67,7 @@ public class ReserveforceController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-	
+	//관리자-예비군 리스트 조회
 	@RequestMapping(value="/reservist/list.snu", method=RequestMethod.GET)
 	public NexacroResult printReserveforceList()
 	{	
@@ -103,6 +103,7 @@ public class ReserveforceController {
 		return result;
 		
 	}
+	//관리자 예비군 승인
 	@RequestMapping(value="/reserveforce/approve.snu", method=RequestMethod.POST)
 	public NexacroResult approveReserveforce(
 			@ParamVariable(name="in_Var1") String inVar1) {
