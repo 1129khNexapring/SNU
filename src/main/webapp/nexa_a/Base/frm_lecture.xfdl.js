@@ -168,7 +168,6 @@
 
 
 
-
         this.btn_retrieveNL_onclick = function(obj,e)
         {
         	var out_Field = this.comb_Field.value;
