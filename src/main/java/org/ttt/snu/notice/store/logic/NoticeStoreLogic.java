@@ -54,6 +54,12 @@ public class NoticeStoreLogic implements NoticeStore {
 		int result = sqlSession.update("NoticeMapper.updateCount", noticeNo);
 		return result;
 	}
+	//넥사크로 관리자- 게시글 조회
+	@Override
+	public List<Notice> selectAllNoticeList(SqlSession sqlSession) {
+		List<Notice> nList = sqlSession.selectList("NoticeMapper.selectNoticeList");
+		return nList;
+	}
 	
 	
 	

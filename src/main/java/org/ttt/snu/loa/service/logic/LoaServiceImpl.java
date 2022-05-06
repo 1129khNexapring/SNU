@@ -43,7 +43,7 @@ public class LoaServiceImpl implements LoaService {
 		int result = lStore.updateStatus(sqlSession, loa);
 		return result;
 	}
-
+	//관리자-휴학반려
 	@Override
 	public int modifyMsg(Loa loa) {
 		int result = lStore.updateMsg(sqlSession, loa);

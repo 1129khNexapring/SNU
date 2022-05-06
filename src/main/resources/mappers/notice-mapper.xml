@@ -52,6 +52,9 @@
   	DELETE FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
   	
   	</delete>
+  	<select id="selectNoticeList" resultMap="noticeResultMap">
+  		SELECT * FROM NOTICE
+  	</select>
 
 	
 </mapper>
