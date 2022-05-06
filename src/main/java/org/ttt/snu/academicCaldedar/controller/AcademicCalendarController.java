@@ -1,6 +1,7 @@
 package org.ttt.snu.academicCaldedar.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,6 +23,13 @@ public class AcademicCalendarController {
 	
 
 	
+	//일정 추가 팝업
+		@RequestMapping(value = "/schedulePopup.snu")
+		public String schedulePopup()  {
+			return "/academicCalendar/schedulePopup";
+		}
+	
+	//일정추가 버튼클릭 
 	@RequestMapping(value="/addSchedule.snu", method = RequestMethod.POST)
 	public Map<Object,Object> addSchedule(@RequestBody AcademicCalendar calendar) {
 		Map<Object,Object> map = new HashMap<Object,Object>();
@@ -30,11 +38,19 @@ public class AcademicCalendarController {
 		
 		return map;
 	}
+	//일정 출력
 	@RequestMapping(value = "/schedule.snu", method=RequestMethod.GET)
 	public String schdule(Model model) {
-		model.addAttribute("showSchdule", aService.showSchedule());
+		List<AcademicCalendar> aList = aService.showSchedule();
+		if(!aList.isEmpty()) {
+			model.addAttribute("aList", aList);
+			return "/academicCalendar/schedule";
+		}else {
+			model.addAttribute("msg", "조회 실패");
+			return "common/errorPage"; 
+			
+		}
 		
-		return "academicCalendar/schedule";
 	}
 	
 }

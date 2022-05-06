@@ -6,10 +6,10 @@ package org.ttt.snu.academicCaldedar.service.logic;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.ttt.snu.academicCaldedar.DAO.AcademicCalendarDAO;
 import org.ttt.snu.academicCaldedar.domain.AcademicCalendar;
 import org.ttt.snu.academicCaldedar.service.AcademicCalendarService;
 import org.ttt.snu.academicCaldedar.store.AcademicCalendarStore;
@@ -18,18 +18,19 @@ import org.ttt.snu.academicCaldedar.store.AcademicCalendarStore;
 public class AcademicCalendarServiceImpl implements AcademicCalendarService{
 		
 		@Autowired
-		private AcademicCalendarDAO dao;
+		private AcademicCalendarStore aStore;
 	
 	@Override
 	public void addSchedule(AcademicCalendar calendar) {
-		dao.addSchedule(calendar);
+		aStore.addSchedule(calendar);
+		
 		
 	}
 
 	@Override
 	public List<AcademicCalendar> showSchedule() {
 		
-		return dao.showSchedule();
+		return aStore.showSchedule();
 	}
 
 	

@@ -9,7 +9,7 @@ import org.ttt.snu.notice.domain.PageInfo;
 public interface NoticeService {
 
 	public int getListCount();
-	public List<Notice>printAll(PageInfo pi);
+	public List<Notice> printAll(PageInfo pi);
 	public Notice printOneByNo(Integer noticeNo);
 	public int registerNotice(Notice notice);
 	public int modifyNotice(Notice notice);
