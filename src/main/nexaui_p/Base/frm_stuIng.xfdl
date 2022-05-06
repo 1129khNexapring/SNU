@@ -3,8 +3,82 @@
   <Form id="frm_stuIng" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="335" top="189" width="120" height="50"/>
+        <Grid id="grid_list" taborder="0" left="80" top="73" width="380" height="515" binddataset="ds_prof" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="70"/>
+                <Column size="116"/>
+                <Column size="65"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="학생 코드"/>
+                <Cell col="1" text="이름"/>
+                <Cell col="2" text="입학일"/>
+                <Cell col="3" text="휴학여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:pCode"/>
+                <Cell col="1" text="bind:pName"/>
+                <Cell col="2" text="bind:pAddmission"/>
+                <Cell col="3" text="bind:advisorYN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="grid_detail" taborder="1" left="550" top="70" width="460" height="521" background="lightgray" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학생 코드" left="40" top="43" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_00" taborder="1" text="이름" left="40" top="118" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_01" taborder="2" text="주소" left="40" top="418" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="grid_detail_Static00_01_onclick"/>
+              <Static id="Static00_02" taborder="3" text="이메일" left="40" top="268" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_03" taborder="4" text="연락처" left="40" top="343" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_04" taborder="5" text="성별" left="40" top="193" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Edit id="Edit00_00" taborder="6" left="210" top="123" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="Edit00_00_00_00" taborder="7" left="210" top="273" width="198" height="35" color="black" readonly="true" background="white"/>
+              <Edit id="Edit00_00_00_00_00" taborder="8" left="210" top="348" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="Edit00_00_00_00_00_00" taborder="9" left="210" top="423" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Radio id="rdo_gender" taborder="10" left="212" top="201" width="198" height="40" onitemchanged="grid_detail_rdo_gender_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" enable="false" color="black">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">M</Col>
+                      <Col id="datacolumn">남</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">W</Col>
+                      <Col id="datacolumn">여</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">9</Col>
+                      <Col id="datacolumn">기타</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
+              <MaskEdit id="mskedt_pCode" taborder="11" left="209" top="50" width="199" height="37" readonly="true" color="black" background="white" format="A###" type="string"/>
+            </Layout>
+          </Layouts>
+        </Div>
       </Layout>
     </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="grid_detail.form.rdo_gender" propid="value" datasetid="ds_prof" columnid="pGender"/>
+      <BindItem id="item1" compid="grid_detail.form.mskedt_pCode" propid="value" datasetid="ds_prof" columnid="pCode"/>
+      <BindItem id="item2" compid="grid_detail.form.Edit00_00" propid="value" datasetid="ds_prof" columnid="pName"/>
+      <BindItem id="item3" compid="grid_detail.form.Edit00_00_00_00" propid="value" datasetid="ds_prof" columnid="pEmail"/>
+      <BindItem id="item4" compid="grid_detail.form.Edit00_00_00_00_00" propid="value" datasetid="ds_prof" columnid="pPhone"/>
+      <BindItem id="item5" compid="grid_detail.form.Edit00_00_00_00_00_00" propid="value" datasetid="ds_prof" columnid="pAddress"/>
+    </Bind>
   </Form>
 </FDL>

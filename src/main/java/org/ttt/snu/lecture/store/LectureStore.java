@@ -9,4 +9,7 @@ public interface LectureStore {
 
 	List<Lecture> selectAllLectures(SqlSession sqlSession);
 
+	List<Lecture> selectLecturePlanList(SqlSession sqlSession);
+
+
 }

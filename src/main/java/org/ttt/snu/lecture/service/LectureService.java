@@ -8,4 +8,6 @@ public interface LectureService {
 	
 	public List<Lecture> printAllLectures();
 
+	public List<Lecture> printLecturePlanList();
+
 }

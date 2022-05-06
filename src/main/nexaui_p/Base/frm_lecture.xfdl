@@ -1,10 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_lecture" width="1080" height="670" titletext="New Form">
+  <Form id="frm_lecture" width="1080" height="700" titletext="New Form">
     <Layouts>
-      <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="288" top="178" width="120" height="50"/>
+      <Layout height="700" mobileorientation="landscape" width="1080">
+        <Grid id="grid_list" taborder="0" left="80" top="73" width="310" height="515" binddataset="ds_prof" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="139"/>
+                <Column size="116"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="강의 코드"/>
+                <Cell col="1" text="강의명"/>
+                <Cell col="2" text="승인여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:pCode"/>
+                <Cell col="1" text="bind:pName"/>
+                <Cell col="2" text="bind:pAddmission"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="grid_detail" taborder="1" left="481" top="69" width="460" height="521" background="lightgray" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="강의 코드" left="40" top="43" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_00" taborder="1" text="강의명" left="40" top="118" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_02" taborder="2" text="강의 내용" left="40" top="268" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_03" taborder="3" text="교재" left="32" top="446" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_04" taborder="4" text="강의 목표" left="40" top="193" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Edit id="Edit00_00" taborder="5" left="210" top="123" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="Edit00_00_00_00_00" taborder="6" left="211" top="451" width="198" height="35" readonly="true" color="black" background="white"/>
+              <MaskEdit id="mskedt_pCode" taborder="7" left="209" top="50" width="199" height="37" readonly="true" color="black" background="white" format="A###" type="string"/>
+              <Edit id="Edit00_00_00_00_00_00" taborder="8" left="211" top="198" width="198" height="35" readonly="true" color="black" background="white"/>
+              <TextArea id="TextArea00" taborder="9" left="213" top="275" width="196" height="148"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="2" text="수정" left="568" top="611" width="120" height="38" color="black" background="skyblue"/>
+        <Button id="Button00_00" taborder="3" text="삭제" left="729" top="611" width="120" height="38" background="pink" color="black"/>
       </Layout>
     </Layouts>
+    <Bind>
+      <BindItem id="item1" compid="grid_detail.form.mskedt_pCode" propid="value" datasetid="ds_prof" columnid="pCode"/>
+      <BindItem id="item2" compid="grid_detail.form.Edit00_00" propid="value" datasetid="ds_prof" columnid="pName"/>
+    </Bind>
   </Form>
 </FDL>

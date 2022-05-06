@@ -25,7 +25,7 @@ public class DepartmentController {
 	private ProfessorService pService;
 	
 	@RequestMapping(value="/dept/info.snu", method=RequestMethod.POST)
-	public NexacroResult printEmployees(
+	public NexacroResult printDeptBypCode(
 			@ParamVariable(name="in_var1") String profCode) {
 		// ErrorCode, ErrorMsg, Dataset 선언
 		int 	nErrorCode = 0;

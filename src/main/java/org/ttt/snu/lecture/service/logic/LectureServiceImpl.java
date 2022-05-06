@@ -24,4 +24,10 @@ public class LectureServiceImpl implements LectureService{
 		return lList;
 	}
 
+	@Override
+	public List<Lecture> printLecturePlanList() {
+		List<Lecture> lList = lStore.selectLecturePlanList(sqlSession);
+		return lList;
+	}
+
 }
