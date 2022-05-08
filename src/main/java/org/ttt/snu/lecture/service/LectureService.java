@@ -15,6 +15,10 @@ public interface LectureService {
 	public List<Lecture> printAllNLecture(Lecture lecture);
 
 	public int modifyLectureStatus(String inVar1);
+
+	public List<Lecture> printLpBypCode(String pCode);
+
+	public int registerLecture(Lecture lecture);
 	
 	
 

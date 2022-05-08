@@ -35,6 +35,18 @@ public class LectureStoreLogic implements LectureStore{
 		int result = sqlSession.update("LectureMapper.updateLectureStatus", inVar1);
 		return result;
 	}
+	//교수 - 강의계획서 조회
+	@Override
+	public List<Lecture> selectLpBypCode(SqlSession sqlSession, String pCode) {
+		List<Lecture> lpList = sqlSession.selectList("LectureMapper.selectLpBypCode", pCode);
+		return lpList;
+	}
+	//교수 - 강의계획서 등록
+	@Override
+	public int insertLecture(SqlSession sqlSession, Lecture lecture) {
+		int result = sqlSession.insert("LectureMapper.insertLecture", lecture);
+		return result;
+	}
 	
 	
 

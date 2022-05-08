@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_lectureWriteForm" width="1080" height="670" titletext="New Form" onload="frm_lectureWriteForm_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Div id="grid_detail" taborder="0" left="90" top="30" width="910" height="561" background="lightgray" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="강의명" left="40" top="80" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_00" taborder="1" text="강의 목표" left="40" top="155" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_02" taborder="2" text="교재" left="40" top="362" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_03" taborder="3" text="희망 정원" left="40" top="472" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_04" taborder="4" text="강의 내용" left="473" top="170" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Edit id="edt_lName" taborder="5" left="210" top="90" width="198" height="35" readonly="true" color="black" background="white"/>
+              <TextArea id="txtArea_lObjective" taborder="6" left="210" top="157" width="200" height="160"/>
+              <TextArea id="txtArea_lContents" taborder="7" left="570" top="174" width="273" height="286"/>
+              <TextArea id="txtArea_textbook" taborder="8" left="208" top="357" width="200" height="96"/>
+              <MaskEdit id="mskEdt_lCapacity" taborder="9" left="210" top="478" width="99" height="36" format="#,###" type="number"/>
+              <Static id="Static01" taborder="10" text="명" left="326" top="477" width="59" height="40"/>
+              <Static id="Static00_01" taborder="11" text="강의코드" left="40" top="23" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <MaskEdit id="mskEdt_lCode" taborder="12" left="209" top="34" width="199" height="36" format="L###" type="string"/>
+              <Static id="Static00_04_00" taborder="13" text="강의 년도" left="470" top="30" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_04_01" taborder="14" text="학기" left="470" top="90" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Combo id="Combo00" taborder="15" text="Combo00" left="573" top="34" width="267" height="43"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_register" taborder="1" text="등록" left="750" top="507" width="120" height="38" color="black" background="skyblue" onclick="btn_register_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_lecture">
+        <ColumnInfo>
+          <Column id="L_CODE" type="STRING" size="256"/>
+          <Column id="L_TYPE" type="STRING" size="256"/>
+          <Column id="L_NAME" type="STRING" size="256"/>
+          <Column id="L_OBJECTIVE" type="STRING" size="256"/>
+          <Column id="L_CONTENTS" type="STRING" size="256"/>
+          <Column id="TEXTBOOK" type="STRING" size="256"/>
+          <Column id="L_DAYS" type="INT" size="256"/>
+          <Column id="CREDIT" type="INT" size="256"/>
+          <Column id="L_YEAR" type="INT" size="256"/>
+          <Column id="L_SEMESTER" type="INT" size="256"/>
+          <Column id="L_CAPACITY" type="INT" size="256"/>
+          <Column id="L_STATUS" type="STRING" size="256"/>
+          <Column id="P_CODE" type="STRING" size="256"/>
+          <Column id="D_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_register_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"lecture_register"
+		,"SnuUrl::lecture/register.snu"
+		,"in_lecture=ds_lecture:U"
+		,""
+		,"in_var=" + nexacro.getEnvironmentVariable("ev_Val")
+		,"fn_callback_tran"
+	);
+};
+
+
+this.frm_lectureWriteForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds_lecture.addRow();
+};
+
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "lecture_register")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패 : " + sErrorMsg);
+			return;
+		}
+	}
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="grid_detail.form.edt_lName" propid="value" datasetid="ds_lecture" columnid="L_NAME"/>
+      <BindItem id="item1" compid="grid_detail.form.txtArea_lObjective" propid="value" datasetid="ds_lecture" columnid="L_OBJECTIVE"/>
+      <BindItem id="item2" compid="grid_detail.form.txtArea_textbook" propid="value" datasetid="ds_lecture" columnid="TEXTBOOK"/>
+      <BindItem id="item3" compid="grid_detail.form.mskEdt_lCode" propid="value" datasetid="ds_lecture" columnid="L_CODE"/>
+    </Bind>
+  </Form>
+</FDL>

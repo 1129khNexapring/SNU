@@ -43,6 +43,18 @@ public class LectureServiceImpl implements LectureService{
 		int result = lStore.updateLectureStatus(sqlSession, inVar1);
 		return result;
 	}
+	//교수 - 강의계획서 조회
+	@Override
+	public List<Lecture> printLpBypCode(String pCode) {
+		List<Lecture> lpList = lStore.selectLpBypCode(sqlSession, pCode);
+		return lpList;
+	}
+	//교수 - 강의계획서 등록
+	@Override
+	public int registerLecture(Lecture lecture) {
+		int result = lStore.insertLecture(sqlSession, lecture);
+		return result;
+	}
 	
 
 }
