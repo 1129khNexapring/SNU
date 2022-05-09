@@ -8,11 +8,12 @@ public class Volunteer {
 	private String vStart;
 	private String vEnd;
 	private String vEnrollDate;
+	private String vInfo;
 	
 	public Volunteer() {}
 
 	public Volunteer(String vCode, String vName, String vArea, String vHour, String vStart, String vEnd,
-			String vEnrollDate) {
+			String vEnrollDate, String vInfo) {
 		super();
 		this.vCode = vCode;
 		this.vName = vName;
@@ -21,6 +22,7 @@ public class Volunteer {
 		this.vStart = vStart;
 		this.vEnd = vEnd;
 		this.vEnrollDate = vEnrollDate;
+		this.vInfo = vInfo;
 	}
 
 	public String getvCode() {
@@ -79,12 +81,21 @@ public class Volunteer {
 		this.vEnrollDate = vEnrollDate;
 	}
 
+	public String getvInfo() {
+		return vInfo;
+	}
+
+	public void setvInfo(String vInfo) {
+		this.vInfo = vInfo;
+	}
+
 	@Override
 	public String toString() {
 		return "Volunteer [vCode=" + vCode + ", vName=" + vName + ", vArea=" + vArea + ", vHour=" + vHour + ", vStart="
-				+ vStart + ", vEnd=" + vEnd + ", vEnrollDate=" + vEnrollDate + "]";
+				+ vStart + ", vEnd=" + vEnd + ", vEnrollDate=" + vEnrollDate + ", vInfo=" + vInfo + "]";
 	}
 
+	
 	
 	
 	

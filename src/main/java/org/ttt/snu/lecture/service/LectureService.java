@@ -15,6 +15,8 @@ public interface LectureService {
 	public List<Lecture> printAllNLecture(Lecture lecture);
 
 	public int modifyLectureStatus(String inVar1);
+
+	public List<Lecture> printMyLecture(String sCode);
 	
 	
 

@@ -93,7 +93,7 @@
         {
         	this.transaction(
         		"tr_select"
-        		,"tttUrl::/money/list.snu"
+        		,"tttUrl::money/list.snu"
         		,""
         		,"ds_sch=out_sch"
         		,""
@@ -109,7 +109,7 @@
         	this.ds_requestSch.setColumn(0, "scCode", scCode);
         	this.transaction(
         		"tr_register"
-        		,"tttUrl::/sch/request.snu"
+        		,"tttUrl::sch/request.snu"
         		,"in_sch=ds_requestSch:U"
         		,""
         		,""

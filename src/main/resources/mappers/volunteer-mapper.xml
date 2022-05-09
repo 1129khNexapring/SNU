@@ -12,9 +12,11 @@
 		<result property="vStart" 			column="V_START"/>
 		<result property="vEnd"				column="V_END"/>
 		<result property="vEnrollDate"		column="V_ENROLL_DATE"/>
+		<result property="vInfo"		column="V_INFO"/>
+		
 	</resultMap>
 	<insert id="insertVolunteer">
-		INSERT INTO VOLUNTEER VALUES(#{vCode },#{vName }, #{vArea }, #{vHour }, #{vStart }, #{vEnd }, DEFAULT)
+		INSERT INTO VOLUNTEER VALUES(#{vCode },#{vName }, #{vArea }, #{vHour }, #{vStart }, #{vEnd }, DEFAULT, #{vInfo })
 	</insert>
 	<select id="selectVolunteerList" resultMap="volunteerResultMap">
 		SELECT * FROM VOLUNTEER 
@@ -25,6 +27,6 @@
 	<update id="updateVolunteer">
 		UPDATE VOLUNTEER
 		SET V_NAME = #{vName }, V_AREA = #{vArea }, V_HOUR = #{vHour }, 
-		V_START = #{vStart }, V_END = #{vEnd }, V_ENROLL_DATE = DEFAULT WHERE V_CODE = #{vCode }
+		V_START = #{vStart }, V_END = #{vEnd }, V_ENROLL_DATE = DEFAULT, V_INFO = #{vInfo} WHERE V_CODE = #{vCode }
 	</update>
 </mapper>

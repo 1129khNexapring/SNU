@@ -3,7 +3,7 @@
   <Form id="frm_hhcareer" width="1080" height="670" titletext="New Form" onload="frm_hhcareer_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="Grid00" taborder="0" left="20" top="85" width="1035" height="390" binddataset="ds_loa" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+        <Grid id="Grid00" taborder="0" left="20" top="85" width="1035" height="390" binddataset="ds_loa" autofittype="col" oncelldblclick="Grid00_oncelldblclick" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
               <Columns>
@@ -24,9 +24,9 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:lRequestDate" textAlign="center"/>
-                <Cell col="1" text="bind:lSemester" textAlign="center"/>
+                <Cell col="1" text="bind:lSemester" textAlign="center" displaytype="combotext" combodataset="ds_semester" combocodecol="id" combodatacol="text"/>
                 <Cell col="2" text="bind:lStatus" displaytype="combotext" combodataset="ds_lstatus" combocodecol="lStatus" combodatacol="lText"/>
-                <Cell col="3" textAlign="center" font="bold 14px/normal &quot;Gulim&quot;" text="취소" color="#fd221a"/>
+                <Cell col="3" textAlign="center" font="bold 14px/normal &quot;Gulim&quot;" text="취소" color="#fd221a" displaytype="buttoncontrol"/>
               </Band>
             </Format>
           </Formats>
@@ -44,7 +44,7 @@
             <Layout>
               <Static id="Static00" taborder="0" text="&lt;휴학신청&gt; 취소하시겠습니까?" left="24" top="10" width="260" height="58" textAlign="center" font="bold 16px/normal &quot;Arial&quot;"/>
               <Button id="Button00" taborder="1" text="확인" left="18" top="83" width="133" height="52" onclick="PopupDiv01_Button00_onclick"/>
-              <Button id="Button00_00" taborder="2" text="취소" left="157" top="83" width="133" height="52"/>
+              <Button id="Button00_00" taborder="2" text="취소" left="157" top="83" width="133" height="52" onclick="PopupDiv01_Button00_00_onclick"/>
             </Layout>
           </Layouts>
         </PopupDiv>
@@ -94,12 +94,6 @@ this.frm_hhcareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	if (this.ds_loa.getColumn(0, "lStatus") == 'Y')
-		{
-			var x= 400;
-			var y= 150;
-			this.PopupDiv01.trackPopupByComponent(obj, x, y);
-		}	
 
 	var msg = this.ds_loa.getColumn(0, "lReturnMsg");
 		if (this.ds_loa.getColumn(0, "lStatus") == 'N')
@@ -122,6 +116,21 @@ this.PopupDiv01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEv
         		,"inVar1="+sCode // 5.InVar : F->S(var)
         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 				)
+};
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if (this.ds_loa.getColumn(0, "lStatus") == 'Y')
+		{
+			var x= 400;
+			var y= 150;
+			this.PopupDiv01.trackPopupByComponent(obj, x, y);
+		}	
+};
+
+this.PopupDiv01_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PopupDiv01.closePopup();
 };
 ]]></Script>
     <Objects>
@@ -150,6 +159,22 @@ this.PopupDiv01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEv
           <Row>
             <Col id="lStatus">N</Col>
             <Col id="lText">반려</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_semester">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="text" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">1</Col>
+            <Col id="text">2022년 1학기</Col>
+          </Row>
+          <Row>
+            <Col id="id">2</Col>
+            <Col id="text">2022년 2학기</Col>
           </Row>
         </Rows>
       </Dataset>

@@ -35,6 +35,11 @@ public class LectureStoreLogic implements LectureStore{
 		int result = sqlSession.update("LectureMapper.updateLectureStatus", inVar1);
 		return result;
 	}
+	@Override
+	public List<Lecture> selectMyLecture(SqlSession sqlSession, String sCode) {
+		List<Lecture> lList = sqlSession.selectList("LectureMapper.selectMyLecture", sCode);
+		return lList;
+	}
 	
 	
 

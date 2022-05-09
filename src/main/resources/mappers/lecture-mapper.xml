@@ -2,48 +2,55 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="LectureMapper">
 	<resultMap type="Lecture" id="lectureResultMap">
-		<id property="lCode" column="L_CODE"/>
-		<result property="lType" column="L_TYPE"/>
-		<result property="lName" column="L_NAME"/>
-		<result property="lObjective" column="L_OBJECTIVE"/>
-		<result property="lContents" column="L_CONTENTS"/>
-		<result property="textbook" column="TEXTBOOK"/>
-		<result property="lDays" column="L_DAYS"/>
-		<result property="credit" column="CREDIT"/>
-		<result property="lYear" column="L_YEAR"/>
-		<result property="lSemester" column="L_SEMESTER"/>
-		<result property="lCapacity" column="L_CAPACITY"/>
-		<result property="lStatus" column="L_STATUS"/>
-		<result property="pCode" column="P_CODE"/>
-		<result property="dCode" column="D_CODE"/>
+		<id property="lCode" column="L_CODE" />
+		<result property="lType" column="L_TYPE" />
+		<result property="lName" column="L_NAME" />
+		<result property="lObjective" column="L_OBJECTIVE" />
+		<result property="lContents" column="L_CONTENTS" />
+		<result property="textbook" column="TEXTBOOK" />
+		<result property="lDays" column="L_DAYS" />
+		<result property="credit" column="CREDIT" />
+		<result property="lYear" column="L_YEAR" />
+		<result property="lSemester" column="L_SEMESTER" />
+		<result property="lCapacity" column="L_CAPACITY" />
+		<result property="lStatus" column="L_STATUS" />
+		<result property="pCode" column="P_CODE" />
+		<result property="dCode" column="D_CODE" />
 	</resultMap>
-	
+
+	<resultMap type="EnrollLecture" id="enrollLectureMap">
+		<id property="semester" column="SEMESTER" />
+		<result property="year" column="L_YEAR" />
+		<result property="sCode" column="S_CODE" />
+		<result property="lCode" column="L_CODE" />
+	</resultMap>
 	<select id="selectAllLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 	</select>
 	<select id="selectAllYLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
-	<where>
-	<choose>
-		<when test="dCode != 'undefined'.toString()" >
-			D_CODE LIKE #{dCode }||'%' AND L_STATUS = 'Y'
-		</when>
-		<when test="lType != 'undefined'.toString()">
-			L_TYPE = #{lType } AND L_STATUS = 'Y'
-		</when>
-		<when test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
-			D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS = 'Y'
-		</when>
-		<otherwise>
-			L_STATUS = 'Y'
-		</otherwise>
-	</choose>
-	</where>	
+		<where>
+			<choose>
+				<when test="dCode != 'undefined'.toString()">
+					D_CODE LIKE #{dCode }||'%' AND L_STATUS = 'Y'
+				</when>
+				<when test="lType != 'undefined'.toString()">
+					L_TYPE = #{lType } AND L_STATUS = 'Y'
+				</when>
+				<when
+					test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
+					D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS = 'Y'
+				</when>
+				<otherwise>
+					L_STATUS = 'Y'
+				</otherwise>
+			</choose>
+		</where>
 	</select>
-	
+
 	<select id="selectAllNLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 		<where>
@@ -54,8 +61,10 @@
 				<when test="lType != 'undefined'.toString()">
 					L_TYPE = #{lType } AND L_STATUS = 'N'
 				</when>
-				<when test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
-					D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS = 'N'
+				<when
+					test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
+					D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS
+					= 'N'
 				</when>
 				<otherwise>
 					L_STATUS = 'N'
@@ -64,6 +73,13 @@
 		</where>
 	</select>
 	<update id="updateLectureStatus">
-		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE = #{inVar1 }
+		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE =
+		#{inVar1 }
 	</update>
+
+	<!-- 학생 강의평가조회 -->
+	<select id="selectMyLecture" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE L
+		JOIN ENROLL_LECTURE EL ON(L.L_CODE = EL.L_CODE) WHERE S_CODE = #{sCode}
+	</select>
 </mapper>
