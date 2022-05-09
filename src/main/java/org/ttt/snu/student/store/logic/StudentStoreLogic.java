@@ -35,4 +35,8 @@ public class StudentStoreLogic implements StudentStore {
 		int result = sqlSession.update("StudentMapper.modifyStudent", student);
 		return result;
 	}
+	public List<Student> selectIngStntBydCode(SqlSession sqlSession, String dCode) {
+		List<Student> sList = sqlSession.selectList("StudentMapper.selectIngListBydCode", dCode);
+		return sList;
+	}
 }

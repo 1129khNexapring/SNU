@@ -19,6 +19,10 @@ public interface LectureStore {
 
 	List<Lecture> selectMyLecture(SqlSession sqlSession, String sCode);
 
+	List<Lecture> selectLpBypCode(SqlSession sqlSession, String pCode);
+
+	int insertLecture(SqlSession sqlSession, Lecture lecture);
+
 	
 
 }

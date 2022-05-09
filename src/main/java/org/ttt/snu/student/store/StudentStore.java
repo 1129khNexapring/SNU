@@ -17,4 +17,6 @@ public interface StudentStore {
 	int updateStudent(SqlSession sqlSession, Student student);
 
 
+	List<Student> selectIngStntBydCode(SqlSession sqlSession, String dCode);
+
 }

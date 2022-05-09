@@ -59,4 +59,7 @@
 	</update>
 
 
+	<select id="selectIngListBydCode" parameterType="string" resultMap="studentResultMap">
+		SELECT * FROM STUDENT WHERE D_CODE = #{dCode}
+	</select>
 </mapper>

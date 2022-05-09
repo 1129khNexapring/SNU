@@ -91,6 +91,7 @@
         <Button id="btn_save" taborder="5" text="Save" left="830" top="94" width="73" height="31" onclick="btn_save_onclick"/>
         <Button id="btn_add" taborder="6" text="Plus" left="909" top="94" width="73" height="31" onclick="btn_add_onclick"/>
         <Button id="btn_delete" taborder="7" text="DELETE" left="986" top="94" width="73" height="31" onclick="btn_delete_onclick"/>
+        <Button id="Button00" taborder="8" text="Button00" left="468" top="35" width="66" height="21" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -279,6 +280,13 @@ this.btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 this.btn_delete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.ds_Info.deleteRow(this.ds_Info.rowposition);
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var name = "김선교"
+	var title = "바보"
+	this.alert(name+"\\"+title);
 };
 ]]></Script>
     <Bind>

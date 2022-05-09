@@ -30,6 +30,9 @@
 	<select id="selectAllLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 	</select>
+	<select id="selectLpBypCode" resultMap="lectureResultMap" parameterType="string">
+		SELECT * FROM LECTURE WHERE P_CODE = #{pCode}
+	</select>
 	<select id="selectAllYLectures" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
 		<where>
@@ -72,6 +75,9 @@
 			</choose>
 		</where>
 	</select>
+	<insert id="insertLecture">
+		INSERT INTO LECTURE VALUES(#{lCode}, #{lType}, #{lName}, #{lObjective}, #{lContents}, #{textbook}, #{lDays}, #{credit}, #{lYear}, #{lSemester}, #{lCapacity}, DEFAULT, #{pCode}, #{dCode})
+	</insert>
 	<update id="updateLectureStatus">
 		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE =
 		#{inVar1 }

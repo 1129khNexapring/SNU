@@ -14,5 +14,6 @@ public interface StudentService {
 	List<Department> studentDept(String sCode);
 
 	int modifyStudent(Student student);
+	List<Student> printIngStntBydCode(String dCode);
 
 }

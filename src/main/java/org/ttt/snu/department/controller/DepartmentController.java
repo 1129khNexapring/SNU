@@ -24,16 +24,17 @@ public class DepartmentController {
 	@Autowired
 	private ProfessorService pService;
 	
+	// 교수 학과 정보 조회
 	@RequestMapping(value="/dept/info.snu", method=RequestMethod.POST)
-	public NexacroResult printEmployees(
-			@ParamVariable(name="in_var1") String profCode) {
+	public NexacroResult printDeptBypCode(
+			@ParamVariable(name="in_var1") String pCode) {
 		// ErrorCode, ErrorMsg, Dataset 선언
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		Department deptJoin = dService.printDeptBypCode(profCode);
+		Department dept = dService.printDeptBypCode(pCode);
 		List<Department> deptList = new ArrayList<Department>();
-		deptList.add(deptJoin);
+		deptList.add(dept);
 		if(!deptList.isEmpty()) {
 			nErrorCode 	= 0;
 			strErrorMsg = "SUCC";

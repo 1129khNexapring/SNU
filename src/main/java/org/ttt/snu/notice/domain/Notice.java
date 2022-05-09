@@ -6,7 +6,7 @@ public class Notice {
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
-	private Date noticeDate;
+	private String noticeDate;
 	private int noticeCount;
 	private String aCode;
 	private String noticeWriter;
@@ -17,7 +17,7 @@ public class Notice {
 	
 	public Notice() {}
 
-	public Notice(int noticeNo, String noticeTitle, String noticeContent, Date noticeDate, int noticeCount,
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeDate, int noticeCount,
 			String aCode, String noticeWriter, String nFileName, String nFileReName, String nFilePath,
 			String nExtension) {
 		super();
@@ -58,11 +58,11 @@ public class Notice {
 		this.noticeContent = noticeContent;
 	}
 
-	public Date getNoticeDate() {
+	public String getNoticeDate() {
 		return noticeDate;
 	}
 
-	public void setNoticeDate(Date noticeDate) {
+	public void setNoticeDate(String noticeDate) {
 		this.noticeDate = noticeDate;
 	}
 

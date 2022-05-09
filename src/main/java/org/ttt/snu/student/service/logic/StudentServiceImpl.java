@@ -29,6 +29,7 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
+
 	public List<Student> studentInfo(String sCode) {
 		List<Student> sList = sStore.selectAllStudent(sqlSession, sCode);
 		return sList;
@@ -47,4 +48,9 @@ public class StudentServiceImpl implements StudentService {
 		return result;
 	}
 
+
+	public List<Student> printIngStntBydCode(String dCode) {
+		List<Student> sList = sStore.selectIngStntBydCode(sqlSession, dCode);
+		return sList;
+	}
 }

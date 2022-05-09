@@ -349,7 +349,6 @@ this.fn_callback_le = function(id, nErrorCode, sErrorMsg)
 
 
 
-
 this.btn_retrieveNL_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {	
 	var out_Field = this.comb_Field.value;
