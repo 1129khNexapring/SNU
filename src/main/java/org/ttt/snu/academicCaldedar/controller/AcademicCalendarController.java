@@ -1,5 +1,6 @@
 package org.ttt.snu.academicCaldedar.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.ttt.snu.academicCaldedar.domain.AcademicCalendar;
 import org.ttt.snu.academicCaldedar.service.AcademicCalendarService;
@@ -32,13 +35,19 @@ public class AcademicCalendarController {
 	
 	//일정추가 버튼클릭 
 	@ResponseBody
-	@RequestMapping(value="/addSchedule.snu", method = RequestMethod.POST, produces="application/json;charset=utf-8")
-	public Map<Object,Object> addSchedule(@RequestBody AcademicCalendar calendar) {
-		Map<Object,Object> map = new HashMap<Object,Object>();
+	@RequestMapping(value="/addSchedule.snu", method = RequestMethod.POST)
+	public String addSchedule(
+			@RequestParam("title") String title
+			, @RequestParam("startDate") String startDate
+			, @RequestParam("endDate") String endDate) {
+		//AcademicCalendar calendar = new AcademicCalendar();
+		AcademicCalendar academicCalendar = new AcademicCalendar();
+		academicCalendar.setTitle(title);
+		academicCalendar.setStartDate(Date.valueOf(startDate));
+		academicCalendar.setEndDate(Date.valueOf(endDate));
+		aService.addSchedule(academicCalendar);
 		
-		aService.addSchedule(calendar);
-		
-		return map;
+		return null;
 	}
 	//일정 출력
 	
@@ -54,6 +63,6 @@ public class AcademicCalendarController {
 			
 		}
 		
-	}//커밋용 변경추가
+	}
 	
 }

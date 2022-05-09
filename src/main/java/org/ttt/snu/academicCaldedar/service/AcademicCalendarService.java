@@ -8,13 +8,8 @@ import org.ttt.snu.academicCaldedar.domain.AcademicCalendar;
 
 public interface AcademicCalendarService {
 
-	void addSchedule(AcademicCalendar calendar);
-
 	public List<AcademicCalendar> showSchedule();
 
-	
+	public void addSchedule(AcademicCalendar academicCalendar);
 
-	
-	
-	
 }

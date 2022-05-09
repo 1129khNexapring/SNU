@@ -21,7 +21,7 @@
 		<h1 class = "zTree-h1"> 일정 추가 </h1>
 	</div>
 	<div class = "group-body">
-	<form id = "scheduleData">
+	<form id = "calendar">
 		<div class = "top">
 			<input class = "title" id = "title" type = "text" name = "title" placeholder="제목을 입력해주세요">
 		</div>

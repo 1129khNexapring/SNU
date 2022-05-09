@@ -7,7 +7,7 @@
  <resultMap type="AcademicCalendar" id="calendarResultMap">
 		<id property="acNo" column="AC_NO" />
 		<result property="aCode" column="A_CODE" />
-		<result property="acTitle" column="TITLE" />
+		<result property="title" column="TITLE" />
 		<result property="startDate" column="START_DATE" />
 		<result property="endDate" column="END_DATE" />
 	

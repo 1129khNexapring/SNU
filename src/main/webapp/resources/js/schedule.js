@@ -51,15 +51,18 @@ $.fn.serializeObject = function(){
 
 function click_ok(){
 
-	var scheduleData = JSON.stringify($('form#scheduleData').serializeObject());
-	
+	//var scheduleData = JSON.stringify($('form#scheduleData').serializeObject());
+	var calendar = {
+		"title" : $("#title").val(), 
+		"startDate" : $("#startDate").val(), 
+		"endDate" : $("#endDate").val()
+	}
 	$.ajax({
-		data : scheduleData,
 		url : "addSchedule.snu",
 		type : "POST",
-		dataType : "json",
-		contentType : "application/json; charset=UTF-8",
-		success : function(data) {
+		//data : JSON.stringify(calendar),
+		data : calendar,
+		success : function() {
 			opener.parent.location.reload();
 			window.close();
 		}

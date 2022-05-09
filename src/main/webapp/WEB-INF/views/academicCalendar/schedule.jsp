@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         		  AcademicCalendar calendar = (AcademicCalendar)aList.get(i);
       %>	
         	  {
-        	   title : '<%= calendar.getAcTitle() %>',
+        	   title : '<%= calendar.getTitle() %>',
         	   start : '<%= calendar.getStartDate() %>',
         	   end : '<%= calendar.getEndDate() %>'
         	   },
@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
       		{
       		   title : 'defult',
       		   start : "2022-05-18",
-      		   end : "2022-05-19T23:59:59"
+      		   end : "2022-05-19",
+      		   allDay : true
+      		  
       		  }
         ]
       });
