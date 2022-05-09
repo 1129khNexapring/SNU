@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_lecture", this);
-            obj._setContents("<ColumnInfo><Column id=\"L_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"L_TYPE\" type=\"STRING\" size=\"256\"/><Column id=\"L_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"L_OBJECTIVE\" type=\"STRING\" size=\"256\"/><Column id=\"L_CONTENTS\" type=\"STRING\" size=\"256\"/><Column id=\"TEXTBOOK\" type=\"STRING\" size=\"256\"/><Column id=\"L_DAYS\" type=\"STRING\" size=\"256\"/><Column id=\"CREDIT\" type=\"STRING\" size=\"256\"/><Column id=\"L_YEAR\" type=\"STRING\" size=\"256\"/><Column id=\"L_SEMESTER\" type=\"STRING\" size=\"256\"/><Column id=\"L_CAPACITY\" type=\"STRING\" size=\"256\"/><Column id=\"L_STATUS\" type=\"STRING\" size=\"256\"/><Column id=\"P_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"D_CODE\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"lCode\" type=\"STRING\" size=\"256\"/><Column id=\"lType\" type=\"STRING\" size=\"256\"/><Column id=\"lName\" type=\"STRING\" size=\"256\"/><Column id=\"lObjective\" type=\"STRING\" size=\"256\"/><Column id=\"lContents\" type=\"STRING\" size=\"256\"/><Column id=\"textbook\" type=\"STRING\" size=\"256\"/><Column id=\"lDays\" type=\"STRING\" size=\"256\"/><Column id=\"credit\" type=\"STRING\" size=\"256\"/><Column id=\"lYear\" type=\"STRING\" size=\"256\"/><Column id=\"lSemester\" type=\"STRING\" size=\"256\"/><Column id=\"lCapacity\" type=\"STRING\" size=\"256\"/><Column id=\"lStatus\" type=\"STRING\" size=\"256\"/><Column id=\"pCode\" type=\"STRING\" size=\"256\"/><Column id=\"dCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -26,7 +26,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_lecture");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"59\"/><Column size=\"56\"/><Column size=\"80\"/><Column size=\"48\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"강의 코드\"/><Cell col=\"1\" text=\"과목 구분\"/><Cell col=\"2\" text=\"강의 명\"/><Cell col=\"3\" text=\"승인여부\"/></Band><Band id=\"body\"><Cell text=\"bind:L_CODE\"/><Cell col=\"1\" text=\"bind:L_TYPE\"/><Cell col=\"2\" text=\"bind:L_NAME\"/><Cell col=\"3\" text=\"bind:L_STATUS\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"59\"/><Column size=\"56\"/><Column size=\"80\"/><Column size=\"48\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"강의 코드\"/><Cell col=\"1\" text=\"과목 구분\"/><Cell col=\"2\" text=\"강의 명\"/><Cell col=\"3\" text=\"승인여부\"/></Band><Band id=\"body\"><Cell text=\"bind:lCode\"/><Cell col=\"1\" text=\"bind:lType\"/><Cell col=\"2\" text=\"bind:lName\"/><Cell col=\"3\" text=\"bind:lStatus\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Div("grid_detail","380","70","610","620",null,null,null,null,null,null,this);
@@ -139,35 +139,35 @@
             this.addLayout(obj.name, obj);
             
             // BindItem Information
-            obj = new BindItem("item1","grid_detail.form.mskedt_lCode","value","ds_lecture","L_CODE");
+            obj = new BindItem("item1","grid_detail.form.mskedt_lCode","value","ds_lecture","lCode");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item2","grid_detail.form.edt_lType","value","ds_lecture","L_TYPE");
+            obj = new BindItem("item2","grid_detail.form.edt_lType","value","ds_lecture","lType");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item0","grid_detail.form.edt_lName","value","ds_lecture","L_NAME");
+            obj = new BindItem("item0","grid_detail.form.edt_lName","value","ds_lecture","lName");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item3","grid_detail.form.rdo_lStatus","value","ds_lecture","L_STATUS");
+            obj = new BindItem("item3","grid_detail.form.rdo_lStatus","value","ds_lecture","lStatus");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item4","grid_detail.form.txtArea_lObjective","value","ds_lecture","L_OBJECTIVE");
+            obj = new BindItem("item4","grid_detail.form.txtArea_lObjective","value","ds_lecture","lObjective");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item5","grid_detail.form.txtArea_lContents","value","ds_lecture","L_CONTENTS");
+            obj = new BindItem("item5","grid_detail.form.txtArea_lContents","value","ds_lecture","lContents");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item6","grid_detail.form.txtArea_textbook","value","ds_lecture","TEXTBOOK");
+            obj = new BindItem("item6","grid_detail.form.txtArea_textbook","value","ds_lecture","textbook");
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item7","grid_detail.form.edt_lCapacity","value","ds_lecture","L_CAPACITY");
+            obj = new BindItem("item7","grid_detail.form.edt_lCapacity","value","ds_lecture","lCapacity");
             this.addChild(obj.name, obj);
             obj.bind();
             

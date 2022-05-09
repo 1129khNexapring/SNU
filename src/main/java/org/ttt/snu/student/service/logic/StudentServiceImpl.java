@@ -1,5 +1,7 @@
 package org.ttt.snu.student.service.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +24,12 @@ public class StudentServiceImpl implements StudentService {
 	public Student checkLogin(Student student) {
 		Student result = sStore.selectOne(sqlSession, student);
 		return result;
+	}
+
+
+	@Override
+	public List<Student> printIngStntBydCode(String dCode) {
+		List<Student> sList = sStore.selectIngStntBydCode(sqlSession, dCode);
+		return sList;
 	}
 }
