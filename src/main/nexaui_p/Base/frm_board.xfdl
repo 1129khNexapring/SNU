@@ -85,7 +85,7 @@
                   </Format>
                 </Formats>
               </Grid>
-              <Button id="btn_cRemove" taborder="23" text="삭제하기" left="870" top="695" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_cRemove_onclick"/>
+              <Button id="btn_cRemove" taborder="23" text="삭제하기" left="804" top="695" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_cRemove_onclick"/>
               <PopupDiv id="popComments" text="PopupDiv00" visible="false" left="450" top="705" width="220" height="55" background="cornsilk">
                 <Layouts>
                   <Layout>

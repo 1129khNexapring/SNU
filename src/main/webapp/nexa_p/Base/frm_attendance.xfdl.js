@@ -23,7 +23,7 @@
 
 
             obj = new Dataset("ds_enrollLectureDomain", this);
-            obj._setContents("<ColumnInfo><Column id=\"dName\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"dName\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"attendanceStatus\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -79,7 +79,7 @@
             obj.set_taborder("5");
             obj.set_binddataset("ds_enrollLectureDomain");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"69\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학과\"/><Cell col=\"1\" text=\"이름\"/><Cell col=\"2\" text=\"출결사항\"/></Band><Band id=\"body\"><Cell text=\"bind:dName\"/><Cell col=\"1\" text=\"bind:sName\"/><Cell col=\"2\" displaytype=\"combocontrol\" edittype=\"combo\" combodataset=\"ds_attStatus\" combodatacol=\"CONTENT\" combocodecol=\"CODE\" combotype=\"dropdown\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학과\"/><Cell col=\"1\" text=\"이름\"/><Cell col=\"2\" text=\"출결사항\"/></Band><Band id=\"body\"><Cell text=\"bind:dName\"/><Cell col=\"1\" text=\"bind:sName\"/><Cell col=\"2\" text=\"bind:attendanceStatus\" displaytype=\"combocontrol\" edittype=\"combo\" combodataset=\"ds_attStatus\" combocodecol=\"CODE\" combodatacol=\"CONTENT\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("static_00_00_00","483","315","120","35",null,null,null,null,null,null,this);
@@ -245,7 +245,8 @@
 
         this.grd_attList_oncloseup = function(obj,e)
         {
-        	this.alert(this.grd_attList.getCellText(2, e.cell));
+           var c = obj.getEditText();
+           this.alert(c);
         };
 
         this.grd_lectureList_onheadclick = function(obj,e)
@@ -317,6 +318,7 @@
 
 
 
+
         });
         
         // Regist UI Components Event
@@ -332,6 +334,8 @@
             this.static_00_00_00.addEventHandler("onclick",this.static_00_00_onclick,this);
             this.Static00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.btn_attSubmit.addEventHandler("onclick",this.btn_attSubmit_onclick,this);
+            this.ds_enrollLectureDomain.addEventHandler("onvaluechanged",this.ds_enrollLectureDomain_onvaluechanged,this);
+            this.ds_attStatus.addEventHandler("onvaluechanged",this.ds_attStatus_onvaluechanged,this);
         };
         this.loadIncludeScript("frm_attendance.xfdl");
         this.loadPreloadList();

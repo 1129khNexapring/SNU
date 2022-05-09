@@ -3,4 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="GradeMapper"></mapper> 
+<mapper namespace="GradeMapper">
+	<resultMap type="EnrollLectureDomain" id="EnrollLectureDomainResultMap">
+		<id     property="dName" column="D_NAME"/>
+		<result property="sName" column="S_NAME"/>
+		<result property="lName" column="L_NAME"/>
+		<result property="pCode" column="P_CODE"/>
+	</resultMap>
+	<select id="selectAllEnLectureList" resultMap="EnrollLectureDomainResultMap">
+		SELECT S_NAME, L_NAME FROM ENROLL_LECTURE JOIN STUDENT USING(S_CODE) JOIN LECTURE USING(L_CODE) WHERE P_CODE = #{pCode}
+	</select>
+</mapper> 

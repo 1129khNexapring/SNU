@@ -57,7 +57,7 @@
               <Columns>
                 <Column size="80"/>
                 <Column size="80"/>
-                <Column size="69"/>
+                <Column size="80"/>
               </Columns>
               <Rows>
                 <Row size="24" band="head"/>
@@ -71,7 +71,7 @@
               <Band id="body">
                 <Cell text="bind:dName"/>
                 <Cell col="1" text="bind:sName"/>
-                <Cell col="2" displaytype="combocontrol" edittype="combo" combodataset="ds_attStatus" combodatacol="CONTENT" combocodecol="CODE" combotype="dropdown"/>
+                <Cell col="2" text="bind:attendanceStatus" displaytype="combocontrol" edittype="combo" combodataset="ds_attStatus" combocodecol="CODE" combodatacol="CONTENT"/>
               </Band>
             </Format>
           </Formats>
@@ -159,7 +159,8 @@ this.btn_attSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 
 this.grd_attList_oncloseup = function(obj:nexacro.Grid,e:nexacro.GridEditEventInfo)
 {
-	this.alert(this.grd_attList.getCellText(2, e.cell));
+   var c = obj.getEditText();
+   this.alert(c);
 };
 
 this.grd_lectureList_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
@@ -230,6 +231,7 @@ this.fn_sort = function(obj, e)
 
 
 
+
 ]]></Script>
     <Objects>
       <Dataset id="ds_lecture">
@@ -252,10 +254,11 @@ this.fn_sort = function(obj, e)
           <Column id="attendanceStatus" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
-      <Dataset id="ds_enrollLectureDomain">
+      <Dataset id="ds_enrollLectureDomain" onvaluechanged="ds_enrollLectureDomain_onvaluechanged">
         <ColumnInfo>
           <Column id="dName" type="STRING" size="256"/>
           <Column id="sName" type="STRING" size="256"/>
+          <Column id="attendanceStatus" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_attendance">
@@ -266,7 +269,7 @@ this.fn_sort = function(obj, e)
           <Column id="attendanceStatus" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
-      <Dataset id="ds_attStatus">
+      <Dataset id="ds_attStatus" onvaluechanged="ds_attStatus_onvaluechanged">
         <ColumnInfo>
           <Column id="CODE" type="STRING" size="256"/>
           <Column id="CONTENT" type="STRING" size="256"/>
