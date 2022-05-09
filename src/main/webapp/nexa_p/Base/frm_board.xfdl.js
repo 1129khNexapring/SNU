@@ -212,7 +212,7 @@
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"48\"/><Column size=\"85\"/><Column size=\"280\"/><Column size=\"79\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"작성자\"/><Cell col=\"2\" text=\"내용\"/><Cell col=\"3\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:comment_no\"/><Cell col=\"1\" text=\"bind:s_name\"/><Cell col=\"2\" text=\"bind:comment_content\"/><Cell col=\"3\" text=\"bind:comment_date\"/></Band></Format></Formats>");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new Button("btn_cRemove","870","695","66","32",null,null,null,null,null,null,this.popDetail.form);
+            obj = new Button("btn_cRemove","804","695","66","32",null,null,null,null,null,null,this.popDetail.form);
             obj.set_taborder("23");
             obj.set_text("삭제하기");
             obj.set_background("cornflowerblue");
