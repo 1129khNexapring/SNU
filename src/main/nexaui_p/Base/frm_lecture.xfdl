@@ -23,10 +23,10 @@
                 <Cell col="3" text="승인여부"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:L_CODE"/>
-                <Cell col="1" text="bind:L_TYPE"/>
-                <Cell col="2" text="bind:L_NAME"/>
-                <Cell col="3" text="bind:L_STATUS"/>
+                <Cell text="bind:lCode"/>
+                <Cell col="1" text="bind:lType"/>
+                <Cell col="2" text="bind:lName"/>
+                <Cell col="3" text="bind:lStatus"/>
               </Band>
             </Format>
           </Formats>
@@ -77,32 +77,32 @@
       </Layout>
     </Layouts>
     <Bind>
-      <BindItem id="item1" compid="grid_detail.form.mskedt_lCode" propid="value" datasetid="ds_lecture" columnid="L_CODE"/>
-      <BindItem id="item2" compid="grid_detail.form.edt_lType" propid="value" datasetid="ds_lecture" columnid="L_TYPE"/>
-      <BindItem id="item0" compid="grid_detail.form.edt_lName" propid="value" datasetid="ds_lecture" columnid="L_NAME"/>
-      <BindItem id="item3" compid="grid_detail.form.rdo_lStatus" propid="value" datasetid="ds_lecture" columnid="L_STATUS"/>
-      <BindItem id="item4" compid="grid_detail.form.txtArea_lObjective" propid="value" datasetid="ds_lecture" columnid="L_OBJECTIVE"/>
-      <BindItem id="item5" compid="grid_detail.form.txtArea_lContents" propid="value" datasetid="ds_lecture" columnid="L_CONTENTS"/>
-      <BindItem id="item6" compid="grid_detail.form.txtArea_textbook" propid="value" datasetid="ds_lecture" columnid="TEXTBOOK"/>
-      <BindItem id="item7" compid="grid_detail.form.edt_lCapacity" propid="value" datasetid="ds_lecture" columnid="L_CAPACITY"/>
+      <BindItem id="item1" compid="grid_detail.form.mskedt_lCode" propid="value" datasetid="ds_lecture" columnid="lCode"/>
+      <BindItem id="item2" compid="grid_detail.form.edt_lType" propid="value" datasetid="ds_lecture" columnid="lType"/>
+      <BindItem id="item0" compid="grid_detail.form.edt_lName" propid="value" datasetid="ds_lecture" columnid="lName"/>
+      <BindItem id="item3" compid="grid_detail.form.rdo_lStatus" propid="value" datasetid="ds_lecture" columnid="lStatus"/>
+      <BindItem id="item4" compid="grid_detail.form.txtArea_lObjective" propid="value" datasetid="ds_lecture" columnid="lObjective"/>
+      <BindItem id="item5" compid="grid_detail.form.txtArea_lContents" propid="value" datasetid="ds_lecture" columnid="lContents"/>
+      <BindItem id="item6" compid="grid_detail.form.txtArea_textbook" propid="value" datasetid="ds_lecture" columnid="textbook"/>
+      <BindItem id="item7" compid="grid_detail.form.edt_lCapacity" propid="value" datasetid="ds_lecture" columnid="lCapacity"/>
     </Bind>
     <Objects>
       <Dataset id="ds_lecture">
         <ColumnInfo>
-          <Column id="L_CODE" type="STRING" size="256"/>
-          <Column id="L_TYPE" type="STRING" size="256"/>
-          <Column id="L_NAME" type="STRING" size="256"/>
-          <Column id="L_OBJECTIVE" type="STRING" size="256"/>
-          <Column id="L_CONTENTS" type="STRING" size="256"/>
-          <Column id="TEXTBOOK" type="STRING" size="256"/>
-          <Column id="L_DAYS" type="STRING" size="256"/>
-          <Column id="CREDIT" type="STRING" size="256"/>
-          <Column id="L_YEAR" type="STRING" size="256"/>
-          <Column id="L_SEMESTER" type="STRING" size="256"/>
-          <Column id="L_CAPACITY" type="STRING" size="256"/>
-          <Column id="L_STATUS" type="STRING" size="256"/>
-          <Column id="P_CODE" type="STRING" size="256"/>
-          <Column id="D_CODE" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="STRING" size="256"/>
+          <Column id="credit" type="STRING" size="256"/>
+          <Column id="lYear" type="STRING" size="256"/>
+          <Column id="lSemester" type="STRING" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
     </Objects>

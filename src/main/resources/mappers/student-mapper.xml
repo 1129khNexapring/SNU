@@ -22,4 +22,7 @@
 	<select id="selectLoginUser" parameterType="org.ttt.snu.student.domain.Student" resultMap="studentResultMap">
 		SELECT * FROM STUDENT WHERE S_CODE = #{sCode} AND S_PASSWORD = #{sPassword}	
 	</select>
+	<select id="selectIngListBydCode" parameterType="string" resultMap="studentResultMap">
+		SELECT * FROM STUDENT WHERE D_CODE = #{dCode}
+	</select>
 </mapper>
