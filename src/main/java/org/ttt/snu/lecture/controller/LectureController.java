@@ -97,7 +97,7 @@ public class LectureController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-	
+	//관리자 강의계획서 승인
 	@RequestMapping(value="/lecture/approve.snu" , method=RequestMethod.POST)
 	public NexacroResult approveLecture(
 			@ParamVariable(name="in_Var1") String inVar1) {

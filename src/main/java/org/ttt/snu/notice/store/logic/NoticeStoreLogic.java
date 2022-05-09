@@ -60,6 +60,13 @@ public class NoticeStoreLogic implements NoticeStore {
 		List<Notice> nList = sqlSession.selectList("NoticeMapper.selectNoticeList");
 		return nList;
 	}
+	//넥사크로 관리자 - 게시글 등록
+	@Override
+	public int insertNoticeFromNexa(SqlSession sqlSession, Notice notice) {
+		int result = sqlSession.insert("NoticeMapper.insertNoticeFromNexa", notice);
+		System.out.println(result);
+		return result;
+	}
 	
 	
 	

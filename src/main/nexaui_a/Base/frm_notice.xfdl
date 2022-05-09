@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_notice" width="1280" height="720" titletext="New Form" scrolltype="both">
+  <Form id="frm_notice" width="1280" height="720" titletext="New Form" scrolltype="both" onload="frm_notice_onload">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
-        <Div id="div_page" taborder="0" text="Div00" left="32" top="324" width="600" height="48" visible="false">
+        <Div id="div_page" taborder="0" text="Div00" left="262" top="344" width="600" height="48" visible="false">
           <Layouts>
             <Layout>
               <Static id="stt_prev" taborder="0" text="Prev" left="119" top="7" width="40" height="32" right="" bottom="" onclick="div_page_stt_prev_onclick" visible="true"/>
@@ -21,8 +21,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Button id="Button00" taborder="1" text="Button00" left="657" top="57" width="146" height="47" onclick="Button00_onclick"/>
-        <Grid id="Grid00" taborder="2" left="71" top="47" width="550" height="267" binddataset="ds_notice" autofittype="col" scrolltype="none" fillareatype="none" autosizingtype="col">
+        <Grid id="Grid00" taborder="1" left="301" top="47" width="550" height="267" binddataset="ds_notice" autofittype="col" scrolltype="both" fillareatype="none" autosizingtype="col">
           <Formats>
             <Format id="default">
               <Columns>
@@ -50,6 +49,7 @@
             </Format>
           </Formats>
         </Grid>
+        <Button id="Button00" taborder="2" text="글쓰기" left="777" top="314" width="74" height="28" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -89,23 +89,6 @@ this.gv_iUnitSelRowNo = 100; // 서버에서 호출할 때 까져올 로우의 �
 this.gv_iStartSelRowNo = 1; // 서버를 호출 할 때 시작할 로우 번호
 this.gv_iMaxPageNum = 10; // 화면에 최대 페이지 갯수
 this.gv_iServerRowCount = 0; // 서버로부터 조회된 로우의 갯수
-
-
-
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	obj.set_visible(false);
-	this.div_page.set_visible(true);
-	
-	this.transaction(
-	"tr_noticeList"
-	,"SnuURL::notice/nList.snu"
-	,""
-	,"ds_notice=out_notice"
-	,""
-	,"fn_callback_notice"
-	)
-};
 
 //callback function
 this.fn_callback_notice = function(Id, nErrorCode, sErrorMsg)
@@ -239,6 +222,40 @@ this.fn_SetStyle = function()
 	{
 		this.div_page.form.components["stt_"+i].set_color("blue");			
 	}	
-}]]></Script>
+}
+this.frm_notice_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.div_page.set_visible(true);
+	
+	this.transaction(
+	"tr_noticeList"
+	,"SnuURL::notice/nList.snu"
+	,""
+	,"ds_notice=out_notice"
+	,""
+	,"fn_callback_notice"
+	)
+};
+//버튼 클릭시 글을 입력할 팝업 페이지 로드
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//clientToScreenX: 컴포넌트의 클라이언트 기준의 x좌표값을 스크린 기준의 X좌표값으로 변환하는 메소드
+	var nLeft = system.clientToScreenX(this,10);
+	var nTop  = system.clientToScreenY(this,10);
+	var objChild = new ChildFrame("popWriteNotice", nLeft, nTop, 600, 500);
+	objChild.set_formurl("Popup::writeNotice.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), {}, this, "fn_popwriteCallback");
+};
+
+this.fn_popwriteCallback = function(sId, strReturn)
+{
+	if(sId == "popWriteNotice")
+	{
+	
+	}
+}
+]]></Script>
   </Form>
 </FDL>

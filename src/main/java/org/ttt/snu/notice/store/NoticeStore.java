@@ -16,7 +16,9 @@ public interface NoticeStore {
 	public int updateNotice(SqlSession sqlSession , Notice notice);
 	public int deleteNotice(SqlSession sqlSession , int noticeNo);
 	public int updateCount(SqlSession sqlSession , int noticeNo);
+	//넥사
 	public List<Notice> selectAllNoticeList(SqlSession sqlSession);
+	public int insertNoticeFromNexa(SqlSession sqlSession, Notice notice);
 	
 
 }

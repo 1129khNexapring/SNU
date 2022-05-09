@@ -28,7 +28,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Div("div_page","32","324","600","48",null,null,null,null,null,null,this);
+            obj = new Div("div_page","262","344","600","48",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_text("Div00");
             obj.set_visible("false");
@@ -106,19 +106,19 @@
             obj.set_visible("true");
             this.div_page.addChild(obj.name, obj);
 
-            obj = new Button("Button00","657","57","146","47",null,null,null,null,null,null,this);
+            obj = new Grid("Grid00","301","47","550","267",null,null,null,null,null,null,this);
             obj.set_taborder("1");
-            obj.set_text("Button00");
-            this.addChild(obj.name, obj);
-
-            obj = new Grid("Grid00","71","47","550","267",null,null,null,null,null,null,this);
-            obj.set_taborder("2");
             obj.set_binddataset("ds_notice");
             obj.set_autofittype("col");
-            obj.set_scrolltype("none");
+            obj.set_scrolltype("both");
             obj.set_fillareatype("none");
             obj.set_autosizingtype("col");
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"noticeNo\"/><Cell col=\"1\" text=\"noticeTitle\"/><Cell col=\"2\" text=\"noticeDate\"/><Cell col=\"3\" text=\"noticeWriter\"/></Band><Band id=\"body\"><Cell text=\"bind:noticeNo\"/><Cell col=\"1\" text=\"bind:noticeTitle\"/><Cell col=\"2\" text=\"bind:noticeDate\"/><Cell col=\"3\" text=\"bind:noticeWriter\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00","777","314","74","28",null,null,null,null,null,null,this);
+            obj.set_taborder("2");
+            obj.set_text("글쓰기");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -145,23 +145,6 @@
         this.gv_iStartSelRowNo = 1; // 서버를 호출 할 때 시작할 로우 번호
         this.gv_iMaxPageNum = 10; // 화면에 최대 페이지 갯수
         this.gv_iServerRowCount = 0; // 서버로부터 조회된 로우의 갯수
-
-
-
-        this.Button00_onclick = function(obj,e)
-        {
-        	obj.set_visible(false);
-        	this.div_page.set_visible(true);
-
-        	this.transaction(
-        	"tr_noticeList"
-        	,"SnuURL::notice/nList.snu"
-        	,""
-        	,"ds_notice=out_notice"
-        	,""
-        	,"fn_callback_notice"
-        	)
-        };
 
         //callback function
         this.fn_callback_notice = function(Id, nErrorCode, sErrorMsg)
@@ -296,11 +279,46 @@
         		this.div_page.form.components["stt_"+i].set_color("blue");
         	}
         }
+        this.frm_notice_onload = function(obj,e)
+        {
+        	this.div_page.set_visible(true);
+
+        	this.transaction(
+        	"tr_noticeList"
+        	,"SnuURL::notice/nList.snu"
+        	,""
+        	,"ds_notice=out_notice"
+        	,""
+        	,"fn_callback_notice"
+        	)
+        };
+        //버튼 클릭시 글을 입력할 팝업 페이지 로드
+        this.Button00_onclick = function(obj,e)
+        {
+        	//clientToScreenX: 컴포넌트의 클라이언트 기준의 x좌표값을 스크린 기준의 X좌표값으로 변환하는 메소드
+        	var nLeft = system.clientToScreenX(this,10);
+        	var nTop  = system.clientToScreenY(this,10);
+        	var objChild = new ChildFrame("popWriteNotice", nLeft, nTop, 600, 500);
+        	objChild.set_formurl("Popup::writeNotice.xfdl");
+        	objChild.set_openalign("center middle");
+        	objChild.set_dragmovetype("normal");
+        	objChild.showModal(this.getOwnerFrame(), {}, this, "fn_popwriteCallback");
+        };
+
+        this.fn_popwriteCallback = function(sId, strReturn)
+        {
+        	if(sId == "popWriteNotice")
+        	{
+
+        	}
+        }
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
+            this.addEventHandler("onload",this.frm_notice_onload,this);
             this.div_page.form.stt_prev.addEventHandler("onclick",this.div_page_stt_prev_onclick,this);
             this.div_page.form.stt_0.addEventHandler("onclick",this.div_page_stt_onclick,this);
             this.div_page.form.stt_1.addEventHandler("onclick",this.div_page_stt_onclick,this);

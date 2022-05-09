@@ -55,6 +55,8 @@
   	<select id="selectNoticeList" resultMap="noticeResultMap">
   		SELECT * FROM NOTICE
   	</select>
-
+	<insert id="insertNoticeFromNexa">
+		INSERT INTO NOTICE VALUES(NOTICE_NO.NEXTVAL, #{noticeTitle }, #{noticeContent }, DEFAULT, DEFAULT, 'admin', #{noticeWriter }, #{nFileName }, #{nFileReName }, #{nFilePath }, #{nExtension })
+	</insert>
 	
 </mapper>

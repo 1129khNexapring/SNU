@@ -23,6 +23,7 @@ import org.ttt.snu.notice.domain.Notice;
 import org.ttt.snu.notice.domain.PageInfo;
 import org.ttt.snu.notice.service.NoticeService;
 
+import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 
 @Controller
@@ -233,6 +234,46 @@ public class NoticeController {
 		result.addDataSet("out_notice", nList);
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+		
+	}
+	//관리자 넥사크로 게시글 등록
+	@RequestMapping(value="/noticeNexa/register.snu", method=RequestMethod.POST)
+	public NexacroResult registerNoticeFromNexa(
+			 @ParamVariable(name="title") String title
+			,@ParamVariable(name="content") String content
+			,@ParamVariable(name="name") String name)
+	{
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		Notice notice = new Notice();
+		String extension = name.substring(name.lastIndexOf(".")+1);
+//		String result1 = name.substring(0, name.indexOf("."));
+//		System.out.println(extension);
+//		System.out.println(result1);
+		//System.out.println(result1); 파일업로드 도출
+		//System.out.println(result); txt가 도출
+		String infilePath = "C:\\Users\\User\\Desktop\\SNU\\src\\main\\webapp\\resources\\nuploadFiles";
+		//System.out.println(infilePath.concat("\\").concat(name));
+		notice.setnFilePath(infilePath.concat("\\").concat(name));
+		notice.setnExtension(extension);
+		notice.setnFileName(name);
+		notice.setNoticeWriter("관리자");
+		notice.setNoticeTitle(title);
+		notice.setNoticeContent(content);
+		int iResult = nService.registerNoticeFromNexa(notice);
+		if(iResult > 0)
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		result.addVariable("out_var", notice.getnFileName());
 		return result;
 		
 	}
