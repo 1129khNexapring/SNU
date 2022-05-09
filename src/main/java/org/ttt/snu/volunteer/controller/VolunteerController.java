@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.ttt.snu.loa.domain.Loa;
 import org.ttt.snu.volunteer.domain.Volunteer;
 import org.ttt.snu.volunteer.service.VolunteerService;
 
@@ -49,7 +50,8 @@ public class VolunteerController {
 			String vStart= 		dsGet(inVolunteer, i, "vStart");
 			String vEnd  = 		dsGet(inVolunteer, i, "vEnd");
 			String vEnrollDate= dsGet(inVolunteer, i, "vEnrollDate");
-			Volunteer volunteer = new Volunteer(vCode, vName, vArea, vHour, vStart, vEnd, vEnrollDate);
+			String vInfo= dsGet(inVolunteer, i, "vInfo");
+			Volunteer volunteer = new Volunteer(vCode, vName, vArea, vHour, vStart, vEnd, vEnrollDate, vInfo);
 			if(rowType == DataSet.ROW_TYPE_INSERTED) {
 				iResult += vService.registerVolunteer(volunteer);
 			}else if(rowType == DataSet.ROW_TYPE_UPDATED)
@@ -90,6 +92,8 @@ public class VolunteerController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
+	
+	
 	
 	
 	// ResultSet ==> Dataset

@@ -56,5 +56,12 @@ public class LectureServiceImpl implements LectureService{
 		return result;
 	}
 	
+	//학생 - 강의평가조회
+	@Override
+	public List<Lecture> printMyLecture(String sCode) {
+		List<Lecture> lList = lStore.selectMyLecture(sqlSession, sCode);
+		return lList;
+	}
+	
 
 }

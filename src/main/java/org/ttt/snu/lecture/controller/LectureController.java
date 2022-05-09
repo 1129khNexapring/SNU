@@ -16,6 +16,8 @@ import org.ttt.snu.board.domain.Board;
 import org.ttt.snu.department.domain.Department;
 import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.lecture.service.LectureService;
+
+import org.ttt.snu.student.domain.Student;
 import org.ttt.snu.professor.service.ProfessorService;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
@@ -118,6 +120,29 @@ public class LectureController {
 		return result;
 	}
 	
+
+	//강의평가조회화면
+	@RequestMapping(value="/lecture/score.snu", method=RequestMethod.POST)
+	public NexacroResult deptListView(
+			@ParamVariable(name="inVar1") String sCode) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Lecture> lList = lService.printMyLecture(sCode);
+		System.out.println(lList);
+		if(!lList.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addDataSet("out_lecture", lList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+
 	//교수 - 강의 계획서 조회
 	@RequestMapping(value="/lecture/planListBypCode.snu", method=RequestMethod.POST)
 	public NexacroResult printLecturePlanList(
@@ -205,6 +230,7 @@ public class LectureController {
 			return value;
 		}
 	}
+
 
 		
 		

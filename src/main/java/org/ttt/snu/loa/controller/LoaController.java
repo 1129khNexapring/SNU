@@ -101,7 +101,7 @@ public class LoaController {
 	
 	//관리자 - 휴학신청리스트 조회
 	@RequestMapping(value="/loaStudent/list.snu", method=RequestMethod.GET)
-	public NexacroResult printALlRequestLoaStudent() {
+	public NexacroResult printAllRequestLoaStudent() {
 		//System.out.println("연결완료");
 		int nErrorCode = 0;
 		String strErrorMsg = "";

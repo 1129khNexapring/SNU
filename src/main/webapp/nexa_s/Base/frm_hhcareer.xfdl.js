@@ -25,13 +25,18 @@
             obj = new Dataset("ds_lstatus", this);
             obj._setContents("<ColumnInfo><Column id=\"lStatus\" type=\"STRING\" size=\"256\"/><Column id=\"lText\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"lStatus\">Y</Col><Col id=\"lText\">승인</Col></Row><Row><Col id=\"lStatus\">N</Col><Col id=\"lText\">반려</Col></Row></Rows>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_semester", this);
+            obj._setContents("<ColumnInfo><Column id=\"id\" type=\"STRING\" size=\"256\"/><Column id=\"text\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"id\">1</Col><Col id=\"text\">2022년 1학기</Col></Row><Row><Col id=\"id\">2</Col><Col id=\"text\">2022년 2학기</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Grid("Grid00","20","85","1035","390",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("ds_loa");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"124\"/><Column size=\"150\"/><Column size=\"128\"/><Column size=\"107\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"신청일\"/><Cell col=\"1\" text=\"휴학학기\"/><Cell col=\"2\" text=\"상태\"/><Cell col=\"3\" text=\"취소\"/></Band><Band id=\"body\"><Cell text=\"bind:lRequestDate\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:lSemester\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:lStatus\" displaytype=\"combotext\" combodataset=\"ds_lstatus\" combocodecol=\"lStatus\" combodatacol=\"lText\"/><Cell col=\"3\" textAlign=\"center\" font=\"bold 14px/normal &quot;Gulim&quot;\" text=\"취소\" color=\"#fd221a\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"124\"/><Column size=\"150\"/><Column size=\"128\"/><Column size=\"107\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"신청일\"/><Cell col=\"1\" text=\"휴학학기\"/><Cell col=\"2\" text=\"상태\"/><Cell col=\"3\" text=\"취소\"/></Band><Band id=\"body\"><Cell text=\"bind:lRequestDate\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:lSemester\" textAlign=\"center\" displaytype=\"combotext\" combodataset=\"ds_semester\" combocodecol=\"id\" combodatacol=\"text\"/><Cell col=\"2\" text=\"bind:lStatus\" displaytype=\"combotext\" combodataset=\"ds_lstatus\" combocodecol=\"lStatus\" combodatacol=\"lText\"/><Cell col=\"3\" textAlign=\"center\" font=\"bold 14px/normal &quot;Gulim&quot;\" text=\"취소\" color=\"#fd221a\" displaytype=\"buttoncontrol\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new PopupDiv("PopupDiv00","327","120","347","354",null,null,null,null,null,null,this);
@@ -140,12 +145,6 @@
 
         this.Grid00_oncelldblclick = function(obj,e)
         {
-        	if (this.ds_loa.getColumn(0, "lStatus") == 'Y')
-        		{
-        			var x= 400;
-        			var y= 150;
-        			this.PopupDiv01.trackPopupByComponent(obj, x, y);
-        		}
 
         	var msg = this.ds_loa.getColumn(0, "lReturnMsg");
         		if (this.ds_loa.getColumn(0, "lStatus") == 'N')
@@ -170,6 +169,21 @@
         				)
         };
 
+        this.Grid00_oncellclick = function(obj,e)
+        {
+        	if (this.ds_loa.getColumn(0, "lStatus") == 'Y')
+        		{
+        			var x= 400;
+        			var y= 150;
+        			this.PopupDiv01.trackPopupByComponent(obj, x, y);
+        		}
+        };
+
+        this.PopupDiv01_Button00_00_onclick = function(obj,e)
+        {
+        	this.PopupDiv01.closePopup();
+        };
+
         });
         
         // Regist UI Components Event
@@ -177,7 +191,9 @@
         {
             this.addEventHandler("onload",this.frm_hhcareer_onload,this);
             this.Grid00.addEventHandler("oncelldblclick",this.Grid00_oncelldblclick,this);
+            this.Grid00.addEventHandler("oncellclick",this.Grid00_oncellclick,this);
             this.PopupDiv01.form.Button00.addEventHandler("onclick",this.PopupDiv01_Button00_onclick,this);
+            this.PopupDiv01.form.Button00_00.addEventHandler("onclick",this.PopupDiv01_Button00_00_onclick,this);
         };
         this.loadIncludeScript("frm_hhcareer.xfdl");
         this.loadPreloadList();
