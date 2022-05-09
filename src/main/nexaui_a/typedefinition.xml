@@ -32,6 +32,8 @@
     <Component type="JavaScript" id="Dataset" classname="nexacro.NormalDataset"/>
     <Component type="JavaScript" id="ListView" classname="nexacro.ListView"/>
     <Component type="JavaScript" id="DataObject" classname="nexacro.DataObject"/>
+    <Component type="JavaScript" id="FileDialog" classname="nexacro.FileDialog" defaultwidth="49"/>
+    <Component type="JavaScript" id="FileUpTransfer" classname="nexacro.FileUpTransfer" defaultwidth="48"/>
   </Components>
   <Services>
     <Service prefixid="theme" type="resource" url="./_resource_/_theme_/" version="0" cachelevel="session" include_subdir="true"/>

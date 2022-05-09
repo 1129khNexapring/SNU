@@ -17,6 +17,7 @@ public interface NoticeService {
 	public int updateCount(int noticeNo);
 	//넥사크로
 	public List<Notice> printAllNotice();
+	public int registerNoticeFromNexa(Notice notice);
 	
 
 }

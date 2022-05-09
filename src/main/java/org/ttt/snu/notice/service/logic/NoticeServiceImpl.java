@@ -67,6 +67,12 @@ public class NoticeServiceImpl implements NoticeService {
 		List<Notice> nList = nStore.selectAllNoticeList(sqlSession);
 		return nList;
 	}
+	//넥사크로 관리자 - 게시글 등록
+	@Override
+	public int registerNoticeFromNexa(Notice notice) {
+		int result = nStore.insertNoticeFromNexa(sqlSession, notice);
+		return result;
+	}
 
 
 
