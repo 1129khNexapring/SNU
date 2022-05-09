@@ -63,6 +63,6 @@ public class AcademicCalendarController {
 			
 		}
 		
-	}
+	}//커밋용 수정
 	
 }
