@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_book" width="1080" height="670" titletext="New Form">
+  <Form id="frm_book" width="1080" height="670" titletext="New Form" onload="frm_book_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
         <Grid id="Grid00" taborder="0" left="11" top="60" width="1061" height="560" binddataset="ds_book" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
@@ -36,29 +36,47 @@
             <Layout>
               <Static id="Static00" taborder="0" text="제목" left="23" top="20" width="87" height="40" onclick="PopupDiv00_Static00_onclick" font="normal 700 15pt/normal &quot;Arial&quot;"/>
               <Static id="Static00_00" taborder="1" text="내용" left="23" top="110" width="87" height="40" onclick="PopupDiv00_Static00_onclick" font="normal 700 15pt/normal &quot;Arial&quot;"/>
-              <Static id="Static01" taborder="2" text="Static01" left="25" top="57" width="581" height="51" onclick="PopupDiv00_Static01_onclick"/>
-              <Static id="Static02" taborder="3" text="Static02" left="22" top="157" width="650" height="331"/>
+              <Edit id="Edit00" taborder="2" left="25" top="57" width="415" height="53"/>
+              <TextArea id="TextArea00" taborder="3" left="25" top="161" width="695" height="279"/>
+              <Button id="Button00" taborder="4" text="취소" left="25" top="449" width="205" height="61" onclick="PopupDiv00_Button00_onclick"/>
+              <Button id="Button01" taborder="5" text="수정" left="270" top="449" width="224" height="61" onclick="PopupDiv00_Button01_onclick"/>
+              <Button id="Button02" taborder="6" text="삭제" left="521" top="449" width="199" height="62" onclick="PopupDiv00_Button02_onclick"/>
             </Layout>
           </Layouts>
         </PopupDiv>
         <Button id="Button00" taborder="4" text="글쓰기" left="956" top="621" width="115" height="44" background="#aea3ef" font="normal 700 13pt/normal &quot;Arial&quot;" onclick="Button00_onclick"/>
-        <PopupDiv id="PopupDiv01" text="PopupDiv01" visible="false" left="920" top="120" width="750" height="520" color="#ffffff" background="#b8f7f9">
+        <PopupDiv id="PopupDiv01" text="PopupDiv01" visible="false" left="920" top="120" width="750" height="520" color="#ffffff" background="#b8f7f9" onpopup="PopupDiv01_onpopup">
           <Layouts>
             <Layout>
               <Static id="Static00" taborder="0" text="제목" left="23" top="20" width="87" height="40" onclick="PopupDiv00_Static00_onclick" font="normal 700 15pt/normal &quot;Arial&quot;"/>
               <Static id="Static00_00" taborder="1" text="내용" left="23" top="110" width="87" height="40" onclick="PopupDiv00_Static00_onclick" font="normal 700 15pt/normal &quot;Arial&quot;"/>
-              <Button id="Button00" taborder="2" text="취소" left="46" top="465" width="144" height="41"/>
-              <Button id="Button01" taborder="3" text="등록" left="556" top="463" width="144" height="45" onclick="PopupDiv01_Button01_onclick"/>
+              <Button id="Button00" taborder="2" text="취소" left="46" top="465" width="144" height="41" onclick="PopupDiv01_Button00_onclick"/>
+              <Button id="btn_bsInsert" taborder="3" text="등록" left="556" top="463" width="144" height="45" onclick="PopupDiv01_btn_bsInsert_onclick"/>
               <Edit id="Edit00" taborder="4" left="22" top="55" width="473" height="55" onchanged="PopupDiv01_Edit00_onchanged"/>
               <Edit id="Edit01" taborder="5" left="25" top="152" width="710" height="293"/>
+              <Edit id="Edit02" taborder="6" left="521" top="31" width="201" height="50"/>
+              <Edit id="Edit03" taborder="7" left="520" top="97" width="202" height="54"/>
             </Layout>
           </Layouts>
         </PopupDiv>
-        <Edit id="Edit01" taborder="5" left="71" top="215" width="91" height="75"/>
-        <Button id="Button01" taborder="6" text="Button01" left="75" top="331" width="90" height="61" onclick="Button01_onclick"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var bsCode = nexacro.getEnvironmentVariable("ev_Val");
+this.out_var="";
+ this.frm_book_onload = function(obj,e)
+        {
+        	this.transaction(
+        		"tr_select"// 1.ID
+        		,"tttUrl::book/list.snu"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"ds_book=out_book" // 4.OutDs : S->F jsp(SELECT)
+        		,"" // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        	)
+        };
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 {
 	if(id=="tr_select")
 	{
@@ -108,6 +126,9 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var x= -200;
 	var y=- 100;
 	this.PopupDiv01.trackPopupByComponent(obj, x, y);
+	this.ds_book.addRow();
+        	this.ds_book.setColumn(this.ds_book.rowposition, "bsDate", "20220426");
+			this.ds_book.setColumn(this.ds_book.rowposition, "sCode", bsCode);
 };
 
 
@@ -126,24 +147,68 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 // 	);
 // };
 
-
-
-
-this.PopupDiv01_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+this.PopupDiv00_Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var bsTitle = this.PopupDiv01.form.Edit00.value;
-	var bsContent = this.PopupDiv01.form.Edit01.value;
-	this.alert(bsTitle);
-	this.transaction(
-		"tr_register"
-		,"tttUrl::book/register.snu"
-		,""
-		,""
-		,"inVar1=bsTitle inVar2=bsContent"
-		,"fn_callback_tran"
-	)
+	this.ds_book.deleteRow(this.ds_book.rowposition);
+        		var name = this.PopupDiv01.form.Edit00.value;
+        	this.transaction(
+        		"tr_register"
+        		,"tttUrl::book/register.snu"
+        		,"in_book=ds_book:U"
+        		,""
+        		,"inVar1="+nexacro.wrapQuote(name)
+        		,"fn_callback_tran"
+        	)
+			this.PopupDiv00.closePopup();
+			this.reload();
 };
 
+this.PopupDiv00_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var row = this.ds_book.rowposition;
+	var bScode = this.ds_book.getColumn(row, "sCode");
+        this.transaction(
+        	"tr_register"
+        	,"tttUrl::book/register.snu"
+        	,"in_book=ds_book:U"
+        	,""
+        	,"inVar1="
+        	,"fn_callback_tran"
+        )
+	this.PopupDiv00.closePopup();
+};
+
+this.PopupDiv00_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PopupDiv00.closePopup();
+};
+
+this.PopupDiv01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_book.deleteRow(this.ds_book.rowposition);
+	this.PopupDiv01.closePopup();
+};
+
+this.PopupDiv01_btn_bsInsert_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+        	this.transaction(
+        		"tr_register"
+        		,"tttUrl::book/register.snu"
+        		,"in_book=ds_book:U"
+        		,""
+        		,"inVar1="
+        		,"fn_callback_tran"
+ 
+       	)	
+		this.PopupDiv01.closePopup();
+		this.reload();
+};
+
+this.PopupDiv01_onpopup = function(obj:nexacro.PopupDiv,e:nexacro.EventInfo)
+{
+	this.PopupDiv01.form.Edit03.set_value(bsCode);
+};
 ]]></Script>
     <Objects>
       <Dataset id="ds_book">
@@ -159,5 +224,13 @@ this.PopupDiv01_Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEv
       </Dataset>
       <Dataset id="Dataset00"/>
     </Objects>
+    <Bind>
+      <BindItem id="item0" compid="PopupDiv00.form.Edit00" propid="value" datasetid="ds_book" columnid="bsTitle"/>
+      <BindItem id="item1" compid="PopupDiv00.form.TextArea00" propid="value" datasetid="ds_book" columnid="bsContent"/>
+      <BindItem id="item2" compid="PopupDiv01.form.Edit00" propid="value" datasetid="ds_book" columnid="bsTitle"/>
+      <BindItem id="item3" compid="PopupDiv01.form.Edit01" propid="value" datasetid="ds_book" columnid="bsContent"/>
+      <BindItem id="item4" compid="PopupDiv01.form.Edit02" propid="value" datasetid="ds_book" columnid="bsDate"/>
+      <BindItem id="item5" compid="PopupDiv01.form.Edit03" propid="value" datasetid="ds_book" columnid="sCode"/>
+    </Bind>
   </Form>
 </FDL>

@@ -1,16 +1,130 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_mypage" width="1080" height="670" titletext="New Form">
+  <Form id="frm_mypage" width="1080" height="670" titletext="New Form" onload="frm_mypage_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="150" top="176" width="184" height="68" onclick="Button00_onclick"/>
+        <Div id="Div00" taborder="0" text="Div00" left="161" top="53" width="859" height="475" background="#ffffff" border="1px solid">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="ImageViewer00" taborder="0" text="ImageViewer00" left="41" top="30" width="127" height="161" onclick="Div00_ImageViewer00_onclick"/>
+              <Static id="Static00" taborder="1" text="학번" left="220" top="30" width="78" height="46"/>
+              <Static id="Static00_00" taborder="2" text="성명" left="220" top="86" width="78" height="46"/>
+              <Static id="Static00_01" taborder="3" text="소속" left="220" top="142" width="78" height="46"/>
+              <Static id="Static00_02" taborder="4" text="전화번호" left="548" top="30" width="78" height="46"/>
+              <Static id="Static00_00_00" taborder="5" text="주소" left="548" top="88" width="78" height="46"/>
+              <Static id="Static00_01_00" taborder="6" text="이메일" left="548" top="142" width="78" height="46"/>
+              <Edit id="edit_phone" taborder="7" left="618" top="30" width="180" height="47"/>
+              <Edit id="edit_address" taborder="8" left="618" top="88" width="180" height="47"/>
+              <Edit id="edit_email" taborder="9" left="618" top="144" width="180" height="47"/>
+              <Static id="Static01" taborder="10" text="Static01" left="268" top="30" width="180" height="47" border="1px solid darkgray"/>
+              <Static id="Static01_00" taborder="11" text="Static01" left="268" top="86" width="180" height="47" border="1px solid darkgray"/>
+              <Static id="Static01_01" taborder="12" text="Static01" left="268" top="142" width="180" height="47" border="1px solid darkgray"/>
+              <Static id="Static02" taborder="13" text="* 학적 변동내역" left="18" top="213" width="242" height="67" onclick="Div00_Static02_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="1" text="정보수정" left="925" top="536" width="96" height="52" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_studentDept")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("학생정보 불러오기 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("학생정보 조회 성공" );
+	}
+}
+
+this.frm_mypage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+        		"tr_select"// 1.ID
+        		,"tttUrl::student/info.snu"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"ds_student=out_student" // 4.OutDs : S->F jsp(SELECT)
+        		,"inVar1="+sCode // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+				)
+				
+   this.transaction(
+        	"tr_studentDept"// 1.ID
+        	,"tttUrl::studentDept/list.snu"// 2.URL
+        	,"" // 3.InDs : F->S jsp(I,U,D)
+        	,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
+        	,"inVar1=" + sCode // 5.InVar : F->S(var)
+        	,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        	)
+};
+
 this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var phone = this.Div00.form.edit_phone.value;
+	var address = this.Div00.form.edit_address.value;
+	var email = this.Div00.form.edit_email.value;
+	this.ds_student.setColumn(0, "sPhone", phone);
+	this.ds_student.setColumn(0, "sEmail", email);
+	this.ds_student.setColumn(0, "sAddress", address);
+	var studentModify = this.confirm("변경사항 저장하시겠습니까?", "취소");
+	if(studentModify == true)
+	{
+			this.transaction(
+				"tr_student"
+				,"tttUrl::student/modify.snu"
+				,""
+				,""
+				,"inVar1=" + sCode + " inVar2=" + phone + " inVar3=" + nexacro.wrapQuote(address) + " inVar4=" + email
+				,"fn_callback_tran"	
+		)
+	}
+};
+
+this.Div00_Static02_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
 	
 };
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="sRrn" type="STRING" size="256"/>
+          <Column id="sPassword" type="STRING" size="256"/>
+          <Column id="sAddress" type="STRING" size="256"/>
+          <Column id="sEmail" type="STRING" size="256"/>
+          <Column id="sGender" type="STRING" size="256"/>
+          <Column id="sPhone" type="STRING" size="256"/>
+          <Column id="sAddmission" type="STRING" size="256"/>
+          <Column id="absenceYN" type="STRING" size="256"/>
+          <Column id="transferYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+          <Column id="officeCode" type="STRING" size="256"/>
+          <Column id="tuitionFee" type="STRING" size="256"/>
+          <Column id="dCapacity" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Static01" propid="text" datasetid="ds_student" columnid="sCode"/>
+      <BindItem id="item1" compid="Div00.form.Static01_00" propid="text" datasetid="ds_student" columnid="sName"/>
+      <BindItem id="item2" compid="Div00.form.Static01_01" propid="text" datasetid="ds_dept" columnid="dName"/>
+      <BindItem id="item3" compid="Div00.form.edit_phone" propid="value" datasetid="ds_student" columnid="sPhone"/>
+      <BindItem id="item4" compid="Div00.form.edit_address" propid="value" datasetid="ds_student" columnid="sAddress"/>
+      <BindItem id="item5" compid="Div00.form.edit_email" propid="value" datasetid="ds_student" columnid="sEmail"/>
+    </Bind>
   </Form>
 </FDL>

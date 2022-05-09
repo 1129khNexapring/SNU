@@ -1,10 +1,150 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_militaryrequest" width="1080" height="670" titletext="New Form">
+  <Form id="frm_militaryrequest" width="1080" height="670" titletext="New Form" onload="frm_militaryrequest_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="125" top="221" width="161" height="44"/>
+        <Div id="Div00" taborder="0" text="Div00" left="55" top="33" width="765" height="427" border="1px solid" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학번" left="19" top="43" width="76" height="50" font="bold 15px/normal &quot;Gulim&quot;\"/>
+              <Static id="Static00_00" taborder="1" text="소속" left="19" top="176" width="76" height="50" font="bold 15px/normal &quot;Gulim&quot;\"/>
+              <Static id="Static00_01" taborder="2" text="집합일시" left="19" top="301" width="76" height="50" font="bold 15px/normal &quot;Gulim&quot;\"/>
+              <Static id="Static00_02" taborder="3" text="성명" left="394" top="43" width="76" height="50" font="bold 15px/normal &quot;Gulim&quot;\"/>
+              <Static id="Static00_03" taborder="4" text="계급" left="394" top="176" width="76" height="50" font="bold 15px/normal &quot;Gulim&quot;\"/>
+              <Static id="Static00_04" taborder="5" text="구분" left="394" top="301" width="76" height="50" font="bold 15px/normal &quot;Gulim&quot;\"/>
+              <Edit id="Edit00" taborder="6" left="90" top="42" width="176" height="52"/>
+              <Edit id="Edit00_00" taborder="7" left="90" top="176" width="176" height="52"/>
+              <Calendar id="Calendar00" taborder="8" left="93" top="317" width="150" height="20"/>
+              <Combo id="Combo00" taborder="9" text="계급" left="466" top="177" width="175" height="51" onitemchanged="Div00_Combo00_onitemchanged" value="" index="-1" innerdataset="ds_level" codecolumn="level" datacolumn="level"/>
+              <Combo id="Combo00_00" taborder="10" text="Combo00" left="466" top="301" width="175" height="51" innerdataset="ds_type" codecolumn="type" datacolumn="type"/>
+              <Edit id="Edit01" taborder="11" left="466" top="44" width="176" height="52"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="1" text="신청" left="672" top="469" width="148" height="62" background="RGB(101,126,194)" color="#ffffff" font="bold 15px/normal &quot;Gulim&quot;,&quot;Arial&quot;" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
+this.Div00.form.Edit00.set_value(sCode);
+this.Div00.form.Edit01.set_value(sName);
+this.frm_militaryrequest_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+        	"tr_select"// 1.ID
+        	,"tttUrl::military/list.snu"// 2.URL
+        	,"" // 3.InDs : F->S jsp(I,U,D)
+        	,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
+        	,"inVar1=" + sCode // 5.InVar : F->S(var)
+        	,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        	)
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+	var mDate = this.Div00.form.Calendar00.value;
+	var military = this.Div00.form.Combo00_00.value;
+	var rank = this.Div00.form.Combo00.value;
+	
+	this.ds_mil.addRow();
+	this.ds_mil.setColumn(0, "sCode", sCode);
+	this.ds_mil.setColumn(0, "musterDate", mDate);
+	this.ds_mil.setColumn(0, "military", military);
+	this.ds_mil.setColumn(0, "rank", rank);
+	
+	this.transaction(
+			"tr_requestMil"
+			,"tttUrl::requestMil/list.snu"
+			,"in_mil=ds_mil:U"
+			,""
+			,""
+			,"fn_callback_tran"
+		)
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="dCode" type="STRING" size="256"/>
+          <Column id="dName" type="STRING" size="256"/>
+          <Column id="dField" type="STRING" size="256"/>
+          <Column id="officeName" type="STRING" size="256"/>
+          <Column id="tuitionFee" type="INT" size="256"/>
+          <Column id="dCapacity" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="sRrn" type="STRING" size="256"/>
+          <Column id="sPassword" type="STRING" size="256"/>
+          <Column id="sAddress" type="STRING" size="256"/>
+          <Column id="sEmail" type="STRING" size="256"/>
+          <Column id="sGender" type="STRING" size="256"/>
+          <Column id="sPhone" type="STRING" size="256"/>
+          <Column id="sAddmission" type="STRING" size="256"/>
+          <Column id="absenceYN" type="STRING" size="256"/>
+          <Column id="transferYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_mil">
+        <ColumnInfo>
+          <Column id="rfNum" type="STRING" size="256"/>
+          <Column id="rfRequestDate" type="STRING" size="256"/>
+          <Column id="musterDate" type="STRING" size="256"/>
+          <Column id="rfStatus" type="STRING" size="256"/>
+          <Column id="rfMsg" type="STRING" size="256"/>
+          <Column id="military" type="STRING" size="256"/>
+          <Column id="rank" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_level">
+        <ColumnInfo>
+          <Column id="level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="level">이병</Col>
+          </Row>
+          <Row>
+            <Col id="level">일병</Col>
+          </Row>
+          <Row>
+            <Col id="level">상병</Col>
+          </Row>
+          <Row>
+            <Col id="level">병장</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_type">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">육군</Col>
+          </Row>
+          <Row>
+            <Col id="type">해군</Col>
+          </Row>
+          <Row>
+            <Col id="type">공군</Col>
+          </Row>
+          <Row>
+            <Col id="type">공익</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00_00" propid="value" datasetid="ds_dept" columnid="dName"/>
+      <BindItem id="item1" compid="Div00.form.Combo00" propid="value" datasetid="ds_level" columnid="level"/>
+      <BindItem id="item2" compid="Div00.form.Combo00_00" propid="value" datasetid="ds_type" columnid="type"/>
+    </Bind>
   </Form>
 </FDL>

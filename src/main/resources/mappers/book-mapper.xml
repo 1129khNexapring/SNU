@@ -19,6 +19,17 @@
 		SELECT * FROM BS_BOARD
 	</select>
 	<insert id = "insertBook">
-		INSERT INTO BS_BOARD VALUES(BOOK_SEQ.NEXTVAL, #{bsTitle}, #{bsContent}, #{bsDate}, #{bsStatus}, #{bsCount}, #{sCode}))
+		INSERT INTO BS_BOARD VALUES(BOOK_SEQ.NEXTVAL, #{bsTitle}, #{bsContent}, #{bsDate}, DEFAULT, DEFAULT, #{sCode})
 	</insert>
+	<delete id = "deleteBook">
+		DELETE FROM BS_BOARD WHERE BS_NO = #{bsNo}
+	</delete>
+	<update id = "updateBook">
+		UPDATE BS_BOARD
+		SET
+		BS_TITLE = #{bsTitle},
+		BS_CONTENT = #{bsContent}
+		WHERE
+		BS_NO = #{bsNo}
+	</update>
 </mapper>

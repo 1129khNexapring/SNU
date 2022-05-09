@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="loaReturnMsg" width="350" height="350" titletext="New Form" onload="loaReturnMsg_onload">
+    <Layouts>
+      <Layout height="350" mobileorientation="landscape" width="350">
+        <Div id="Div00" taborder="0" text="" left="3" top="2" width="343" height="314" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="반려사유" left="2" top="5" width="125" height="30" textAlign="left" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <TextArea id="TextArea00" taborder="1" left="3" top="39" width="335" height="269"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_msgSubmit" taborder="1" text="보내기" left="260" top="319" width="85" height="27" onclick="btn_msgSubmit_onclick"/>
+        <Button id="btn_close" taborder="2" text="취소" left="6" top="319" width="85" height="27" onclick="btn_close_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_loaReturn">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="lReturnMsg" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//휴학반려메시지 작성
+this.loaReturnMsg_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds_loaReturn.addRow();
+	this.ds_loaReturn.setColumn(0, "sCode", this.parent.sCode);
+	this.ds_loaReturn.setColumn(0, "lReturnMsg", this.parent.lReturnMsg);
+};
+
+this.btn_msgSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var msg = this.Div00.form.TextArea00.value;
+	var sCode = this.ds_loaReturn.getColumn(0, "sCode");
+	this.transaction(
+	"tr_returnMsg"
+	,"SnuURL::loa/updateMsg.snu"
+	,""
+	,""
+	,"in_Var1="+sCode+" in_Var2="+msg+"" 
+	,"fn_callback_loapop"
+	
+	
+	)
+};
+
+this.btn_close_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.fn_callback_loapop = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_returnMsg")
+	{
+		if(nErrorCode < 0) 
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+}]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="Div00.form.TextArea00" propid="value" datasetid="ds_loaReturn" columnid="lReturnMsg"/>
+    </Bind>
+  </Form>
+</FDL>

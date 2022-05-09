@@ -1,8 +1,185 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_absenceschool" width="1280" height="720" titletext="New Form">
+  <Form id="frm_absenceschool" width="1280" height="720" titletext="New Form" onload="frm_absenceschool_onload">
     <Layouts>
-      <Layout height="720" width="1280"/>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="1" left="81" top="65" width="399" height="183" binddataset="ds_loalist" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="72"/>
+                <Column size="67"/>
+                <Column size="48"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="신청번호"/>
+                <Cell col="1" text="학번"/>
+                <Cell col="2" text="이름"/>
+                <Cell col="3" text="신청일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lNum" textAlign="center"/>
+                <Cell col="1" text="bind:sCode" textAlign="center"/>
+                <Cell col="2" text="bind:sCode" displaytype="combotext" combodataset="ds_student" combodatacol="sName" combocodecol="sCode" textAlign="center"/>
+                <Cell col="3" text="bind:lRequestDate" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="" left="500" top="68" width="410" height="579" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학생 정보" left="14" top="6" width="183" height="36" font="normal 700 15pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static01" taborder="1" text="학번" left="14" top="55" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_00" taborder="2" text="이름" left="14" top="120" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_01" taborder="3" text="신청사항" left="14" top="224" width="125" height="36" font="normal bold 15pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static01_02" taborder="4" text="휴학년도" left="14" top="300" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_03" taborder="5" text="휴학학기" left="14" top="356" width="83" height="36" textAlign="center"/>
+              <Static id="Static01_04" taborder="6" text="휴학사유" left="14" top="412" width="83" height="36" textAlign="center"/>
+              <Edit id="Edit00" taborder="7" left="112" top="53" width="146" height="37"/>
+              <Edit id="Edit02" taborder="8" left="106" top="298" width="172" height="37"/>
+              <Edit id="Edit03" taborder="9" left="106" top="364" width="183" height="41"/>
+              <TextArea id="TextArea00" taborder="10" left="106" top="426" width="267" height="128"/>
+              <Edit id="Edit01" taborder="11" left="114" top="123" width="150" height="42"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_appLoa" taborder="2" text="승인" left="501" top="655" width="123" height="39" onclick="btn_appLoa_onclick"/>
+        <Button id="btn_rejectLoa" taborder="3" text="반려" left="791" top="655" width="123" height="39" onclick="btn_rejectLoa_onclick"/>
+      </Layout>
     </Layouts>
+    <Objects>
+      <Dataset id="ds_loalist">
+        <ColumnInfo>
+          <Column id="lNum" type="STRING" size="256"/>
+          <Column id="lReason" type="STRING" size="256"/>
+          <Column id="lRequestDate" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="lMsg" type="STRING" size="256"/>
+          <Column id="lSemester" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="lReturnMsg" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_student">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="sName" type="STRING" size="256"/>
+          <Column id="sRrn" type="STRING" size="256"/>
+          <Column id="sPassword" type="STRING" size="256"/>
+          <Column id="sAddress" type="STRING" size="256"/>
+          <Column id="sEmail" type="STRING" size="256"/>
+          <Column id="sGender" type="STRING" size="256"/>
+          <Column id="sPhone" type="STRING" size="256"/>
+          <Column id="sAddmission" type="STRING" size="256"/>
+          <Column id="absenceYN" type="STRING" size="256"/>
+          <Column id="transferYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//폼이 로드됐을 때. 휴학 신청한 학생리스트를 받아와야함
+
+this.frm_absenceschool_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+	"tr_lsList"
+	,"SnuURL::loaStudent/list.snu"
+	,""
+	,"ds_loalist=out_list ds_student=out_sList"
+	,""
+	,"fn_callback_loa"
+	)
+};
+
+this.fn_callback_loa = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_lsList")
+	{
+	
+	}
+	if(id=="tr_appLoa")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+			return;
+		}
+		this.alert(sErrorMsg);
+	}
+	
+}
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nRow = this.ds_loalist.rowposition;
+	var sCode = this.ds_loalist.getColumn(nRow, "sCode");
+	var sName="";
+	var sRow = this.ds_student.getRowCount();
+	for(var i =0; i< sRow; i++)
+	{
+		if(this.ds_student.getColumn(i, "sCode") == sCode)
+		{
+			this.Div00.form.Edit01.set_value(this.ds_student.getColumn(i, "sName"));
+			
+		}
+	}
+};
+// 휴학승인
+this.btn_appLoa_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rtn= this.confirm("승인하시겠습니까?", "승인 창");
+	if(rtn == true)
+	{
+		var lRow = this.ds_loalist.rowposition;
+		var sCode = this.ds_loalist.getColumn(lRow, "sCode");
+		this.transaction(
+		"tr_appLoa"
+		,"SnuURL::loa/approve.snu"
+		,""
+		,""
+		,"in_Var1="+sCode+""
+		,"fn_callback_loa"
+		
+		
+		)
+	}
+};
+// 휴학반려 -> 반려작성 팝업창을 띄운다.
+this.btn_rejectLoa_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_loalist.rowposition;
+	var objParam = {sCode : this.ds_loalist.getColumn(nRow, "sCode")
+					,lReturnMsg : this.ds_loalist.getColumn(nRow, "lReturnMsg")};
+	var nLeft = system.clientToScreenX(this,10); 
+	var nTop  = system.clientToScreenY(this,10);
+	var objChild = new ChildFrame("poploaReturnMsg", nLeft, nTop, 350, 350);
+	objChild.set_formurl("Popup::loaReturnMsg.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_poploaCallback");
+};
+
+this.fn_poploaCallback = function(strPopId, strReturn)
+{
+	if(strPopId == "poploaReturnMsg")
+	{
+	
+	}
+	if(strReturn == undefined)
+	{
+		return;
+	}
+}]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_loalist" columnid="sCode"/>
+      <BindItem id="item2" compid="Div00.form.Edit02" propid="value" datasetid="ds_loalist" columnid="lRequestDate"/>
+      <BindItem id="item3" compid="Div00.form.Edit03" propid="value" datasetid="ds_loalist" columnid="lSemester"/>
+      <BindItem id="item4" compid="Div00.form.TextArea00" propid="value" datasetid="ds_loalist" columnid="lReason"/>
+    </Bind>
   </Form>
 </FDL>

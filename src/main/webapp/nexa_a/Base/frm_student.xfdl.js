@@ -181,6 +181,11 @@
             obj.set_taborder("7");
             obj.set_text("DELETE");
             this.addChild(obj.name, obj);
+
+            obj = new Button("Button00","468","35","66","21",null,null,null,null,null,null,this);
+            obj.set_taborder("8");
+            obj.set_text("Button00");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,670,this,function(p){});
@@ -309,6 +314,13 @@
         	this.ds_Info.deleteRow(this.ds_Info.rowposition);
         };
 
+        this.Button00_onclick = function(obj,e)
+        {
+        	var name = "김선교"
+        	var title = "바보"
+        	this.alert(name+"\\"+title);
+        };
+
         });
         
         // Regist UI Components Event
@@ -323,6 +335,7 @@
             this.btn_save.addEventHandler("onclick",this.btn_save_onclick,this);
             this.btn_add.addEventHandler("onclick",this.btn_add_onclick,this);
             this.btn_delete.addEventHandler("onclick",this.btn_delete_onclick,this);
+            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
         };
         this.loadIncludeScript("frm_student.xfdl");
         this.loadPreloadList();

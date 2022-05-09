@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeMapper">
+	<resultMap type="Notice" id="noticeResultMap">
+		<id property="noticeNo" column="NOTICE_NO" />
+		<result property="noticeTitle" column="NOTICE_TITLE" />
+		<result property="noticeContent" column="NOTICE_CONTENT" />
+		<result property="noticeDate" column="NOTICE_DATE" />
+		<result property="noticeCount" column="NOTICE_COUNT" />
+		<result property="aCode" column="A_CODE" />
+		<result property="noticeWriter" column="NOTICE_WRITER" />
+		<result property="nFileName" column="N_FILENAME"/>
+		<result property="nFileReName" column="N_FILERENAME"/>
+		<result property="nFilePath" column="N_FILEPATH"/>
+		<result property="nExtension" column="N_EXTENSION"/>
+
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		
+		SELECT COUNT(*) FROM NOTICE 
+	</select>
+	
+
+	<select id="selectAllList" resultMap="noticeResultMap">
+		
+		SELECT * FROM NOTICE 
+	</select>
+	
+	<select id="selectOneByNo" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE WHERE
+		NOTICE_NO = #{noticeNo}
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+	
+  		INSERT INTO NOTICE VALUES(NOTICE_NO.NEXTVAL, #{noticeTitle}, #{noticeContent}, DEFAULT, DEFAULT, 'admin', #{noticeWriter}, #{nFileName}, #{nFileReName}, #{nFilePath}, #{nExtension})
+  	</insert>
+  	
+  	<update id="updateCount" parameterType="int">
+       UPDATE NOTICE SET NOTICE_COUNT = NOTICE_COUNT+1 WHERE NOTICE_NO = #{noticeNo}
+   </update>
+	
+	
+<update id="updateNotice">
+  		 UPDATE NOTICE SET NOTICE_TITLE = #{noticeTitle}, NOTICE_CONTENT = #{noticeContent}, N_FILENAME = #{nFileName}, N_FILERENAME = #{nFileReName}, N_FILEPATH = #{nFilePath}, N_EXTENSION = #{nExtension} WHERE NOTICE_NO = #{noticeNo}
+  	</update>
+  	
+  	 	<delete id="deleteNotice">
+  	DELETE FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
+  	
+  	</delete>
+  	<select id="selectNoticeList" resultMap="noticeResultMap">
+  		SELECT * FROM NOTICE
+  	</select>
+	<insert id="insertNoticeFromNexa">
+		INSERT INTO NOTICE VALUES(NOTICE_NO.NEXTVAL, #{noticeTitle }, #{noticeContent }, DEFAULT, DEFAULT, 'admin', #{noticeWriter }, #{nFileName }, #{nFileReName }, #{nFilePath }, #{nExtension })
+	</insert>
+	
+</mapper>

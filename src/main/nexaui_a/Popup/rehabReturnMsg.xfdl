@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="rehabReturnMsg" width="350" height="350" titletext="New Form" onload="rehabReturnMsg_onload">
+    <Layouts>
+      <Layout height="350" mobileorientation="landscape" width="350">
+        <Div id="Div00" taborder="0" text="" left="3" top="2" width="343" height="313" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="반려사유" left="2" top="5" width="125" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <TextArea id="TextArea00" taborder="1" left="3" top="39" width="335" height="269"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_rehabMsgsubmit" taborder="1" text="보내기" left="260" top="319" width="85" height="27" onclick="btn_rehabMsgsubmit_onclick"/>
+        <Button id="btn_close" taborder="2" text="취소" left="6" top="319" width="85" height="27" onclick="btn_close_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_rehabReturn">
+        <ColumnInfo>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="rMsg" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//복학 반려 메시지 작성
+this.rehabReturnMsg_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds_rehabReturn.addRow();
+	this.ds_rehabReturn.setColumn(0, "sCode", this.parent.sCode);
+	this.ds_rehabReturn.setColumn(0, "rMsg", this.parent.rMsg);
+};
+
+this.btn_rehabMsgsubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var msg = this.Div00.form.TextArea00.value;
+	var sCode = this.ds_rehabReturn.getColumn(0, "sCode");
+	this.transaction(
+	"tr_returnMsg"
+	,"SnuURL::rehabilitation/updateMsg.snu"
+	,""
+	,""
+	,"in_Var1="+sCode+" in_Var2="+msg+""
+	,"fn_callback_rehabpop"
+	)
+};
+
+
+
+this.btn_close_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.fn_callback_rehabpop = function(id, nErrorCode, sErrorMsg)
+{
+	if(id=="tr_returnMsg")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+}]]></Script>
+  </Form>
+</FDL>

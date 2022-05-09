@@ -1,0 +1,19 @@
+1. packing 
+nexacro -> eclipse
+-경로 설정
+-packing
+
+-encoding
+-java version
+-maven
+
+
+2.Nexacro + Spring
+-porm.xml - repositories태그이용 nexacro library(jar)가 있는 저장소, ojdbc6를 추가
+후 dependexncy 추가
+
+3. java ( severProgramming)
+-web.xml에서 mapping을 *.nexa
+index.html(index.jsp)
+-> /home.nexa -> HomeController의 Home메소드 호출
+->nexaui/index.html 호출

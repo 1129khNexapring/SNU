@@ -3,7 +3,7 @@
   <Form id="Form_Top" width="1280" height="100" titletext="Form_Top" onload="Form_Top_onload">
     <Layouts>
       <Layout width="1280" height="100" screenid="Desktop_screen">
-        <ImageViewer id="ImageViewer00" taborder="0" text="" left="0" top="0" width="270" height="100" background="url('theme::default/images/img_WF_Nexacro.png') no-repeat left top /contain"/>
+        <ImageViewer id="ImageViewer00" taborder="0" text="" left="0" top="0" width="200" height="100" background="url('theme::default/images/img_WF_Nexacro.png') no-repeat left top /contain"/>
         <Static id="Static00" taborder="1" text="" left="1012" top="23" width="153" height="36" background="antiquewhite" textAlign="center"/>
         <Button id="Button00" taborder="2" text="로그아웃" left="1175" top="27" width="97" height="28" background="#657ec2" color="#ffffff"/>
       </Layout>

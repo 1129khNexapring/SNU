@@ -2,24 +2,64 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="StudentMapper">
-	<resultMap type="org.ttt.snu.student.domain.Student" id="studentResultMap">
-		<id property="sCode" column="S_CODE"/>
-		<result property="sName" column="S_NAME"/>
-		<result property="sRrn" column="S_RRN"/>
-		<result property="sPassword" column="S_PASSWORD"/>
-		<result property="sAddress" column="S_ADDRESS"/>
-		<result property="sEmail" column="S_EMAIL"/>
-		<result property="sGender" column="S_GENDER"/>
-		<result property="sPhone" column="S_PHONE"/>
-		<result property="sAddmission" column="S_ADDMISSION"/>
-		<result property="absenceYN" column="ABSENCE_YN"/>
-		<result property="transferYN" column="TRANSFER_YN"/>
-		<result property="dCode" column="D_CODE"/>
-		
+	<resultMap type="org.ttt.snu.student.domain.Student"
+		id="studentResultMap">
+		<id property="sCode" column="S_CODE" />
+		<result property="sName" column="S_NAME" />
+		<result property="sRrn" column="S_RRN" />
+		<result property="sPassword" column="S_PASSWORD" />
+		<result property="sAddress" column="S_ADDRESS" />
+		<result property="sEmail" column="S_EMAIL" />
+		<result property="sGender" column="S_GENDER" />
+		<result property="sPhone" column="S_PHONE" />
+		<result property="sAddmission" column="S_ADDMISSION" />
+		<result property="absenceYN" column="ABSENCE_YN" />
+		<result property="transferYN" column="TRANSFER_YN" />
+		<result property="dCode" column="D_CODE" />
 	</resultMap>
-	<select id="selectLoginUser" parameterType="org.ttt.snu.student.domain.Student" resultMap="studentResultMap">
-		SELECT * FROM STUDENT WHERE S_CODE = #{sCode} AND S_PASSWORD = #{sPassword}	
+
+	<resultMap type="Department" id="departmentResultMap">
+		<id property="dCode" column="D_CODE" />
+		<result property="dName" column="D_NAME" />
+		<result property="dField" column="D_FIELD" />
+		<result property="officeName" column="OFFICE_CODE" />
+		<result property="tuitionFee" column="TUITION_FEE" />
+		<result property="dCapacity" column="D_CAPACITY" />
+	</resultMap>
+	<select id="selectLoginUser"
+		parameterType="org.ttt.snu.student.domain.Student"
+		resultMap="studentResultMap">
+		SELECT * FROM STUDENT WHERE S_CODE = #{sCode} AND S_PASSWORD
+		= #{sPassword}
+	</select>
+
+	<select id="selectAllStudent"
+		parameterType="org.ttt.snu.student.domain.Student"
+		resultMap="studentResultMap">
+		SELECT * FROM STUDENT WHERE S_CODE = #{sCode}
+	</select>
+
+	<select id="selectAllDept"
+		parameterType="org.ttt.snu.department.domain.Department"
+		resultMap="departmentResultMap">
+
+		SELECT * FROM DEPARTMENT D
+		JOIN STUDENT S ON(S.D_CODE =
+		D.D_CODE)
+		WHERE
+		S_CODE
+		= #{sCode}
+	</select>
+
+	<update id="modifyStudent">
+		UPDATE STUDENT SET S_PHONE = #{sPhone} , S_EMAIL = #{sEmail} , S_ADDRESS =
+		#{sAddress} WHERE S_CODE = #{sCode}
+	</update>
+
+
+	<select id="selectIngListBydCode" parameterType="string" resultMap="studentResultMap">
+		SELECT * FROM STUDENT WHERE D_CODE = #{dCode}
 	</select>
 </mapper>
