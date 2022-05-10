@@ -152,7 +152,7 @@ this.div_page_stt_prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
 	
 	/* transaction function call */
 	
-	this.fn_callback("tr_noticeList", 0, "success");
+	this.fn_callback_notice("tr_noticeList", 0, "success");
 }
 
 /*
@@ -165,7 +165,7 @@ this.div_page_stt_next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
 	
 	/* transaction function call */
 	
-	this.fn_callback("tr_noticeList", 0, "success");
+	this.fn_callback_notice("tr_noticeList", 0, "success");
 }
 
 /*
