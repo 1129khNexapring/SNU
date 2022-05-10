@@ -10,6 +10,7 @@ import org.ttt.snu.board.domain.PageInfo;
 import org.ttt.snu.enrollLecture.domain.EnrollLectureDomain;
 import org.ttt.snu.grade.domain.Grade;
 import org.ttt.snu.grade.domain.LectureEvaluation;
+import org.ttt.snu.grade.domain.ScoreList;
 import org.ttt.snu.grade.service.GradeService;
 import org.ttt.snu.grade.store.GradeStore;
 
@@ -35,9 +36,9 @@ public class GradeServiceImpl implements GradeService{
 	}
 
 	@Override
-	public List<LectureEvaluation> printAllLE(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ScoreList> printAllLE() {
+		List<ScoreList> sList = gStore.selectAllLectureInquiry(sqlSession);
+		return sList;
 	}
 
 	@Override

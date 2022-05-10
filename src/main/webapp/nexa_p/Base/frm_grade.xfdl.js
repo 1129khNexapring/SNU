@@ -41,7 +41,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_enLecture");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"26\"/><Column size=\"96\"/><Column size=\"33\"/><Column size=\"2\"/><Column size=\"1\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학생이름\"/><Cell col=\"1\" text=\"과목명\"/><Cell col=\"2\" colspan=\"3\" textAlign=\"right\" text=\"점수\"><Cell text=\"                 점수\"/><Cell col=\"1\"/><Cell col=\"2\"/></Cell></Band><Band id=\"body\"><Cell text=\"bind:sName\"/><Cell col=\"1\" text=\"bind:lName\"/><Cell col=\"2\" displaytype=\"editcontrol\" edittype=\"text\" combodataset=\"ds_grade\" combocodecol=\"grade\" combodatacol=\"grade\" text=\"bind:grade\"/><Cell col=\"3\" text=\"bind:dName\"/><Cell col=\"4\" text=\"bind:pCode\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"26\"/><Column size=\"96\"/><Column size=\"33\"/><Column size=\"2\"/><Column size=\"1\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학생이름\"/><Cell col=\"1\" text=\"과목명\"/><Cell col=\"2\" colspan=\"3\" textAlign=\"right\" text=\"점수\"><Cell text=\"                 점수\"/><Cell col=\"1\"/><Cell col=\"2\"/></Cell></Band><Band id=\"body\"><Cell text=\"bind:sName\"/><Cell col=\"1\" text=\"bind:lName\"/><Cell col=\"2\" displaytype=\"editcontrol\" edittype=\"text\" combodataset=\"ds_grade\" combocodecol=\"grade\" combodatacol=\"grade\" text=\"bind:grade\" editinputfilter=\"space,alpha\"/><Cell col=\"3\" text=\"bind:dName\"/><Cell col=\"4\" text=\"bind:pCode\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_save","964","4","66","32",null,null,null,null,null,null,this);
@@ -115,10 +115,6 @@
         	);
         };
 
-        this.ds_enLecture_onvaluechanged = function(obj,e)
-        {
-        	this.alert("제발");
-        };
 
         });
         
@@ -126,15 +122,7 @@
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.frm_grade_onload,this);
-            this.grd_grade.addEventHandler("oninput",this.grd_grade_oninput,this);
             this.btn_save.addEventHandler("onclick",this.btn_save_onclick,this);
-            this.ds_enLecture.addEventHandler("oncolumnchanged",this.ds_enLecture_oncolumnchanged,this);
-            this.ds_enLecture.addEventHandler("cancolumnchange",this.ds_enLecture_cancolumnchange,this);
-            this.ds_enLecture.addEventHandler("canrowposchange",this.ds_enLecture_canrowposchange,this);
-            this.ds_enLecture.addEventHandler("onload",this.ds_enLecture_onload,this);
-            this.ds_enLecture.addEventHandler("onrowposchanged",this.ds_enLecture_onrowposchanged,this);
-            this.ds_enLecture.addEventHandler("onrowsetchanged",this.ds_enLecture_onrowsetchanged,this);
-            this.ds_enLecture.addEventHandler("onvaluechanged",this.ds_enLecture_onvaluechanged,this);
         };
         this.loadIncludeScript("frm_grade.xfdl");
         this.loadPreloadList();

@@ -10,7 +10,15 @@
 		<result property="lName" column="L_NAME"/>
 		<result property="pCode" column="P_CODE"/>
 	</resultMap>
+	<resultMap type="ScoreList" id="ScoreListResultMap">
+		<id     property="lName"   column="L_NAME"/>
+		<result property="pName"   column="P_NAME"/>
+		<result property="leScore" column="LE_SCORE"/>
+	</resultMap>
 	<select id="selectAllEnLectureList" resultMap="EnrollLectureDomainResultMap">
 		SELECT S_NAME, L_NAME FROM ENROLL_LECTURE JOIN STUDENT USING(S_CODE) JOIN LECTURE USING(L_CODE) WHERE P_CODE = #{pCode}
+	</select>
+	<select id="selectAllScore" resultMap="ScoreListResultMap">
+		SELECT L_NAME, P_NAME, LE_SCORE FROM L_EVALUATION JOIN LECTURE USING(L_CODE) JOIN PROFESSOR USING(P_CODE)
 	</select>
 </mapper> 

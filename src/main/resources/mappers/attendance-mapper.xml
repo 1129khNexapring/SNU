@@ -29,11 +29,15 @@
 	<resultMap type="EnrollLectureDomain" id="EnrollLectureDomainResultMap">
 		<id     property="dName" column="D_NAME"/>
 		<result property="sName" column="S_NAME"/>
+		<result property="sCode" column="S_CODE"/>
 	</resultMap>
 	<select id="selectAllLectureList" resultMap="LectureResultMap">
 		SELECT L_TYPE, L_NAME, CREDIT, L_DAYS, L_CAPACITY, L_YEAR, L_SEMESTER, L_CODE FROM LECTURE
 	</select>
 	<select id="selectAllEnLectureList" resultMap="EnrollLectureDomainResultMap">
-		SELECT D_NAME, S_NAME FROM ENROLL_LECTURE JOIN STUDENT USING(S_CODE) JOIN DEPARTMENT ON (STUDENT.D_CODE = DEPARTMENT.D_CODE) WHERE L_CODE = #{lCode}
+		SELECT S_CODE, D_NAME, S_NAME FROM ENROLL_LECTURE JOIN STUDENT USING(S_CODE) JOIN DEPARTMENT ON (STUDENT.D_CODE = DEPARTMENT.D_CODE) WHERE L_CODE = #{lCode}
 	</select>
+	<insert id="insertAttendance">
+		INSERT INTO ATTENDANCE VALUES(DEFAULT, #{sCode}, #{lCode}, #{attendanceStatus})
+	</insert>
 </mapper> 

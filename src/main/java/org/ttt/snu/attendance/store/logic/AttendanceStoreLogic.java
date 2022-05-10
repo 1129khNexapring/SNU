@@ -32,8 +32,8 @@ public class AttendanceStoreLogic implements AttendanceStore {
 
 	@Override
 	public int insertAttendance(SqlSession sqlSession, Attendance attendance) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("AttendanceMapper.insertAttendance", attendance);
+		return result;
 	}
 
 	@Override
