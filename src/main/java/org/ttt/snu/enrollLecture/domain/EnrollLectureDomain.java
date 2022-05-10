@@ -4,13 +4,18 @@ public class EnrollLectureDomain {
 	
 	private String dName;
 	private String sName;
-	public EnrollLectureDomain(String dName, String sName) {
+	private String lName;
+	private String pCode;
+	
+	public EnrollLectureDomain() {}
+
+	public EnrollLectureDomain(String dName, String sName, String lName, String pCode) {
 		super();
 		this.dName = dName;
 		this.sName = sName;
+		this.lName = lName;
+		this.pCode = pCode;
 	}
-	
-	public EnrollLectureDomain() {}
 
 	public String getdName() {
 		return dName;
@@ -28,11 +33,28 @@ public class EnrollLectureDomain {
 		this.sName = sName;
 	}
 
+	public String getlName() {
+		return lName;
+	}
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+	public String getpCode() {
+		return pCode;
+	}
+
+	public void setpCode(String pCode) {
+		this.pCode = pCode;
+	}
+
 	@Override
 	public String toString() {
-		return "EnrollLectureDomain [dName=" + dName + ", sName=" + sName + "]";
+		return "EnrollLectureDomain [dName=" + dName + ", sName=" + sName + ", lName=" + lName + ", pCode=" + pCode
+				+ "]";
 	}
-	
-	
 
+	
+	
 }

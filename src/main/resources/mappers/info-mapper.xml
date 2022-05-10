@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
-        <mapper namespace="InfoMapper">
-        <resultMap type="Info" id="infoResultMap">
-        <id property="infoNo" column="INFO_NO" />
-		<result property="infoContent" column="INFO_CONTENT" />
-		<result property="infoStatus" column="INFO_STATUS" />
-		<result property="infoEnrollDate" column="INFO_ENROLL_DATE" />
-		<result property="aCode" column="A_CODE" />
-        </resultMap>
-        <select id="selectAllList" resultMap="infoResultMap">
-        	SELECT * FROM INFO
-        </select>
-        
-        
-        </mapper>
+ <mapper namespace="InfoMapper">
+   <resultMap type="Info" id="infoResultMap">
+     <id property="infoNo" column="INFO_NO" />
+	 <result property="infoContent" column="INFO_CONTENT" />
+	 <result property="infoStatus" column="INFO_STATUS" />
+	 <result property="infoEnrollDate" column="INFO_ENROLL_DATE" />
+	 <result property="aCode" column="A_CODE" />
+   </resultMap>
+   
+   <select id="selectAllList" resultMap="infoResultMap">
+   		SELECT * FROM INFO WHERE INFO_STATUS = 'Y'
+   </select>
+   <select id="selectAllNInfo" resultMap="infoResultMap">
+   		SELECT * FROM INFO 
+   </select>
+   <insert id="insertInfo">
+   		INSERT INTO INFO VALUES(SEQ_INFO_NO.NEXTVAL, #{infoContent }, DEFAULT, DEFAULT, #{aCode } )
+   </insert>     
+   <update id="updateInfo">
+   		UPDATE INFO SET INFO_CONTENT = #{infoContent } WHERE INFO_NO = #{infoNo }
+   </update>
+   <update id="closeInfo">
+   		UPDATE INFO SET INFO_STATUS = 'N' WHERE INFO_NO = #{infoNo }
+   </update>  
+   <update id="openInfo">
+   		UPDATE INFO SET INFO_STATUS = 'Y' WHERE INFO_NO = #{infoNo }
+   </update>
+   <delete id="deleteInfo">
+   		DELETE FROM INFO WHERE INFO_NO = #{infoNo }
+   </delete>
+</mapper>

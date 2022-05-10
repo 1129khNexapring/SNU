@@ -208,7 +208,7 @@
 
         	/* transaction function call */
 
-        	this.fn_callback("tr_noticeList", 0, "success");
+        	this.fn_callback_notice("tr_noticeList", 0, "success");
         }
 
         /*
@@ -221,7 +221,7 @@
 
         	/* transaction function call */
 
-        	this.fn_callback("tr_noticeList", 0, "success");
+        	this.fn_callback_notice("tr_noticeList", 0, "success");
         }
 
         /*
