@@ -70,8 +70,37 @@
 
         this.Grid00_oncellclick = function(obj,e)
         {
+        	var objChildFrame = new ChildFrame();
+        	objChildFrame.init(
+        		"score_popup"
+        		,0
+        		,0
+        		,400
+        		,300
+        		,null
+        		,null
+        		,"Base::popup_lectureScore.xfdl"
+        	);
 
+        	objChildFrame.set_openalign("center middle");
+        	objChildFrame.set_overlaycolor("RGBA(196,196,196,0.5)");
+        	objChildFrame.set_dragmovetype("all");
+        	objChildFrame.set_resizable(false);
+        	objChildFrame.set_showstatusbar(false);
+
+        	var onRow = this.ds_lecture.rowposition;
+        	var objParam = {lCode:this.ds_lecture.getColumn(onRow, "lCode")};
+
+        	objChildFrame.showModal(
+        		this.getOwnerFrame()
+        		, objParam
+        		, this
+        		, "fn_popupCallback"
+        		);
         };
+
+        var gridTest = this.Grid00.getEditText();
+        alert(gridTest);
 
         });
         

@@ -209,11 +209,6 @@
         	}
         };
 
-        this.Div00_Static02_onclick = function(obj,e)
-        {
-
-        };
-
         });
         
         // Regist UI Components Event
