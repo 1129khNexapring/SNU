@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="writeInfo" width="600" height="500" titletext="New Form">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="600">
+        <Div id="Div00" taborder="0" text="" left="6" top="10" width="586" height="435" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <TextArea id="TextArea00" taborder="0" left="7" top="48" width="570" height="377" wordWrap="none"/>
+              <Static id="Static00" taborder="1" text="학교알림이 작성" left="7" top="6" width="139" height="35" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_registerInfo" taborder="1" text="등록" left="490" top="450" width="102" height="32" onclick="btn_registerInfo_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//버튼 클릭시 확인 창을 띄우고, 확인 시 트랜잭션
+this.btn_registerInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var title = this.Div00.form.TextArea00.value;
+	var rtn = this.confirm("등록하시겠습니까?", "등록 창");
+	if(rtn == true)
+	{
+		this.transaction(
+		"tr_writeInfo"
+		,"SnuURL::info/write.snu"
+		,""
+		,""
+		,"in_Var1="+nexacro.wrapQuote(title)+""
+		,"fn_callback_info"
+		)
+	}
+};
+
+this.fn_callback_info = function(sId, nErrorCode, sErrorMsg)
+{
+	if(sId == "tr_writeInfo")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+}
+]]></Script>
+  </Form>
+</FDL>
