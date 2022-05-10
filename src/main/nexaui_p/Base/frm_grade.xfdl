@@ -3,7 +3,7 @@
   <Form id="frm_grade" width="1080" height="670" titletext="New Form" onload="frm_grade_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="grd_grade" taborder="0" left="100" top="40" width="930" height="370" binddataset="ds_enLecture" autofittype="col" oninput="grd_grade_oninput">
+        <Grid id="grd_grade" taborder="0" left="100" top="40" width="930" height="370" binddataset="ds_enLecture" autofittype="col">
           <Formats>
             <Format id="default">
               <Columns>
@@ -29,7 +29,7 @@
               <Band id="body">
                 <Cell text="bind:sName"/>
                 <Cell col="1" text="bind:lName"/>
-                <Cell col="2" displaytype="editcontrol" edittype="text" combodataset="ds_grade" combocodecol="grade" combodatacol="grade" text="bind:grade"/>
+                <Cell col="2" displaytype="editcontrol" edittype="text" combodataset="ds_grade" combocodecol="grade" combodatacol="grade" text="bind:grade" editinputfilter="space,alpha"/>
                 <Cell col="3" text="bind:dName"/>
                 <Cell col="4" text="bind:pCode"/>
               </Band>
