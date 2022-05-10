@@ -35,13 +35,13 @@
       <File url="Base\frm_hhcareer.xfdl" checksum="20220509093239" errormsg=""/>
       <File url="Base\frm_hhrequest.xfdl" checksum="20220502092103" errormsg=""/>
       <File url="Base\frm_lectureSchedule.xfdl" checksum="20220422171352" errormsg=""/>
-      <File url="Base\frm_lecturescore.xfdl" checksum="20220509173051" errormsg=""/>
+      <File url="Base\frm_lecturescore.xfdl" checksum="20220510123437" errormsg=""/>
       <File url="Base\frm_militarycareer.xfdl" checksum="20220504145912" errormsg=""/>
       <File url="Base\frm_militaryrequest.xfdl" checksum="20220502175837" errormsg=""/>
       <File url="Base\frm_moneycareer.xfdl" checksum="20220504145853" errormsg=""/>
       <File url="Base\frm_moneylist.xfdl" checksum="20220506120057" errormsg=""/>
       <File url="Base\frm_movecareer.xfdl" checksum="20220504143835" errormsg=""/>
-      <File url="Base\frm_mypage.xfdl" checksum="20220509151015" errormsg=""/>
+      <File url="Base\frm_mypage.xfdl" checksum="20220510111423" errormsg=""/>
       <File url="Base\frm_Ok.xfdl" checksum="20220422171353" errormsg=""/>
       <File url="Base\frm_seasoncareer.xfdl" checksum="20220422171352" errormsg=""/>
       <File url="Base\frm_seasonrequest.xfdl" checksum="20220422171352" errormsg=""/>
@@ -52,6 +52,7 @@
       <File url="FrameBase\Form_Work.xfdl" checksum="20220426110554" errormsg=""/>
       <File url="Base\book_popup.xfdl" checksum="20220425122606" errormsg=""/>
       <File url="Base\frm_filetest.xfdl" checksum="20220506163427" errormsg=""/>
+      <File url="Base\popup_lectureScore.xfdl" checksum="20220510120935" errormsg=""/>
     </Info>
   </GenInfo>
 </root>
