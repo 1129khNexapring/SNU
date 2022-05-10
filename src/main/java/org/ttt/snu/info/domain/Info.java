@@ -6,12 +6,12 @@ public class Info {
 	private int infoNo;
 	private String infoContent;
 	private String infoStatus;
-	private Date infoEnrollDate;
+	private String infoEnrollDate;
 	private String aCode;
 	
 	public Info() {}
 	
-	public Info(int infoNo, String infoContent, String infoStatus, Date infoEnrollDate, String aCode) {
+	public Info(int infoNo, String infoContent, String infoStatus, String infoEnrollDate, String aCode) {
 		super();
 		this.infoNo = infoNo;
 		this.infoContent = infoContent;
@@ -44,11 +44,11 @@ public class Info {
 		this.infoStatus = infoStatus;
 	}
 
-	public Date getInfoEnrollDate() {
+	public String getInfoEnrollDate() {
 		return infoEnrollDate;
 	}
 
-	public void setInfoEnrollDate(Date infoEnrollDate) {
+	public void setInfoEnrollDate(String infoEnrollDate) {
 		this.infoEnrollDate = infoEnrollDate;
 	}
 

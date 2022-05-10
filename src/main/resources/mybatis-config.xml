@@ -33,7 +33,12 @@
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
 		<typeAlias type="org.ttt.snu.requestSch.domain.RequestSch" alias="RequestSch"/>
 		<typeAlias type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" alias="RequestVolunteer"/>
+
 		<typeAlias type="org.ttt.snu.grade.domain.ScoreList" alias="ScoreList"/>
+
+		<typeAlias type="org.ttt.snu.lectureEvaluation.domain.LectureEvaluation" alias="LectureEvaluation"/>
+		
+
 
 
 
@@ -63,6 +68,7 @@
 		<mapper resource="mappers/reserveforce-mapper.xml"/>
 		<mapper resource="mappers/rehabilitation-mapper.xml"/>
 		<mapper resource="mappers/requestVolunteer-mapper.xml"/>
+		<mapper resource="mappers/lectureEvaluation-mapper.xml"/>
 
 	</mappers>
 </configuration>
