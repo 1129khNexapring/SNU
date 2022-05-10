@@ -2,11 +2,12 @@
    
 // add schedule popup open
 function click_add() {
-	var url = "schedulePopup.snu";
-	var name = "schedulePopup.snu";
+	var url = "/schedule/Popup.snu";
+	var name = "/schedule/Popup.snu";
 	var option = "width = 600, height = 600 left = 100, top=50,location=no";
 	window.open(url,name,option)
 };
+ 
 
 //datepicker
 $(function() {
@@ -58,13 +59,14 @@ function click_ok(){
 		"endDate" : $("#endDate").val()
 	}
 	$.ajax({
-		url : "addSchedule.snu",
+		url : "/schedule/add.snu",
 		type : "POST",
-		//data : JSON.stringify(calendar),
-		data : calendar,
+		data : JSON.stringify(calendar),
 		success : function() {
 			opener.parent.location.reload();
 			window.close();
 		}
 	});
 };
+	
+	 

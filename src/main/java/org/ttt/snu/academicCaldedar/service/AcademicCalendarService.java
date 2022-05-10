@@ -12,4 +12,7 @@ public interface AcademicCalendarService {
 
 	public void addSchedule(AcademicCalendar academicCalendar);
 
+
+	public void removeSchedule(String title);
+
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.ttt.snu.academicCaldedar.domain.AcademicCalendar"%>
 <%@page import="java.util.List"%>
@@ -51,6 +51,35 @@ document.addEventListener('DOMContentLoaded', function() {
         editable: true,
         selectable: true,
         locale: 'ko',
+        displayEventTime: false,
+        allDay:true,
+        eventClick: function(info) {
+            if(window.confirm("일정을 삭제하시겠습니까?")) {
+                info.event.remove();
+                
+                console.log(info.event);
+                var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                var obj = new Object();
+                	
+                    obj.title = info.event._def.title;
+                    obj.start = info.event._instance.range.start;
+                    obj.end = info.event._instance.range.end;
+                    events.push(obj);
+
+                console.log(events);
+            }
+            $(function deleteData(){
+                $.ajax({
+                    url: "/schedule/delete.snu",
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify(events),
+                    
+                })
+            })
+        },
+          
+        
         events: [
         	<% 
         	  for (int i = 0; i < aList.size(); i++) {
@@ -59,18 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
         	  {
         	   title : '<%= calendar.getTitle() %>',
         	   start : '<%= calendar.getStartDate() %>',
-        	   end : '<%= calendar.getEndDate() %>'
+        	   end : '<%= calendar.getEndDate() %>T23:59:59'
         	   },
       <%
       	}
       %>
-      		{
-      		   title : 'defult',
-      		   start : "2022-05-18",
-      		   end : "2022-05-19",
-      		   allDay : true
-      		  
-      		  }
+      		
         ]
       });
 

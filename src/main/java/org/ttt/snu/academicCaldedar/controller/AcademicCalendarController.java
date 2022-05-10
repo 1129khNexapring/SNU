@@ -22,14 +22,14 @@ public class AcademicCalendarController {
 
 	
 	//일정 추가 팝업
-		@RequestMapping(value = "/schedulePopup.snu")
+		@RequestMapping(value = "/schedule/Popup.snu")
 		public String schedulePopup()  {
 			return "/academicCalendar/schedulePopup";
 		}
 	
 	//일정추가 버튼클릭 
 	@ResponseBody
-	@RequestMapping(value="/addSchedule.snu", method = RequestMethod.POST)
+	@RequestMapping(value="/schedule/add.snu", method = RequestMethod.POST)
 	public String addSchedule(
 			@RequestParam("title") String title
 			, @RequestParam("startDate") String startDate
@@ -57,6 +57,18 @@ public class AcademicCalendarController {
 			
 		}
 		
-	}//커밋용 수정
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/schedule/delete.snu", method = RequestMethod.GET)
+	public String removeSchedule(
+			@RequestParam("title") String title)
+			 {
+		 aService.removeSchedule(title);
+		
+		
+		
+		return null;
+	}
 	
 }

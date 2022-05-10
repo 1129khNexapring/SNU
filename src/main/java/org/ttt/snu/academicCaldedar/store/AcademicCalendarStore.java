@@ -11,4 +11,8 @@ public interface AcademicCalendarStore {
 
 	void addSchedule(AcademicCalendar academicCalendar);
 
+
+
+	void deleteSchedule(String title);
+
 }

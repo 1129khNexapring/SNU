@@ -25,4 +25,10 @@ public class AcademicCalendarStoreLogic implements AcademicCalendarStore {
 		return sqlSession.selectList("calendarMapper.showSchedule");
 	}
 
+	@Override
+	public void deleteSchedule(String title) {
+		sqlSession.delete("calendarMapper.deleteSchedule", title);
+		
+	}
+
 }

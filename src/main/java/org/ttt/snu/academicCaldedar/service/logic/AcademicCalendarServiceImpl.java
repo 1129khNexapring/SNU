@@ -27,4 +27,12 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 		return aStore.showSchedule();
 	}
 
+	
+
+	@Override
+	public void removeSchedule(String title) {
+		aStore.deleteSchedule(title);
+		
+	}
+
 }
