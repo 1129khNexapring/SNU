@@ -525,8 +525,6 @@
         {
         	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
         	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-        	trace(comment_no);
-        	trace(board_no);
         	this.transaction(
         		  "tr_cUpdate"
         		, "SnuUrl::comments/changeComments.snu"
