@@ -35,7 +35,7 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/index.snu", method = RequestMethod.GET)
+	@RequestMapping(value = "/main.snu", method = RequestMethod.GET)
 	public String popupList(Model model) {
 		List<Info> iList = iService.printAll();
 		if (!iList.isEmpty()) {
