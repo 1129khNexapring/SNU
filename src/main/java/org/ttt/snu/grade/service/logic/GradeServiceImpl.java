@@ -43,8 +43,8 @@ public class GradeServiceImpl implements GradeService{
 
 	@Override
 	public int registerGrade(Grade grade) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = gStore.insertGrade(sqlSession, grade);
+		return result;
 	}
 
 	@Override

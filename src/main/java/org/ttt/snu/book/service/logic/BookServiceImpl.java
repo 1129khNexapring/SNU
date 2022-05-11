@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.ttt.snu.book.domain.Book;
 import org.ttt.snu.book.service.BookService;
 import org.ttt.snu.book.store.BookStore;
+import org.ttt.snu.student.domain.Student;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -31,8 +32,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public int removeBook(String dBook) {
-		int result = bStore.deleteBook(sqlSession, dBook);
+	public int removeBook(Book book) {
+		int result = bStore.deleteBook(sqlSession, book);
 		return result;
 	}
 
@@ -40,6 +41,13 @@ public class BookServiceImpl implements BookService {
 	public int modifyBook(Book book) {
 		int result = bStore.updateBook(sqlSession, book);
 		return result;
+	}
+
+	//작성자출력용
+	@Override
+	public List<Student> printAllStudent() {
+		List<Student> sList = bStore.selectAllStudent(sqlSession);
+		return sList;
 	}
 
 }

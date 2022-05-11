@@ -9,7 +9,7 @@
     <Script type="xscript5.1"><![CDATA[
 this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	
+	system.print(this.Button00);
 };
 ]]></Script>
   </Form>

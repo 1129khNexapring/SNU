@@ -29,8 +29,8 @@ public class GradeStoreLogic implements GradeStore{
 
 	@Override
 	public int insertGrade(SqlSession sqlSession, Grade grade) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("GradeMapper.insertGrade", grade);
+		return result;
 	}
 
 	@Override
