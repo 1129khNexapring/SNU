@@ -99,8 +99,6 @@
         		);
         };
 
-        var gridTest = this.Grid00.getEditText();
-        alert(gridTest);
 
         });
         

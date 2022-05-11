@@ -47,7 +47,7 @@
 
         this.Button00_onclick = function(obj,e)
         {
-
+        	system.print(this.Button00);
         };
 
         });

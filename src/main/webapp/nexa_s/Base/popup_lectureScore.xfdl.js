@@ -208,6 +208,8 @@
                 		,"fn_callback_tran"
                 	)
         	}
+
+        	this.close();
         };
 
         this.Button00_00_onclick = function(obj,e)
@@ -232,6 +234,8 @@
                 		,"fn_callback_tran"
                 	)
         	}
+
+        	this.close();
         };
 
         });
