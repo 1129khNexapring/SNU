@@ -3,7 +3,7 @@
   <Form id="frm_bhcareer" width="1080" height="670" titletext="New Form" onload="frm_bhcareer_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="Grid00" taborder="0" left="16" top="11" width="1045" height="526" binddataset="ds_rehab" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+        <Grid id="Grid00" taborder="0" left="16" top="11" width="1045" height="526" binddataset="ds_rehab" autofittype="col" oncelldblclick="Grid00_oncelldblclick" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
               <Columns>
@@ -24,9 +24,9 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:rRequestDate" textAlign="center"/>
-                <Cell col="1" suppressalign="middle" text="bind:rYear" textAlign="center"/>
+                <Cell col="1" suppressalign="middle" text="expr:rYear.toString()+rSemester.toString()" textAlign="center" combodataset="ds_rPeriod" combocodecol="origin" combodatacol="text" displaytype="combotext"/>
                 <Cell col="2" displaytype="combotext" combodataset="ds_rstatus" combocodecol="rStatus" combodatacol="rText" text="bind:rStatus" textAlign="center"/>
-                <Cell col="3" font="bold 14px/normal &quot;Gulim&quot;" text="취소" textAlign="center" color="#f10b03"/>
+                <Cell col="3" font="bold 14px/normal &quot;Gulim&quot;" text="취소" textAlign="center" color="#f10b03" displaytype="buttoncontrol"/>
               </Band>
             </Format>
           </Formats>
@@ -36,15 +36,6 @@
             <Layout>
               <Static id="Static00" taborder="0" text="반려사유" left="10" top="9" width="149" height="50" font="bold 20px/normal &quot;Gulim&quot;"/>
               <Static id="Static01" taborder="1" text="Static01" left="26" top="79" width="293" height="209" border="1px solid"/>
-            </Layout>
-          </Layouts>
-        </PopupDiv>
-        <PopupDiv id="PopupDiv01" text="PopupDiv01" visible="false" left="464" top="158" width="312" height="146" background="#aebff3" border="1px solid">
-          <Layouts>
-            <Layout>
-              <Static id="Static00" taborder="0" text="&lt;복학신청&gt; 취소하시겠습니까?" left="24" top="10" width="260" height="58" textAlign="center" font="bold 16px/normal &quot;Arial&quot;" onclick="PopupDiv01_Static00_onclick"/>
-              <Button id="Button00" taborder="1" text="확인" left="18" top="83" width="133" height="52" onclick="PopupDiv01_Button00_onclick"/>
-              <Button id="Button00_00" taborder="2" text="취소" left="157" top="83" width="133" height="52" onclick="PopupDiv01_Button00_00_onclick"/>
             </Layout>
           </Layouts>
         </PopupDiv>
@@ -62,50 +53,44 @@ this.frm_bhcareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
         		,"inVar1="+sCode // 5.InVar : F->S(var)
         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 				)
-
-	if(this.ds_rehab.getColumn(0, "rStatus") == 'Y')
-		{
-			this.ds_rehab.setColumn(0, "rMsg", "취소");
-		}
 };
-
 
 this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-		if (this.ds_rehab.getColumn(0, "rStatus") == 'Y')
-		{
-			var x= 400;
-			var y= 150;
-			this.PopupDiv01.trackPopupByComponent(obj, x, y);
-		}	
-
-	var msg = this.ds_rehab.getColumn(0, "rMsg");
-		if (this.ds_rehab.getColumn(0, "rStatus") == 'N')
+		var row =  this.ds_rehab.rowposition;
+		if(e.cell==2){
+		var msg = this.ds_rehab.getColumn(row, "rMsg");
+		if (this.ds_rehab.getColumn(row, "rStatus") == 'N')
 		{
 			var x=400;
 			var y=150;
 			this.PopupDiv00.trackPopupByComponent(obj, x, y);
 			this.PopupDiv00.form.Static01.set_text(msg);
-		}	
+		}
+	}
 };
 
-this.PopupDiv01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	this.ds_rehab.deleteRow(0);
-	this.transaction(
-        		"tr_delete"// 1.ID
-        		,"tttUrl::rehab/request.snu"// 2.URL
-        		,"in_rehab=ds_rehab:U" // 3.InDs : F->S jsp(I,U,D)
-        		,"" // 4.OutDs : S->F jsp(SELECT)
-        		,"inVar1="+sCode // 5.InVar : F->S(var)
-        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-				)
-	this.PopupDiv01.closePopup();
-};
+	var row =  this.ds_rehab.rowposition;
+	if(e.cell==3){
+			if (this.ds_rehab.getColumn(row, "rStatus") == 'Y')
+				{
+					var cancelRehab = this.confirm("복학 취소하시겠습니까?", "복학 취소");
+					if(cancelRehab == true){
+						this.ds_rehab.deleteRow(row);
+						this.transaction(
+							"tr_delete"// 1.ID
+							,"tttUrl::rehab/request.snu"// 2.URL
+							,"in_rehab=ds_rehab:U" // 3.InDs : F->S jsp(I,U,D)
+							,"" // 4.OutDs : S->F jsp(SELECT)
+							,"inVar1="+sCode // 5.InVar : F->S(var)
+							,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+							)
+						}
+					}	
+				}
 
-this.PopupDiv01_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	this.PopupDiv01.closePopup();
 };
 ]]></Script>
     <Objects>
@@ -139,23 +124,29 @@ this.PopupDiv01_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.Clic
       </Dataset>
       <Dataset id="ds_rPeriod">
         <ColumnInfo>
-          <Column id="rYear" type="STRING" size="256"/>
-          <Column id="rSemester" type="STRING" size="256"/>
-          <Column id="rYearText" type="STRING" size="256"/>
-          <Column id="rSemesterText" type="STRING" size="256"/>
+          <Column id="origin" type="STRING" size="256"/>
+          <Column id="text" type="STRING" size="256"/>
         </ColumnInfo>
         <Rows>
           <Row>
-            <Col id="rYear">2022</Col>
-            <Col id="rSemester">1</Col>
-            <Col id="rSemesterText">1학기</Col>
-            <Col id="rYearText">2022년</Col>
+            <Col id="origin">20221</Col>
+            <Col id="text">2022년 1학기</Col>
           </Row>
           <Row>
-            <Col id="rYear">2023</Col>
-            <Col id="rSemester">2</Col>
-            <Col id="rSemesterText">2학기</Col>
-            <Col id="rYearText">2023년</Col>
+            <Col id="origin">20222</Col>
+            <Col id="text">2022년 2학기</Col>
+          </Row>
+          <Row>
+            <Col id="origin">20231</Col>
+            <Col id="text">2023년 1학기</Col>
+          </Row>
+          <Row>
+            <Col id="origin">20232</Col>
+            <Col id="text">2023년 2학기</Col>
+          </Row>
+          <Row>
+            <Col id="origin">20241</Col>
+            <Col id="text">2024년 1학기</Col>
           </Row>
         </Rows>
       </Dataset>
