@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="Application_Desktop" screenid="Desktop_screen">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="true" left="0" top="0" width="1280" height="720" titletext="TopLeftFrame">
+        <VFrameSet id="VFrameSet00" separatesize="100,*">
+          <Frames>
+            <ChildFrame id="TopFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Top.xfdl"/>
+            <HFrameSet id="HFrameSet00" separatesize="200,*" showtitlebar="false">
+              <Frames>
+                <ChildFrame id="LeftFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Left.xfdl"/>
+                <VFrameSet id="VFrameSet00" separatesize="30,0,*">
+                  <Frames>
+                    <ChildFrame id="MdiFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Mdi.xfdl"/>
+                    <FrameSet id="WorkFrame"/>
+                    <ChildFrame id="MainFrame" formurl="" showtitlebar="false"/>
+                  </Frames>
+                </VFrameSet>
+              </Frames>
+            </HFrameSet>
+          </Frames>
+        </VFrameSet>
+      </MainFrame>
+    </Layout>
+  </Application>
+  <Script type="xscript5.1"><![CDATA[this.av_MdiFrame = "";
+this.av_WorkFrame = "";
+
+this.Application_onload = function(obj:nexacro.Application, e:nexacro.LoadEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	this.av_MdiFrame = objApp.mainframe.VFrameSet00.HFrameSet00.VFramset00.MdiFrame;
+	this.av_WorkFrame = objApp.mainframe.VFrameSet00.HFrameSet00.VFramset00.WorkFrame;
+}]]></Script>
+</ADL>

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_notice" width="1280" height="720" titletext="New Form" scrolltype="both" onload="frm_notice_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="div_page" taborder="0" text="Div00" left="262" top="344" width="600" height="48" visible="false">
+          <Layouts>
+            <Layout>
+              <Static id="stt_prev" taborder="0" text="Prev" left="119" top="7" width="40" height="32" right="" bottom="" onclick="div_page_stt_prev_onclick" visible="true"/>
+              <Static id="stt_0" taborder="0" text="1" left="175" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_1" taborder="0" text="2" left="199" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_2" taborder="0" text="3" left="223" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_3" taborder="0" text="4" left="247" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_4" taborder="0" text="5" left="271" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_5" taborder="0" text="6" left="295" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_6" taborder="0" text="7" left="319" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_7" taborder="0" text="8" left="343" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_8" taborder="0" text="9" left="367" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_9" taborder="0" text="10" left="391" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_next" taborder="0" text="Next" left="427" top="7" width="40" height="32" right="" bottom="" onclick="div_page_stt_next_onclick" visible="true"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="1" left="301" top="47" width="550" height="267" binddataset="ds_notice" autofittype="col" scrolltype="both" fillareatype="none" autosizingtype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="noticeNo"/>
+                <Cell col="1" text="noticeTitle"/>
+                <Cell col="2" text="noticeDate"/>
+                <Cell col="3" text="noticeWriter"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:noticeNo"/>
+                <Cell col="1" text="bind:noticeTitle"/>
+                <Cell col="2" text="bind:noticeDate"/>
+                <Cell col="3" text="bind:noticeWriter"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="2" text="글쓰기" left="777" top="314" width="74" height="28" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_client">
+        <ColumnInfo>
+          <Column id="noticeNo" type="INT" size="256"/>
+          <Column id="noticeTitle" type="STRING" size="256"/>
+          <Column id="noticeContent" type="STRING" size="256"/>
+          <Column id="noticeDate" type="STRING" size="256"/>
+          <Column id="noticeCount" type="INT" size="256"/>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="noticeWriter" type="STRING" size="256"/>
+          <Column id="nFileName" type="STRING" size="256"/>
+          <Column id="nFileReName" type="STRING" size="256"/>
+          <Column id="nFilePath" type="STRING" size="256"/>
+          <Column id="nExtension" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_notice">
+        <ColumnInfo>
+          <Column id="noticeNo" type="INT" size="256"/>
+          <Column id="noticeTitle" type="STRING" size="256"/>
+          <Column id="noticeContent" type="STRING" size="256"/>
+          <Column id="noticeDate" type="STRING" size="256"/>
+          <Column id="noticeCount" type="INT" size="256"/>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="noticeWriter" type="STRING" size="256"/>
+          <Column id="nFileName" type="STRING" size="256"/>
+          <Column id="nFileReName" type="STRING" size="256"/>
+          <Column id="nFilePath" type="STRING" size="256"/>
+          <Column id="nExtension" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.gv_iStartPageNo = 0; // 현재페이지 숫자
+this.gv_iUnitSelRowNo = 100; // 서버에서 호출할 때 까져올 로우의 수
+this.gv_iStartSelRowNo = 1; // 서버를 호출 할 때 시작할 로우 번호
+this.gv_iMaxPageNum = 10; // 화면에 최대 페이지 갯수
+this.gv_iServerRowCount = 0; // 서버로부터 조회된 로우의 갯수
+
+//callback function
+this.fn_callback_notice = function(Id, nErrorCode, sErrorMsg)
+{
+	if(Id == "tr_noticeList")
+	{
+		if(nErrorCode  < 0)
+		{
+			this.alert("Fail");
+		}
+		else
+		{// 조회 성공시
+		
+		var iLastRow = this.gv_iStartPageNo * this.gv_iUnitSelRowNo; // 0*40 = 0 iLastRow = 0이다? 
+		this.ds_notice.filter("noticeNo >="+(iLastRow + this.gv_iStartSelRowNo)+" && noticeNo <="+(iLastRow + this.gv_iUnitSelRowNo)); //noticeNo >= 0 && noticeNo <= 100
+		
+		if(this.ds_notice.getRowCount() == 0) // 서버에서 가져온 로우 갯수가 0개이면?
+		{
+			alert("No more Data");			// 띄워주고
+			this.ds_notice.filter("");			// 필터링한다?
+			return;
+		}
+		else
+		{	
+			// 로우 갯수가 0개아니면
+			this.gv_iServerRowCount = this.ds_notice.getRowCount();	// 로드된 36개가 서버에서 조회된 갯수가 된다.
+			this.fn_SetStyle();	//스타일 주고
+			this.fn_SetPageNo();	//페이지 번호 주고
+			
+			this.div_page.form.stt_0.set_color("red");	//1번에 빨간색 css준다
+		}
+	  }
+		
+		
+		
+	}
+}
+
+//click event function for page number
+
+this.div_page_stt_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);	//iNo는 그 눌린 스태틱의 텍스트값 1-> iNo =1, 2-> iNo =2
+	var iFirstNum = (iNo-1)*this.gv_iMaxPageNum+1;	//iFirstNum = 1->0 2->10 3-> 20 
+	var iLastNum = iFirstNum + this.gv_iMaxPageNum;	// iLastNum = 1->10 2->20 3-> 30
+		
+	this.fn_SetStyle();					//스타일주고
+	obj.set_color("red");				// 빨간색 주고
+	
+	this.ds_notice.filter("");
+	this.ds_notice.filter("noticeNo >= " + iFirstNum+" && noticeNo < " + iLastNum);
+}
+
+/*
+click event function for prev
+*/
+this.div_page_stt_prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.gv_iStartPageNo = this.gv_iStartPageNo - 1;
+	
+	/* transaction function call */
+	
+	this.fn_callback_notice("tr_noticeList", 0, "success");
+}
+
+/*
+click event function for next
+*/
+this.div_page_stt_next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.gv_iStartPageNo = this.gv_iStartPageNo + 1;
+	
+	/* transaction function call */
+	
+	this.fn_callback_notice("tr_noticeList", 0, "success");
+}
+
+/*
+page number setting
+*/
+this.fn_SetPageNo = function()
+{	
+	var sPage = this.gv_iStartPageNo * this.gv_iMaxPageNum;	//istartPageNo = 0 gv_iMaxPageNum 10;
+	
+	/* prev button setting */
+	if (this.gv_iStartPageNo < 1)
+	{
+		this.div_page.form.stt_prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.form.stt_prev.set_visible(true);
+	}
+
+	/* next button setting */
+	if (this.gv_iServerRowCount < this.gv_iUnitSelRowNo)
+	{
+		this.div_page.form.stt_next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.form.stt_next.set_visible(true);
+	}
+
+	/* page button setting */
+	for (var i = 0; i < this.gv_iMaxPageNum; i++)
+	{
+		this.div_page.form.components["stt_"+i].set_visible(true);
+		
+		this.div_page.form.components["stt_"+i].set_text(sPage+i+1);
+		
+		if (this.gv_iServerRowCount < (i * this.gv_iMaxPageNum))
+		{
+			this.div_page.form.components["stt_"+i].set_visible(false);
+		} 
+		else 
+		{
+			this.div_page.form.components["stt_"+i].set_visible(true);
+		}
+	}	
+}
+
+/*
+style settings
+*/
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.gv_iMaxPageNum; i++)
+	{
+		this.div_page.form.components["stt_"+i].set_color("blue");			
+	}	
+}
+this.frm_notice_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.div_page.set_visible(true);
+	
+	this.transaction(
+	"tr_noticeList"
+	,"SnuURL::notice/nList.snu"
+	,""
+	,"ds_notice=out_notice"
+	,""
+	,"fn_callback_notice"
+	)
+};
+//버튼 클릭시 글을 입력할 팝업 페이지 로드
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//clientToScreenX: 컴포넌트의 클라이언트 기준의 x좌표값을 스크린 기준의 X좌표값으로 변환하는 메소드
+	var nLeft = system.clientToScreenX(this,10);
+	var nTop  = system.clientToScreenY(this,10);
+	var objChild = new ChildFrame("popWriteNotice", nLeft, nTop, 600, 500);
+	objChild.set_formurl("Popup::writeNotice.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), {}, this, "fn_popwriteCallback");
+};
+
+this.fn_popwriteCallback = function(sId, strReturn)
+{
+	if(sId == "popWriteNotice")
+	{
+	
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Work" width="1080" height="670" titletext="Form_Work" onload="Form_Work_onload" onactivate="Form_Work_onactivate">
+    <Layouts>
+      <Layout width="1080" height="670" screenid="Desktop_screen">
+        <Button id="btn_bookmark" taborder="0" text="☆" left="7" top="6" width="23" height="20" font="bold 14px/normal &quot;Malgun Gothic&quot;" onclick="btn_bookmark_onclick"/>
+        <Static id="st_title" taborder="1" text="Static00" left="41" top="6" width="344" height="27"/>
+        <Div id="div_work" taborder="2" text="Div00" left="7" top="44" width="1064" height="616"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.fv_key = "";
+
+this.Form_Work_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var objOwnerFrame = this.getOwnerFrame();
+	
+	var sMenuId = objOwnerFrame.openParam.MENU_ID;
+	var sMenuNM = objOwnerFrame.openParam.MENU_NAME;
+	var sFormUrl = objOwnerFrame.openParam.FORM_URL;
+	var sMenuPath = objOwnerFrame.openParam.MENU_PATH;
+	
+	this.div_work.set_url(sFormUrl);
+	this.st_title.set_text(sMenuPath);
+	
+	this.fv_key = sMenuId;
+	
+	var objApp = nexacro.getApplication();
+	var nRow = objApp.gds_myMenu.findRow("MENU_ID", this.fv_key);
+	
+	if(nRow > -1) 
+	{
+		this.btn_bookmark.set_text("★"); //별은 텍스트
+		this.fv_myMenu = "D";
+	}
+};
+
+
+
+this.Form_Work_onactivate = function(obj:nexacro.Form,e:nexacro.ActivateEventInfo)
+{
+	nexacro.getApplication().av_MdiFrame.form.fn_tabControl(this.fv_key);
+};
+
+this.fv_myMenu = "I"; // 등록(I), 삭제(D)
+
+
+this.btn_bookmark_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.fv_myMenu == "I") 
+	{
+		//즐겨찾기 등록
+		var objApp = nexacro.getApplication();
+		var nFindRow = objApp.gds_menu.findRow("MENU_ID", this.fv_key);
+		var nNewRow = objApp.gds_myMenu.addRow();
+		objApp.gds_myMenu.copyRow(nNewRow, objApp.gds_menu, nFindRow);
+		obj.set_text("★");
+		this.fv_myMenu = "D";
+	}else if(this.fv_myMenu == "D") 
+	{
+		//즐겨찾기 삭제
+		var objApp = nexacro.getApplication();
+		var nRow = objApp.gds_myMenu.findRow("MENU_ID", this.fv_key);
+		objApp.gds_myMenu.deleteRow(nRow);
+		obj.set_text("☆");
+		this.fv_myMenu = "I";
+	}
+	nexacro.setPrivateProfile("myMenuData", objApp.gds_myMenu.saveXML());
+	
+};
+]]></Script>
+  </Form>
+</FDL>

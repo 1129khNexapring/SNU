@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Work" width="1080" height="650" titletext="Form_Work" onload="Form_Work_onload">
+    <Layouts>
+      <Layout width="1080" height="650" screenid="Desktop_screen">
+        <Button id="btn_bookmark" taborder="0" text="☆" left="7" top="6" width="23" height="20" font="bold 14px/normal &quot;Malgun Gothic&quot;" onclick="btn_bookmark_onclick"/>
+        <Static id="st_title" taborder="1" text="Static01" left="37" top="5" width="322" height="26"/>
+        <Div id="div_work" taborder="2" text="Div00" left="10" top="33" width="1060" height="608"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.fv_key = ""
+this.Form_Work_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var objOwnerFrame = this.getOwnerFrame();
+	
+	var sMenuId = objOwnerFrame.openParam.LIST_ID;
+	var sMenuNM = objOwnerFrame.openParam.LIST;
+	var sFormUrl = objOwnerFrame.openParam.FORM_URL;
+	
+	this.div_work.set_url(sFormUrl);
+	
+	
+};
+
+]]></Script>
+  </Form>
+</FDL>

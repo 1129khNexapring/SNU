@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_lectureScore" width="1080" height="670" titletext="New Form" onload="frm_lectureScore_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="Grid00" taborder="0" left="60" top="20" width="980" height="350" binddataset="ds_scoreList" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="교과목명"/>
+                <Cell col="1" text="담당교수"/>
+                <Cell col="2" text="평균(5점 만점)"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lName"/>
+                <Cell col="1" text="bind:pName"/>
+                <Cell col="2" text="bind:leScore"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_score">
+        <ColumnInfo>
+          <Column id="leNo" type="STRING" size="256"/>
+          <Column id="leScore" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_scoreList">
+        <ColumnInfo>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
+          <Column id="leScore" type="FLOAT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "tr_lectureScoreList") {
+		if(nErrorCode < 0) {
+			this.alert("점수 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("점수 조회 성공");
+	}
+};
+this.frm_lectureScore_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+			"tr_lectureScoreList" 					  	  // 1. ID
+			, "SnuUrl::lectureScore/list.snu" 		  // 2. URL
+			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+			, "ds_scoreList=out_scoreList" 	  // 4. OutDs : S -> F jsp(SELECT)
+	        , ""							  // 5. InVar : F -> S(var)
+			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+		)
+};
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_bhcareer" width="1080" height="670" titletext="New Form" onload="frm_bhcareer_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="Grid00" taborder="0" left="16" top="11" width="1045" height="526" binddataset="ds_rehab" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="140"/>
+                <Column size="140"/>
+                <Column size="131"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="신청일"/>
+                <Cell col="1" text="복학학기"/>
+                <Cell col="2" text="상태"/>
+                <Cell col="3" text="취소"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rRequestDate" textAlign="center"/>
+                <Cell col="1" suppressalign="middle" text="bind:rYear" textAlign="center"/>
+                <Cell col="2" displaytype="combotext" combodataset="ds_rstatus" combocodecol="rStatus" combodatacol="rText" text="bind:rStatus" textAlign="center"/>
+                <Cell col="3" font="bold 14px/normal &quot;Gulim&quot;" text="취소" textAlign="center" color="#f10b03"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <PopupDiv id="PopupDiv00" text="PopupDiv00" visible="false" left="375" top="137" width="360" height="319" background="#fcfef0" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="반려사유" left="10" top="9" width="149" height="50" font="bold 20px/normal &quot;Gulim&quot;"/>
+              <Static id="Static01" taborder="1" text="Static01" left="26" top="79" width="293" height="209" border="1px solid"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <PopupDiv id="PopupDiv01" text="PopupDiv01" visible="false" left="464" top="158" width="312" height="146" background="#aebff3" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="&lt;복학신청&gt; 취소하시겠습니까?" left="24" top="10" width="260" height="58" textAlign="center" font="bold 16px/normal &quot;Arial&quot;" onclick="PopupDiv01_Static00_onclick"/>
+              <Button id="Button00" taborder="1" text="확인" left="18" top="83" width="133" height="52" onclick="PopupDiv01_Button00_onclick"/>
+              <Button id="Button00_00" taborder="2" text="취소" left="157" top="83" width="133" height="52" onclick="PopupDiv01_Button00_00_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
+this.frm_bhcareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+        		"tr_select"// 1.ID
+        		,"tttUrl::bb/list.snu"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"ds_rehab=out_rehab" // 4.OutDs : S->F jsp(SELECT)
+        		,"inVar1="+sCode // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+				)
+
+	if(this.ds_rehab.getColumn(0, "rStatus") == 'Y')
+		{
+			this.ds_rehab.setColumn(0, "rMsg", "취소");
+		}
+};
+
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+		if (this.ds_rehab.getColumn(0, "rStatus") == 'Y')
+		{
+			var x= 400;
+			var y= 150;
+			this.PopupDiv01.trackPopupByComponent(obj, x, y);
+		}	
+
+	var msg = this.ds_rehab.getColumn(0, "rMsg");
+		if (this.ds_rehab.getColumn(0, "rStatus") == 'N')
+		{
+			var x=400;
+			var y=150;
+			this.PopupDiv00.trackPopupByComponent(obj, x, y);
+			this.PopupDiv00.form.Static01.set_text(msg);
+		}	
+};
+
+this.PopupDiv01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_rehab.deleteRow(0);
+	this.transaction(
+        		"tr_delete"// 1.ID
+        		,"tttUrl::rehab/request.snu"// 2.URL
+        		,"in_rehab=ds_rehab:U" // 3.InDs : F->S jsp(I,U,D)
+        		,"" // 4.OutDs : S->F jsp(SELECT)
+        		,"inVar1="+sCode // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+				)
+	this.PopupDiv01.closePopup();
+};
+
+this.PopupDiv01_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PopupDiv01.closePopup();
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_rehab">
+        <ColumnInfo>
+          <Column id="rNum" type="INT" size="256"/>
+          <Column id="rReason" type="STRING" size="256"/>
+          <Column id="rSemester" type="INT" size="256"/>
+          <Column id="rYear" type="INT" size="256"/>
+          <Column id="rStatus" type="STRING" size="256"/>
+          <Column id="rRequestDate" type="STRING" size="256"/>
+          <Column id="rMsg" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_rstatus">
+        <ColumnInfo>
+          <Column id="rStatus" type="STRING" size="256"/>
+          <Column id="rText" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="rStatus">Y</Col>
+            <Col id="rText">승인</Col>
+          </Row>
+          <Row>
+            <Col id="rStatus">N</Col>
+            <Col id="rText">반려</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_rPeriod">
+        <ColumnInfo>
+          <Column id="rYear" type="STRING" size="256"/>
+          <Column id="rSemester" type="STRING" size="256"/>
+          <Column id="rYearText" type="STRING" size="256"/>
+          <Column id="rSemesterText" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="rYear">2022</Col>
+            <Col id="rSemester">1</Col>
+            <Col id="rSemesterText">1학기</Col>
+            <Col id="rYearText">2022년</Col>
+          </Row>
+          <Row>
+            <Col id="rYear">2023</Col>
+            <Col id="rSemester">2</Col>
+            <Col id="rSemesterText">2학기</Col>
+            <Col id="rYearText">2023년</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="RequestVolunteerMapper">
+	<resultMap type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" id="requestVolunteerMap">
+		<id property="vRequestNo" column="V_REQUEST_NO"/>
+		<result property="vRequestStatus" column="V_REQUEST_STATUS"/>
+		<result property="vDate" column="V_DATE"/>
+		<result property="sCode" column="S_CODE"/>
+		<result property="vName" column="V_NAME"/>
+	</resultMap>
+	
+	<insert id = "requestVolunteer">
+		INSERT INTO REQUEST_VOLUNTEER VALUES(SEQ_VREQUEST.NEXTVAL, DEFAULT, DEFAULT, #{sCode}, #{vName})
+	</insert>
+	<select id = "printRequestVol" resultMap="requestVolunteerMap">
+		SELECT * FROM REQUEST_VOLUNTEER WHERE S_CODE = #{sCode}
+	</select>
+
+</mapper>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Left" width="200" height="670" titletext="Form_Left" onload="Form_Left_onload">
+    <Layouts>
+      <Layout width="200" height="670" screenid="Desktop_screen">
+        <Grid id="grd_left" taborder="0" left="0" top="180" width="200" height="490" binddataset="gds_menu" autofittype="col" treeusecheckbox="false" treeinitstatus="collapse,all" scrollbartype="none none" oncelldblclick="grd_left_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="197"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:MENU_NAME" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:MENU_LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="1" text="관리자 종합 정보" left="0" top="0" width="201" height="140" background="#657ec2" color="#ffffff" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Button id="btn_menu" taborder="2" text="MENU" left="0" top="140" width="100" height="40" onclick="btn_menu_onclick"/>
+        <Button id="btn_myMenu" taborder="3" text="MY MENU" left="100" top="140" width="100" height="40" onclick="btn_myMenu_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.grd_left_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fn_openForm(obj, e);
+};
+
+this.fn_openForm = function(obj, e)
+{
+	nexacro.getApplication().mainframe.VFrameSet00.HFrameSet00.VFrameSet00.set_separatesize("30,*,0");
+	
+	var objDs = obj.getBindDataset();
+	var sMenuId = objDs.getColumn(e.row, "MENU_ID");
+	var sMenuNM = objDs.getColumn(e.row, "MENU_NAME");
+	var sFormUrl = objDs.getColumn(e.row, "FORM_URL");
+	
+	var sMenuPath = obj.getTreePath(e.row); // tree경로 
+	sMenuPath = nexacro.replaceAll(sMenuPath, ".", ">"); // .을 >로 바꾸는 듯함
+	
+	if(sFormUrl.length <= 0) return;
+	
+	var objApp = nexacro.getApplication();
+	var sWorkFramePath = objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame;
+	
+	var arrObj = sWorkFramePath.all;
+	for(var i=0; i<arrObj.length; i++)
+	{
+		if(arrObj[i].name == sMenuId)
+		{
+			arrObj[i].setFocus();
+			return;
+		}
+	}
+	
+	var nWidth = sWorkFramePath.getOffsetWidth();
+	var nHeight = sWorkFramePath.getOffsetHeight();
+	
+	var objChildFrame = new ChildFrame(sMenuId, 0, 0, nWidth, nHeight);
+	sWorkFramePath.addChild(sMenuId, objChildFrame);
+	
+	var oParam = {
+					MENU_ID : sMenuId,
+					MENU_NAME : sMenuNM,
+					FORM_URL : sFormUrl,
+					MENU_PATH : sMenuPath
+				};
+	
+	objChildFrame.openParam = oParam;
+	
+	objChildFrame.set_resizable(true);
+	objChildFrame.set_openstatus("maximize");
+	objChildFrame.set_showtitlebar(false);
+	
+	objChildFrame.set_formurl(sFormUrl);
+	objChildFrame.show();
+	
+	var nRow = objApp.gds_openForm.addRow();
+	objApp.gds_openForm.setColumn(nRow, "MENU_ID", sMenuId);
+	objApp.gds_openForm.setColumn(nRow, "MENU_NAME", sMenuNM);
+	objApp.gds_openForm.setColumn(nRow, "FORM_URL" , sFormUrl);
+	
+	objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.MdiFrame.form.fn_addTab(oParam);
+}
+
+this.btn_menu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btn_menu.setSelectStatus(true);
+	this.btn_myMenu.setSelectStatus(false);
+	
+	this.grd_left.set_formatid("default");
+	this.grd_left.set_binddataset("gds_menu");
+};
+
+this.btn_myMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btn_menu.setSelectStatus(false);
+	this.btn_myMenu.setSelectStatus(true);
+	
+	this.grd_left.set_formatid("myMenu");
+	this.grd_left.set_binddataset("gds_myMenu");
+};
+
+this.Form_Left_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.btn_menu.setSelectStatus(true);
+};
+]]></Script>
+  </Form>
+</FDL>

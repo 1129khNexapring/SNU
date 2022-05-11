@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Tab" width="1080" height="30" titletext="New Form" onload="Form_Tab_onload">
+    <Layouts>
+      <Layout height="30" mobileorientation="landscape" width="1080">
+        <Tab id="tab_mdi" taborder="0" tabindex="0" left="57" top="1" width="413" height="29" onchanged="tab_mdi_onchanged" onextrabuttonclick="tab_mdi_onextrabuttonclick">
+          <Tabpages>
+            <Tabpage id="Tabpage2" text="Tabpage2"/>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Form_Tab_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.tab_mdi.removeTabpage(0);
+};
+
+this.fn_addTab = function(oParam)
+{
+	this.tab_mdi.insertTabpage(oParam.LIST_ID, -1, "", oParam.LIST);
+}
+
+
+this.tab_mdi_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	var sTabId = obj.tabpages[e.postindex].name;
+	var objApp = nexacro.getApplication();
+	objApp.mainfram.VFrameSet00.HFrameSet00.VFrameset00.WorkFrame[sTabId].setFocus();
+};
+
+
+
+this.tab_mdi_onextrabuttonclick = function(obj:nexacro.Tab,e:nexacro.TabMouseEventInfo)
+{
+	//e.index로 접근
+	//탭페이지 삭제 removeTabpage
+	//화면 종료 메소드 close()
+	//gds_openForm Key값으로 findrow / deleteRow
+	
+	var sTabId = obj.tabpages[e.index].name;
+	var objApp = nexacro.getApplication();
+	objApp.mainfram.VFrameSet00.HFrameSet00.VFrameset00.WorkFrame[sTabId].form.close();
+	obj.removeTabpage(e.index);
+	
+	var nRow = objApp.p_openForm.findRow("LIST_ID", sTabId);
+	objApp.gds_openForm.deleteRow(nRow);
+};
+]]></Script>
+  </Form>
+</FDL>

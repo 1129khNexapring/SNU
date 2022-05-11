@@ -1,0 +1,6 @@
+﻿LG Security Center에 설정된 비밀 번호는 아래와 같습니다.
+
+비밀 번호를 잊을 경우 LG Security Center의 사용이 불가하니,
+비밀 번호를 잊지 않도록 안전한 곳에 보관 하시기 바랍니다.
+
+- LG Security Center 사용자 비밀 번호 : 960306

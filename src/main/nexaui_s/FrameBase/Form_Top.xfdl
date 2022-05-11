@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Top" width="1280" height="100" titletext="Form_Top" onload="Form_Top_onload" background="#ffffff">
+    <Layouts>
+      <Layout width="1280" height="100" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" text="" left="1012" top="30" width="153" height="36" background="antiquewhite" textAlign="center"/>
+        <Button id="Button00" taborder="1" text="로그아웃" left="1175" top="33" width="97" height="32" background="#657ec2" color="#ffffff"/>
+        <ImageViewer id="ImageViewer00" taborder="2" left="1" top="1" width="269" height="99" background="url('theme::default/images/img_WF_Nexacro.png') no-repeat left top /contain"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+
+this.Form_Top_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var sName = nexacro.getEnvironmentVariable("ev_Val1");
+	this.Static00.set_text(sName+"님 환영합니다!");
+};
+]]></Script>
+  </Form>
+</FDL>

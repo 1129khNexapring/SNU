@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Mdi" width="1080" height="30" titletext="New Form" onload="Form_Mdi_onload" background="lightgray">
+    <Layouts>
+      <Layout height="30" mobileorientation="landscape" width="1080">
+        <Tab id="tab_mdi" taborder="0" tabindex="0" left="38" top="4" width="643" height="26" onchanged="tab_mdi_onchanged" showextrabutton="true" onextrabuttonclick="tab_mdi_onextrabuttonclick" onlbuttondown="tab_mdi_onlbuttondown">
+          <Tabpages>
+            <Tabpage id="Tabpage2" text="Tabpage2"/>
+          </Tabpages>
+        </Tab>
+        <Button id="btn_home" taborder="1" left="6" top="3" width="25" height="25" background="url('theme://images/btn_MDI_Home.png') no-repeat center center" onclick="btn_home_onclick"/>
+        <Button id="btn_max" taborder="2" text="M" top="5" width="21" height="21" onclick="btn_max_onclick" right="62"/>
+        <Button id="btn_cacade" taborder="3" text="C" top="5" width="21" height="21" onclick="btn_cacade_onclick" right="36"/>
+        <Button id="btn_closeAll" taborder="4" text="X" top="5" width="21" height="21" onclick="btn_closeAll_onclick" right="9"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Form_Mdi_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.tab_mdi.removeTabpage(0);
+};
+
+//오픈한 화면의 탭페이지를 생성
+this.fn_addTab = function(oParam)
+{
+	this.tab_mdi.insertTabpage(oParam.MENU_ID, -1, "", oParam.MENU_NAME);
+}
+this.tab_mdi_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	var sTabId = obj.tabpages[e.postindex].name;
+	
+	var objApp = nexacro.getApplication();
+	objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame[sTabId].setFocus();
+
+};
+
+this.tab_mdi_onextrabuttonclick = function(obj:nexacro.Tab,e:nexacro.TabMouseEventInfo)
+{
+//	e.index
+// 탭페이지 삭제 removeTabpage 
+// 화면 종료 메소드 close()
+// gds_openForm key값으로 findRow, deleteRow
+
+	var sTabId = obj.tabpages[e.index].name;	
+	var objApp = nexacro.getApplication();
+	objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame[sTabId].form.close();
+	obj.removeTabpage(e.index);
+	
+	var nRow = objApp.gds_openForm.findRow("MENU_ID", sTabId);
+	objApp.gds_openForm.deleteRow(nRow);
+
+};
+
+
+
+
+this.btn_closeAll_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	var sWorkFramePath = objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame;
+	var arrObj = sWorkFramePath.all;
+	
+	for(var i=arrObj.length-1; i>=0; i--)
+	{
+		arrObj[i].form.close();
+		this.tab_mdi.removeTabpage(i);
+	}
+	objApp.gds_openForm.clearData();	
+};
+
+this.btn_cacade_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	var sWorkFramePath = objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame;
+	sWorkFramePath.arrange("cascade");
+	
+	var arrObj = sWorkFramePath.all;
+	for(var i=0; i<arrObj.length; i++)
+	{
+ 		sWorkFramePath.frames[i].set_border("2px solid gray");
+	}	
+};
+
+this.btn_max_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	var sWorkFramePath = objApp.mainframe.VFrameSet00.HFrameSet00.VFrameSet00.WorkFrame;
+	var arrObj = sWorkFramePath.all;
+
+	for(var i=0; i<arrObj.length; i++)
+	{
+		sWorkFramePath.frames[i].set_openstatus("maximize");
+ 		sWorkFramePath.frames[i].set_border("0px none");
+	}
+};
+
+this.fn_tabControl = function(pKey)
+{
+	var nCnt = this.tab_mdi.getTabpageCount();
+	
+	for(var i=0; i<nCnt; i++)
+	{
+		var sTabId = this.tab_mdi.tabpages[i].name;
+		if(sTabId == pKey){
+			this.tab_mdi.set_tabindex(i);
+		}		
+	}
+}
+
+this.btn_home_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().mainframe.VFrameSet00.HFrameSet00.VFrameSet00.set_separatesize("30,0,*");
+};
+
+this.tab_mdi_onlbuttondown = function(obj:nexacro.Tab,e:nexacro.MouseEventInfo)
+{
+	if(obj.getTabpageCount() > 0){
+		nexacro.getApplication().mainframe.VFrameSet00.HFrameSet00.VFrameSet00.set_separatesize("30,*,0");
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

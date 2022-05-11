@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="modifyInfo" width="600" height="500" titletext="New Form" onload="modifyInfo_onload">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="600">
+        <Div id="Div00" taborder="0" text="" left="6" top="10" width="586" height="435" border="1px solid black" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학교알림이 수정" left="7" top="6" width="139" height="35" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <TextArea id="TextArea00" taborder="1" left="7" top="48" width="570" height="377"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_modifyInfo" taborder="1" text="수정" left="490" top="450" width="102" height="32" onclick="btn_modifyInfo_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+
+this.modifyInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds_info.addRow();
+	this.ds_info.setColumn(0,"infoNo",this.parent.infoNo);
+	this.ds_info.setColumn(0,"infoContent",this.parent.infoContent);
+};
+
+this.btn_modifyInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var content = this.Div00.form.TextArea00.value;
+	var infoNo = this.ds_info.getColumn(0, "infoNo");
+	var rtn =  this.confirm("수정하시겠습니까?", "수정 창");
+	if(rtn == true)
+	{
+		this.transaction(
+		"tr_modifyInfo"
+		,"SnuURL::info/modify.snu"
+		,""
+		,""
+		,"in_Var1="+infoNo+" in_Var2="+nexacro.wrapQuote(content)+""
+		,"fn_callback_modify"
+		)
+	}
+};
+
+this.fn_callback_modify = function(sId, nErrorCode, sErrorMsg)
+{
+	if(sId == "tr_modifyInfo")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+}
+]]></Script>
+    <Objects>
+      <Dataset id="ds_info">
+        <ColumnInfo>
+          <Column id="infoNo" type="INT" size="256"/>
+          <Column id="infoContent" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.TextArea00" propid="value" datasetid="ds_info" columnid="infoContent"/>
+    </Bind>
+  </Form>
+</FDL>

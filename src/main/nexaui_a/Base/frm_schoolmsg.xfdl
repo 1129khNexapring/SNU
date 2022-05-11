@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_schoolmsg" width="1280" height="720" titletext="New Form" onload="frm_schoolmsg_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="Grid00" taborder="0" left="169" top="60" width="541" height="209" binddataset="ds_info" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="61"/>
+                <Column size="80"/>
+                <Column size="127"/>
+                <Column size="138"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="infoNo"/>
+                <Cell col="1" text="infoContent"/>
+                <Cell col="2" text="infoEnrollDate"/>
+                <Cell col="3" text="infoStatus"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:infoNo"/>
+                <Cell col="1" text="bind:infoContent"/>
+                <Cell col="2" text="bind:infoEnrollDate"/>
+                <Cell col="3" text="bind:infoStatus"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="div_page" taborder="1" text="Div00" left="135" top="293" width="600" height="48" visible="false">
+          <Layouts>
+            <Layout>
+              <Static id="stt_prev" taborder="0" text="Prev" left="119" top="7" width="40" height="32" right="" bottom="" onclick="div_page_stt_prev_onclick" visible="true"/>
+              <Static id="stt_0" taborder="0" text="1" left="175" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_1" taborder="0" text="2" left="199" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_2" taborder="0" text="3" left="223" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_3" taborder="0" text="4" left="247" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_4" taborder="0" text="5" left="271" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_5" taborder="0" text="6" left="295" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_6" taborder="0" text="7" left="319" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_7" taborder="0" text="8" left="343" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_8" taborder="0" text="9" left="367" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_9" taborder="0" text="10" left="391" top="7" width="20" height="32" right="" bottom="" onclick="div_page_stt_onclick" visible="true"/>
+              <Static id="stt_next" taborder="0" text="Next" left="427" top="7" width="40" height="32" right="" bottom="" onclick="div_page_stt_next_onclick" visible="true"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_writeInfo" taborder="2" text="글쓰기" left="652" top="268" width="58" height="23" onclick="btn_writeInfo_onclick"/>
+        <Button id="btn_openInfo" taborder="3" text="게시" left="594" top="268" width="58" height="23" onclick="btn_openInfo_onclick"/>
+        <Button id="btn_removeInfo" taborder="4" text="삭제" left="536" top="268" width="58" height="23" onclick="btn_removeInfo_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_info">
+        <ColumnInfo>
+          <Column id="infoNo" type="INT" size="256"/>
+          <Column id="infoContent" type="STRING" size="256"/>
+          <Column id="infoStatus" type="STRING" size="256"/>
+          <Column id="infoEnrollDate" type="STRING" size="256"/>
+          <Column id="aCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.gv_iStartPageNo = 0; // 현재페이지 숫자
+this.gv_iUnitSelRowNo = 100; // 서버에서 호출할 때 까져올 로우의 수
+this.gv_iStartSelRowNo = 1; // 서버를 호출 할 때 시작할 로우 번호
+this.gv_iMaxPageNum = 10; // 화면에 최대 페이지 갯수
+this.gv_iServerRowCount = 0; // 서버로부터 조회된 로우의 갯수
+
+//화면이 로드되면 조회할 수 있도록
+this.frm_schoolmsg_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.div_page.set_visible(true);
+	this.transaction(
+	"tr_infoList"
+	,"SnuURL::info/list.snu"
+	,""
+	,"ds_info=out_info"
+	,"fn_callback_info"
+	)
+};
+
+this.fn_callback_info = function(sId, nErrorCode, sErrorMsg)
+{
+	if(sId == "tr_infoList")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		else
+		{
+			var iLastRow = this.gv_iStartPageNo * this.gv_iUnitSelRowNo;
+			this.ds_info.filter("infoNo >="+(iLastRow + this.gv_iStartSelRowNo)+" && infoNo <="+(iLastRow + this.gv_iUnitSelRowNo));
+				if(this.ds_info.getRowCount() == 0)
+				{
+					alert("No more data");
+					this.ds_info.filter("");
+					return;
+				}
+				else
+				{
+					this.gv_iServerRowCount = this.ds_info.getRowCount();
+					this.fn_SetStyle();
+					this.fn_SetPageNo();
+					this.div_page.form.stt_0.set_color("red");
+				}
+		}
+	}
+	if(sId == "tr_closeInfo")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+	if(sId == "tr_openInfo")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+	if(sId == "tr_removeInfo")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert(sErrorMsg);
+		}
+		this.alert(sErrorMsg);
+	}
+}
+
+//click event function for page number
+
+this.div_page_stt_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);	//iNo는 그 눌린 스태틱의 텍스트값 1-> iNo =1, 2-> iNo =2
+	var iFirstNum = (iNo-1)*this.gv_iMaxPageNum+1;	//iFirstNum = 1->0 2->10 3-> 20 
+	var iLastNum = iFirstNum + this.gv_iMaxPageNum;	// iLastNum = 1->10 2->20 3-> 30
+		
+	this.fn_SetStyle();					//스타일주고
+	obj.set_color("red");				// 빨간색 주고
+	
+	this.ds_info.filter("");
+	this.ds_info.filter("infoNo >= " + iFirstNum+" && infoNo < " + iLastNum);
+}
+
+/*
+click event function for prev
+*/
+this.div_page_stt_prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.gv_iStartPageNo = this.gv_iStartPageNo - 1;
+	
+	/* transaction function call */
+	
+	this.fn_callback_info("tr_infoList", 0, "success");
+}
+
+/*
+click event function for next
+*/
+this.div_page_stt_next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.gv_iStartPageNo = this.gv_iStartPageNo + 1;
+	
+	/* transaction function call */
+	
+	this.fn_callback_info("tr_infoList", 0, "success");
+}
+
+/*
+page number setting
+*/
+this.fn_SetPageNo = function()
+{	
+	var sPage = this.gv_iStartPageNo * this.gv_iMaxPageNum;	//istartPageNo = 0 gv_iMaxPageNum 10;
+	
+	/* prev button setting */
+	if (this.gv_iStartPageNo < 1)
+	{
+		this.div_page.form.stt_prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.form.stt_prev.set_visible(true);
+	}
+
+	/* next button setting */
+	if (this.gv_iServerRowCount < this.gv_iUnitSelRowNo)
+	{
+		this.div_page.form.stt_next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.form.stt_next.set_visible(true);
+	}
+
+	/* page button setting */
+	for (var i = 0; i < this.gv_iMaxPageNum; i++)
+	{
+		this.div_page.form.components["stt_"+i].set_visible(true);
+		
+		this.div_page.form.components["stt_"+i].set_text(sPage+i+1);
+		
+		if (this.gv_iServerRowCount < (i * this.gv_iMaxPageNum))
+		{
+			this.div_page.form.components["stt_"+i].set_visible(false);
+		} 
+		else 
+		{
+			this.div_page.form.components["stt_"+i].set_visible(true);
+		}
+	}	
+}
+
+/*
+style settings
+*/
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.gv_iMaxPageNum; i++)
+	{
+		this.div_page.form.components["stt_"+i].set_color("blue");			
+	}	
+}
+
+// 학교알림이 등록페이지
+this.btn_writeInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this,10);
+	var nTop  = system.clientToScreenY(this,10);
+	var objChild = new ChildFrame("popWriteInfo", nLeft, nTop, 600, 500);
+	objChild.set_formurl("Popup::writeInfo.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), {}, this, "fn_popwriteInfoCallback");
+};
+
+this.fn_popwriteInfoCallback = function(sPopId, sReturn)
+{
+	if(sPopId == "popWriteInfo")
+	{
+	
+	}
+	if(sPopId == "popModifyInfo")
+	{
+	
+	}
+}
+// 학교알림이 수정페이지
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nRow = this.ds_info.rowposition;
+	var objParam = {infoNo : this.ds_info.getColumn(nRow, "infoNo"), infoContent : this.ds_info.getColumn(nRow, "infoContent")};
+	var nLeft = system.clientToScreenX(this,10);
+	var nTop  = system.clientToScreenY(this,10);
+	var objChild = new ChildFrame("popModifyInfo", nLeft, nTop, 600, 500);
+	objChild.set_formurl("Popup::modifyInfo.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popwriteInfoCallback");
+};
+// 게시글 상태가 Y이면 N으로 N이면 Y로 변경하는 이벤트
+this.btn_openInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_info.rowposition;
+	var status = this.ds_info.getColumn(nRow, "infoStatus");
+	var infoNo = this.ds_info.getColumn(nRow, "infoNo");
+	if(status == "Y")
+	{
+		var rtn1 = this.confirm("게시글을 내리시겠습니까?", "게시 창");
+		if(rtn1 == true)
+		{
+			this.transaction(
+			"tr_closeInfo"
+			,"SnuURL::info/close.snu"
+			,""
+			,""
+			,"in_Var1="+infoNo+""
+			,"fn_callback_info"
+			)
+		}
+	}
+	if(status == "N")
+	{
+		var rtn2 = this.confirm("게시글을 게시하겠습니까?", "게시 창");
+		if(rtn2 == true)
+		{
+			this.transaction(
+			"tr_openInfo"
+			,"SnuURL::info/open.snu"
+			,""
+			,""
+			,"in_Var1="+infoNo+""
+			,"fn_callback_info"
+			)
+		}
+	}
+};
+//학교알림이 삭제
+this.btn_removeInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var dRow = this.ds_info.rowposition;
+	var infoNo = this.ds_info.getColumn(dRow, "infoNo");
+	var rtn = this.confirm("게시글을 삭제하시겠습니까?", "삭제 창");
+	if(rtn == true)
+	{
+		this.transaction(
+		"tr_removeInfo"
+		,"SnuURL::info/delete.snu"
+		,""
+		,""
+		,"in_Var1="+infoNo+""
+		,"fn_callback_info"
+		)
+	}
+};
+]]></Script>
+  </Form>
+</FDL>
