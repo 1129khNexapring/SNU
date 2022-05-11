@@ -1,6 +1,6 @@
 package org.ttt.snu.grade.domain;
 
-// 커밋용 
+// 커밋용 주석
 public class ScoreList {
 	
 	private String lName;
