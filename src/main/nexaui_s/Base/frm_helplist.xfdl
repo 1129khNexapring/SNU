@@ -3,7 +3,7 @@
   <Form id="frm_helpLIst" width="1080" height="670" titletext="New Form" onload="frm_helpLIst_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Edit id="Edit00" taborder="0" left="15" top="71" width="165" height="50"/>
+        <Edit id="Edit00" taborder="0" left="17" top="85" width="165" height="50" displaynulltext="봉사활동명을 입력하세요"/>
         <Grid id="Grid00" taborder="1" left="15" top="142" width="992" height="320" binddataset="ds_vol" autofittype="col" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
@@ -28,18 +28,17 @@
                 <Cell col="5" text="신청"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:vName" textAlign="center"/>
-                <Cell col="1" text="bind:vArea" textAlign="center"/>
-                <Cell col="2" text="bind:vInfo" textAlign="center"/>
-                <Cell col="3" text="bind:vStart" textAlign="center"/>
-                <Cell col="4" text="bind:vHour" textAlign="center"/>
+                <Cell text="bind:vName" textAlign="center" displaytype="decoratetext"/>
+                <Cell col="1" text="bind:vArea" textAlign="center" displaytype="decoratetext"/>
+                <Cell col="2" text="bind:vInfo" textAlign="center" displaytype="decoratetext"/>
+                <Cell col="3" text="bind:vStart" textAlign="center" displaytype="decoratetext"/>
+                <Cell col="4" text="bind:vHour" textAlign="center" displaytype="decoratetext"/>
                 <Cell col="5" text="신청" displaytype="buttoncontrol" textAlign="center"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Combo id="Combo00" taborder="2" text="Combo00" left="244" top="71" width="186" height="49" onitemchanged="Combo00_onitemchanged" innerdataset="ds_search" codecolumn="search" datacolumn="search"/>
-        <Button id="Button00" taborder="3" text="Button00" left="182" top="71" width="52" height="50"/>
+        <Button id="Button00" taborder="2" text="조회" left="184" top="85" width="52" height="50" onclick="Button00_onclick"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
@@ -59,23 +58,37 @@ this.frm_helpLIst_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-/*	this.confirm("해당 봉사활동을 신청하시겠습니까?", "봉사활동신청"); */
-	var vDate = this.ds_vol.getColumn(e.row, "vDate");
+   var vDate = this.ds_vol.getColumn(e.row, "vDate");
 	var vName = this.ds_vol.getColumn(e.row, "vName");
+	if(e.cell==5){
+		var volAsk = this.confirm(vName + " 신청하시겠습니까?", "봉사활동신청");
+		if(volAsk==true){
+		
 
-	this.ds_requestVol.addRow();
-	this.ds_requestVol.setColumn(0, "vDate", vDate);
-	this.ds_requestVol.setColumn(0, "vName", vName);
-	this.ds_requestVol.setColumn(0, "sCode", sCode);
+			this.ds_requestVol.addRow();
+			this.ds_requestVol.setColumn(0, "vDate", vDate);
+			this.ds_requestVol.setColumn(0, "vName", vName);
+			this.ds_requestVol.setColumn(0, "sCode", sCode);
 	
-	this.transaction(
-        	"tr_register"
-        	,"tttUrl::vol/request.snu"
-        	,"in_vol=ds_requestVol:U"
-        	,""
-        	,""
-        	,"fn_callback_tran"
-        )
+			this.transaction(
+					"tr_register"
+					,"tttUrl::vol/request.snu"
+					,"in_vol=ds_requestVol:U"
+					,""
+					,""
+					,"fn_callback_tran"
+				)
+				alert(vName + " 신청 완료되었습니다");
+			}
+		}
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_vol.filter("vName.indexOf('"+this.Edit00.value+"')>-1");
+	var fRow = this.ds_vol.filter("vName.indexOf('"+this.Edit00.value+"')>-1");
+// 	this.ds_vol.filter("vInfo.indexOf('"+this.Edit00.value+"')>-1");
+// 	this.ds_vol.filter("vArea.indexOf('"+this.Edit00.value+"')>-1");
 };
 ]]></Script>
     <Objects>
@@ -101,8 +114,5 @@ this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo
         </ColumnInfo>
       </Dataset>
     </Objects>
-    <Bind>
-      <BindItem id="item0" compid="Combo00" propid="value" datasetid="ds_vol" columnid="vName"/>
-    </Bind>
   </Form>
 </FDL>

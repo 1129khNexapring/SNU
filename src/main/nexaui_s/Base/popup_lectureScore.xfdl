@@ -184,6 +184,8 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
         		,"fn_callback_tran"
         	)
 	}
+	
+	this.close();
 };
 
 this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -208,6 +210,8 @@ this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
         		,"fn_callback_tran"
         	)
 	}
+	
+	this.close();
 };
 ]]></Script>
     <Objects>

@@ -2,34 +2,60 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="BookMapper">
-	<resultMap type="org.ttt.snu.book.domain.Book" id="bookResultMap">
-		<id property="bsNo" column="BS_NO"/>
-		<result property="bsTitle" column="BS_TITLE"/>
-		<result property="bsContent" column="BS_CONTENT"/>
-		<result property="bsDate" column="BS_DATE"/>
-		<result property="bsStatus" column="BS_STATUS"/>
-		<result property="bsCount" column="BS_COUNT"/>
-		<result property="sCode" column="S_CODE"/>
-		
-		
+	<resultMap type="org.ttt.snu.book.domain.Book"
+		id="bookResultMap">
+		<id property="bsNo" column="BS_NO" />
+		<result property="bsTitle" column="BS_TITLE" />
+		<result property="bsContent" column="BS_CONTENT" />
+		<result property="bsDate" column="BS_DATE" />
+		<result property="bsStatus" column="BS_STATUS" />
+		<result property="bsCount" column="BS_COUNT" />
+		<result property="sCode" column="S_CODE" />
 	</resultMap>
-	<select id="selectAllBook" parameterType="org.ttt.snu.book.domain.Book" resultMap="bookResultMap">
-		SELECT * FROM BS_BOARD
+
+	<resultMap type="org.ttt.snu.student.domain.Student"
+		id="studentResultMap">
+		<id property="sCode" column="S_CODE" />
+		<result property="sName" column="S_NAME" />
+		<result property="sRrn" column="S_RRN" />
+		<result property="sPassword" column="S_PASSWORD" />
+		<result property="sAddress" column="S_ADDRESS" />
+		<result property="sEmail" column="S_EMAIL" />
+		<result property="sGender" column="S_GENDER" />
+		<result property="sPhone" column="S_PHONE" />
+		<result property="sAddmission" column="S_ADDMISSION" />
+		<result property="absenceYN" column="ABSENCE_YN" />
+		<result property="transferYN" column="TRANSFER_YN" />
+		<result property="dCode" column="D_CODE" />
+	</resultMap>
+	
+	<select id="selectAllBook"
+		parameterType="org.ttt.snu.book.domain.Book" resultMap="bookResultMap">
+		SELECT * FROM
+		BS_BOARD
 	</select>
-	<insert id = "insertBook">
-		INSERT INTO BS_BOARD VALUES(BOOK_SEQ.NEXTVAL, #{bsTitle}, #{bsContent}, #{bsDate}, DEFAULT, DEFAULT, #{sCode})
+	<insert id="insertBook">
+		INSERT INTO BS_BOARD VALUES(BOOK_SEQ.NEXTVAL,
+		#{bsTitle}, #{bsContent}, DEFAULT, DEFAULT, DEFAULT, #{sCode})
 	</insert>
-	<delete id = "deleteBook">
+	<delete id="deleteBook">
 		DELETE FROM BS_BOARD WHERE BS_NO = #{bsNo}
 	</delete>
-	<update id = "updateBook">
+	<update id="updateBook">
 		UPDATE BS_BOARD
 		SET
 		BS_TITLE = #{bsTitle},
-		BS_CONTENT = #{bsContent}
+		BS_CONTENT =
+		#{bsContent}
 		WHERE
 		BS_NO = #{bsNo}
 	</update>
+
+	<!-- 학생출력용 -->
+	<select id="selectAllStudent" resultMap="studentResultMap">
+		SELECT * FROM STUDENT
+	</select>
+
 </mapper>
