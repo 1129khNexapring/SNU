@@ -23,7 +23,7 @@
               <Band id="body">
                 <Cell text="bind:lName"/>
                 <Cell col="1" text="bind:pName"/>
-                <Cell col="2" text="bind:leScore"/>
+                <Cell col="2" text="expr:leScore / 4"/>
               </Band>
             </Format>
           </Formats>

@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_enLecture", this);
-            obj._setContents("<ColumnInfo><Column id=\"Column0\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"lName\" type=\"STRING\" size=\"256\"/><Column id=\"dName\" type=\"STRING\" size=\"256\"/><Column id=\"pCode\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"lName\" type=\"STRING\" size=\"256\"/><Column id=\"gCode\" type=\"STRING\" size=\"256\"/><Column id=\"sCode\" type=\"STRING\" size=\"256\"/><Column id=\"lCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -41,17 +41,15 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_enLecture");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"26\"/><Column size=\"96\"/><Column size=\"33\"/><Column size=\"2\"/><Column size=\"1\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학생이름\"/><Cell col=\"1\" text=\"과목명\"/><Cell col=\"2\" colspan=\"3\" textAlign=\"right\" text=\"점수\"><Cell text=\"                 점수\"/><Cell col=\"1\"/><Cell col=\"2\"/></Cell></Band><Band id=\"body\"><Cell text=\"bind:sName\"/><Cell col=\"1\" text=\"bind:lName\"/><Cell col=\"2\" displaytype=\"editcontrol\" edittype=\"text\" combodataset=\"ds_grade\" combocodecol=\"grade\" combodatacol=\"grade\" text=\"bind:grade\" editinputfilter=\"space,alpha\"/><Cell col=\"3\" text=\"bind:dName\"/><Cell col=\"4\" text=\"bind:pCode\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"46\"/><Column size=\"138\"/><Column size=\"43\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학생이름\"/><Cell col=\"1\" text=\"교과목명\"/><Cell col=\"2\" text=\"점수\"/></Band><Band id=\"body\"><Cell text=\"bind:sName\"/><Cell col=\"1\" text=\"bind:lName\"/><Cell col=\"2\" text=\"bind:gCode\" displaytype=\"editcontrol\" edittype=\"text\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_save","964","4","66","32",null,null,null,null,null,null,this);
+            obj = new Static("Static01","710","10","320","20",null,null,null,null,null,null,this);
             obj.set_taborder("1");
-            obj.set_text("저장하기");
-            obj.set_background("cornflowerblue");
-            obj.set_borderRadius("6px");
-            obj.set_cursor("pointer");
-            obj.set_color("white");
-            obj.set_font("normal bold 10pt/normal \"Arial\"");
+            obj.set_text("※ 점수를 입력하고 Enter를 입력하면 점수가 입력됩니다. ");
+            obj.set_border("1px solid lightgray");
+            obj.set_borderRadius("5px");
+            obj.set_color("darkred");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -82,13 +80,20 @@
         		}
         		// this.alert("수강 장바구니 조회 성공");
         	}
+
+        	if(id == "tr_gradeSave") {
+        		if(nErrorCode < 0) {
+        			this.alert("성적 입력 실패 : " + sErrorMsg);
+        			return;
+        		}
+        	    this.alert("성적 입력 성공");
+        	}
         };
 
         this.btn_add_onclick = function(obj,e)
         {
         	this.ds_grade.addRow();
         };
-
 
         this.frm_grade_onload = function(obj,e)
         {
@@ -105,16 +110,31 @@
 
         this.btn_save_onclick = function(obj,e)
         {
-        	this.transaction(
-        		  "tr_gradeSave"
-        		, "SnuUrl::grade/save.snu"
-        		, "in_boardList=ds_boardList:U"
-        		, ""
-        		, "in_var1=" + nexacro.wrapQuote(name)
-        		, "fn_callback_tran"
-        	);
+
         };
 
+        this.grd_grade_onkeydown = function(obj,e)
+        {
+        	if(e.keycode == 13) {
+        		obj.updateToDataset();
+        		var sCode = this.ds_enLecture.getColumn(e.row, "sCode");
+        		var lCode = this.ds_enLecture.getColumn(e.row, "lCode");
+        		var grade = obj.getEditingText();
+        		this.transaction(
+        			  "tr_gradeSave"
+        			, "SnuUrl::grade/save.snu"
+        			, ""
+        			, ""
+        			, "inVar1=" + sCode + " inVar2=" + lCode + " inVar3=" + grade
+        			, "fn_callback_tran"
+        		);
+        	}
+        };
+
+        this.Static01_onclick = function(obj,e)
+        {
+
+        };
 
         });
         
@@ -122,7 +142,8 @@
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.frm_grade_onload,this);
-            this.btn_save.addEventHandler("onclick",this.btn_save_onclick,this);
+            this.grd_grade.addEventHandler("onkeydown",this.grd_grade_onkeydown,this);
+            this.Static01.addEventHandler("onclick",this.Static01_onclick,this);
         };
         this.loadIncludeScript("frm_grade.xfdl");
         this.loadPreloadList();
