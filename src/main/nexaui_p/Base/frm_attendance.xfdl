@@ -83,8 +83,7 @@
         <Static id="st_year00_01" taborder="10" text="학과" left="630" top="380" width="55" height="30" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
         <Edit id="edt_boardNo00" taborder="11" left="700" top="410" width="145" height="30" borderRadius="4px"/>
         <Edit id="edt_boardNo01" taborder="12" left="700" top="380" width="145" height="30" borderRadius="4px"/>
-        <Static id="Static01" taborder="13" text="※ 출석을 모두 입력하고 저장버튼을 눌러주십시오." left="760" top="85" width="281" height="20" border="1px solid lightgray" borderRadius="5px" color="darkred"/>
-        <Button id="btn_attSubmit" taborder="14" text="출석부 저장" left="960" top="50" width="80" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_attSubmit_onclick"/>
+        <Static id="Static01" taborder="13" text="※ 출결사항을 선택하면 출석부에 저장됩니다." left="780" top="105" width="260" height="20" border="1px solid lightgray" borderRadius="5px" color="darkred"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[

@@ -35,6 +35,11 @@
             obj = new Dataset("ds_attStatus", this);
             obj._setContents("<ColumnInfo><Column id=\"CODE\" type=\"STRING\" size=\"256\"/><Column id=\"CONTENT\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"CODE\">출석</Col><Col id=\"CONTENT\">출석</Col></Row><Row><Col id=\"CODE\">지각</Col><Col id=\"CONTENT\">지각</Col></Row><Row><Col id=\"CODE\">결석</Col><Col id=\"CONTENT\">결석</Col></Row></Rows>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_student", this);
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"sRrn\" type=\"STRING\" size=\"256\"/><Column id=\"sPassword\" type=\"STRING\" size=\"256\"/><Column id=\"sAddress\" type=\"STRING\" size=\"256\"/><Column id=\"sEmail\" type=\"STRING\" size=\"256\"/><Column id=\"sGender\" type=\"STRING\" size=\"256\"/><Column id=\"sPhone\" type=\"STRING\" size=\"256\"/><Column id=\"sAddmission\" type=\"STRING\" size=\"256\"/><Column id=\"absenceYN\" type=\"STRING\" size=\"256\"/><Column id=\"transferYN\" type=\"STRING\" size=\"256\"/><Column id=\"dCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Static("static_00","83","93","120","35",null,null,null,null,null,null,this);
@@ -79,7 +84,7 @@
             obj.set_taborder("5");
             obj.set_binddataset("ds_enrollLectureDomain");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"48\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학과\"/><Cell col=\"1\" text=\"이름\"/><Cell col=\"2\" text=\"출결사항\" displaytype=\"normal\" edittype=\"normal\" combodataset=\"ds_attStatus\" combocodecol=\"CODE\" combodatacol=\"CONTENT\"/><Cell col=\"3\"/></Band><Band id=\"body\"><Cell text=\"bind:dName\"/><Cell col=\"1\" text=\"bind:sName\"/><Cell col=\"2\" text=\"bind:attendanceStatus\" displaytype=\"combocontrol\" edittype=\"combo\" combodataset=\"ds_attStatus\" combocodecol=\"CODE\" combodatacol=\"CONTENT\"/><Cell col=\"3\" text=\"bind:sCode\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"학과\"/><Cell col=\"1\" text=\"이름\"/><Cell col=\"2\" text=\"출결사항\"/></Band><Band id=\"body\"><Cell text=\"bind:dName\"/><Cell col=\"1\" text=\"bind:sName\"/><Cell col=\"2\" text=\"bind:attendanceStatus\" displaytype=\"combocontrol\" edittype=\"combo\" combodataset=\"ds_attStatus\" combocodecol=\"CODE\" combodatacol=\"CONTENT\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("static_00_00_00","483","315","120","35",null,null,null,null,null,null,this);
@@ -130,22 +135,12 @@
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static01","760","85","281","20",null,null,null,null,null,null,this);
+            obj = new Static("Static01","780","105","260","20",null,null,null,null,null,null,this);
             obj.set_taborder("13");
-            obj.set_text("※ 출석을 모두 입력하고 저장버튼을 눌러주십시오.");
+            obj.set_text("※ 출결사항을 선택하면 출석부에 저장됩니다.");
             obj.set_border("1px solid lightgray");
             obj.set_borderRadius("5px");
             obj.set_color("darkred");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_attSubmit","960","50","80","32",null,null,null,null,null,null,this);
-            obj.set_taborder("14");
-            obj.set_text("출석부 저장");
-            obj.set_background("cornflowerblue");
-            obj.set_borderRadius("6px");
-            obj.set_cursor("pointer");
-            obj.set_color("white");
-            obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -235,15 +230,9 @@
 
         this.grd_attList_oncloseup = function(obj,e)
         {
-        //    for(var i = 0; i < this.ds_enrollLectureDomain.rowcount; i++) {
-        // 	   var status = obj.getEditText(i);
-        // 	   //this.alert(status);
-        //    }
            var lCode            = this.ds_lecture.getColumn(e.row, "lCode");
-           var sValue           = this.ds_enrollLectureDomain.getColumn(e.row, "sName");
-           var sRow             = this.ds_enrollLectureDomain.findRow("sCode", sValue);
-           var sCode            = this.ds_enrollLectureDomain.getColumn(sRow, "sCode");
-           var attendanceStatus = this.ds_enrollLectureDomain.getColumn(e.row, "attendanceStatus");
+           var sCode            = this.ds_enrollLectureDomain.getColumn(e.row, "sCode");
+           var attendanceStatus = obj.getEditingText();
            this.transaction(
         			"tr_attendanceSumbit" 					  	    // 1. ID
         			, "SnuUrl::attendance/save.snu" 		  		// 2. URL
@@ -338,7 +327,6 @@
             this.grd_attList.addEventHandler("oncloseup",this.grd_attList_oncloseup,this);
             this.static_00_00_00.addEventHandler("onclick",this.static_00_00_onclick,this);
             this.Static00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
-            this.btn_attSubmit.addEventHandler("onclick",this.btn_attSubmit_onclick,this);
             this.ds_enrollLectureDomain.addEventHandler("onvaluechanged",this.ds_enrollLectureDomain_onvaluechanged,this);
             this.ds_attStatus.addEventHandler("onvaluechanged",this.ds_attStatus_onvaluechanged,this);
         };

@@ -73,7 +73,6 @@ public class AttendanceController {
 		NexacroResult result = new NexacroResult();
 		int 	nErrorCode  = 0;
 		String  strErrorMsg = "START";
-		int i;
 		Attendance attendance = new Attendance();
 		attendance.setsCode(sCode);
 		attendance.setlCode(lCode);

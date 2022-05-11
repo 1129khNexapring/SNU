@@ -3,15 +3,13 @@
   <Form id="frm_grade" width="1080" height="670" titletext="New Form" onload="frm_grade_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="grd_grade" taborder="0" left="100" top="40" width="930" height="370" binddataset="ds_enLecture" autofittype="col">
+        <Grid id="grd_grade" taborder="0" left="100" top="40" width="930" height="370" binddataset="ds_enLecture" autofittype="col" onkeydown="grd_grade_onkeydown">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="26"/>
-                <Column size="96"/>
-                <Column size="33"/>
-                <Column size="2"/>
-                <Column size="1"/>
+                <Column size="46"/>
+                <Column size="138"/>
+                <Column size="43"/>
               </Columns>
               <Rows>
                 <Row size="24" band="head"/>
@@ -19,35 +17,28 @@
               </Rows>
               <Band id="head">
                 <Cell text="학생이름"/>
-                <Cell col="1" text="과목명"/>
-                <Cell col="2" colspan="3" textAlign="right" text="점수">
-                  <Cell text="                 점수"/>
-                  <Cell col="1"/>
-                  <Cell col="2"/>
-                </Cell>
+                <Cell col="1" text="교과목명"/>
+                <Cell col="2" text="점수"/>
               </Band>
               <Band id="body">
                 <Cell text="bind:sName"/>
                 <Cell col="1" text="bind:lName"/>
-                <Cell col="2" displaytype="editcontrol" edittype="text" combodataset="ds_grade" combocodecol="grade" combodatacol="grade" text="bind:grade" editinputfilter="space,alpha"/>
-                <Cell col="3" text="bind:dName"/>
-                <Cell col="4" text="bind:pCode"/>
+                <Cell col="2" text="bind:gCode" displaytype="editcontrol" edittype="text"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Button id="btn_save" taborder="1" text="저장하기" left="964" top="4" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="btn_save_onclick"/>
+        <Static id="Static01" taborder="1" text="※ 점수를 입력하고 Enter를 입력하면 점수가 입력됩니다. " left="710" top="10" width="320" height="20" border="1px solid lightgray" borderRadius="5px" color="darkred" onclick="Static01_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
       <Dataset id="ds_enLecture">
         <ColumnInfo>
-          <Column id="Column0" type="STRING" size="256"/>
           <Column id="sName" type="STRING" size="256"/>
           <Column id="lName" type="STRING" size="256"/>
-          <Column id="dName" type="STRING" size="256"/>
-          <Column id="pCode" type="STRING" size="256"/>
-          <Column id="grade" type="STRING" size="256"/>
+          <Column id="gCode" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="Dataset00"/>
@@ -69,13 +60,20 @@
 		}
 		// this.alert("수강 장바구니 조회 성공");
 	}
+	
+	if(id == "tr_gradeSave") {
+		if(nErrorCode < 0) {
+			this.alert("성적 입력 실패 : " + sErrorMsg);
+			return;
+		}
+	    this.alert("성적 입력 성공");
+	}
 };
 
 this.btn_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.ds_grade.addRow();
 };
-
 
 this.frm_grade_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
@@ -92,16 +90,31 @@ this.frm_grade_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 this.btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.transaction(
-		  "tr_gradeSave"
-		, "SnuUrl::grade/save.snu"
-		, "in_boardList=ds_boardList:U"
-		, ""
-		, "in_var1=" + nexacro.wrapQuote(name)
-		, "fn_callback_tran"
-	);
+	
 };
 
+this.grd_grade_onkeydown = function(obj:nexacro.Grid,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13) {
+		obj.updateToDataset();
+		var sCode = this.ds_enLecture.getColumn(e.row, "sCode");
+		var lCode = this.ds_enLecture.getColumn(e.row, "lCode");
+		var grade = obj.getEditingText();
+		this.transaction(
+			  "tr_gradeSave"
+			, "SnuUrl::grade/save.snu"
+			, ""
+			, ""
+			, "inVar1=" + sCode + " inVar2=" + lCode + " inVar3=" + grade
+			, "fn_callback_tran"
+		);
+	}
+};
+
+this.Static01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
 ]]></Script>
   </Form>
 </FDL>
