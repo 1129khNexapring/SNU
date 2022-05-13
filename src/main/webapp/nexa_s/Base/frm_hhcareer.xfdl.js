@@ -57,30 +57,6 @@
             obj.set_text("Static01");
             obj.set_border("1px solid");
             this.PopupDiv00.addChild(obj.name, obj);
-
-            obj = new PopupDiv("PopupDiv01","464","158","312","146",null,null,null,null,null,null,this);
-            obj.set_text("PopupDiv01");
-            obj.set_visible("false");
-            obj.set_background("#aebff3");
-            obj.set_border("1px solid");
-            this.addChild(obj.name, obj);
-
-            obj = new Static("Static00","24","10","260","58",null,null,null,null,null,null,this.PopupDiv01.form);
-            obj.set_taborder("0");
-            obj.set_text("<휴학신청> 취소하시겠습니까?");
-            obj.set_textAlign("center");
-            obj.set_font("bold 16px/normal \"Arial\"");
-            this.PopupDiv01.addChild(obj.name, obj);
-
-            obj = new Button("Button00","18","83","133","52",null,null,null,null,null,null,this.PopupDiv01.form);
-            obj.set_taborder("1");
-            obj.set_text("확인");
-            this.PopupDiv01.addChild(obj.name, obj);
-
-            obj = new Button("Button00_00","157","83","133","52",null,null,null,null,null,null,this.PopupDiv01.form);
-            obj.set_taborder("2");
-            obj.set_text("취소");
-            this.PopupDiv01.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,670,this,function(p){});
@@ -102,6 +78,7 @@
         // User Script
         this.registerScript("frm_hhcareer.xfdl", function() {
         var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
         this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
         {
         	if(id=="tr_select")
@@ -127,6 +104,7 @@
 
         this.frm_hhcareer_onload = function(obj,e)
         {
+        	var row =  this.ds_loa.rowposition;
         		this.transaction(
                 		"tr_select"// 1.ID
                 		,"tttUrl::hh/list.snu"// 2.URL
@@ -136,53 +114,52 @@
                 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
         				)
 
-        		if(this.ds_loa.getColumn(0, "lStatus") == 'Y')
+        		if(this.ds_loa.getColumn(row, "lStatus") == 'Y')
         		{
-        			this.ds_loa.setColumn(0, "lMsg", "취소");
+        			this.ds_loa.setColumn(row, "lMsg", "취소");
         		}
         };
 
 
         this.Grid00_oncelldblclick = function(obj,e)
         {
-
-        	var msg = this.ds_loa.getColumn(0, "lReturnMsg");
-        		if (this.ds_loa.getColumn(0, "lStatus") == 'N')
+        	var row =  this.ds_loa.rowposition;
+        	if(e.cell==2){
+        		var msg = this.ds_loa.getColumn(row, "lReturnMsg");
+        		if (this.ds_loa.getColumn(row, "lStatus") == 'N')
         		{
         			var x=400;
         			var y=150;
         			this.PopupDiv00.trackPopupByComponent(obj, x, y);
         			this.PopupDiv00.form.Static01.set_text(msg);
         		}
-        };
-
-        this.PopupDiv01_Button00_onclick = function(obj,e)
-        {
-        	this.ds_loa.deleteRow(0);
-        	this.transaction(
-                		"tr_delete"// 1.ID
-                		,"tttUrl::loa/request.snu"// 2.URL
-                		,"in_loa=ds_loa:U" // 3.InDs : F->S jsp(I,U,D)
-                		,"" // 4.OutDs : S->F jsp(SELECT)
-                		,"inVar1="+sCode // 5.InVar : F->S(var)
-                		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-        				)
+        	}
         };
 
         this.Grid00_oncellclick = function(obj,e)
         {
-        	if (this.ds_loa.getColumn(0, "lStatus") == 'Y')
-        		{
-        			var x= 400;
-        			var y= 150;
-        			this.PopupDiv01.trackPopupByComponent(obj, x, y);
-        		}
+        	var row =  this.ds_loa.rowposition;
+        	if(e.cell==3){
+
+        			if (this.ds_loa.getColumn(row, "lStatus") == 'Y')
+        				{
+        					var cancelLoa = this.confirm("휴학 취소하시겠습니까?", "휴학 취소");
+        					if(cancelLoa == true){
+        						this.ds_loa.deleteRow(row);
+        						this.transaction(
+        							"tr_delete"// 1.ID
+        							,"tttUrl::loa/request.snu"// 2.URL
+        							,"in_loa=ds_loa:U" // 3.InDs : F->S jsp(I,U,D)
+        							,"" // 4.OutDs : S->F jsp(SELECT)
+        							,"inVar1="+sCode // 5.InVar : F->S(var)
+        							,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        							)
+        					}
+        				}
+        			}
+
         };
 
-        this.PopupDiv01_Button00_00_onclick = function(obj,e)
-        {
-        	this.PopupDiv01.closePopup();
-        };
 
         });
         
@@ -192,8 +169,6 @@
             this.addEventHandler("onload",this.frm_hhcareer_onload,this);
             this.Grid00.addEventHandler("oncelldblclick",this.Grid00_oncelldblclick,this);
             this.Grid00.addEventHandler("oncellclick",this.Grid00_oncellclick,this);
-            this.PopupDiv01.form.Button00.addEventHandler("onclick",this.PopupDiv01_Button00_onclick,this);
-            this.PopupDiv01.form.Button00_00.addEventHandler("onclick",this.PopupDiv01_Button00_00_onclick,this);
         };
         this.loadIncludeScript("frm_hhcareer.xfdl");
         this.loadPreloadList();

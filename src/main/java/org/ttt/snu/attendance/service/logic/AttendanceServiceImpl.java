@@ -43,8 +43,8 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 	@Override
 	public int registerAttendance(Attendance attendance) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = aStore.insertAttendance(sqlSession, attendance);
+		return result;
 	}
 
 	@Override

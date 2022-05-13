@@ -9,6 +9,7 @@ import org.ttt.snu.enrollLecture.domain.EnrollLecture;
 import org.ttt.snu.enrollLecture.domain.EnrollLectureDomain;
 import org.ttt.snu.grade.domain.Grade;
 import org.ttt.snu.grade.domain.LectureEvaluation;
+import org.ttt.snu.grade.domain.ScoreList;
 import org.ttt.snu.grade.store.GradeStore;
 
 @Repository
@@ -21,15 +22,15 @@ public class GradeStoreLogic implements GradeStore{
 	}
 
 	@Override
-	public List<LectureEvaluation> selectAllLectureInquiry(SqlSession sqlSession, PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ScoreList> selectAllLectureInquiry(SqlSession sqlSession) {
+		List<ScoreList> sList = sqlSession.selectList("GradeMapper.selectAllScore");
+		return sList;
 	}
 
 	@Override
 	public int insertGrade(SqlSession sqlSession, Grade grade) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("GradeMapper.insertGrade", grade);
+		return result;
 	}
 
 	@Override

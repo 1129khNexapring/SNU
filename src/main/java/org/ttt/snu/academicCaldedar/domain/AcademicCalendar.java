@@ -5,17 +5,17 @@ import java.sql.Date;
 public class AcademicCalendar {
 	private int acNo;
 	private String aCode;
-	private String acTitle;
+	private String title;
 	private Date startDate;
 	private Date endDate;
 	
 	public AcademicCalendar() {}
 
-	public AcademicCalendar(int acNo, String aCode, String acTitle, Date startDate, Date endDate) {
+	public AcademicCalendar(int acNo, String aCode, String title, Date startDate, Date endDate) {
 		super();
 		this.acNo = acNo;
 		this.aCode = aCode;
-		this.acTitle = acTitle;
+		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
@@ -36,12 +36,12 @@ public class AcademicCalendar {
 		this.aCode = aCode;
 	}
 
-	public String getAcTitle() {
-		return acTitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setAcTitle(String acTitle) {
-		this.acTitle = acTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Date getStartDate() {
@@ -62,7 +62,7 @@ public class AcademicCalendar {
 
 	@Override
 	public String toString() {
-		return "AcademicCalendar [acNo=" + acNo + ", aCode=" + aCode + ", acTitle=" + acTitle + ", startDate="
-				+ startDate + ", endDate=" + endDate + "]";
+		return "AcademicCalendar [acNo=" + acNo + ", aCode=" + aCode + ", title=" + title + ", startDate=" + startDate
+				+ ", endDate=" + endDate + "]";
 	}
 }

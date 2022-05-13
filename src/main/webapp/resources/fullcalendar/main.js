@@ -840,7 +840,7 @@ var FullCalendar = (function (exports) {
                     }
                 }
                 return {
-                    allDay: allDay,
+                    allDay: allDay+1,
                     duration: parsed.duration,
                     typeData: parsed.typeData,
                     typeId: i,

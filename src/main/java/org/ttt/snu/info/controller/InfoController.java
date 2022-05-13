@@ -24,7 +24,7 @@ public class InfoController {
 	private InfoService iService;
 	
 	
-	public String NoticeListView(Model model ) {
+	public String InfoListView(Model model ) {
 		List<Info> iList = iService.printAll();
 		if (!iList.isEmpty()) {
 			model.addAttribute("iList", iList);

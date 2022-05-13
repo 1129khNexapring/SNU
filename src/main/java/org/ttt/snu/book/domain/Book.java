@@ -10,7 +10,7 @@ public class Book {
 	private int bsCount;
 	private String sCode;
 	
-	Book() {}
+	public Book() {}
 
 	public Book(int bsNo, String bsTitle, String bsContent, String bsDate, String bsStatus, int bsCount, String sCode) {
 		super();

@@ -39,18 +39,10 @@
             </Layout>
           </Layouts>
         </PopupDiv>
-        <PopupDiv id="PopupDiv01" text="PopupDiv01" visible="false" left="464" top="158" width="312" height="146" background="#aebff3" border="1px solid">
-          <Layouts>
-            <Layout>
-              <Static id="Static00" taborder="0" text="&lt;휴학신청&gt; 취소하시겠습니까?" left="24" top="10" width="260" height="58" textAlign="center" font="bold 16px/normal &quot;Arial&quot;"/>
-              <Button id="Button00" taborder="1" text="확인" left="18" top="83" width="133" height="52" onclick="PopupDiv01_Button00_onclick"/>
-              <Button id="Button00_00" taborder="2" text="취소" left="157" top="83" width="133" height="52" onclick="PopupDiv01_Button00_00_onclick"/>
-            </Layout>
-          </Layouts>
-        </PopupDiv>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 {
 	if(id=="tr_select")
@@ -76,6 +68,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 
 this.frm_hhcareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
+	var row =  this.ds_loa.rowposition;
 		this.transaction(
         		"tr_select"// 1.ID
         		,"tttUrl::hh/list.snu"// 2.URL
@@ -85,53 +78,52 @@ this.frm_hhcareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 				)
 				
-		if(this.ds_loa.getColumn(0, "lStatus") == 'Y')
+		if(this.ds_loa.getColumn(row, "lStatus") == 'Y')
 		{
-			this.ds_loa.setColumn(0, "lMsg", "취소");
+			this.ds_loa.setColumn(row, "lMsg", "취소");
 		}
 };
 
 
 this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-
-	var msg = this.ds_loa.getColumn(0, "lReturnMsg");
-		if (this.ds_loa.getColumn(0, "lStatus") == 'N')
+	var row =  this.ds_loa.rowposition;
+	if(e.cell==2){
+		var msg = this.ds_loa.getColumn(row, "lReturnMsg");
+		if (this.ds_loa.getColumn(row, "lStatus") == 'N')
 		{
 			var x=400;
 			var y=150;
 			this.PopupDiv00.trackPopupByComponent(obj, x, y);
 			this.PopupDiv00.form.Static01.set_text(msg);
 		}		
-};
-
-this.PopupDiv01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	this.ds_loa.deleteRow(0);
-	this.transaction(
-        		"tr_delete"// 1.ID
-        		,"tttUrl::loa/request.snu"// 2.URL
-        		,"in_loa=ds_loa:U" // 3.InDs : F->S jsp(I,U,D)
-        		,"" // 4.OutDs : S->F jsp(SELECT)
-        		,"inVar1="+sCode // 5.InVar : F->S(var)
-        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-				)
+	}
 };
 
 this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	if (this.ds_loa.getColumn(0, "lStatus") == 'Y')
-		{
-			var x= 400;
-			var y= 150;
-			this.PopupDiv01.trackPopupByComponent(obj, x, y);
-		}	
+	var row =  this.ds_loa.rowposition;
+	if(e.cell==3){
+		
+			if (this.ds_loa.getColumn(row, "lStatus") == 'Y')
+				{
+					var cancelLoa = this.confirm("휴학 취소하시겠습니까?", "휴학 취소");
+					if(cancelLoa == true){
+						this.ds_loa.deleteRow(row);
+						this.transaction(
+							"tr_delete"// 1.ID
+							,"tttUrl::loa/request.snu"// 2.URL
+							,"in_loa=ds_loa:U" // 3.InDs : F->S jsp(I,U,D)
+							,"" // 4.OutDs : S->F jsp(SELECT)
+							,"inVar1="+sCode // 5.InVar : F->S(var)
+							,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+							)
+					}
+				}	
+			}
+
 };
 
-this.PopupDiv01_Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	this.PopupDiv01.closePopup();
-};
 ]]></Script>
     <Objects>
       <Dataset id="ds_loa">

@@ -56,7 +56,7 @@ public class Attendance {
 		return "Attendance [lDate=" + lDate + ", sCode=" + sCode + ", lCode=" + lCode + ", attendanceStatus="
 				+ attendanceStatus + "]";
 	}
-	
+
 	
 	
 }

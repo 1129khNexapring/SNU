@@ -23,7 +23,7 @@
 
 
             obj = new Dataset("ds_enrollLectureDomain", this);
-            obj._setContents("<ColumnInfo><Column id=\"dName\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"attendanceStatus\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"dName\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"attendanceStatus\" type=\"STRING\" size=\"256\"/><Column id=\"sCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -34,6 +34,11 @@
 
             obj = new Dataset("ds_attStatus", this);
             obj._setContents("<ColumnInfo><Column id=\"CODE\" type=\"STRING\" size=\"256\"/><Column id=\"CONTENT\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"CODE\">출석</Col><Col id=\"CONTENT\">출석</Col></Row><Row><Col id=\"CODE\">지각</Col><Col id=\"CONTENT\">지각</Col></Row><Row><Col id=\"CODE\">결석</Col><Col id=\"CONTENT\">결석</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_student", this);
+            obj._setContents("<ColumnInfo><Column id=\"sCode\" type=\"STRING\" size=\"256\"/><Column id=\"sName\" type=\"STRING\" size=\"256\"/><Column id=\"sRrn\" type=\"STRING\" size=\"256\"/><Column id=\"sPassword\" type=\"STRING\" size=\"256\"/><Column id=\"sAddress\" type=\"STRING\" size=\"256\"/><Column id=\"sEmail\" type=\"STRING\" size=\"256\"/><Column id=\"sGender\" type=\"STRING\" size=\"256\"/><Column id=\"sPhone\" type=\"STRING\" size=\"256\"/><Column id=\"sAddmission\" type=\"STRING\" size=\"256\"/><Column id=\"absenceYN\" type=\"STRING\" size=\"256\"/><Column id=\"transferYN\" type=\"STRING\" size=\"256\"/><Column id=\"dCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -75,7 +80,7 @@
             obj.set_font("bold 12px/normal \"Gulim\"");
             this.addChild(obj.name, obj);
 
-            obj = new Grid("grd_attList","63","317","307","270",null,null,null,null,null,null,this);
+            obj = new Grid("grd_attList","63","317","297","270",null,null,null,null,null,null,this);
             obj.set_taborder("5");
             obj.set_binddataset("ds_enrollLectureDomain");
             obj.set_autofittype("col");
@@ -130,22 +135,12 @@
             obj.set_borderRadius("4px");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static01","760","85","281","20",null,null,null,null,null,null,this);
+            obj = new Static("Static01","780","105","260","20",null,null,null,null,null,null,this);
             obj.set_taborder("13");
-            obj.set_text("※ 출석을 모두 입력하고 저장버튼을 눌러주십시오.");
+            obj.set_text("※ 출결사항을 선택하면 출석부에 저장됩니다.");
             obj.set_border("1px solid lightgray");
             obj.set_borderRadius("5px");
             obj.set_color("darkred");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_attSubmit","960","50","80","32",null,null,null,null,null,null,this);
-            obj.set_taborder("14");
-            obj.set_text("출석부 저장");
-            obj.set_background("cornflowerblue");
-            obj.set_borderRadius("6px");
-            obj.set_cursor("pointer");
-            obj.set_color("white");
-            obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -228,25 +223,24 @@
         		)
         };
 
-        this.btn_attSubmit_onclick = function(obj,e)
+        this.btn_attSubmit_onclick = function(obj,e, status)
         {
-        	var comboData = this.ds_attStatus.rowposition;
-        	var comboText = this.ds_attStatus.getColum(comboData, "출결사항");
-        	alert(comboText.value);
-        	this.transaction(
-        			"tr_attendanceSumbit" 					  	  // 1. ID
-        			, "SnuUrl::attendance/save.snu" 		  // 2. URL
-        			, ""							  // 3. InDs : F -> S jsp(I, U, D)
-        			, ""	  // 4. OutDs : S -> F jsp(SELECT)
-        	        , ""						  // 5. InVar : F -> S(var)
-        			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
-        		)
+
         };
 
         this.grd_attList_oncloseup = function(obj,e)
         {
-           var c = obj.getEditText();
-           this.alert(c);
+           var lCode            = this.ds_lecture.getColumn(e.row, "lCode");
+           var sCode            = this.ds_enrollLectureDomain.getColumn(e.row, "sCode");
+           var attendanceStatus = obj.getEditingText();
+           this.transaction(
+        			"tr_attendanceSumbit" 					  	    // 1. ID
+        			, "SnuUrl::attendance/save.snu" 		  		// 2. URL
+        			, ""		                                    // 3. InDs : F -> S jsp(I, U, D)
+        			, ""	  										// 4. OutDs : S -> F jsp(SELECT)
+        	        , "inVar2=" + sCode + " inVar3=" + lCode + " inVar4=" + attendanceStatus						  					// 5. InVar : F -> S(var)
+        			, "fn_callback_tran"			 				// 6. callback function(transaction 완료시 호출되는 함수)
+        	)
         };
 
         this.grd_lectureList_onheadclick = function(obj,e)
@@ -333,7 +327,6 @@
             this.grd_attList.addEventHandler("oncloseup",this.grd_attList_oncloseup,this);
             this.static_00_00_00.addEventHandler("onclick",this.static_00_00_onclick,this);
             this.Static00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
-            this.btn_attSubmit.addEventHandler("onclick",this.btn_attSubmit_onclick,this);
             this.ds_enrollLectureDomain.addEventHandler("onvaluechanged",this.ds_enrollLectureDomain_onvaluechanged,this);
             this.ds_attStatus.addEventHandler("onvaluechanged",this.ds_attStatus_onvaluechanged,this);
         };

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.ttt.snu.book.domain.Book;
 import org.ttt.snu.book.store.BookStore;
+import org.ttt.snu.student.domain.Student;
 
 @Repository
 public class BookStoreLogic implements BookStore {
@@ -23,8 +24,8 @@ public class BookStoreLogic implements BookStore {
 	}
 
 	@Override
-	public int deleteBook(SqlSession sqlSession, String dBook) {
-		int result = sqlSession.delete("BookMapper.deleteBook", dBook);
+	public int deleteBook(SqlSession sqlSession, Book book) {
+		int result = sqlSession.delete("BookMapper.deleteBook", book);
 		return result;
 	}
 
@@ -32,5 +33,11 @@ public class BookStoreLogic implements BookStore {
 	public int updateBook(SqlSession sqlSession, Book book) {
 		int result = sqlSession.update("BookMapper.updateBook", book);
 		return result;
+	}
+
+	@Override
+	public List<Student> selectAllStudent(SqlSession sqlSession) {
+		List<Student> sList = sqlSession.selectList("BookMapper.selectAllStudent");
+		return sList;
 	}
 }

@@ -47,7 +47,7 @@ public class NoticeController {
 	private static String sUserPath = "";
 	@Autowired
 	private NoticeService nService;
-
+	//공지사항 리스트
 	@RequestMapping(value = "/notice/list.snu", method = RequestMethod.GET)
 	public String NoticeListView(Model model, @RequestParam(value = "page", required = false) Integer page) {
 
@@ -65,7 +65,7 @@ public class NoticeController {
 		}
 
 	}
-
+	//공지사항 상세 페이지
 	@RequestMapping(value = "notice/Detail.snu", method = RequestMethod.GET)
 	public String NoticeDetailView(Model model, @RequestParam("noticeNo") Integer noticeNo) {
 		nService.updateCount(noticeNo);
@@ -79,12 +79,12 @@ public class NoticeController {
 		}
 
 	}
-
+	
 	@RequestMapping(value = "/notice/writeView.snu", method = RequestMethod.GET)
 	public String noticeWriteView() {
 		return "notice/noticeWriteForm";
 	}
-
+//	공지사항 등록
 	@RequestMapping(value = "/notice/register.snu", method = RequestMethod.POST)
 	public ModelAndView noticeRegister(ModelAndView mv, @ModelAttribute Notice notice,
 			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
@@ -150,7 +150,7 @@ public class NoticeController {
 		return fileMap;
 
 	}
-
+	//공지사항 수정
 	@RequestMapping(value = "/notice/update.snu", method = RequestMethod.POST)
 	public ModelAndView noticeUpdate(ModelAndView mv, @ModelAttribute Notice notice,
 			@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile,
@@ -184,14 +184,14 @@ public class NoticeController {
 		}
 		return mv;
 	}
-
+	//파일 삭제
 	public void deleteFile(String filePath, HttpServletRequest request) {
 		File deleteFile = new File(filePath);
 		if (deleteFile.exists()) {
 			deleteFile.delete();
 		}
 	}
-
+	//공지사항 수정
 	@RequestMapping(value = "notice/modifyView.snu", method = RequestMethod.GET)
 	public String noticeModifyView(Model model, @RequestParam("noticeNo") int noticeNo) {
 		try {
@@ -210,7 +210,7 @@ public class NoticeController {
 			return "common/errorPage";
 		}
 	}
-
+	//공지사항 삭제
 	@RequestMapping(value = "/notice/delete.snu", method = RequestMethod.GET)
 	public String noticeDelete(Model model, @RequestParam("noticeNo") int noticeNo) {
 		try {
