@@ -6,12 +6,12 @@ public class AcademicCalendar {
 	private int acNo;
 	private String aCode;
 	private String title;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	
 	public AcademicCalendar() {}
 
-	public AcademicCalendar(int acNo, String aCode, String title, Date startDate, Date endDate) {
+	public AcademicCalendar(int acNo, String aCode, String title, String startDate, String endDate) {
 		super();
 		this.acNo = acNo;
 		this.aCode = aCode;
@@ -44,19 +44,19 @@ public class AcademicCalendar {
 		this.title = title;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -65,4 +65,6 @@ public class AcademicCalendar {
 		return "AcademicCalendar [acNo=" + acNo + ", aCode=" + aCode + ", title=" + title + ", startDate=" + startDate
 				+ ", endDate=" + endDate + "]";
 	}
+
+	
 }

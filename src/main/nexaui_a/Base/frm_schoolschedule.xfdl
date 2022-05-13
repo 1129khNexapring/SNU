@@ -1,8 +1,127 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_schoolschedule" width="1280" height="720" titletext="New Form">
+  <Form id="frm_schoolschedule" width="1280" height="720" titletext="New Form" onload="frm_schoolschedule_onload">
     <Layouts>
-      <Layout height="720" width="1280"/>
+      <Layout height="720" width="1280">
+        <Div id="Div00" taborder="0" text="Div00" left="196" top="335" width="584" height="376" border="1px solid" background="gray">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit00" taborder="0" left="245" top="77" width="154" height="40"/>
+              <Calendar id="Calendar00" taborder="1" left="249" top="147" width="148" height="38" dateformat="yy-MM-dd ddd" editformat="yy-MM-dd"/>
+              <Calendar id="Calendar01" taborder="2" left="251" top="211" width="146" height="30"/>
+              <Static id="Static00" taborder="3" text="제목" left="141" top="79" width="86" height="38"/>
+              <Static id="Static01" taborder="4" text="시작 날짜" left="135" top="149" width="84" height="40" onclick="Static01_onclick"/>
+              <Static id="Static02" taborder="5" text="종료 날짜" left="135" top="216" width="62" height="30"/>
+              <Button id="btn_scheduleRegister" taborder="6" text="완료" left="439" top="314" width="120" height="50" onclick="Div00_btn_scheduleRegister_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="1" left="40" top="72" width="966" height="248" binddataset="ds_schedule" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="acNo"/>
+                <Cell col="1" text="aCode"/>
+                <Cell col="2" text="title"/>
+                <Cell col="3" text="startDate"/>
+                <Cell col="4" text="endDate"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:acNo"/>
+                <Cell col="1" text="bind:aCode"/>
+                <Cell col="2" text="bind:title"/>
+                <Cell col="3" text="bind:startDate"/>
+                <Cell col="4" text="bind:endDate"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="2" text="Button00" left="50" top="10" width="120" height="50" onclick="Button00_onclick"/>
+      </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var title = this.Div00.form.Edit00.value;
+	var startDate = this.Div00.form.Calendar00.value;
+	var endDate = this.Div00.form.Calendar01.value;
+	 
+
+  
+	this.transaction(
+	"tr_scheduleRegister"
+	,"SnuURL::schedule/register.snu"
+	,""
+	,""
+	,"title=" + title + " startDate="+ startDate + " endDate=" + endDate +""
+	,"fn_callback_schedule"
+		
+	
+	)
+
+}
+	
+	this.fn_callback_schedule = function(sId, nErrorCode, sErrorMsg)
+{
+	if(sId == "tr_scheduleRegister")
+	{
+		if(nErrorCode < 0)
+		{""
+			this.alert("일정 등록 실패" + sErrorMsg);
+		}
+		this.alert("일정 등록 성공");
+	}
+
+	
+if(sId == "tr_selectSchedule")
+	{
+	 if(nErrorCode < 0)
+	 {
+		this.alert("조회 성공:" + this.ds_schedule.getCount() + "건");
+		}
+		this.alert("조회 실패");
+		
+	
+		}
+		
+	
+	
+};
+
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"tr_selectSchedule"
+		,"SnuURL::schedule/list.snu"
+		,""
+		,"ds_shcedule=out_schedule"
+		,""
+		,"fn_callback_schedule"
+	);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_schedule">
+        <ColumnInfo>
+          <Column id="acNo" type="INT" size="256"/>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="title" type="STRING" size="256"/>
+          <Column id="startDate" type="STRING" size="256"/>
+          <Column id="endDate" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

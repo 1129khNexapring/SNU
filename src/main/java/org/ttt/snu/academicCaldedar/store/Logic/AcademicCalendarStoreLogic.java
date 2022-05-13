@@ -14,10 +14,10 @@ public class AcademicCalendarStoreLogic implements AcademicCalendarStore {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public void addSchedule(AcademicCalendar academicCalendar) {
-		sqlSession.insert("calendarMapper.addSchedule", academicCalendar);
-
-	}
+//	public void addSchedule(AcademicCalendar academicCalendar) {
+//		sqlSession.insert("calendarMapper.addSchedule", academicCalendar);
+//
+//	}
 
 	public List<AcademicCalendar> showSchedule() {
 
@@ -28,6 +28,17 @@ public class AcademicCalendarStoreLogic implements AcademicCalendarStore {
 	public void deleteSchedule(String title) {
 		sqlSession.delete("calendarMapper.deleteSchedule", title);
 
+	}
+	@Override
+	public int registerSchedule(SqlSession sqlSession, AcademicCalendar calendar) {
+		int result = sqlSession.insert("calendarMapper.insertSchedule", calendar);
+		return result;
+	}
+
+	@Override
+	public List<AcademicCalendar> printAllSchedule(SqlSession sqlSession) {
+		List<AcademicCalendar> aList = sqlSession.selectList("calendarMapper.showSchedule");
+		return aList;
 	}
 
 }
