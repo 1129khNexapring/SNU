@@ -52,7 +52,8 @@ if (nexacro.Environment)
         		{"id":"ListView", "classname":"nexacro.ListView", "type":"JavaScript"},
         		{"id":"DataObject", "classname":"nexacro.DataObject", "type":"JavaScript"},
         		{"id":"FileDialog", "classname":"nexacro.FileDialog", "type":"JavaScript"},
-        		{"id":"FileUpTransfer", "classname":"nexacro.FileUpTransfer", "type":"JavaScript"}
+        		{"id":"FileUpTransfer", "classname":"nexacro.FileUpTransfer", "type":"JavaScript"},
+        		{"id":"FileDownTransfer", "classname":"nexacro.FileDownTransfer", "type":"JavaScript"}
         ];
     	nexacro._addClasses(registerclass);
     };
