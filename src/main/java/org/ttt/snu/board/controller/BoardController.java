@@ -7,11 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,7 +52,6 @@ public class BoardController {
 	@RequestMapping(value="/board/register.snu", method=RequestMethod.POST)
 	public NexacroResult registerBoard(
 				  @ParamDataSet  (name="in_boardList") DataSet inBoardList
-				, @ParamVariable(name="in_var1") String inVar1
 				, @ParamVariable(name="in_var1") int board_no
 				, @ParamVariable(name="file_up", required=false) MultipartFile fileUp
 				, HttpServletRequest request) throws Exception {
@@ -72,12 +69,6 @@ public class BoardController {
 		int 	nErrorCode  = 0;
 		String  strErrorMsg = "START";
 		int i;
-		// 강의게시판 삭제
-		for(i = 0; i < inBoardList.getRemovedRowCount(); i++) {
-				String bId = inBoardList.getRemovedData(i, "board_no").toString();
-				bService.removeBoard(bId);
-		}			
-		
 		int iResult = 0;
 		int uResult = 0;
 		for(i = 0; i < inBoardList.getRowCount(); i++) {
@@ -120,29 +111,32 @@ public class BoardController {
 		}
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("errorMsg", strErrorMsg);
-		result.addVariable("out_var", inVar1);
+		// result.addVariable("out_var", inVar1);
 		return result;
 	}
 	
-//	// 강의 게시판 삭제
-//	@RequestMapping(value="/board/delete.snu", method=RequestMethod.GET)
-//	public NexacroResult removeBoard(
-//				  @ParamDataSet(name="in_boardList") DataSet inBoardList
-//				, @ParamVariable(name="in_var1") String inVar1) {
-//		int     nErrorCode  = 0;
-//		String  strErrorMsg = "START";
-//		NexacroResult result = new NexacroResult();
-//		int i;
-//		
-//		for(i = 0; i < inBoardList.getRemovedRowCount(); i++) {
-//			String boardNo = inBoardList.getRemovedData(i, "board_no").toString();
-//			// bService.removeBoard(boardNo);
-//		}
-//		result.addVariable("ErrorCode", nErrorCode);
-//		result.addVariable("ErrorMsg", strErrorMsg);
-//		result.addVariable("out_var", inVar1);
-//		return result;
-//	}
+	// 강의 게시판 삭제
+	@RequestMapping(value="/board/delete.snu", method=RequestMethod.POST)
+	public NexacroResult removeBoard(
+				@ParamVariable(name="in_var1") int boardNo) {
+		int     nErrorCode  = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		System.out.println(boardNo);
+		Board board = new Board();
+		board.setBoard_no(boardNo);
+		int dResult = bService.removeBoard(board);
+		if(dResult > 0) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
 	
 	// 강의 게시판 댓글 조회
 //		@RequestMapping(value="/comment/list.snu", method=RequestMethod.POST)
@@ -187,59 +181,79 @@ public class BoardController {
 			return result;
 		}
 	
-	// 강의 게시판 댓글 영역
-	@RequestMapping(value="/comments/changeComments.snu", method=RequestMethod.POST)
-	public NexacroResult changeComments(
-				    @ParamDataSet(name="in_comments") DataSet inComments
-				  , @ParamVariable(name="in_var1") String board_no
-				  , @ParamVariable(name="in_var2") String comment_no) throws Exception {
+	// 강의 게시판 등록
+	@RequestMapping(value="/comments/register.snu", method=RequestMethod.POST)
+	public NexacroResult commentsRegister(
+				  @ParamVariable(name="inVar1") int boardNo
+				, @ParamVariable(name="inVar2") String commentContent
+				, @ParamVariable(name="inVar3") String pCode) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		Comments comments = new Comments();
 		NexacroResult result = new NexacroResult();
-		int 	nErrorCode  = 0;
-		String  strErrorMsg = "START";
-		int i;
-		
-		// 강의게시판 삭제
-		for(i = 0; i < inComments.getRemovedRowCount(); i++) {
-				String cId = inComments.getRemovedData(i, "comment_no").toString();
-				bService.removeComments(Integer.parseInt(cId));
-		}
-		
-		// INSERT, UPDATE
-		// RowType에 따라서 INSERT OR UPDATE
-		int iResult = 0;
-		int uResult = 0;
-		for(i = 0; i < inComments.getRowCount(); i++) {
-			int rowType = inComments.getRowType(i);
-			String comment_content = dsGet(inComments, i, "comment_content");
-			String comment_date    = dsGet(inComments, i, "comment_date");
-			String s_code          = dsGet(inComments, i, "s_code");
-			String p_code          = dsGet(inComments, i, "p_code");
-			Comments comments = new Comments(
-						 	Integer.parseInt(comment_no)
-						,	comment_content
-						,	comment_date
-						, 	s_code
-						, 	p_code
-						, 	Integer.parseInt(board_no));
-			if(rowType == DataSet.ROW_TYPE_INSERTED) {
-				iResult += bService.registerComments(comments);
-			}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
-				String commentId = inComments.getSavedData(i, "comment_no").toString();
-				comments.setComment_no(Integer.parseInt(commentId));
-				uResult += bService.modifyComments(comments);
-			}
-		}
-		if(iResult < 0 && uResult < 0) {
-			nErrorCode  = -1;
-			strErrorMsg = "FAIL";
-		}else {
+		comments.setBoard_no(boardNo);
+		comments.setComment_content(commentContent);
+		comments.setP_code(pCode);
+		int iResult = bService.registerComments(comments);
+		if(iResult > 0) {
 			nErrorCode  = 0;
 			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
 		}
 		result.addVariable("ErrorCode", nErrorCode);
-		result.addVariable("errorMsg", strErrorMsg);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
+	
+	// 강의 게시판 수정
+	@RequestMapping(value="/comments/modify.snu", method=RequestMethod.POST)
+	public NexacroResult commentsModify(
+				  @ParamVariable(name="inVar1") int board_no
+				, @ParamVariable(name="inVar2") int comment_no
+				, @ParamVariable(name="inVar3") String commentContent) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		Comments comments = new Comments();
+		comments.setBoard_no(board_no);
+		comments.setComment_no(comment_no);
+		comments.setComment_content(commentContent);
+		NexacroResult result = new NexacroResult();
+		int uResult = bService.modifyComments(comments);
+		if(uResult > 0) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	// 강의 게시판 삭제
+		@RequestMapping(value="/comments/delete.snu", method=RequestMethod.POST)
+		public NexacroResult commentsRemove(
+					@ParamVariable(name="in_var1") int commentNo) {
+			int     nErrorCode  = 0;
+			String  strErrorMsg = "START";
+			NexacroResult result = new NexacroResult();
+			Comments comments = new Comments();
+			comments.setComment_no(commentNo);
+			int dResult = bService.removeComments(comments);
+			if(dResult > 0) {
+				nErrorCode  = 0;
+				strErrorMsg = "SUCC";
+			}else {
+				nErrorCode  = -1;
+				strErrorMsg = "FAIL";
+			}
+			result.addVariable("ErrorCode", nErrorCode);
+			result.addVariable("ErrorMsg", strErrorMsg);
+			return result;
+		}
 	
 	// 첨부파일 저장
 	public String saveFile(MultipartFile uploadFile, HttpServletRequest request) {
