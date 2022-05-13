@@ -1,0 +1,7 @@
+new Gson().toJson(Object)
+이거로 json으로 바꿔주거나
+JSONObject obj = new JSONObject() 로
+키, 밸류 값으로 만들어서 보내주면
+여러개를 보낼 수 있어요
+
+시원이 : 시퀀스다이어그램

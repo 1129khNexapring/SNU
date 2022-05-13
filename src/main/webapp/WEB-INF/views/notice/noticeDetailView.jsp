@@ -40,7 +40,7 @@
 									<tr>
 			<td>첨부파일</td>
 			<td>
-				<a href="../../../resources/nuploadFiles/${notice.nFileReName }" download>
+				<a href="../../../resources/nuploadFiles/${notice.nFileName }" download>
 				${notice.nFileName }
 				</a>
 			</td>
