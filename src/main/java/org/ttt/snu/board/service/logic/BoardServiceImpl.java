@@ -69,8 +69,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int removeBoard(String boardNo) {
-		int result = bStore.deleteBoard(sqlSession, boardNo);
+	public int removeBoard(Board board) {
+		int result = bStore.deleteBoard(sqlSession, board);
 		return result;
 	}
 
@@ -87,8 +87,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int removeComments(int commentNo) {
-		int result = bStore.deleteComments(sqlSession, commentNo);
+	public int removeComments(Comments comments) {
+		int result = bStore.deleteComments(sqlSession, comments);
 		return result;
 	}
 

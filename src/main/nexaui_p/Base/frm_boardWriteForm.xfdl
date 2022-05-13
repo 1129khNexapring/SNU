@@ -4,9 +4,9 @@
     <Layouts>
       <Layout height="590" mobileorientation="landscape" width="1080" stepcount="0">
         <Static id="Static00" taborder="0" text="No" left="340" top="120" width="55" height="30" onclick="Static00_onclick" border="1px solid lightgray" borderRadius="4px" textAlign="center"/>
-        <Edit id="edt_boardNo" taborder="1" left="395" top="120" width="145" height="30" borderRadius="4px"/>
-        <Edit id="edt_boardCount" taborder="2" left="595" top="120" width="160" height="30" borderRadius="4px" onchanged="edt_boardCount_onchanged"/>
-        <Edit id="edt_boardWriter" taborder="3" left="395" top="150" width="145" height="30" borderRadius="4px"/>
+        <Edit id="edt_boardNo" taborder="1" left="395" top="120" width="145" height="30" borderRadius="4px" enable="false"/>
+        <Edit id="edt_boardCount" taborder="2" left="595" top="120" width="160" height="30" borderRadius="4px" onchanged="edt_boardCount_onchanged" enable="false"/>
+        <Edit id="edt_boardWriter" taborder="3" left="395" top="150" width="145" height="30" borderRadius="4px" enable="false"/>
         <Edit id="edt_boardWriteDate" taborder="4" left="595" top="150" width="160" height="30" borderRadius="4px"/>
         <Static id="Static04" taborder="5" text="1번 게시글" left="475" top="40" width="190" height="60" onclick="Static04_onclick" font="normal 25pt/normal &quot;Arial&quot;"/>
         <Edit id="edt_boardTitle" taborder="6" left="395" top="180" width="360" height="30" borderRadius="4px"/>
@@ -22,18 +22,23 @@
         <Edit id="Edit00" taborder="16" left="485" top="520" width="140" height="20"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
+    <Script type="xscript5.1"><![CDATA[// 게시글 등록
 this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	var registerBtn = this.confirm("해당 게시글을 등록하시겠습니까?", "게시글 등록")
+	if(registerBtn == true) {
 	
-	this.transaction(
-		"tr_register"  	 	 	 	 	      // 1.ID
-		,"SnuUrl::board/register.snu"   	  // 2.URL
-		,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
-		,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
-		,"in_var1=" + nexacro.wrapQuote(name) 			// 5.InVar : F->S(var)
-		,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
-	);
+		this.transaction(
+			"tr_register"  	 	 	 	 	      // 1.ID
+			,"SnuUrl::board/register.snu"   	  // 2.URL
+			,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
+			,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
+			,"in_var1=" + nexacro.wrapQuote(name) 			// 5.InVar : F->S(var)
+			,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
+		
+		);
+	}
+	
 };
 
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)

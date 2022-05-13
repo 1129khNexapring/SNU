@@ -89,7 +89,7 @@
               <PopupDiv id="popComments" text="PopupDiv00" visible="false" left="450" top="705" width="220" height="55" background="cornsilk">
                 <Layouts>
                   <Layout>
-                    <Edit id="Edit00" taborder="0" left="0" top="0" width="220" height="20" borderRadius="5px" onchanged="popDetail_popComments_Edit00_onchanged"/>
+                    <Edit id="edt_commentModify" taborder="0" left="0" top="0" width="220" height="20" borderRadius="5px" onchanged="popDetail_popComments_Edit00_onchanged"/>
                     <Button id="Button00" taborder="1" text="수정완료" left="70" top="24" width="80" height="26" borderRadius="5px" background="royalblue" color="white" onclick="popDetail_popComments_Button00_onclick"/>
                   </Layout>
                 </Layouts>
@@ -128,13 +128,15 @@
     </Objects>
     <Script type="xscript5.1"><![CDATA[var currentboardNo = 0;
 var currentCommentNo = 0;
+var pCode = nexacro.getEnvironmentVariable("ev_Val");
 
+// 게시글 작성화면 이동
 this.btn_boardWrite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.go("Base::frm_boardWriteForm.xfdl");	
 };
 
-
+// 게시글 상세화면 
 this.grd_boardList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {	
 	currentboardNo = e.row;
@@ -163,6 +165,7 @@ this.grd_boardList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClic
 // 	this.frm_boarddetailView.ta_boardContent.set_text(bContent);
 // }
 
+// 게시글 목록
 this.frm_board_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	this.transaction(
@@ -199,7 +202,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			this.alert("게시글 삭제 실패 : " + sErrorMsg);
 			return;
 		}
-		this.alert("게시글 삭제 성공");
+		// this.alert("게시글 삭제 성공");
 	}
 	
 	if(id == "tr_cRegister") {
@@ -236,28 +239,19 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	
 };
 
+// 게시글 닫기
 this.popDetail_btn_popUpClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-
-	var arrRtn = "";
-	var nRow = this.ds_boardList.rowposition;
-	arrRtn = this.ds_boardList.getColumn(nRow, "board_no");
-	arrRtn += ":" +  this.ds_boardList.getColumn(nRow, "board_count");
-	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_writer");
-	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_date");
-	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_title");
-	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_content");
-	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "edt_file");
-	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "edt_comment");
-	
-	this.close(arrRtn);
+	this.popDetail.closePopup();
 };
 
+// 게시글 닫기
 this.popDetail_btn_popUpBack_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.close("popDetail");
+	this.popDetail.closePopup();
 };
 
+// 게시글 수정
 this.popDetail_btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.transaction(
@@ -270,39 +264,48 @@ this.popDetail_btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
 	);
 };
 
+// 게시글 삭제
 this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-	this.transaction(
-		"tr_bDelete"
-		, "SnuUrl::board/register.snu"
-		, "in_boardList=ds_boardList:D"
-		, ""
-		, "in_var1=" + board_no
-		, "fn_callback_tran"
-	);
+	var removeBtn = this.confirm("해당 게시글을 삭제하시겠습니까?", "게시글 삭제");
+	if(removeBtn == true) {
+		this.transaction(
+			"tr_bDelete"
+			, "SnuUrl::board/delete.snu"
+			, ""
+			, ""
+			, "in_var1=" + board_no
+			, "fn_callback_tran"
+		);
+	};
 };
 
+// 댓글 등록
 this.popDetail_btn_commentSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	var registerBtn = this.confirm("해당 댓을 등록하시겠습니까?", "댓글 등록");
+	var commentContent = this.popDetail.form.edt_comment.value;
+	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	if(registerBtn == true) {
+		this.transaction(
+			"tr_cRegister"
+			, "SnuUrl::comments/register.snu"
+			, ""
+			, ""
+			, "inVar1=" + boardNo + " inVar2=" + nexacro.wrapQuote(commentContent) + " inVar3=" + pCode
+		);
+	}
 	
-	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-	this.transaction(
-		"tr_cRegister"
-		, "SnuUrl::comments/changeComments.snu"
-		, "in_comments=ds_comments:U"
-		, ""
-		, "in_var1=" + board_no
-	);
 };
 
+// 댓글 목록
 this.popDetail_onpopup = function(obj:nexacro.PopupDiv,e:nexacro.EventInfo)
 {
-	
-	this.commentsList();
-	
+	this.commentsList();	
 };
 
+// 댓글 입력창 클릭시
 this.popDetail_edt_comment_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
 {
 	var d = new Date();
@@ -311,8 +314,8 @@ this.popDetail_edt_comment_oneditclick = function(obj:nexacro.Edit,e:nexacro.Edi
 	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
 };
 
+// 댓글 목록
 // var sCode = nexacro.getEnvironmentVariable("ev_Val");
-var sCode = "S001";
 this.commentsList = function(currentboardNo)
 {
 	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
@@ -321,24 +324,30 @@ this.commentsList = function(currentboardNo)
 		, "SnuUrl::comment/list.snu"
 		, ""
 		,"ds_comments=out_comments" // 4.OutDs : S->F jsp(SELECT)
-		,"in_var1="+board_no+" in_var2="+sCode // 5.InVar : F->S(var)
+		,"in_var1=" + board_no + " in_var2=" + sCode // 5.InVar : F->S(var)
 	);
 }
 
+// 댓글 삭제
 this.popDetail_btn_cRemove_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.ds_comments.deleteRow(this.ds_comments.rowposition);
 	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
-	this.transaction(
-		"tr_cRemove"
-		, "SnuUrl::comments/changeComments.snu"
-		, "in_comments=ds_comments:D"
-		, ""
-		, "in_var2=" + comment_no
-		, "fn_callback_tran"
-	);
+	var deleteBtn = this.confirm("해당 댓글을 삭제하시겠습니까?", "댓글 삭제");
+	if(deleteBtn == true) {
+			this.transaction(
+			"tr_cRemove"
+			, "SnuUrl::comments/delete.snu"
+			, "in_comments=ds_comments:D"
+			, ""
+			, "in_var1=" + comment_no
+			, "fn_callback_tran"
+		);
+	}
+	
 };
 
+// 댓글 수정 입력 화면
 this.popDetail_grd_comment_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	var comment = this.popDetail.form.edt_comment;
@@ -349,18 +358,24 @@ this.popDetail_grd_comment_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.
 	
 };
 
+// 댓글 수정
 this.popDetail_popComments_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
 	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-	this.transaction(
-		  "tr_cUpdate"
-		, "SnuUrl::comments/changeComments.snu"
-		, "in_comments=ds_comments:U"
-		, ""
-		, "in_var1="+board_no+" in_var2="+comment_no
-		, "fn_callback_tran"
-	);
+	var commentContent = this.popDetail.form.popComments.form.edt_commentModify.value;
+	var modifyBtn = this.confirm("해당 댓글을 수정하시겠습니까?", "댓글 수정");
+	if(modifyBtn == true) {
+			this.transaction(
+			  "tr_cUpdate"
+			, "SnuUrl::comments/modify.snu"
+			, ""
+			, ""
+			, "inVar1=" + board_no + " inVar2=" + comment_no + " inVar3=" + nexacro.wrapQuote(commentContent) 
+			, "fn_callback_tran"
+		);
+	};
+	
 };
 ]]></Script>
     <Bind>
@@ -373,7 +388,7 @@ this.popDetail_popComments_Button00_onclick = function(obj:nexacro.Button,e:nexa
       <BindItem id="item6" compid="popDetail.form.edt_file" propid="value" datasetid="ds_boardList" columnid="board_fileName"/>
       <BindItem id="item7" compid="popDetail.form.edt_comment" propid="value" datasetid="ds_comments" columnid="comment_content"/>
       <BindItem id="item10" compid="popDetail.form.edt_cBoardNo" propid="value" datasetid="ds_comments" columnid="board_no"/>
-      <BindItem id="item11" compid="popDetail.form.popComments.form.Edit00" propid="value" datasetid="ds_comments" columnid="comment_content"/>
+      <BindItem id="item11" compid="popDetail.form.popComments.form.edt_commentModify" propid="value" datasetid="ds_comments" columnid="comment_content"/>
     </Bind>
   </Form>
 </FDL>
