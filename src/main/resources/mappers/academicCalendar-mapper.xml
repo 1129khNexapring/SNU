@@ -28,7 +28,7 @@
   
   
   <select id="selectScheduleList" resultMap="calendarResultMap">
-  	SELECT * FROM ACADEMIC_CALENDAR
+  	SELECT AC_NO, A_CODE, TITLE, START_DATE, END_DATE FROM ACADEMIC_CALENDAR
   </select>
   </mapper>
 

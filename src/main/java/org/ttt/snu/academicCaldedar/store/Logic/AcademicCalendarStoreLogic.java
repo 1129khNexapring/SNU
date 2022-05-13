@@ -36,8 +36,9 @@ public class AcademicCalendarStoreLogic implements AcademicCalendarStore {
 	}
 
 	@Override
-	public List<AcademicCalendar> printAllSchedule(SqlSession sqlSession) {
-		List<AcademicCalendar> aList = sqlSession.selectList("calendarMapper.showSchedule");
+	public List<AcademicCalendar> printAllSchedule() {
+		List<AcademicCalendar> aList = sqlSession.selectList("calendarMapper.selectScheduleList");
+		System.out.println(aList);
 		return aList;
 	}
 

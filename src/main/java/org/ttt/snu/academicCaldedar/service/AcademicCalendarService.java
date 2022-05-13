@@ -18,5 +18,7 @@ public interface AcademicCalendarService {
 	//넥사에서 조회
 	public List<AcademicCalendar> printAllSchedule();
 
+	public int modifySchedule(AcademicCalendar calendar);
+
 }
 

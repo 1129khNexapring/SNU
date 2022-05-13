@@ -26,7 +26,7 @@
       <File url="FrameBase\Form_Top.xfdl" checksum="20220512105712" errormsg=""/>
       <File url="FrameBase\Form_Work.xfdl" checksum="20220512105714" errormsg=""/>
       <File url="Base\academicCalendar.xfdl" checksum="20220512153525" errormsg=""/>
-      <File url="Base\frm_schoolschedule.xfdl" checksum="20220513142315" errormsg=""/>
+      <File url="Base\frm_schoolschedule.xfdl" checksum="20220513155838" errormsg=""/>
       <File url="Base\frm_absenceschool.xfdl" checksum="20220512105713" errormsg=""/>
       <File url="Base\frm_lecture.xfdl" checksum="20220512105713" errormsg=""/>
       <File url="Base\frm_notice.xfdl" checksum="20220512105713" errormsg=""/>
@@ -35,7 +35,7 @@
       <File url="Base\frm_returnschool.xfdl" checksum="20220512105714" errormsg=""/>
       <File url="Base\frm_scholarship.xfdl" checksum="20220512105717" errormsg=""/>
       <File url="Base\frm_schoolmsg.xfdl" checksum="20220512105718" errormsg=""/>
-      <File url="Base\frm_student.xfdl" checksum="20220512105718" errormsg=""/>
+      <File url="Base\frm_student.xfdl" checksum="20220513153332" errormsg=""/>
       <File url="Base\frm_suggestion.xfdl" checksum="20220512105719" errormsg=""/>
       <File url="Base\frm_swsession.xfdl" checksum="20220512105717" errormsg=""/>
       <File url="Base\frm_transfermajor.xfdl" checksum="20220512105715" errormsg=""/>
@@ -48,6 +48,8 @@
       <File url="Popup\TransferReturnMsg.xfdl" checksum="20220512105714" errormsg=""/>
       <File url="Popup\writeInfo.xfdl" checksum="20220512105716" errormsg=""/>
       <File url="Popup\writeNotice.xfdl" checksum="20220512105715" errormsg=""/>
+      <File url="Popup\insertSchedul.xfdl" checksum="20220513145652" errormsg=""/>
+      <File url="Popup\insertSchedule.xfdl" checksum="20220513150317" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

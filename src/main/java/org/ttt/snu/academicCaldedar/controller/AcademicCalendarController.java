@@ -68,7 +68,7 @@ public class AcademicCalendarController {
 		String strErrorMsg="";
 		NexacroResult result = new NexacroResult();
 		List<AcademicCalendar> aList = aService.printAllSchedule();
-		System.out.println(aList);
+		
 		if(!aList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "조회 성공";
@@ -99,9 +99,6 @@ public class AcademicCalendarController {
 		calendar.setStartDate(startDate);
 		calendar.setEndDate(endDate);
 		int aResult = aService.registerSchedule(calendar);
-		System.out.println(title);
-		System.out.println(startDate);
-		System.out.println(endDate);
 		if(aResult > 0) {
 			nErrorCode = 0;
 			strErrorMsg = "등록 완료";
@@ -112,6 +109,36 @@ public class AcademicCalendarController {
 		}
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	@RequestMapping(value="/schedule/modify.snu", method=RequestMethod.POST)
+	public NexacroResult modifySchedule(
+			@ParamVariable(name="title") String title
+			,@ParamVariable(name="startDate") String startDate
+			,@ParamVariable(name="endDate") String endDate) {
+		
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		AcademicCalendar calendar = new AcademicCalendar();
+		calendar.setTitle(title);
+		calendar.setStartDate(startDate);
+		calendar.setEndDate(endDate);
+		
+		int aResult = aService.modifySchedule(calendar);
+		System.out.println(title);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
+		if(aResult < 0) {
+			nErrorCode = 0;
+			strErrorMsg = "일정 수정 완료";
+			}else {
+				nErrorCode = -1;
+				strErrorMsg = "일정 수정 실패";			}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);;
+		
 		return result;
 	}
 

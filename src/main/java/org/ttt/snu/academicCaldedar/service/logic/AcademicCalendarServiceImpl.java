@@ -43,7 +43,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
 	@Override
 	public List<AcademicCalendar> printAllSchedule() {
-		List<AcademicCalendar> aList = aStore.printAllSchedule(sqlSession);
+		List<AcademicCalendar> aList = aStore.printAllSchedule();
 		return aList;
 	}
 
