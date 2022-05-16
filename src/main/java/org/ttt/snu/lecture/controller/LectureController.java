@@ -142,6 +142,8 @@ public class LectureController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
+	
+	
 
 	//교수 - 강의 계획서 조회
 	@RequestMapping(value="/lecture/planListBypCode.snu", method=RequestMethod.POST)
