@@ -103,7 +103,7 @@
 		JOIN ENROLL_LECTURE EL ON(L.L_CODE = EL.L_CODE) WHERE S_CODE = #{sCode}
 	</select>
 	
-	<!-- 강의계획서 조회 -->
+	<!-- 학생 강의계획서 조회 -->
 	<select id="viewlist" resultMap="viewLecture">
 		SELECT * FROM LECTURE L
 		JOIN L_SCHEDULE LS ON(L.L_CODE = LS.L_CODE)
