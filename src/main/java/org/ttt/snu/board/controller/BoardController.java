@@ -160,28 +160,31 @@ public class BoardController {
 //			return result;
 //		}
 		
-		@RequestMapping(value="/comment/list.snu", method=RequestMethod.POST)
-		public NexacroResult commentsList(
-					  @ParamVariable(name="in_var1") String inVar1
-					, @ParamVariable(name="in_var2") String inVar2) {
-			int    nErrorCode  = 0;
-			String strErrorMsg = "START";
-			NexacroResult result = new NexacroResult();
-			List<Comments> commentList = bService.printAllComments(Integer.parseInt(inVar1), inVar2);
-			if(!commentList.isEmpty()) {
-				nErrorCode  = 0;
-				strErrorMsg = "SUCC";
-			}else {
-				nErrorCode  = -1;
-				strErrorMsg = "FAIL";
-			}	
-			result.addDataSet("out_comments", commentList);
-			result.addVariable("ErrorCode", nErrorCode);
-			result.addVariable("ErrorMsg", strErrorMsg);
-			return result;
-		}
+	// 강의 게시판 댓글 조회
+	@RequestMapping(value="/comment/list.snu", method=RequestMethod.POST)
+	public NexacroResult commentsList(
+				@ParamVariable(name="in_var1") int  boardNo
+			  , @ParamVariable(name="in_var2") String sCode) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		System.out.println(boardNo);
+		System.out.println(sCode);
+		List<Comments> commentList = bService.printAllComments(boardNo, sCode);
+		if(!commentList.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}	
+		result.addDataSet("out_comments", commentList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
 	
-	// 강의 게시판 등록
+	// 강의 게시판 댓글 등록
 	@RequestMapping(value="/comments/register.snu", method=RequestMethod.POST)
 	public NexacroResult commentsRegister(
 				  @ParamVariable(name="inVar1") int boardNo
@@ -207,7 +210,7 @@ public class BoardController {
 		return result;
 	}
 	
-	// 강의 게시판 수정
+	// 강의 게시판 댓글 수정
 	@RequestMapping(value="/comments/modify.snu", method=RequestMethod.POST)
 	public NexacroResult commentsModify(
 				  @ParamVariable(name="inVar1") int board_no
@@ -233,7 +236,7 @@ public class BoardController {
 		return result;
 	}
 	
-	// 강의 게시판 삭제
+	// 강의 게시판 댓글 삭제
 		@RequestMapping(value="/comments/delete.snu", method=RequestMethod.POST)
 		public NexacroResult commentsRemove(
 					@ParamVariable(name="in_var1") int commentNo) {
