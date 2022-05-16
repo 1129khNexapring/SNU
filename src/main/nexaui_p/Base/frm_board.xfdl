@@ -57,14 +57,14 @@
               <FileDownload id="FileDownload00" taborder="19" text="File Download" left="665" top="500" width="94" height="30" borderRadius="5px"/>
               <Button id="btn_popUpClose" taborder="20" text="X" left="1000" top="5" width="20" height="25" background="dodgerblue" font="normal bold 10pt/normal &quot;Arial&quot;" cursor="pointer" onclick="popDetail_btn_popUpClose_onclick"/>
               <Edit id="edt_cBoardNo" taborder="21" left="810" top="565" width="140" height="20" visible="false"/>
-              <Grid id="grd_comment" taborder="22" left="308" top="695" width="492" height="130" binddataset="ds_comments" oncelldblclick="popDetail_grd_comment_oncelldblclick" cursor="pointer">
+              <Grid id="grd_comment" taborder="22" left="308" top="695" width="492" height="130" binddataset="ds_comments" oncelldblclick="popDetail_grd_comment_oncelldblclick" cursor="pointer" autofittype="col">
                 <Formats>
                   <Format id="default">
                     <Columns>
-                      <Column size="48"/>
-                      <Column size="85"/>
-                      <Column size="280"/>
-                      <Column size="79"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="202"/>
+                      <Column size="80"/>
                     </Columns>
                     <Rows>
                       <Row size="24" band="head"/>
@@ -72,7 +72,7 @@
                     </Rows>
                     <Band id="head">
                       <Cell text="No"/>
-                      <Cell col="1" text="작성자"/>
+                      <Cell col="1" text="작성자" suppressalign="first"/>
                       <Cell col="2" text="내용"/>
                       <Cell col="3" text="작성일"/>
                     </Band>
@@ -86,7 +86,7 @@
                 </Formats>
               </Grid>
               <Button id="btn_cRemove" taborder="23" text="삭제하기" left="804" top="695" width="66" height="32" background="cornflowerblue" borderRadius="6px" cursor="pointer" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" onclick="popDetail_btn_cRemove_onclick"/>
-              <PopupDiv id="popComments" text="PopupDiv00" visible="false" left="450" top="705" width="220" height="55" background="cornsilk">
+              <PopupDiv id="popComments" text="PopupDiv00" visible="false" left="450" top="727" width="220" height="55" background="cornsilk">
                 <Layouts>
                   <Layout>
                     <Edit id="edt_commentModify" taborder="0" left="0" top="0" width="220" height="20" borderRadius="5px" onchanged="popDetail_popComments_Edit00_onchanged"/>
@@ -243,12 +243,14 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 this.popDetail_btn_popUpClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.popDetail.closePopup();
+	this.reload();
 };
 
 // 게시글 닫기
 this.popDetail_btn_popUpBack_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.popDetail.closePopup();
+	this.reload();
 };
 
 // 게시글 수정
@@ -281,6 +283,15 @@ this.popDetail_btn_remove_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
 	};
 };
 
+// 댓글 입력창 클릭시
+this.popDetail_edt_comment_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+	this.ds_comments.addRow();
+	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
+};
+
 // 댓글 등록
 this.popDetail_btn_commentSubmit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
@@ -305,20 +316,11 @@ this.popDetail_onpopup = function(obj:nexacro.PopupDiv,e:nexacro.EventInfo)
 	this.commentsList();	
 };
 
-// 댓글 입력창 클릭시
-this.popDetail_edt_comment_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
-{
-	var d = new Date();
-	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
-	this.ds_comments.addRow();
-	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
-};
-
 // 댓글 목록
-// var sCode = nexacro.getEnvironmentVariable("ev_Val");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
 this.commentsList = function(currentboardNo)
 {
-	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+	var board_no = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
 	this.transaction(
 		"tr_cList"
 		, "SnuUrl::comment/list.snu"
@@ -338,7 +340,7 @@ this.popDetail_btn_cRemove_onclick = function(obj:nexacro.Button,e:nexacro.Click
 			this.transaction(
 			"tr_cRemove"
 			, "SnuUrl::comments/delete.snu"
-			, "in_comments=ds_comments:D"
+			, ""
 			, ""
 			, "in_var1=" + comment_no
 			, "fn_callback_tran"
