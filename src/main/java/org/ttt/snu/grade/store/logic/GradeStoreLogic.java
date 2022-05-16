@@ -11,6 +11,7 @@ import org.ttt.snu.grade.domain.Grade;
 import org.ttt.snu.grade.domain.LectureEvaluation;
 import org.ttt.snu.grade.domain.ScoreList;
 import org.ttt.snu.grade.store.GradeStore;
+import org.ttt.snu.lecture.domain.Lecture;
 
 @Repository
 public class GradeStoreLogic implements GradeStore{
@@ -37,6 +38,13 @@ public class GradeStoreLogic implements GradeStore{
 	public int updateGrade(SqlSession sqlSession, Grade grade) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	//학생 성적조회
+	@Override
+	public List<Lecture> printGrade(SqlSession sqlSession, String sCode) {
+		List<Lecture> lList = sqlSession.selectList("GradeMapper.printGrade", sCode);
+		return lList;
 	}
 
 }
