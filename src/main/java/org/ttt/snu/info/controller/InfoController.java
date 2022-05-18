@@ -97,7 +97,7 @@ public class InfoController {
 		info.setInfoContent(inVar2);
 		int uResult = iService.modifyInfo(info);
 		if(uResult > 0)
-		{
+		{a
 			nErrorCode = 0;
 			strErrorMsg = "수정이 완료됐습니다!";
 		}else {

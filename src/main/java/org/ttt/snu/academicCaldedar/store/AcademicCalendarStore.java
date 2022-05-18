@@ -17,4 +17,6 @@ public interface AcademicCalendarStore {
 
 	List<AcademicCalendar> printAllSchedule();
 
+	int modifySchedule(SqlSession sqlSession, AcademicCalendar calendar);
+
 }

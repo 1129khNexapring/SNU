@@ -23,12 +23,16 @@
   </insert>
   
   <delete id="deleteSchedule" >
-  	DELETE FROM ACADEMIC_CALENDAR WHERE TITLE = ${title}
+  	DELETE FROM ACADEMIC_CALENDAR WHERE AC_NO = #{acNo}
   </delete>
   
   
   <select id="selectScheduleList" resultMap="calendarResultMap">
   	SELECT AC_NO, A_CODE, TITLE, START_DATE, END_DATE FROM ACADEMIC_CALENDAR
   </select>
+  
+  <update id="updateSchedule" parameterType="AcademicCalendar">
+  UPDATE ACADEMIC_CALENDAR SET TITLE = #{title}, START_DATE = #{startDate}, END_DATE = #{endDate} WHERE AC_NO = #{acNo}
+  </update>
   </mapper>
 

@@ -42,4 +42,11 @@ public class AcademicCalendarStoreLogic implements AcademicCalendarStore {
 		return aList;
 	}
 
+	@Override
+	public int modifySchedule(SqlSession sqlSession, AcademicCalendar calendar) {
+		int result = sqlSession.update("calendarMapper.updateSchedule", calendar);
+		
+		return result;
+	}
+
 }

@@ -32,6 +32,8 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
 	position: fixed;
 	left: 85%;
 	top: 48%;
+	width: 300px;
+    height: 400px;
 	transform: translate(-50%, -50%);
 	padding: 30px;
 	background: #fff;
@@ -67,9 +69,9 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
 	margin-top: 5px;
 	font-size: 16px;
 	font-weight: 600;
-	weight: 100%;
-	height: 30px;
+	padding-top:350px;
 	line-height: 30px
+	
 }
 
 .layerPopup #close {
@@ -82,6 +84,8 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
 	line-height: 30px;
 	text-align: center;
 	text-decoration: underline;
+	position: relative;
+    left: 20px;
 }
 
 .layerPopup a {
@@ -163,7 +167,7 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
         </div>
           <form name="pop_form">
         
-        <span id="check"><input type="checkbox" value="checkbox" name="chkbox" id="chkday"/><label for="chkday">오늘 하루동안 보지 않기</label></span>
+        <span id="check"><input type="checkbox" value="checkbox" name="chkbox" id="chkday" style="padding-top : 350px;"/><label for="chkday">오늘 하루동안 보지 않기</label></span>
                 <span id="close">닫기</span>
 		</form>
 	</div>

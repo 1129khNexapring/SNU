@@ -34,45 +34,26 @@
             </Format>
           </Formats>
         </Grid>
-        <Button id="Button00" taborder="1" text="조회" left="50" top="10" width="120" height="50" onclick="Button00_onclick"/>
+        <Button id="btn_selectSchedule" taborder="1" text="조회" left="50" top="10" width="120" height="50" onclick="btn_selectSchedule_onclick"/>
         <Button id="btn_insertSchedule" taborder="2" text="일정추가" left="640" top="15" width="120" height="50" onclick="btn_insertSchedule_onclick"/>
-        <Button id="btn_modifySchedule" taborder="3" text="일정수정" left="770" top="15" width="120" height="50" onclick="btn_modifySchedule_onclick"/>
-        <Button id="Button03" taborder="4" text="일정삭제" left="900" top="15" width="120" height="50"/>
+        <Button id="btn_modifySchedule" taborder="3" text="저장" left="770" top="15" width="120" height="50" onclick="btn_modifySchedule_onclick"/>
+        <Button id="btn_deleteSchedule" taborder="4" text="일정삭제" left="900" top="15" width="120" height="50" onclick="btn_deleteSchedule_onclick"/>
         <Div id="Div00" taborder="5" text="Div00" left="50" top="374" width="955" height="168" border="1px solid">
           <Layouts>
             <Layout>
-              <Edit id="Edit00" taborder="0" left="119" top="73" width="140" height="39"/>
-              <Calendar id="Calendar00" taborder="1" left="439" top="77" width="140" height="39"/>
-              <Calendar id="Calendar01" taborder="2" left="674" top="77" width="190" height="38"/>
-              <Static id="Static00" taborder="3" text="제목" left="19" top="65" width="80" height="60" onclick="Div00_Static00_onclick"/>
-              <Static id="Static01" taborder="4" text="시작날짜" left="339" top="66" width="60" height="60"/>
-              <Static id="Static02" taborder="5" text="종료날짜" left="599" top="66" width="60" height="60"/>
+              <Calendar id="Calendar_start" taborder="0" left="439" top="77" width="140" height="39" editformat="yy-MM-dd" dateformat="yy-MM-dd "/>
+              <Calendar id="Calendar_end" taborder="1" left="674" top="77" width="190" height="38" dateformat="yy-MM-dd " editformat="yy-MM-dd"/>
+              <Static id="Static00" taborder="2" text="제목" left="19" top="65" width="80" height="60" onclick="Div00_Static00_onclick"/>
+              <Static id="Static01" taborder="3" text="시작날짜" left="339" top="66" width="60" height="60"/>
+              <Static id="Static02" taborder="4" text="종료날짜" left="599" top="66" width="60" height="60"/>
+              <Edit id="Edit00" taborder="5" left="121" top="76" width="153" height="40"/>
             </Layout>
           </Layouts>
         </Div>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
-this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	var title = this.Div00.form.Edit00.value;
-	var startDate = this.Div00.form.Calendar00.value;
-	var endDate = this.Div00.form.Calendar01.value;
-	 
 
-  
-	this.transaction(
-	"tr_scheduleRegister"
-	,"SnuURL::schedule/register.snu"
-	,""
-	,""
-	,"title=" + title + " startDate="+ startDate + " endDate=" + endDate +""
-	,"fn_callback_schedule"
-		
-	
-	)
-
-}
 	
 	this.fn_callback_schedule = function(sId, nErrorCode, sErrorMsg)
 {
@@ -97,7 +78,7 @@ if(sId == "tr_selectSchedule")
 	
 		}
 		
-		if(sId == "tr_saveSchedule") {
+		if(sId == "tr_modifySchedule") {
 		if(nErrorCode < 0 )
 			{
 				this.alert("일정 수정 실패");
@@ -113,7 +94,7 @@ if(sId == "tr_selectSchedule")
 };
 
 
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+this.btn_selectSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.transaction(
 		"tr_selectSchedule"
@@ -130,7 +111,7 @@ this.btn_insertSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 	
 	var sLeft = system.clientToScreenX(this,10);
 	var sTop  = system.clientToScreenY(this,10);
-	var objChild = new ChildFrame("popinsertSchedule", sLeft, sTop, 600, 500);
+	var objChild = new ChildFrame("popinsertSchedule", sLeft, sTop, 300, 300);
 	objChild.set_formurl("Popup::insertSchedule.xfdl");
 	objChild.set_openalign("center middle");
 	objChild.set_dragmovetype("normal");
@@ -143,15 +124,21 @@ this.btn_insertSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 
 this.btn_modifySchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var title = this.Div00.form.Edit00.value;
+	
+	var name = "학사스케줄 수정";
 	this.transaction(
-	"tr_saveSchedule"
+	"tr_modifySchedule"
 	,"SnuURL::schedule/modify.snu"
 	,"in_schedule=ds_schedule:U"
 	,""
-	,"title=" + nexacro.wrapQuote(title) + "startDate=" + startDate + "endDate=" + endDate + ""
+	,"in_var1=" + nexacro.wrapQuote(name)
 	,"fn_callback_schedule"
 	)
+};
+
+this.btn_deleteSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_schedule.deleteRow(this.ds_schedule.rowposition);
 };
 ]]></Script>
     <Objects>
@@ -166,9 +153,8 @@ this.btn_modifySchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
       </Dataset>
     </Objects>
     <Bind>
-      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_schedule" columnid="title"/>
-      <BindItem id="item1" compid="Div00.form.Calendar00" propid="value" datasetid="ds_schedule" columnid="startDate"/>
-      <BindItem id="item2" compid="Div00.form.Calendar01" propid="value" datasetid="ds_schedule" columnid="endDate"/>
+      <BindItem id="item1" compid="Div00.form.Calendar_start" propid="value" datasetid="ds_schedule" columnid="startDate"/>
+      <BindItem id="item2" compid="Div00.form.Calendar_end" propid="value" datasetid="ds_schedule" columnid="endDate"/>
     </Bind>
   </Form>
 </FDL>

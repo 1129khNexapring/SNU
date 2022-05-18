@@ -47,4 +47,10 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 		return aList;
 	}
 
+	@Override
+	public int modifySchedule(AcademicCalendar calendar) {
+		int result = aStore.modifySchedule(sqlSession, calendar);
+		return result;
+	}
+
 }
