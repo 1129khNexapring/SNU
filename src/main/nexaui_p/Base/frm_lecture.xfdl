@@ -40,16 +40,15 @@
               <Static id="Static00_02" taborder="3" text="강의 목표" left="40" top="268" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_03" taborder="4" text="강의 내용" left="40" top="418" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_04" taborder="5" text="강의명" left="40" top="193" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Edit id="edt_lType" taborder="6" left="153" top="123" width="198" height="35" readonly="true" color="black" background="white"/>
-              <MaskEdit id="mskedt_lCode" taborder="7" left="152" top="50" width="199" height="37" readonly="true" color="black" background="white" format="L###" type="string"/>
-              <Static id="Static00_01_00" taborder="8" text="정원" left="399" top="185" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="grid_detail_Static00_01_onclick"/>
-              <Static id="Static00_01_00_00" taborder="9" text="승인여부" left="399" top="250" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="grid_detail_Static00_01_onclick"/>
-              <Edit id="edt_lName" taborder="10" left="152" top="198" width="198" height="35" readonly="true" color="black" background="white"/>
-              <TextArea id="txtArea_lObjective" taborder="11" left="152" top="264" width="201" height="113"/>
-              <TextArea id="txtArea_lContents" taborder="12" left="154" top="412" width="197" height="181"/>
-              <TextArea id="txtArea_textbook" taborder="13" left="569" top="47" width="198" height="101"/>
-              <Edit id="edt_lCapacity" taborder="14" left="569" top="190" width="198" height="37"/>
-              <Radio id="rdo_lStatus" taborder="15" left="570" top="254" width="200" height="33" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" enable="false" direction="vertical">
+              <MaskEdit id="mskedt_lCode" taborder="6" left="152" top="50" width="199" height="37" readonly="true" color="black" background="white" format="L###" type="string"/>
+              <Static id="Static00_01_00" taborder="7" text="정원" left="399" top="185" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="grid_detail_Static00_01_onclick"/>
+              <Static id="Static00_01_00_00" taborder="8" text="승인여부" left="399" top="250" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="grid_detail_Static00_01_onclick"/>
+              <Edit id="edt_lName" taborder="9" left="152" top="198" width="198" height="35" readonly="true" color="black" background="white"/>
+              <TextArea id="txtArea_lObjective" taborder="10" left="152" top="264" width="201" height="113"/>
+              <TextArea id="txtArea_lContents" taborder="11" left="154" top="412" width="197" height="181"/>
+              <TextArea id="txtArea_textbook" taborder="12" left="569" top="47" width="198" height="101"/>
+              <Edit id="edt_lCapacity" taborder="13" left="569" top="190" width="198" height="37"/>
+              <Radio id="rdo_lStatus" taborder="14" left="570" top="254" width="200" height="33" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" enable="false" direction="vertical">
                 <Dataset id="innerdataset">
                   <ColumnInfo>
                     <Column id="codecolumn" size="256"/>
@@ -71,6 +70,32 @@
                   </Rows>
                 </Dataset>
               </Radio>
+              <Combo id="Combo00" taborder="15" text="Combo00" left="152" top="122" width="199" height="38" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">전공필수</Col>
+                      <Col id="datacolumn">전공필수</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">전공선택</Col>
+                      <Col id="datacolumn">전공선택</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">교양필수</Col>
+                      <Col id="datacolumn">교양필수</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">교양선택</Col>
+                      <Col id="datacolumn">교양선택</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
             </Layout>
           </Layouts>
         </Div>
@@ -78,13 +103,13 @@
     </Layouts>
     <Bind>
       <BindItem id="item1" compid="grid_detail.form.mskedt_lCode" propid="value" datasetid="ds_lecture" columnid="lCode"/>
-      <BindItem id="item2" compid="grid_detail.form.edt_lType" propid="value" datasetid="ds_lecture" columnid="lType"/>
       <BindItem id="item0" compid="grid_detail.form.edt_lName" propid="value" datasetid="ds_lecture" columnid="lName"/>
       <BindItem id="item3" compid="grid_detail.form.rdo_lStatus" propid="value" datasetid="ds_lecture" columnid="lStatus"/>
       <BindItem id="item4" compid="grid_detail.form.txtArea_lObjective" propid="value" datasetid="ds_lecture" columnid="lObjective"/>
       <BindItem id="item5" compid="grid_detail.form.txtArea_lContents" propid="value" datasetid="ds_lecture" columnid="lContents"/>
       <BindItem id="item6" compid="grid_detail.form.txtArea_textbook" propid="value" datasetid="ds_lecture" columnid="textbook"/>
       <BindItem id="item7" compid="grid_detail.form.edt_lCapacity" propid="value" datasetid="ds_lecture" columnid="lCapacity"/>
+      <BindItem id="item8" compid="grid_detail.form.Combo00" propid="value" datasetid="ds_lecture" columnid="lType"/>
     </Bind>
     <Objects>
       <Dataset id="ds_lecture">

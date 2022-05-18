@@ -1,0 +1,8 @@
+Error creating bean with name 'sqlSession' defined in ServletContext resource [/WEB-INF/spring/root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse config resource: class path resource [mybatis-config.xml]; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing SQL Mapper Configuration. Cause: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'mappers/employee-mapper.xml'. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'com.kh.nexapring.domain.Employee'.  Cause: java.lang.ClassNotFoundException: Cannot find class: com.kh.nexapring.domain.Employee
+--> mapper.xml -> resultType= "domain주소 잘못입력한 경우
+
+Mapped Statements collection does not contain value for departmentMapper.selectAllDepartment
+-> mybatis-config.xml에  mapper 경로 설정안한경우 오류
+
+Required DataSet parameter 'in_emp' is not present
+--> Save작업할때 POST방식이 아니라 Get방식을 취하면 발생하는 오류

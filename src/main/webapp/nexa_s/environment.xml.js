@@ -22,6 +22,7 @@ if (nexacro.Environment)
         nexacro._addService("Base", "form", "./Base/", "session", null, "", "0", "0");
         nexacro._addService("FrameBase", "form", "./FrameBase/", "session", null, "", "0", "0");
         nexacro._addService("tttUrl", "JSP", "http://127.0.0.1:8881", "session", null, "", "0", "0");
+        nexacro._addService("SnuURL", "JSP", "http://127.0.0.1:7776", "session", null, "", "0", "0");
     	nexacro._component_uri = (nexacro._arg_compurl ? nexacro._arg_compurl : "./nexacro17lib/component/");
     	nexacro._theme_uri = "./_resource_/_theme_/";
     	// load components

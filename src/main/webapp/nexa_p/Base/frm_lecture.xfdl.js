@@ -71,15 +71,8 @@
             obj.set_font("bold 16px/normal \"Gulim\",\"맑은 고딕\"");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_lType","153","123","198","35",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("6");
-            obj.set_readonly("true");
-            obj.set_color("black");
-            obj.set_background("white");
-            this.grid_detail.addChild(obj.name, obj);
-
             obj = new MaskEdit("mskedt_lCode","152","50","199","37",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("7");
+            obj.set_taborder("6");
             obj.set_readonly("true");
             obj.set_color("black");
             obj.set_background("white");
@@ -88,42 +81,42 @@
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Static("Static00_01_00","399","185","97","45",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("8");
+            obj.set_taborder("7");
             obj.set_text("정원");
             obj.set_font("bold 16px/normal \"Gulim\",\"맑은 고딕\"");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Static("Static00_01_00_00","399","250","97","45",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("9");
+            obj.set_taborder("8");
             obj.set_text("승인여부");
             obj.set_font("bold 16px/normal \"Gulim\",\"맑은 고딕\"");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Edit("edt_lName","152","198","198","35",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("10");
+            obj.set_taborder("9");
             obj.set_readonly("true");
             obj.set_color("black");
             obj.set_background("white");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new TextArea("txtArea_lObjective","152","264","201","113",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("11");
+            obj.set_taborder("10");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new TextArea("txtArea_lContents","154","412","197","181",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("12");
+            obj.set_taborder("11");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new TextArea("txtArea_textbook","569","47","198","101",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("13");
+            obj.set_taborder("12");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Edit("edt_lCapacity","569","190","198","37",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("14");
+            obj.set_taborder("13");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Radio("rdo_lStatus","570","254","200","33",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("15");
+            obj.set_taborder("14");
             obj.set_codecolumn("codecolumn");
             obj.set_datacolumn("datacolumn");
             obj.set_enable("false");
@@ -131,6 +124,16 @@
             var grid_detail_form_rdo_lStatus_innerdataset = new nexacro.NormalDataset("grid_detail_form_rdo_lStatus_innerdataset", obj);
             grid_detail_form_rdo_lStatus_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">승인</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">대기</Col></Row><Row><Col id=\"codecolumn\">R</Col><Col id=\"datacolumn\">반려</Col></Row></Rows>");
             obj.set_innerdataset(grid_detail_form_rdo_lStatus_innerdataset);
+            this.grid_detail.addChild(obj.name, obj);
+
+            obj = new Combo("Combo00","152","122","199","38",null,null,null,null,null,null,this.grid_detail.form);
+            obj.set_taborder("15");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            var grid_detail_form_Combo00_innerdataset = new nexacro.NormalDataset("grid_detail_form_Combo00_innerdataset", obj);
+            grid_detail_form_Combo00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">전공필수</Col><Col id=\"datacolumn\">전공필수</Col></Row><Row><Col id=\"codecolumn\">전공선택</Col><Col id=\"datacolumn\">전공선택</Col></Row><Row><Col id=\"codecolumn\">교양필수</Col><Col id=\"datacolumn\">교양필수</Col></Row><Row><Col id=\"codecolumn\">교양선택</Col><Col id=\"datacolumn\">교양선택</Col></Row></Rows>");
+            obj.set_innerdataset(grid_detail_form_Combo00_innerdataset);
+            obj.set_text("Combo00");
             this.grid_detail.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -140,10 +143,6 @@
             
             // BindItem Information
             obj = new BindItem("item1","grid_detail.form.mskedt_lCode","value","ds_lecture","lCode");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item2","grid_detail.form.edt_lType","value","ds_lecture","lType");
             this.addChild(obj.name, obj);
             obj.bind();
 
@@ -168,6 +167,10 @@
             obj.bind();
 
             obj = new BindItem("item7","grid_detail.form.edt_lCapacity","value","ds_lecture","lCapacity");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item8","grid_detail.form.Combo00","value","ds_lecture","lType");
             this.addChild(obj.name, obj);
             obj.bind();
             

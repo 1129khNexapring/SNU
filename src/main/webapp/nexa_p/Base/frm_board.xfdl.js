@@ -209,7 +209,8 @@
             obj.set_taborder("22");
             obj.set_binddataset("ds_comments");
             obj.set_cursor("pointer");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"48\"/><Column size=\"85\"/><Column size=\"280\"/><Column size=\"79\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"작성자\"/><Cell col=\"2\" text=\"내용\"/><Cell col=\"3\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:comment_no\"/><Cell col=\"1\" text=\"bind:s_name\"/><Cell col=\"2\" text=\"bind:comment_content\"/><Cell col=\"3\" text=\"bind:comment_date\"/></Band></Format></Formats>");
+            obj.set_autofittype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"202\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"작성자\" suppressalign=\"first\"/><Cell col=\"2\" text=\"내용\"/><Cell col=\"3\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:comment_no\"/><Cell col=\"1\" text=\"bind:s_name\"/><Cell col=\"2\" text=\"bind:comment_content\"/><Cell col=\"3\" text=\"bind:comment_date\"/></Band></Format></Formats>");
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Button("btn_cRemove","804","695","66","32",null,null,null,null,null,null,this.popDetail.form);
@@ -222,13 +223,13 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new PopupDiv("popComments","450","705","220","55",null,null,null,null,null,null,this.popDetail.form);
+            obj = new PopupDiv("popComments","450","727","220","55",null,null,null,null,null,null,this.popDetail.form);
             obj.set_text("PopupDiv00");
             obj.set_visible("false");
             obj.set_background("cornsilk");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new Edit("Edit00","0","0","220","20",null,null,null,null,null,null,this.popDetail.form.popComments.form);
+            obj = new Edit("edt_commentModify","0","0","220","20",null,null,null,null,null,null,this.popDetail.form.popComments.form);
             obj.set_taborder("0");
             obj.set_borderRadius("5px");
             this.popDetail.form.popComments.addChild(obj.name, obj);
@@ -283,7 +284,7 @@
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item11","popDetail.form.popComments.form.Edit00","value","ds_comments","comment_content");
+            obj = new BindItem("item11","popDetail.form.popComments.form.edt_commentModify","value","ds_comments","comment_content");
             this.addChild(obj.name, obj);
             obj.bind();
             
@@ -300,13 +301,15 @@
         this.registerScript("frm_board.xfdl", function() {
         var currentboardNo = 0;
         var currentCommentNo = 0;
+        var pCode = nexacro.getEnvironmentVariable("ev_Val");
 
+        // 게시글 작성화면 이동
         this.btn_boardWrite_onclick = function(obj,e)
         {
         	this.go("Base::frm_boardWriteForm.xfdl");
         };
 
-
+        // 게시글 상세화면
         this.grd_boardList_oncelldblclick = function(obj,e)
         {
         	currentboardNo = e.row;
@@ -335,6 +338,7 @@
         // 	this.frm_boarddetailView.ta_boardContent.set_text(bContent);
         // }
 
+        // 게시글 목록
         this.frm_board_onload = function(obj,e)
         {
         	this.transaction(
@@ -371,7 +375,7 @@
         			this.alert("게시글 삭제 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert("게시글 삭제 성공");
+        		// this.alert("게시글 삭제 성공");
         	}
 
         	if(id == "tr_cRegister") {
@@ -408,28 +412,21 @@
 
         };
 
+        // 게시글 닫기
         this.popDetail_btn_popUpClose_onclick = function(obj,e)
         {
-
-        	var arrRtn = "";
-        	var nRow = this.ds_boardList.rowposition;
-        	arrRtn = this.ds_boardList.getColumn(nRow, "board_no");
-        	arrRtn += ":" +  this.ds_boardList.getColumn(nRow, "board_count");
-        	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_writer");
-        	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_date");
-        	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_title");
-        	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "board_content");
-        	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "edt_file");
-        	arrRtn += ":" + this.ds_boardList.getColumn(nRow, "edt_comment");
-
-        	this.close(arrRtn);
+        	this.popDetail.closePopup();
+        	this.reload();
         };
 
+        // 게시글 닫기
         this.popDetail_btn_popUpBack_onclick = function(obj,e)
         {
-        	this.close("popDetail");
+        	this.popDetail.closePopup();
+        	this.reload();
         };
 
+        // 게시글 수정
         this.popDetail_btn_update_onclick = function(obj,e)
         {
         	this.transaction(
@@ -442,39 +439,24 @@
         	);
         };
 
+        // 게시글 삭제
         this.popDetail_btn_remove_onclick = function(obj,e)
         {
         	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-        	this.transaction(
-        		"tr_bDelete"
-        		, "SnuUrl::board/register.snu"
-        		, "in_boardList=ds_boardList:D"
-        		, ""
-        		, "in_var1=" + board_no
-        		, "fn_callback_tran"
-        	);
+        	var removeBtn = this.confirm("해당 게시글을 삭제하시겠습니까?", "게시글 삭제");
+        	if(removeBtn == true) {
+        		this.transaction(
+        			"tr_bDelete"
+        			, "SnuUrl::board/delete.snu"
+        			, ""
+        			, ""
+        			, "in_var1=" + board_no
+        			, "fn_callback_tran"
+        		);
+        	};
         };
 
-        this.popDetail_btn_commentSubmit_onclick = function(obj,e)
-        {
-
-        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-        	this.transaction(
-        		"tr_cRegister"
-        		, "SnuUrl::comments/changeComments.snu"
-        		, "in_comments=ds_comments:U"
-        		, ""
-        		, "in_var1=" + board_no
-        	);
-        };
-
-        this.popDetail_onpopup = function(obj,e)
-        {
-
-        	this.commentsList();
-
-        };
-
+        // 댓글 입력창 클릭시
         this.popDetail_edt_comment_oneditclick = function(obj,e)
         {
         	var d = new Date();
@@ -483,34 +465,64 @@
         	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
         };
 
-        // var sCode = nexacro.getEnvironmentVariable("ev_Val");
-        var sCode = "S001";
+        // 댓글 등록
+        this.popDetail_btn_commentSubmit_onclick = function(obj,e)
+        {
+        	var registerBtn = this.confirm("해당 댓을 등록하시겠습니까?", "댓글 등록");
+        	var commentContent = this.popDetail.form.edt_comment.value;
+        	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	if(registerBtn == true) {
+        		this.transaction(
+        			"tr_cRegister"
+        			, "SnuUrl::comments/register.snu"
+        			, ""
+        			, ""
+        			, "inVar1=" + boardNo + " inVar2=" + nexacro.wrapQuote(commentContent) + " inVar3=" + pCode
+        		);
+        	}
+
+        };
+
+        // 댓글 목록
+        this.popDetail_onpopup = function(obj,e)
+        {
+        	this.commentsList();
+        };
+
+        // 댓글 목록
+        var sCode = nexacro.getEnvironmentVariable("ev_Val");
         this.commentsList = function(currentboardNo)
         {
-        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	var board_no = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
         	this.transaction(
         		"tr_cList"
         		, "SnuUrl::comment/list.snu"
         		, ""
         		,"ds_comments=out_comments" // 4.OutDs : S->F jsp(SELECT)
-        		,"in_var1="+board_no+" in_var2="+sCode // 5.InVar : F->S(var)
+        		,"in_var1=" + board_no + " in_var2=" + sCode // 5.InVar : F->S(var)
         	);
         }
 
+        // 댓글 삭제
         this.popDetail_btn_cRemove_onclick = function(obj,e)
         {
         	this.ds_comments.deleteRow(this.ds_comments.rowposition);
         	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
-        	this.transaction(
-        		"tr_cRemove"
-        		, "SnuUrl::comments/changeComments.snu"
-        		, "in_comments=ds_comments:D"
-        		, ""
-        		, "in_var2=" + comment_no
-        		, "fn_callback_tran"
-        	);
+        	var deleteBtn = this.confirm("해당 댓글을 삭제하시겠습니까?", "댓글 삭제");
+        	if(deleteBtn == true) {
+        			this.transaction(
+        			"tr_cRemove"
+        			, "SnuUrl::comments/delete.snu"
+        			, ""
+        			, ""
+        			, "in_var1=" + comment_no
+        			, "fn_callback_tran"
+        		);
+        	}
+
         };
 
+        // 댓글 수정 입력 화면
         this.popDetail_grd_comment_oncelldblclick = function(obj,e)
         {
         	var comment = this.popDetail.form.edt_comment;
@@ -521,20 +533,24 @@
 
         };
 
+        // 댓글 수정
         this.popDetail_popComments_Button00_onclick = function(obj,e)
         {
         	var comment_no = this.ds_comments.getColumn(currentCommentNo, "comment_no");
         	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
-        	trace(comment_no);
-        	trace(board_no);
-        	this.transaction(
-        		  "tr_cUpdate"
-        		, "SnuUrl::comments/changeComments.snu"
-        		, "in_comments=ds_comments:U"
-        		, ""
-        		, "in_var1="+board_no+" in_var2="+comment_no
-        		, "fn_callback_tran"
-        	);
+        	var commentContent = this.popDetail.form.popComments.form.edt_commentModify.value;
+        	var modifyBtn = this.confirm("해당 댓글을 수정하시겠습니까?", "댓글 수정");
+        	if(modifyBtn == true) {
+        			this.transaction(
+        			  "tr_cUpdate"
+        			, "SnuUrl::comments/modify.snu"
+        			, ""
+        			, ""
+        			, "inVar1=" + board_no + " inVar2=" + comment_no + " inVar3=" + nexacro.wrapQuote(commentContent)
+        			, "fn_callback_tran"
+        		);
+        	};
+
         };
 
         });
@@ -563,7 +579,7 @@
             this.popDetail.form.btn_popUpClose.addEventHandler("onclick",this.popDetail_btn_popUpClose_onclick,this);
             this.popDetail.form.grd_comment.addEventHandler("oncelldblclick",this.popDetail_grd_comment_oncelldblclick,this);
             this.popDetail.form.btn_cRemove.addEventHandler("onclick",this.popDetail_btn_cRemove_onclick,this);
-            this.popDetail.form.popComments.form.Edit00.addEventHandler("onchanged",this.popDetail_popComments_Edit00_onchanged,this);
+            this.popDetail.form.popComments.form.edt_commentModify.addEventHandler("onchanged",this.popDetail_popComments_Edit00_onchanged,this);
             this.popDetail.form.popComments.form.Button00.addEventHandler("onclick",this.popDetail_popComments_Button00_onclick,this);
         };
         this.loadIncludeScript("frm_board.xfdl");

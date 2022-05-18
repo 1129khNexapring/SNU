@@ -33,16 +33,19 @@
             obj = new Edit("edt_boardNo","395","120","145","30",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_borderRadius("4px");
+            obj.set_enable("false");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_boardCount","595","120","160","30",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_borderRadius("4px");
+            obj.set_enable("false");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_boardWriter","395","150","145","30",null,null,null,null,null,null,this);
             obj.set_taborder("3");
             obj.set_borderRadius("4px");
+            obj.set_enable("false");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_boardWriteDate","595","150","160","30",null,null,null,null,null,null,this);
@@ -179,18 +182,23 @@
         
         // User Script
         this.registerScript("frm_boardWriteForm.xfdl", function() {
-
+        // 게시글 등록
         this.btn_submit_onclick = function(obj,e)
         {
+        	var registerBtn = this.confirm("해당 게시글을 등록하시겠습니까?", "게시글 등록")
+        	if(registerBtn == true) {
 
-        	this.transaction(
-        		"tr_register"  	 	 	 	 	      // 1.ID
-        		,"SnuUrl::board/register.snu"   	  // 2.URL
-        		,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
-        		,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
-        		,"in_var1=" + nexacro.wrapQuote(name) 			// 5.InVar : F->S(var)
-        		,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
-        	);
+        		this.transaction(
+        			"tr_register"  	 	 	 	 	      // 1.ID
+        			,"SnuUrl::board/register.snu"   	  // 2.URL
+        			,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
+        			,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
+        			,"in_var1=" + nexacro.wrapQuote(name) 			// 5.InVar : F->S(var)
+        			,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
+
+        		);
+        	}
+
         };
 
         this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
