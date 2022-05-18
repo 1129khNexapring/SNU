@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[this.gfnFileTransUpDownFormLoad = function(objForm, objConfig)
+{
+	//add event handler
+	//objConfig.objUpTrans.addEventHandler("onsuccess", this.fileUpTrans_onsuccess, this);
+	//objConfig.objUpTrans.addEventHandler("onerror", this.fileUpTrans_onerror, this);
+	//objConfig.objUpTrans.addEventHandler("onprogress", this.fileUpTrans_onprogress, this);
+	
+	//objConfig.objDownTrans.addEventHandler("onsuccess", this.fileDownTrans_onsuccess, this);
+	//objConfig.objDownTrans.addEventHandler("onerror", this.fileDownTrans_onerror, this);
+	
+	objConfig.objDialog.addEventHandler("onclose", this.fileDialog_onclose, this);
+	
+	objConfig.objUpTrans.datasetId = objConfig.dsUploadId;
+	objConfig.objDownTrans.datasetId = objConfig.dsDownloadId;
+	
+	//object connected
+	objForm.config = objConfig;
+}
+
+this.gfnCutFileSize = function(nFileSize)
+{
+	var sOutput = nFileSize + " bytes";
+	var aMultiples = ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+	var nApprox = nFileSize / 1024;
+	
+	for (var nMultiple = 0; nApprox > 1; nApprox /= 1024, nMultiple++) 
+	{
+		sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+	}
+	
+	return sOutput;
+};
+
+this.gfnGetPercent = function(nload,nTotal)
+{
+	var nCurPercent = (nload / nTotal) * 100;
+	return nCurPercent;
+};
+
+this.gfnAddFileList = function(filelists, objForm)
+{
+	var objFileUpTrans = objForm.config.objUpTrans;
+	
+	//array type virtualfile List
+	var vFile;
+	var len = filelists.length;
+	for(var i = 0; i<len; i++)
+	{
+		vFile = filelists[i];
+		objFileUpTrans.addFile(vFile.name, vFile);
+		vFile.addEventHandler("onsuccess", this.fileList_onsuccess, this);
+		vFile.addEventHandler("onerror", this.fileList_onerror, this);		
+		vFile.datasetId = objFileUpTrans.datasetId;
+		vFile.open(null, VirtualFile.openRead);
+		//return file size --> fileList_onsuccess : reason 9
+		vFile.getFileSize();	
+		vFile.close();
+	}
+}
+
+this.gfnAddUploadRow = function (objVirtureFile,e)
+{
+	var objDs = this.objects[objVirtureFile.datasetId];
+	var objParent = objDs.parent;
+	var objProgress = this.components[objParent.config.objProgId];
+	var nRowIdx = objDs.addRow();
+	objDs.setColumn(nRowIdx, "FILE_NAME", objVirtureFile.filename);
+	objDs.setColumn(nRowIdx, "FiLE_SIZE", this.gfnCutFileSize(e.filesize));
+	//file local path --> only nexacro runtime environment 
+	objDs.setColumn(nRowIdx, "FILE_PATH", objVirtureFile.fullpath);
+	objDs.setColumn(nRowIdx, "FILE_ID",	  objVirtureFile.id);
+	
+	//progressbar status
+	if(objProgress.pos > 0)
+	{
+		objProgress.set_pos(0);
+	}
+};
+
+this.fileDialog_onclose = function(obj:nexacro.FileDialog,e:nexacro.FileDialogEventInfo)
+{
+	var objParent = obj.parent;
+	var objFileupTransFer = objParent.config.objUpTrans;
+	if(this.gfnIsNull(e.virtualfiles))
+	{
+		return;
+	}
+	
+	//add row file list
+	this.gfnAddFileList(e.virtualfiles, objParent);
+};
+
+
+this.gfnIsNull = function (Val)
+{
+	if (new String(Val).valueOf() == "undefined") return true;
+	if (Val == null) return true;
+	if (("x" + Val == "xNaN") && (new String(Val.length).valueOf() == "undefined")) return true;
+	if (Val.length == 0) return true;
+
+	return false;
+}
+]]></Script>
