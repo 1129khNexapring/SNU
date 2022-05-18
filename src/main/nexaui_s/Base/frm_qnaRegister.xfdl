@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_qnaRegister" width="920" height="510" titletext="New Form">
+    <Layouts>
+      <Layout height="510" width="920">
+        <Static id="Static00_01" taborder="0" text="제목" left="18" top="85" width="152" height="45" border="1px solid black" background="#efefef" textAlign="center"/>
+        <Edit id="edit_registerTitle" taborder="1" left="175" top="85" width="689" height="45" border="1px solid black"/>
+        <Static id="Static00_02" taborder="2" text="내용" left="18" top="132" width="152" height="270" border="1px solid black" background="#efefef" textAlign="center"/>
+        <TextArea id="ta_registerContent" taborder="3" left="175" top="132" width="689" height="270" border="1px solid black"/>
+        <Button id="Button00" taborder="4" text="등록" left="764" top="410" width="101" height="35" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
+
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rTitle = this.edit_registerTitle.value;
+	var rContent = this.ta_registerContent.value;
+	
+	this.transaction(
+        		"tr_register"
+        		,"tttUrl::qna/register.snu"
+        		,""
+        		,""
+        		,"inVar1=" + rTitle + " inVar2=" + rContent + " inVar3=" + sCode
+        		,"fn_callback_tran"
+        	)
+	this.close();
+	this.reload(this.parent);
+};
+
+
+]]></Script>
+  </Form>
+</FDL>

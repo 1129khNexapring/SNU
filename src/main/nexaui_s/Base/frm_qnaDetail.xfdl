@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_qnaDetail" width="920" height="510" titletext="New Form" onload="frm_qnaDetail_onload">
+    <Layouts>
+      <Layout height="510" width="920">
+        <Div id="Div00" taborder="0" text="Div00" left="12" top="13" width="860" height="424" border="2px double">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="No" left="5" top="4" width="152" height="45" border="1px solid black" background="#efefef" textAlign="center"/>
+              <Static id="Static00_00" taborder="1" text="작성자" left="5" top="51" width="152" height="45" border="1px solid black" background="#efefef" textAlign="center"/>
+              <Static id="Static00_01" taborder="2" text="제목" left="5" top="98" width="152" height="45" border="1px solid black" background="#efefef" textAlign="center"/>
+              <Static id="Static00_02" taborder="3" text="내용" left="5" top="145" width="152" height="270" border="1px solid black" background="#efefef" textAlign="center"/>
+              <TextArea id="ta_content" taborder="4" left="162" top="145" width="689" height="270" border="1px solid black"/>
+              <Edit id="edit_title" taborder="5" left="162" top="98" width="689" height="45" border="1px solid black"/>
+              <Edit id="edit_writer" taborder="6" left="162" top="51" width="259" height="45" border="1px solid black"/>
+              <Edit id="edit_no" taborder="7" left="162" top="4" width="259" height="45" border="1px solid black"/>
+              <Static id="Static00_03" taborder="8" text="조회수" left="425" top="4" width="156" height="45" border="1px solid black" background="#efefef" textAlign="center"/>
+              <Static id="Static00_00_00" taborder="9" text="작성일" left="425" top="51" width="156" height="45" border="1px solid black" background="#efefef" textAlign="center"/>
+              <Edit id="edit_count" taborder="10" left="586" top="4" width="265" height="45" border="1px solid black"/>
+              <Edit id="edit_date" taborder="11" left="586" top="51" width="265" height="45" border="1px solid black"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="1" text="목록으로" left="753" top="442" width="119" height="42" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.frm_qnaDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Div00.form.edit_no.set_value(this.parent.qnaNo);
+	this.Div00.form.edit_count.set_value(this.parent.qnaCount);
+	this.Div00.form.edit_date.set_value(this.parent.qnaDate);
+	this.Div00.form.edit_writer.set_value(this.parent.qsCode);
+	this.Div00.form.edit_title.set_value(this.parent.qnaTitle);
+	this.Div00.form.ta_content.set_value(this.parent.qnaContent);
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+  </Form>
+</FDL>

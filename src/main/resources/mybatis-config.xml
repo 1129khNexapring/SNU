@@ -35,6 +35,9 @@
 		<typeAlias type="org.ttt.snu.requestSch.domain.RequestSch" alias="RequestSch"/>
 		<typeAlias type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" alias="RequestVolunteer"/>
 
+		<typeAlias type="org.ttt.snu.qna.domain.Qna" alias="Qna"/>
+
+
 		<typeAlias type="org.ttt.snu.timetable.domain.Timetable" alias="Timetable"/>
 
 		
@@ -76,6 +79,10 @@
 		<mapper resource="mappers/rehabilitation-mapper.xml"/>
 		<mapper resource="mappers/requestVolunteer-mapper.xml"/>
 		<mapper resource="mappers/lectureEvaluation-mapper.xml"/>
+
+		<mapper resource="mappers/qna-mapper.xml"/>
+
 		<mapper resource="mappers/timetable-mapper.xml"/>
+
 	</mappers>
 </configuration>
