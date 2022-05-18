@@ -1,0 +1,167 @@
+
+this.Div00_btn_find_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.FileDialog00.open('nexacro17', FileDialog.MULTILOAD);
+};
+//파일을 추가하는 방법이 파일 선택 대화상자와 드래그앤드롭 두 가지로 나누어져서 추가한 파일을 처리하는 부분을 addFileList라는 function으로 분리
+this.FileDialog00_onclose = function(obj:nexacro.FileDialog,e:nexacro.FileDialogEventInfo)
+{
+	this.addFileList(e.virtualfiles);
+};
+
+this.addFileList = function(filelist)
+{
+	for (var i = 0, len = filelist.length, vFile; i < len; i++)
+	{
+		vFile = filelist[i];
+		vFile.addEventHandler("onsuccess", this.FileList_onsuccess, this);
+		vFile.addEventHandler("onerror", this.FileList_onerror , this);
+		
+		vFile.open(null, 1);
+	}
+
+}
+
+//Grid컴포넌트의 drag, drop관련 이벤트 함수를 아래와 같이 작성
+// 사용자가 윈도우 탐색기에서 파일을 선택하고 드래그해서 Grid컴포넌트 영역으로 들어왔을 때
+//투명도 속성을 조정해서 뒤에 있는 static컴포넌트가 보여지도록 합니다. Grid컴포넌트 영역 밖으로
+//나가거나 드롭 동작이 처리되면 투명도를 다시 원래 상태로 돌려놓습니다
+
+//Grid 영역 내로 드래그 상태의 마우스 포인터가 들어왔을 때 발생하는 이벤트입니다
+this.Div00_Grid00_ondragenter = function(obj:nexacro.Grid,e:nexacro.DragEventInfo)
+{
+	if(e.datatype == "file")
+	{
+		this.Div00.form.Grid00.set_opacity(0.5);
+	}
+};
+//Grid 영역 밖으로 드래그 상태의 마우스 포인터가 나갈 때 발생하는 이벤트입니다.
+this.Div00_Grid00_ondragleave = function(obj:nexacro.Grid,e:nexacro.DragEventInfo)
+{
+	this.Div00.form.Grid00.set_opacity(1);
+};
+
+//Grid 영역 내에서 드래그 상태의 마우스 버튼을 떼었을 때 발생하는 이벤트입니다.
+this.Div00_Grid00_ondrop = function(obj:nexacro.Grid,e:nexacro.GridDragEventInfo)
+{
+	this.Div00.form.Grid00.set_opacity(1);
+	if(e.datatype == "file")
+	{
+		this.addFileList(e.filelist);
+	}
+};
+//여기가 안먹는거같음 지금 보기에
+this.FileList_onsuccess = function(obj:nexacro.VirtualFile, e:nexacro.VirtualFileEventInfo)
+{
+	switch (e.reason)
+	{
+		case 1:
+			obj.getFileSize();
+			break;
+		case 9:
+			var nRowIdx = this.ds_data.addRow();
+			this.ds_data.setColumn(nRowIdx, 0, obj.filename);
+			this.ds_data.setColumn(nRowIdx, 1, this.cutFileSize(e.filesize));
+			this.FileUpTransfer00.addFile(obj.filename, obj);
+			break;
+	}
+}
+
+this.FileList_onerrror = function(obj:nexacro.VirtualFile, e:nexacro.VirtualFileErrorEventInfo)
+{
+	trace("errortype:"+e.errortype);
+	trace("errormsg:"+e.errormsg);
+	trace("statuscode:"+e.statuscode);
+}
+
+//파일 크기를 적절한 단위로 표시하는 function을 아래와 같이 추가합니다. 
+this.cutFileSize = function(filesize)
+{
+	var sOutput = filesize + " bytes";
+	for (var aMultiples = ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], nMultiple = 0, nApprox = filesize / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) 
+	{
+		sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple];
+	}
+	return sOutput;
+}
+//upload버튼을 완료버튼으로 대체시키고싶다& 트랜잭션
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//업로드 하는 코드는 나중에 
+	//this.FileUpTransfer00.upload("");
+	var title = this.Div00.form.Edit00_01.value;
+	var content = this.Div00.form.TextArea00.value;
+	var dRow = this.ds_data.rowposition;
+	var name = this.ds_data.getColumn(dRow, "name");
+	this.transaction(
+	"tr_noticeRegister"
+	,"SnuURL::noticeNexa/register.snu"
+	,""
+	,""
+	,"title="+title+" content="+content+" name="+name+""
+	,"fn_callback_notice"
+	)
+};
+
+this.FileUpTransfer00_onprogress = function(obj:nexacro.FileUploadTransfer,e:nexacro.FileUploadTransferProgressEventInfo)
+{
+	this.fn_addlog(e.loaded+"/"+e.total);
+};
+
+this.FileUpTransfer00_onsuccess = function(obj:nexacro.FileUploadTransfer,e:nexacro.FileUploadTransferEventinfo)
+{
+	this.fn_addlog(e.code);
+	this.fn_addlog(e.message);
+};
+
+this.FileUpTransfer00_onerror = function(obj:nexacro.FileUploadTransfer,e:nexacro.FileUploadTransferErrorEventInfo)
+{
+	this.fn_addlog(e.errormsg);
+	this.fn_addlog(e.statuscode);
+};
+
+this.fn_addlog = function(strMessage)
+{
+
+	
+}
+
+
+
+//폼이 로드됐을 때, 작성자와 작성날짜 셋팅
+this.writeNotice_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Div00.form.Edit00.set_value("관리자");
+	this.Div00.form.Edit00.set_textAlign("center");
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()).padLeft(2,'0'));
+	this.Div00.form.Edit00_00.set_value(today);
+	this.Div00.form.Edit00_00.set_textAlign("center");
+};
+
+this.fn_callback_notice = function(sId, nErrorCode, sErrorMsg)
+{
+	if(sId == "tr_noticeRegister")
+	{
+		if(nErrorCode>0)
+		{
+			var nRow = this.ds_data.rowposition;
+			var name = this.ds_data.getColumn(nRow, "name");
+			var filePath = "http://127.0.0.1:7776/index.snu"
+			this.FileUpTransfer00.upload(filePath+"\\"+name);	
+		}
+		
+		
+	}
+}
+
+
+
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_data.rowposition;
+	var name = this.ds_data.getColumn(nRow, "name");
+	this.alert(name);
+};

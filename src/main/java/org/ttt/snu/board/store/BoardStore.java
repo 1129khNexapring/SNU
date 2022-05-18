@@ -18,14 +18,14 @@ public interface BoardStore {
 	
 	public int insertBoard(SqlSession sqlSession, Board board);
 	public int updateBoard(SqlSession sqlSession, Board board);
-	public int deleteBoard(SqlSession sqlSession, String boardNo);
+	public int deleteBoard(SqlSession sqlSession, Board board);
 	
 	// 댓글 영역
 	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo, String sCode);
 	
 	public int insertComments(SqlSession sqlSession, Comments comments);
 	public int updateComments(SqlSession sqlSesion, Comments comments);
-	public int deleteComments(SqlSession sqlSession, int commentNo);
+	public int deleteComments(SqlSession sqlSession, Comments comments);
 	
 
 }

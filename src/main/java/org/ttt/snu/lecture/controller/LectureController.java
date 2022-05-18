@@ -170,7 +170,7 @@ public class LectureController {
 	@RequestMapping(value="/lecture/register.snu", method=RequestMethod.POST)
 	public NexacroResult registerBoard(
 				  @ParamDataSet  (name="in_lecture") DataSet inLecture
-				, @ParamVariable(name="in_var1") String pCode
+				, @ParamVariable(name="in_var") String pCode
 				, HttpServletRequest request) throws Exception{
 		NexacroResult result = new NexacroResult();
 		int 	nErrorCode  = 0;
@@ -179,19 +179,19 @@ public class LectureController {
 		int iResult = 0;
 		for(int i = 0; i < inLecture.getRowCount(); i++) {
 			int    rowType          = inLecture.getRowType(i);
-			String lCode      = dsGet(inLecture, i, "L_CODE");
+			String lCode      = "L" + dsGet(inLecture, i, "L_CODE");
 			String lType    = dsGet(inLecture, i, "L_TYPE");
 			String lName       = dsGet(inLecture, i, "L_NAME");
 			String lObjective         = dsGet(inLecture, i, "L_OBJECTIVE");
 			String lContents           = dsGet(inLecture, i, "L_CONTENTS");
 			String textbook   = dsGet(inLecture, i, "TEXTBOOK");
-			String lDays = dsGet(inLecture, i, "L_DAYS");
 			String credit     = dsGet(inLecture, i, "CREDIT");
 			String lYear      = dsGet(inLecture, i, "L_YEAR");
 			String lSemester      = dsGet(inLecture, i, "L_SEMESTER");
 			String lCapacity      = dsGet(inLecture, i, "L_CAPACITY");
-			String lStatus      = null;
 			String dCode      = pService.printProfessorById(pCode).getdCode();
+			
+		System.out.println(lCode + lType + lName + lObjective + lContents + textbook + credit + lYear + lSemester + lCapacity + dCode);
 			
 		Lecture lecture = new Lecture(
 					lCode
@@ -200,7 +200,7 @@ public class LectureController {
 				,	lObjective
 				,	lContents
 				,	textbook
-				,	Integer.parseInt(lDays)
+				,	0
 				,	Integer.parseInt(credit)
 				,   Integer.parseInt(lYear)
 				,	Integer.parseInt(lSemester)
@@ -208,6 +208,7 @@ public class LectureController {
 				,	"DEFAULT"
 				,	pCode
 				,	dCode);
+		System.out.println(lecture);
 		iResult += lService.registerLecture(lecture);
 		}
 		if(iResult < 0) {

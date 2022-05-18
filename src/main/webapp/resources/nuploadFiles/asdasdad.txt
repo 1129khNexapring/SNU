@@ -1,0 +1,1 @@
+Access to XMLHttpRequest at 'ttturl::money/list.snu' from origin 'http://127.0.0.1:8882' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https.

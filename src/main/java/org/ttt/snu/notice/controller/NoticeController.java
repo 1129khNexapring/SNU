@@ -1,21 +1,32 @@
 package org.ttt.snu.notice.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.ttt.snu.common.NoticePagenation;
 import org.ttt.snu.common.Pagenation;
@@ -25,10 +36,15 @@ import org.ttt.snu.notice.service.NoticeService;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
+import com.nexacro17.xapi.data.DataSet;
+import com.nexacro17.xapi.data.datatype.PlatformDataType;
 
 @Controller
 public class NoticeController {
-
+	private Logger logger = LoggerFactory.getLogger(NoticeController.class); 
+	private static final String SP = File.separator;
+	private static final String PATH = "C:\\Users\\User\\Desktop\\SNU\\src\\main\\webapp\\resources\\nuploadFiles"; //서버 첨부파일 경로
+	private static String sUserPath = "";
 	@Autowired
 	private NoticeService nService;
 	//공지사항 리스트
@@ -266,10 +282,10 @@ public class NoticeController {
 		if(iResult > 0)
 		{
 			nErrorCode = 0;
-			strErrorMsg = "SUCC";
+			strErrorMsg = "게시글이 등록됐습니다!";
 		}else {
 			nErrorCode = -1;
-			strErrorMsg = "Fail";
+			strErrorMsg = "오류가 발생했습니다!";
 		}
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
@@ -277,5 +293,111 @@ public class NoticeController {
 		return result;
 		
 	}
+	@RequestMapping(value="/uploadFiles.snu")
+	public NexacroResult uploadFiles(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//MultipartHttpServletRequest체크
+		if(!(request instanceof MultipartHttpServletRequest)) {
+			if(logger.isDebugEnabled()) {
+				logger.debug("Request is not a MultipartHttpServletRequest");
+			}
+			return new NexacroResult();
+		}
+		
+		logger.debug("----------------------nexacro platform uploadFiles --------");
+		
+		//반환될 파일저장 정보 Dataset 생성
+		DataSet resultDs = createDataSet4UploadResult();
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		
+		//파라미터 처리
+		uploadParameters(multipartRequest);
+		//파일저장 및 파일정보 반환 Dataset셋팅 처리
+		uploadMultipartFiles(multipartRequest, resultDs);
+		
+		NexacroResult nexacroResult = new NexacroResult();
+		nexacroResult.addDataSet(resultDs);
+		nexacroResult.setErrorCode(0);
+		nexacroResult.setErrorMsg("File Save Success!");
+		
+		return nexacroResult;
+	}//uploadFiles
 
+	//파라미터 셋팅
+	
+	private void uploadParameters(MultipartHttpServletRequest multipartRequest) {
+		// parameter and multipart parameter
+		Enumeration<String> parameterNames = multipartRequest.getParameterNames();
+		
+		while(parameterNames.hasMoreElements()) {
+			String parameterName = parameterNames.nextElement();
+			if(parameterName == null || parameterName.length() == 0) {
+				continue;
+			}
+			
+			String value = multipartRequest.getParameter(parameterName);
+			
+			//화면 FileupTransfer의  setPostData로 셋팅한 저장될 파일경로 String을 셋팅한다. ("file")
+			if("filepath".equals(parameterName)) {
+				if(value != null && !value.equals("")) {
+					sUserPath = SP + value;
+				}
+				continue;
+			}
+		}//while
+	}//uploadParameters
+	
+	//실제파일 저장 및 저장파일 정보 셋팅
+	
+	private void uploadMultipartFiles(MultipartHttpServletRequest multipartRequest, DataSet resultDs) throws IOException {
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+		String filePath = getFilePath();
+		
+		Set<String> keySet = fileMap.keySet();
+		for(String name: keySet) {
+			MultipartFile multipartFile = fileMap.get(name);
+			String originalFilename = multipartFile.getOriginalFilename();
+			
+			if(originalFilename == null || originalFilename.length() == 0) {
+				continue;
+			}
+			
+			File destination = new File(filePath);
+			
+			if(destination.exists() == false) {
+				boolean mkdirs = destination.mkdirs();
+				destination.setWritable(true);
+				
+				logger.debug("------create directory ----{}", mkdirs);
+			}
+			
+			File targetFile = new File(filePath+SP+originalFilename);
+			
+			InputStream inpustStream = multipartFile.getInputStream();
+			FileCopyUtils.copy(inpustStream, new FileOutputStream(targetFile));
+			
+			int row = resultDs.newRow();
+			resultDs.set(row, "fileid", originalFilename);
+			resultDs.set(row, "filename", originalFilename);
+			resultDs.set(row, "filesize", targetFile.length());
+			
+			logger.debug("uploaded file write success, file={}", originalFilename);
+		}//for
+	}//uploadMultipartFiles
+	
+	//반환용 파일정보 데이터셋 생성
+	private DataSet createDataSet4UploadResult() {
+		DataSet ds = new DataSet("ds_output");
+		ds.addColumn("fileid", PlatformDataType.STRING);
+		ds.addColumn("filename", PlatformDataType.STRING);
+		ds.addColumn("filesize", PlatformDataType.INT);
+		
+		return ds;
+	}//createDataset4UploadResult
+	//파일을 저장할 절대경로 반환
+	
+	private String getFilePath() {
+		String uploadPath = PATH + sUserPath;
+		return uploadPath;
+	}//getFilePath
+	
 }
