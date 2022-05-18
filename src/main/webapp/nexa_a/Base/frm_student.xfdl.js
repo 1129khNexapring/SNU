@@ -321,8 +321,6 @@
         	this.alert(name+"\\"+title);
         };
 
-
-
         });
         
         // Regist UI Components Event
@@ -331,7 +329,6 @@
             this.addEventHandler("onload",this.frm_student_onload,this);
             this.Div00.form.Static00.addEventHandler("onclick",this.Div00_Static00_onclick,this);
             this.Div00.form.MaskEdit00.addEventHandler("onchanged",this.Div00_MaskEdit00_onchanged,this);
-            this.Div00.form.Edit02.addEventHandler("onchanged",this.Div00_Edit02_onchanged,this);
             this.Div00.form.Radio00.addEventHandler("onitemchanged",this.Div00_Radio00_onitemchanged,this);
             this.btn_retrive.addEventHandler("onclick",this.btn_retrive_onclick,this);
             this.btn_retrive.addEventHandler("onrbuttondown",this.btn_retrive_onrbuttondown,this);

@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-﻿<?xml version="1.0" encoding="utf-8"?>
-<FDL version="2.1">
-  <Form id="frm_ask" width="1080" height="670" titletext="New Form">
-    <Layouts>
-      <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="192" top="114" width="174" height="45" onclick="Button00_onclick"/>
-        <Button id="Button01" taborder="1" text="Button01" left="120" top="203" width="287" height="72"/>
-      </Layout>
-    </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-=======
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
   <Form id="frm_ask" width="1080" height="670" titletext="New Form" onload="frm_ask_onload">
@@ -51,7 +38,6 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 
 
 this.frm_ask_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
->>>>>>> refs/remotes/origin/master
 {
 	
 	this.transaction(
@@ -143,11 +129,6 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		, "fn_popupCallback"
 		);
 };
-<<<<<<< HEAD
-]]></Script>
-  </Form>
-</FDL>
-=======
 ]]></Script>
     <Objects>
       <Dataset id="ds_qna">
@@ -164,4 +145,3 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
     </Objects>
   </Form>
 </FDL>
->>>>>>> refs/remotes/origin/master
