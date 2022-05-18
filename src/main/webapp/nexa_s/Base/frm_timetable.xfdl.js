@@ -105,9 +105,6 @@
         			//월요일,3
         			if(this.Monday == Day)
         			{
-        					var expr = this.Monday == Day;
-        					var tRow = this.dsTimetable.findRowExpr(expr);
-        					this.alert(tRow);
 
         				this.timetable.setColumn(time00-1,1,lName);
         				//월1, 월3 등록완료
@@ -116,6 +113,8 @@
         				{
         					this.timetable.setColumn(time01-1,1,lName);
         				}
+        				var tRow = this.dsTimetable.findRowExpr(this.Monday==Day);
+        				this.alert(tRow);
 
 
         			}
