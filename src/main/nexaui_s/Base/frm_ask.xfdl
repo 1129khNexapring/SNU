@@ -1,17 +1,147 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_ask" width="1080" height="670" titletext="New Form">
+  <Form id="frm_ask" width="1080" height="670" titletext="New Form" onload="frm_ask_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="192" top="114" width="174" height="45" onclick="Button00_onclick"/>
-        <Button id="Button01" taborder="1" text="Button01" left="120" top="203" width="287" height="72"/>
+        <Grid id="Grid00" taborder="0" left="10" top="200" width="1060" height="367" binddataset="ds_qna" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="284"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="작성자"/>
+                <Cell col="1" text="건의내용"/>
+                <Cell col="2" text="작성일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:sCode" textAlign="center"/>
+                <Cell col="1" text="bind:qnaContent" textAlign="center"/>
+                <Cell col="2" text="bind:qnaDate" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Edit id="Edit00" taborder="1" left="11" top="140" width="184" height="50"/>
+        <Button id="Button00" taborder="2" text="조회" left="201" top="140" width="70" height="51"/>
+        <Button id="Button01" taborder="3" text="글쓰기" left="925" top="575" width="146" height="49" onclick="Button01_onclick"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+    <Script type="xscript5.1"><![CDATA[var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
+
+
+this.frm_ask_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	
+	this.transaction(
+        		"tr_select"// 1.ID
+        		,"tttUrl::qna/list.snu"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"ds_qna=out_qna" // 4.OutDs : S->F jsp(SELECT)
+        		,"inVar1=" // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+				)
+};
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var row = this.ds_qna.rowposition;
+	var qnaNo = this.ds_qna.getColumn(row, "qnaNo");
+	var qnaCount = this.ds_qna.getColumn(row, "qnaCount");
+
+	var objChildFrame = new ChildFrame();
+	objChildFrame.init(
+		"qna_detail"
+		,0
+		,0
+		,400
+		,300
+		,null
+		,null
+		,"Base::frm_qnaDetail.xfdl"
+	);
+	
+	objChildFrame.set_openalign("center middle");
+	objChildFrame.set_overlaycolor("RGBA(196,196,196,0.5)");
+	objChildFrame.set_dragmovetype("all");
+	objChildFrame.set_resizable(false);
+	objChildFrame.set_showstatusbar(false);
+	
+	var onRow = this.ds_qna.rowposition;
+	var objParam = {qsCode:this.ds_qna.getColumn(onRow, "sCode")
+					,qnaTitle:this.ds_qna.getColumn(onRow, "qnaTitle")
+					,qnaNo:this.ds_qna.getColumn(onRow, "qnaNo")
+					,qnaContent:this.ds_qna.getColumn(onRow, "qnaContent")
+					,qnaDate:this.ds_qna.getColumn(onRow, "qnaDate")
+					,qnaStatus:this.ds_qna.getColumn(onRow, "qnaStatus")
+					,qnaCount:this.ds_qna.getColumn(onRow, "qnaCount")
+					};
+	
+	objChildFrame.showModal(
+		this.getOwnerFrame()
+		, objParam
+		, this
+		, "fn_popupCallback"
+		);
+		
+		
+	this.transaction(
+        		"tr_register"
+        		,"tttUrl::qna/count.snu"
+        		,""
+        		,""
+        		,"inVar1=" + qnaNo + " inVar2=" + qnaCount
+        		,"fn_callback_tran"
+        	)
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objChildFrame = new ChildFrame();
+	objChildFrame.init(
+		"qna_detail"
+		,0
+		,0
+		,400
+		,300
+		,null
+		,null
+		,"Base::frm_qnaRegister.xfdl"
+	);
+	
+	objChildFrame.set_openalign("center middle");
+	objChildFrame.set_overlaycolor("RGBA(196,196,196,0.5)");
+	objChildFrame.set_dragmovetype("all");
+	objChildFrame.set_resizable(false);
+	objChildFrame.set_showstatusbar(false);
+	
+	objChildFrame.showModal(
+		this.getOwnerFrame()
+		, ""
+		, this
+		, "fn_popupCallback"
+		);
 };
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_qna">
+        <ColumnInfo>
+          <Column id="qnaNo" type="INT" size="256"/>
+          <Column id="qnaTitle" type="STRING" size="256"/>
+          <Column id="qnaContent" type="STRING" size="256"/>
+          <Column id="qnaDate" type="STRING" size="256"/>
+          <Column id="qnaStatus" type="STRING" size="256"/>
+          <Column id="qnaCount" type="INT" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

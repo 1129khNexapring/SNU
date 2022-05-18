@@ -13,6 +13,7 @@ import org.ttt.snu.grade.domain.LectureEvaluation;
 import org.ttt.snu.grade.domain.ScoreList;
 import org.ttt.snu.grade.service.GradeService;
 import org.ttt.snu.grade.store.GradeStore;
+import org.ttt.snu.lecture.domain.Lecture;
 
 @Service
 public class GradeServiceImpl implements GradeService{
@@ -51,6 +52,13 @@ public class GradeServiceImpl implements GradeService{
 	public int modifyGrade(Grade grade) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	//학생 성적조회
+	@Override
+	public List<Lecture> printGrade(String sCode) {
+		List<Lecture> lList = gStore.printGrade(sqlSession, sCode);
+		return lList;
 	}
 
 }

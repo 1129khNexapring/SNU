@@ -7,13 +7,13 @@
           <Layouts>
             <Layout>
               <Static id="Static00" taborder="0" text="강의명" left="40" top="80" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Static id="Static00_00" taborder="1" text="강의 목표" left="40" top="155" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_00" taborder="1" text="강의 목표" left="40" top="180" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_02" taborder="2" text="교재" left="40" top="362" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_03" taborder="3" text="희망 정원" left="40" top="472" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Static id="Static00_04" taborder="4" text="강의 내용" left="473" top="170" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Edit id="edt_lName" taborder="5" left="210" top="90" width="198" height="35" readonly="true" color="black" background="white"/>
-              <TextArea id="txtArea_lObjective" taborder="6" left="210" top="157" width="200" height="160"/>
-              <TextArea id="txtArea_lContents" taborder="7" left="570" top="174" width="273" height="286"/>
+              <Static id="Static00_04" taborder="4" text="강의 내용" left="472" top="215" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Edit id="edt_lName" taborder="5" left="210" top="90" width="198" height="35" readonly="false" color="black" background="white"/>
+              <TextArea id="txtArea_lObjective" taborder="6" left="210" top="182" width="200" height="160"/>
+              <TextArea id="txtArea_lContents" taborder="7" left="570" top="220" width="273" height="240"/>
               <TextArea id="txtArea_textbook" taborder="8" left="208" top="357" width="200" height="96"/>
               <MaskEdit id="mskEdt_lCapacity" taborder="9" left="210" top="478" width="99" height="36" format="#,###" type="number"/>
               <Static id="Static01" taborder="10" text="명" left="326" top="477" width="59" height="40"/>
@@ -21,7 +21,38 @@
               <MaskEdit id="mskEdt_lCode" taborder="12" left="209" top="34" width="199" height="36" format="L###" type="string"/>
               <Static id="Static00_04_00" taborder="13" text="강의 년도" left="470" top="30" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_04_01" taborder="14" text="학기" left="470" top="90" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Combo id="Combo00" taborder="15" text="Combo00" left="573" top="34" width="267" height="43"/>
+              <Spin id="spn_lYear" taborder="15" left="590" top="34" width="130" height="37" max="2050" min="2022" value="2022"/>
+              <Spin id="spn_lSemester" taborder="16" left="590" top="100" width="130" height="37" max="2" min="1" value="1"/>
+              <Static id="Static00_04_01_00" taborder="17" text="학점" left="472" top="145" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Spin id="spn_credit" taborder="18" left="590" top="154" width="130" height="36" max="45" min="0" value=""/>
+              <Static id="Static00_05" taborder="19" text="과목 구분" left="40" top="125" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Combo id="cmbo_lType" taborder="20" text="Combo00" left="210" top="135" width="200" height="36" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">전공필수</Col>
+                      <Col id="datacolumn">전공필수</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">전공선택</Col>
+                      <Col id="datacolumn">전공선택</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">교양필수</Col>
+                      <Col id="datacolumn">교양필수</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">교양선택</Col>
+                      <Col id="datacolumn">교양선택</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Button id="Button00" taborder="21" text="Button00" left="797" top="40" width="45" height="51"/>
             </Layout>
           </Layouts>
         </Div>
@@ -74,7 +105,13 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	{
 		if(nErrorCode < 0)
 		{
-			this.alert("조회 실패 : " + sErrorMsg);
+			this.alert("등록 실패 : " + sErrorMsg);
+			return;
+		}
+		else 
+		{
+			this.alert("등록 성공!");
+			this.reload();
 			return;
 		}
 	}
@@ -84,6 +121,12 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
       <BindItem id="item1" compid="grid_detail.form.txtArea_lObjective" propid="value" datasetid="ds_lecture" columnid="L_OBJECTIVE"/>
       <BindItem id="item2" compid="grid_detail.form.txtArea_textbook" propid="value" datasetid="ds_lecture" columnid="TEXTBOOK"/>
       <BindItem id="item3" compid="grid_detail.form.mskEdt_lCode" propid="value" datasetid="ds_lecture" columnid="L_CODE"/>
+      <BindItem id="item4" compid="grid_detail.form.spn_lYear" propid="value" datasetid="ds_lecture" columnid="L_YEAR"/>
+      <BindItem id="item5" compid="grid_detail.form.spn_lSemester" propid="value" datasetid="ds_lecture" columnid="L_SEMESTER"/>
+      <BindItem id="item6" compid="grid_detail.form.mskEdt_lCapacity" propid="value" datasetid="ds_lecture" columnid="L_CAPACITY"/>
+      <BindItem id="item7" compid="grid_detail.form.spn_credit" propid="value" datasetid="ds_lecture" columnid="CREDIT"/>
+      <BindItem id="item8" compid="grid_detail.form.txtArea_lContents" propid="value" datasetid="ds_lecture" columnid="L_CONTENTS"/>
+      <BindItem id="item9" compid="grid_detail.form.cmbo_lType" propid="value" datasetid="ds_lecture" columnid="L_TYPE"/>
     </Bind>
   </Form>
 </FDL>

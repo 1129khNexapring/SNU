@@ -71,4 +71,29 @@ public class ProfessorController {
 		return result;
 
 	}
+	
+	@RequestMapping(value="/prof/selectProfBypCode.snu", method=RequestMethod.POST)
+	public NexacroResult selectProfBypCode(
+			@ParamVariable(name="in_var1") String pCode
+			) {
+		
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		Professor p = pService.printProfessorById(pCode);
+		List<Professor> pList = new ArrayList<Professor>();
+		pList.add(p);
+		if(!pList.isEmpty()) {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode 	= -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_prof", pList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+
+	}
 }

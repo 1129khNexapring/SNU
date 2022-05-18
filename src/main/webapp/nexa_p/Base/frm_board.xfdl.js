@@ -209,7 +209,8 @@
             obj.set_taborder("22");
             obj.set_binddataset("ds_comments");
             obj.set_cursor("pointer");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"48\"/><Column size=\"85\"/><Column size=\"280\"/><Column size=\"79\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"작성자\"/><Cell col=\"2\" text=\"내용\"/><Cell col=\"3\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:comment_no\"/><Cell col=\"1\" text=\"bind:s_name\"/><Cell col=\"2\" text=\"bind:comment_content\"/><Cell col=\"3\" text=\"bind:comment_date\"/></Band></Format></Formats>");
+            obj.set_autofittype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"202\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"No\"/><Cell col=\"1\" text=\"작성자\" suppressalign=\"first\"/><Cell col=\"2\" text=\"내용\"/><Cell col=\"3\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:comment_no\"/><Cell col=\"1\" text=\"bind:s_name\"/><Cell col=\"2\" text=\"bind:comment_content\"/><Cell col=\"3\" text=\"bind:comment_date\"/></Band></Format></Formats>");
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Button("btn_cRemove","804","695","66","32",null,null,null,null,null,null,this.popDetail.form);
@@ -222,7 +223,7 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new PopupDiv("popComments","450","705","220","55",null,null,null,null,null,null,this.popDetail.form);
+            obj = new PopupDiv("popComments","450","727","220","55",null,null,null,null,null,null,this.popDetail.form);
             obj.set_text("PopupDiv00");
             obj.set_visible("false");
             obj.set_background("cornsilk");
@@ -415,12 +416,14 @@
         this.popDetail_btn_popUpClose_onclick = function(obj,e)
         {
         	this.popDetail.closePopup();
+        	this.reload();
         };
 
         // 게시글 닫기
         this.popDetail_btn_popUpBack_onclick = function(obj,e)
         {
         	this.popDetail.closePopup();
+        	this.reload();
         };
 
         // 게시글 수정
@@ -453,6 +456,15 @@
         	};
         };
 
+        // 댓글 입력창 클릭시
+        this.popDetail_edt_comment_oneditclick = function(obj,e)
+        {
+        	var d = new Date();
+        	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+        	this.ds_comments.addRow();
+        	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
+        };
+
         // 댓글 등록
         this.popDetail_btn_commentSubmit_onclick = function(obj,e)
         {
@@ -477,27 +489,17 @@
         	this.commentsList();
         };
 
-        // 댓글 입력창 클릭시
-        this.popDetail_edt_comment_oneditclick = function(obj,e)
-        {
-        	var d = new Date();
-        	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
-        	this.ds_comments.addRow();
-        	this.ds_comments.setColumn(this.ds_comments.rowposition, "comment_date", today)
-        };
-
         // 댓글 목록
-        // var sCode = nexacro.getEnvironmentVariable("ev_Val");
-        var sCode = "S001";
+        var sCode = nexacro.getEnvironmentVariable("ev_Val");
         this.commentsList = function(currentboardNo)
         {
-        	var board_no = this.ds_boardList.getColumn(currentboardNo, "board_no");
+        	var board_no = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
         	this.transaction(
         		"tr_cList"
         		, "SnuUrl::comment/list.snu"
         		, ""
         		,"ds_comments=out_comments" // 4.OutDs : S->F jsp(SELECT)
-        		,"in_var1="+board_no+" in_var2="+sCode // 5.InVar : F->S(var)
+        		,"in_var1=" + board_no + " in_var2=" + sCode // 5.InVar : F->S(var)
         	);
         }
 
@@ -511,7 +513,7 @@
         			this.transaction(
         			"tr_cRemove"
         			, "SnuUrl::comments/delete.snu"
-        			, "in_comments=ds_comments:D"
+        			, ""
         			, ""
         			, "in_var1=" + comment_no
         			, "fn_callback_tran"

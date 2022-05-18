@@ -8,6 +8,7 @@ import org.ttt.snu.enrollLecture.domain.EnrollLectureDomain;
 import org.ttt.snu.grade.domain.Grade;
 import org.ttt.snu.grade.domain.LectureEvaluation;
 import org.ttt.snu.grade.domain.ScoreList;
+import org.ttt.snu.lecture.domain.Lecture;
 
 public interface GradeStore {
 	
@@ -16,4 +17,6 @@ public interface GradeStore {
 	
 	public int insertGrade(SqlSession sqlSession, Grade grade);
 	public int updateGrade(SqlSession sqlSession, Grade grade);
+	public List<Lecture> printGrade(SqlSession sqlSession, String sCode);
+
 }
