@@ -41,7 +41,7 @@
               <Static id="Static02" taborder="4" text="전화번호" left="14" top="106" width="84" height="36" textAlign="center"/>
               <MaskEdit id="MaskEdit00" taborder="5" left="119" top="101" width="175" height="47" format="###-####-####" type="string" onchanged="Div00_MaskEdit00_onchanged"/>
               <Static id="Static03" taborder="6" text="이메일" left="14" top="197" width="84" height="36" textAlign="center"/>
-              <Edit id="Edit02" taborder="7" left="119" top="193" width="175" height="47" onchanged="Div00_Edit02_onchanged"/>
+              <Edit id="Edit02" taborder="7" left="119" top="193" width="175" height="47"/>
               <Static id="Static04" taborder="8" text="학과" left="310" top="105" width="84" height="36" textAlign="center"/>
               <Edit id="Edit03" taborder="9" left="421" top="104" width="175" height="47"/>
               <Static id="Static05" taborder="10" text="입학일" left="310" top="196" width="84" height="36" textAlign="center"/>
@@ -288,8 +288,6 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var title = "바보"
 	this.alert(name+"\\"+title);
 };
-
-
 ]]></Script>
     <Bind>
       <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_Info" columnid="sName"/>
