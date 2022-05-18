@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.ttt.snu.academicCaldedar.domain.AcademicCalendar;
 import org.ttt.snu.academicCaldedar.service.AcademicCalendarService;
 
+import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
+import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
+
 @Controller
 public class AcademicCalendarController {
 	
@@ -70,5 +73,7 @@ public class AcademicCalendarController {
 		
 		return null;
 	}
+	
+	
 }
 	
