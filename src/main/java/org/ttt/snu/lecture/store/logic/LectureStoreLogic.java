@@ -53,6 +53,11 @@ public class LectureStoreLogic implements LectureStore{
 		return result;
 
 	}
+	@Override
+	public List<Lecture> viewLecture(SqlSession sqlSession, String sCode) {
+		List<Lecture> vlList = sqlSession.selectList("LectureMapper.viewlist", sCode);
+		return vlList;
+	}
 	
 	
 

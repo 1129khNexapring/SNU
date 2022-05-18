@@ -26,6 +26,7 @@
 		<typeAlias type="org.ttt.snu.rehabilitation.domain.Rehabilitation" alias="Rehabilitation"/>
 		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLecture" alias="EnrollLecture"/>
 		<typeAlias type="org.ttt.snu.enrollLecture.domain.EnrollLectureDomain" alias="EnrollLectureDomain"/>
+		<typeAlias type="org.ttt.snu.lectureSchedule.domain.ViewLectureSchedule" alias="ViewLectureDomain"/>
 		<typeAlias type="org.ttt.snu.student.domain.Student" alias="Student"/>
 		<typeAlias type="org.ttt.snu.book.domain.Book" alias="Book"/>
 		<typeAlias type="org.ttt.snu.loa.domain.Loa" alias="Loa"/>
@@ -33,10 +34,16 @@
 		<typeAlias type="org.ttt.snu.requestScholarship.domain.RequestScholarship" alias="RequestScholarship"/>
 		<typeAlias type="org.ttt.snu.requestSch.domain.RequestSch" alias="RequestSch"/>
 		<typeAlias type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" alias="RequestVolunteer"/>
+
 		<typeAlias type="org.ttt.snu.timetable.domain.Timetable" alias="Timetable"/>
+
+		
+
 		<typeAlias type="org.ttt.snu.grade.domain.ScoreList" alias="ScoreList"/>
 
 		<typeAlias type="org.ttt.snu.lectureEvaluation.domain.LectureEvaluation" alias="LectureEvaluation"/>
+		<typeAlias type="org.ttt.snu.grade.domain.LectureGrade" alias="LectureGrade"/>
+		
 		
 
 
