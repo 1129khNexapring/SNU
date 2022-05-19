@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Work" width="1080" height="590" titletext="Form_Work" background="aqua">
+  <Form id="Form_Work" width="1080" height="590" titletext="Form_Work">
     <Layouts>
       <Layout width="1080" height="590" screenid="Desktop_screen">
-        <Button id="Button00" taborder="0" text="Button00" left="130" top="64" width="142" height="48" onclick="Button00_onclick"/>
-        <CheckBox id="CheckBox00" taborder="1" text="CheckBox00" left="361" top="151" width="150" height="20"/>
+        <Button id="Button00" taborder="0" text="교수 통합 정보 시스템에 오신걸 환영합니다." left="16" top="15" width="1050" height="555" font="normal 30pt/normal &quot;Arial&quot;" background="transparent"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[

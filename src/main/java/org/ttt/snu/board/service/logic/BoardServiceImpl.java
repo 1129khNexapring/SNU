@@ -73,6 +73,12 @@ public class BoardServiceImpl implements BoardService {
 		int result = bStore.deleteBoard(sqlSession, board);
 		return result;
 	}
+	
+	@Override
+	public int updateBoardCnt(Board board) {
+		int result = bStore.updateBoardCnt(sqlSession, board);
+		return result;
+	}
 
 	@Override
 	public int registerComments(Comments comments) {
@@ -91,5 +97,7 @@ public class BoardServiceImpl implements BoardService {
 		int result = bStore.deleteComments(sqlSession, comments);
 		return result;
 	}
+
+	
 
 }

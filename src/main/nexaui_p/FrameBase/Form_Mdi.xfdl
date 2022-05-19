@@ -8,7 +8,7 @@
             <Tabpage id="Tabpage2" text="Tabpage2"/>
           </Tabpages>
         </Tab>
-        <Button id="btn_home" taborder="1" left="6" top="3" width="25" height="25" background="url('theme://images/btn_MDI_Home.png') no-repeat center center" onclick="btn_home_onclick"/>
+        <Button id="btn_home" taborder="1" left="6" top="3" width="25" height="25" background="url('imagerc::home.jpg') no-repeat center center /contain" onclick="btn_home_onclick"/>
         <Button id="btn_max" taborder="2" text="M" top="5" width="21" height="21" onclick="btn_max_onclick" right="62"/>
         <Button id="btn_cacade" taborder="3" text="C" top="5" width="21" height="21" onclick="btn_cacade_onclick" right="36"/>
         <Button id="btn_closeAll" taborder="4" text="X" top="5" width="21" height="21" onclick="btn_closeAll_onclick" right="9"/>
@@ -20,11 +20,10 @@ this.Form_Mdi_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	this.tab_mdi.removeTabpage(0);
 };
 
-//오픈한 화면의 탭페이지를 생성
 this.fn_addTab = function(oParam)
 {
 	this.tab_mdi.insertTabpage(oParam.MENU_ID, -1, "", oParam.MENU_NAME);
-}
+};
 this.tab_mdi_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
 {
 	var sTabId = obj.tabpages[e.postindex].name;
@@ -36,10 +35,6 @@ this.tab_mdi_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventI
 
 this.tab_mdi_onextrabuttonclick = function(obj:nexacro.Tab,e:nexacro.TabMouseEventInfo)
 {
-//	e.index
-// 탭페이지 삭제 removeTabpage 
-// 화면 종료 메소드 close()
-// gds_openForm key값으로 findRow, deleteRow
 
 	var sTabId = obj.tabpages[e.index].name;	
 	var objApp = nexacro.getApplication();
@@ -105,7 +100,7 @@ this.fn_tabControl = function(pKey)
 			this.tab_mdi.set_tabindex(i);
 		}		
 	}
-}
+};
 
 this.btn_home_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {

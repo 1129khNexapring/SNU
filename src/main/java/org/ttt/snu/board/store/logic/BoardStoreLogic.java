@@ -57,12 +57,19 @@ public class BoardStoreLogic implements BoardStore {
 		int result = sqlSession.update("BoardMapper.updateBoard", board);
 		return result;
 	}
+	
+	@Override
+	public int updateBoardCnt(SqlSession sqlSession, Board board) {
+		int result = sqlSession.update("BoardMapper.updateBoardCnt", board);
+		return result;
+	}
 
 	@Override
 	public int deleteBoard(SqlSession sqlSession, Board board) {
 		int result = sqlSession.delete("BoardMapper.deleteBoard", board);
 		return result;
 	}
+	
 
 	@Override
 	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo, String sCode) {
@@ -91,5 +98,7 @@ public class BoardStoreLogic implements BoardStore {
 		int result = sqlSession.delete("BoardMapper.deleteComments", comments);
 		return result;
 	}
+
+	
 
 }

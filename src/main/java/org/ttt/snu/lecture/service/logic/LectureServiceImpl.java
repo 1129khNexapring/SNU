@@ -62,6 +62,23 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> lList = lStore.selectMyLecture(sqlSession, sCode);
 		return lList;
 	}
+	@Override
+	public List<Lecture> viewList(String sCode) {
+		List<Lecture> vlList = lStore.viewLecture(sqlSession, sCode);
+		return vlList;
+	}
+	//교수 - 강의 계획서 삭제
+	@Override
+	public int removeLecture(String lCode) {
+		int result = lStore.deleteLecture(sqlSession, lCode);
+		return result;
+	}
+	//교수 - 강의 계획서 수정
+	@Override
+	public int modifyLecture(Lecture lecture) {
+		int result = lStore.updateLecture(sqlSession, lecture);
+		return result;
+	}
 	
 
 }

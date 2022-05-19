@@ -142,6 +142,8 @@ public class LectureController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
+	
+	
 
 	//교수 - 강의 계획서 조회
 	@RequestMapping(value="/lecture/planListBypCode.snu", method=RequestMethod.POST)
@@ -168,7 +170,7 @@ public class LectureController {
 	@RequestMapping(value="/lecture/register.snu", method=RequestMethod.POST)
 	public NexacroResult registerBoard(
 				  @ParamDataSet  (name="in_lecture") DataSet inLecture
-				, @ParamVariable(name="in_var1") String pCode
+				, @ParamVariable(name="in_var") String pCode
 				, HttpServletRequest request) throws Exception{
 		NexacroResult result = new NexacroResult();
 		int 	nErrorCode  = 0;
@@ -177,19 +179,19 @@ public class LectureController {
 		int iResult = 0;
 		for(int i = 0; i < inLecture.getRowCount(); i++) {
 			int    rowType          = inLecture.getRowType(i);
-			String lCode      = dsGet(inLecture, i, "L_CODE");
+			String lCode      = "L" + dsGet(inLecture, i, "L_CODE");
 			String lType    = dsGet(inLecture, i, "L_TYPE");
 			String lName       = dsGet(inLecture, i, "L_NAME");
 			String lObjective         = dsGet(inLecture, i, "L_OBJECTIVE");
 			String lContents           = dsGet(inLecture, i, "L_CONTENTS");
 			String textbook   = dsGet(inLecture, i, "TEXTBOOK");
-			String lDays = dsGet(inLecture, i, "L_DAYS");
 			String credit     = dsGet(inLecture, i, "CREDIT");
 			String lYear      = dsGet(inLecture, i, "L_YEAR");
 			String lSemester      = dsGet(inLecture, i, "L_SEMESTER");
 			String lCapacity      = dsGet(inLecture, i, "L_CAPACITY");
-			String lStatus      = null;
 			String dCode      = pService.printProfessorById(pCode).getdCode();
+			
+		System.out.println(lCode + lType + lName + lObjective + lContents + textbook + credit + lYear + lSemester + lCapacity + dCode);
 			
 		Lecture lecture = new Lecture(
 					lCode
@@ -198,7 +200,7 @@ public class LectureController {
 				,	lObjective
 				,	lContents
 				,	textbook
-				,	Integer.parseInt(lDays)
+				,	0
 				,	Integer.parseInt(credit)
 				,   Integer.parseInt(lYear)
 				,	Integer.parseInt(lSemester)
@@ -206,6 +208,7 @@ public class LectureController {
 				,	"DEFAULT"
 				,	pCode
 				,	dCode);
+		System.out.println(lecture);
 		iResult += lService.registerLecture(lecture);
 		}
 		if(iResult < 0) {
@@ -220,6 +223,69 @@ public class LectureController {
 		return result;
 	}
 	
+	// 강의 계획서 수정 사항 저장
+	@RequestMapping(value="/lecture/saveLecture.snu", method=RequestMethod.POST)
+	public NexacroResult saveLecture(
+			@ParamDataSet(name="in_lecture") DataSet inLecture
+			,@ParamVariable(name="in_var") String pCode) throws Exception{
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		
+		int dResult = 0;
+		for(int i = 0; i < inLecture.getRemovedRowCount(); i++) {
+			System.out.println("12341234");
+			String lCode = inLecture.getRemovedData(i, "lCode").toString();
+			System.out.println(lCode);
+			dResult += lService.removeLecture(lCode);
+		}
+		
+		int uResult = 0;
+		for(int i = 0; i < inLecture.getRowCount(); i++) {
+			int rowType = inLecture.getRowType(i);
+			String lCode      = dsGet(inLecture, i, "lCode");
+			String lType    = dsGet(inLecture, i, "lType");
+			String lName       = dsGet(inLecture, i, "lName");
+			String lObjective         = dsGet(inLecture, i, "lObjective");
+			String lContents           = dsGet(inLecture, i, "lContents");
+			String textbook   = dsGet(inLecture, i, "textbook");
+			String lDays	= dsGet(inLecture, i, "lDays");
+			String credit     = dsGet(inLecture, i, "credit");
+			String lYear      = dsGet(inLecture, i, "lYear");
+			String lSemester      = dsGet(inLecture, i, "lSemester");
+			String lCapacity      = dsGet(inLecture, i, "lCapacity");
+			String lStatus		= dsGet(inLecture, i, "lStatus");
+			String dCode      = pService.printProfessorById(pCode).getdCode();
+			Lecture lecture = new Lecture(
+					lCode
+				,	lType
+				, 	lName
+				,	lObjective
+				,	lContents
+				,	textbook
+				,	Integer.parseInt(lDays)
+				,	Integer.parseInt(credit)
+				,   Integer.parseInt(lYear)
+				,	Integer.parseInt(lSemester)
+				,	Integer.parseInt(lCapacity)
+				,	lStatus
+				,	pCode
+				,	dCode);
+			System.out.println(lecture);
+			uResult += lService.modifyLecture(lecture);
+		}
+		if(uResult < 0 && dResult < 0) {
+			nErrorCode = -1;
+			strErrorMsg = "FAIL";
+		}else {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCCESS";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+		
+	}
 	// dsGet
 	public String dsGet(DataSet ds, int rowNo, String colId) throws Exception {
 		String value;

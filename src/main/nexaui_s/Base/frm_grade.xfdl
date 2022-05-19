@@ -1,16 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_grade" width="1080" height="670" titletext="New Form">
+  <Form id="frm_grade" width="1080" height="670" titletext="New Form" onload="frm_grade_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="199" top="242" width="124" height="54" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="0" left="11" top="14" width="1054" height="616" binddataset="ds_grade" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="85"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="강의코드"/>
+                <Cell col="1" text="강의명"/>
+                <Cell col="2" text="강의분류"/>
+                <Cell col="3" text="학점"/>
+                <Cell col="4" text="평점"/>
+                <Cell col="5" text="등급"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lCode" textAlign="center"/>
+                <Cell col="1" text="bind:lName" textAlign="center"/>
+                <Cell col="2" text="bind:lType" textAlign="center"/>
+                <Cell col="3" text="bind:credit" textAlign="center"/>
+                <Cell col="4" text="bind:gCode" textAlign="center"/>
+                <Cell col="5" displaytype="combotext" text="bind:gCode" textAlign="center" combodataset="ds_lecturegrade" combocodecol="score" combodatacol="grade"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
+this.frm_grade_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
+	this.transaction(
+        		"tr_select"
+        		,"tttUrl::grade/list.snu"
+        		,""
+        		,"ds_grade=out_grade"
+        		,"inVar1=" +sCode
+        		,"fn_callback_tran"
+        	)
 	
 };
+
+
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_grade">
+        <ColumnInfo>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="credit" type="INT" size="256"/>
+          <Column id="gCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_lecturegrade">
+        <ColumnInfo>
+          <Column id="score" type="STRING" size="256"/>
+          <Column id="grade" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="score">1</Col>
+            <Col id="grade">F</Col>
+          </Row>
+          <Row>
+            <Col id="score">2</Col>
+            <Col id="grade">D</Col>
+          </Row>
+          <Row>
+            <Col id="score">3</Col>
+            <Col id="grade">C</Col>
+          </Row>
+          <Row>
+            <Col id="score">4</Col>
+            <Col id="grade">B</Col>
+          </Row>
+          <Row>
+            <Col id="score">5</Col>
+            <Col id="grade">A</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

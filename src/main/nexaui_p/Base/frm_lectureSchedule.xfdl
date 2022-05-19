@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_lectureScheduler" width="1080" height="670" titletext="New Form">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Calendar id="Calendar00" taborder="0" left="53" top="78" width="490" height="334" onchanged="Calendar00_onchanged"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
+  </Form>
+</FDL>

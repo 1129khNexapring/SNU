@@ -9,11 +9,12 @@ public class Comments {
 	public String p_code;
 	public String s_sode;
 	public int board_no;
+	private String s_name;
 	
 	public Comments() {}
 
 	public Comments(int comment_no, String comment_content, String comment_date, String p_code, String s_sode,
-			int board_no) {
+			int board_no, String s_name) {
 		super();
 		this.comment_no = comment_no;
 		this.comment_content = comment_content;
@@ -21,6 +22,7 @@ public class Comments {
 		this.p_code = p_code;
 		this.s_sode = s_sode;
 		this.board_no = board_no;
+		this.s_name = s_name;
 	}
 
 	public int getComment_no() {
@@ -71,12 +73,20 @@ public class Comments {
 		this.board_no = board_no;
 	}
 
+	public String getS_name() {
+		return s_name;
+	}
+
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+
 	@Override
 	public String toString() {
 		return "Comments [comment_no=" + comment_no + ", comment_content=" + comment_content + ", comment_date="
-				+ comment_date + ", p_code=" + p_code + ", s_sode=" + s_sode + ", board_no=" + board_no + "]";
+				+ comment_date + ", p_code=" + p_code + ", s_sode=" + s_sode + ", board_no=" + board_no + ", s_name="
+				+ s_name + "]";
 	}
 
-	
 	
 }

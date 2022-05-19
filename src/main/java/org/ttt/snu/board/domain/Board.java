@@ -9,15 +9,13 @@ public class Board {
 	private String board_date;
 	private String b_status;
 	private String p_code;
-	private String board_fileName;
-	private String board_fileReName;
 	private String board_writer;
-	private String board_count;
+	private int board_count;
 	
 	public Board() {}
 
 	public Board(int board_no, String board_title, String board_content, String board_date, String b_status,
-			String p_code, String board_fileName, String board_fileReName, String board_writer, String board_count) {
+			String p_code, String board_writer, int board_count) {
 		super();
 		this.board_no = board_no;
 		this.board_title = board_title;
@@ -25,8 +23,6 @@ public class Board {
 		this.board_date = board_date;
 		this.b_status = b_status;
 		this.p_code = p_code;
-		this.board_fileName = board_fileName;
-		this.board_fileReName = board_fileReName;
 		this.board_writer = board_writer;
 		this.board_count = board_count;
 	}
@@ -79,22 +75,6 @@ public class Board {
 		this.p_code = p_code;
 	}
 
-	public String getBoard_fileName() {
-		return board_fileName;
-	}
-
-	public void setBoard_fileName(String board_fileName) {
-		this.board_fileName = board_fileName;
-	}
-
-	public String getBoard_fileReName() {
-		return board_fileReName;
-	}
-
-	public void setBoard_fileReName(String board_fileReName) {
-		this.board_fileReName = board_fileReName;
-	}
-
 	public String getBoard_writer() {
 		return board_writer;
 	}
@@ -103,22 +83,23 @@ public class Board {
 		this.board_writer = board_writer;
 	}
 
-	public String getBoard_count() {
+	public int getBoard_count() {
 		return board_count;
 	}
 
-	public void setBoard_count(String board_count) {
+	public void setBoard_count(int board_count) {
 		this.board_count = board_count;
 	}
 
 	@Override
 	public String toString() {
 		return "Board [board_no=" + board_no + ", board_title=" + board_title + ", board_content=" + board_content
-				+ ", board_date=" + board_date + ", b_status=" + b_status + ", p_code=" + p_code + ", board_fileName="
-				+ board_fileName + ", board_fileReName=" + board_fileReName + ", board_writer=" + board_writer
-				+ ", board_count=" + board_count + "]";
+				+ ", board_date=" + board_date + ", b_status=" + b_status + ", p_code=" + p_code + ", board_writer="
+				+ board_writer + ", board_count=" + board_count + "]";
 	}
 
+	
+	
 	
 	
 }

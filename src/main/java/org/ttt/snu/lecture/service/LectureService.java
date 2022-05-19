@@ -22,7 +22,12 @@ public interface LectureService {
 
 	public int registerLecture(Lecture lecture);
 
-	
+	public List<Lecture> viewList(String sCode);
+
+	public int removeLecture(String lCode);
+
+	public int modifyLecture(Lecture lecture);
+
 	
 
 }
