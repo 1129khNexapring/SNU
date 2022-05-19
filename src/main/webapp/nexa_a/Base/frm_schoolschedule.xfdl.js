@@ -29,28 +29,23 @@
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"acNo\"/><Cell col=\"1\" text=\"aCode\"/><Cell col=\"2\" text=\"title\"/><Cell col=\"3\" text=\"startDate\"/><Cell col=\"4\" text=\"endDate\"/></Band><Band id=\"body\"><Cell text=\"bind:acNo\"/><Cell col=\"1\" text=\"bind:aCode\"/><Cell col=\"2\" text=\"bind:title\"/><Cell col=\"3\" text=\"bind:startDate\"/><Cell col=\"4\" text=\"bind:endDate\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_selectSchedule","50","10","120","50",null,null,null,null,null,null,this);
-            obj.set_taborder("1");
-            obj.set_text("조회");
-            this.addChild(obj.name, obj);
-
             obj = new Button("btn_insertSchedule","640","15","120","50",null,null,null,null,null,null,this);
-            obj.set_taborder("2");
+            obj.set_taborder("1");
             obj.set_text("일정추가");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_modifySchedule","770","15","120","50",null,null,null,null,null,null,this);
-            obj.set_taborder("3");
+            obj.set_taborder("2");
             obj.set_text("저장");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_deleteSchedule","900","15","120","50",null,null,null,null,null,null,this);
-            obj.set_taborder("4");
+            obj.set_taborder("3");
             obj.set_text("일정삭제");
             this.addChild(obj.name, obj);
 
             obj = new Div("Div00","50","374","955","168",null,null,null,null,null,null,this);
-            obj.set_taborder("5");
+            obj.set_taborder("4");
             obj.set_text("Div00");
             obj.set_border("1px solid");
             this.addChild(obj.name, obj);
@@ -96,6 +91,10 @@
             obj.bind();
 
             obj = new BindItem("item2","Div00.form.Calendar_end","value","ds_schedule","endDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item0","Div00.form.Edit00","value","ds_schedule","title");
             this.addChild(obj.name, obj);
             obj.bind();
             
@@ -152,17 +151,7 @@
         };
 
 
-        this.btn_selectSchedule_onclick = function(obj,e)
-        {
-        	this.transaction(
-        		"tr_selectSchedule"
-        		,"SnuURL::schedule/list.snu"
-        		,""
-        		,"ds_schedule=out_schedule"
-        		,""
-        		,"fn_callback_schedule"
-        	);
-        };
+
 
         this.btn_insertSchedule_onclick = function(obj,e)
         {
@@ -199,13 +188,24 @@
         	this.ds_schedule.deleteRow(this.ds_schedule.rowposition);
         };
 
+        this.frm_schoolschedule_onload = function(obj,e)
+        {
+        	this.transaction(
+        		"tr_selectSchedule"
+        		,"SnuURL::schedule/list.snu"
+        		,""
+        		,"ds_schedule=out_schedule"
+        		,""
+        		,"fn_callback_schedule"
+        	);
+        };
+
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.frm_schoolschedule_onload,this);
-            this.btn_selectSchedule.addEventHandler("onclick",this.btn_selectSchedule_onclick,this);
             this.btn_insertSchedule.addEventHandler("onclick",this.btn_insertSchedule_onclick,this);
             this.btn_modifySchedule.addEventHandler("onclick",this.btn_modifySchedule_onclick,this);
             this.btn_deleteSchedule.addEventHandler("onclick",this.btn_deleteSchedule_onclick,this);
