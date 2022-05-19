@@ -3,7 +3,7 @@
   <Form id="frm_lectureScheduler" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="156" top="131" width="120" height="50"/>
+        <Calendar id="Calendar00" taborder="0" left="150" top="90" width="227" height="60"/>
       </Layout>
     </Layouts>
   </Form>
