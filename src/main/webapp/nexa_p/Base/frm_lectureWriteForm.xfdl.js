@@ -155,11 +155,6 @@
             obj.set_text("Combo00");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Button("Button00","797","40","45","51",null,null,null,null,null,null,this.grid_detail.form);
-            obj.set_taborder("21");
-            obj.set_text("Button00");
-            this.grid_detail.addChild(obj.name, obj);
-
             obj = new Button("btn_register","750","507","120","38",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("등록");

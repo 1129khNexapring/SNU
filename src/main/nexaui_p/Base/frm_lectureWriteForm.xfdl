@@ -52,7 +52,6 @@
                   </Rows>
                 </Dataset>
               </Combo>
-              <Button id="Button00" taborder="21" text="Button00" left="797" top="40" width="45" height="51"/>
             </Layout>
           </Layouts>
         </Div>

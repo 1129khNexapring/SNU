@@ -33,7 +33,7 @@
 
             obj = new Button("btn_home","6","3","25","25",null,null,null,null,null,null,this);
             obj.set_taborder("1");
-            obj.set_background("url(\'theme://images/btn_MDI_Home.png\') no-repeat center center");
+            obj.set_background("url(\'imagerc::home.jpg\') no-repeat center center /contain");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_max",null,"5","21","21","62",null,null,null,null,null,this);
@@ -76,11 +76,10 @@
         	this.tab_mdi.removeTabpage(0);
         };
 
-        //오픈한 화면의 탭페이지를 생성
         this.fn_addTab = function(oParam)
         {
         	this.tab_mdi.insertTabpage(oParam.MENU_ID, -1, "", oParam.MENU_NAME);
-        }
+        };
         this.tab_mdi_onchanged = function(obj,e)
         {
         	var sTabId = obj.tabpages[e.postindex].name;
@@ -92,10 +91,6 @@
 
         this.tab_mdi_onextrabuttonclick = function(obj,e)
         {
-        //	e.index
-        // 탭페이지 삭제 removeTabpage
-        // 화면 종료 메소드 close()
-        // gds_openForm key값으로 findRow, deleteRow
 
         	var sTabId = obj.tabpages[e.index].name;
         	var objApp = nexacro.getApplication();
@@ -161,7 +156,7 @@
         			this.tab_mdi.set_tabindex(i);
         		}
         	}
-        }
+        };
 
         this.btn_home_onclick = function(obj,e)
         {

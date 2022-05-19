@@ -9,5 +9,7 @@ public interface ProfessorService {
 
 	List<Professor> printProfessorListBydCode(String dCode);
 
+	int modifyProf(Professor prof);
+
 
 }

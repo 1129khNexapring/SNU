@@ -25,6 +25,10 @@ public interface LectureStore {
 
 	List<Lecture> viewLecture(SqlSession sqlSession, String sCode);
 
+	int deleteLecture(SqlSession sqlSession, String lCode);
+
+	int updateLecture(SqlSession sqlSession, Lecture lecture);
+
 	
 
 }

@@ -24,7 +24,10 @@ public interface LectureService {
 
 	public List<Lecture> viewList(String sCode);
 
-	
+	public int removeLecture(String lCode);
+
+	public int modifyLecture(Lecture lecture);
+
 	
 
 }
