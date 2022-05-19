@@ -15,6 +15,7 @@ public interface BoardService {
 	public int registerBoard(Board board);
 	public int modifyBoard(Board board);
 	public int removeBoard(Board board);
+	public int updateBoardCnt(Board board);
 	
 	// 댓글 영역
 	public int printOneByNo(Integer boardNo);

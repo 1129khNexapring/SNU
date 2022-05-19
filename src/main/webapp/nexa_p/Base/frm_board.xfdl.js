@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_boardList", this);
-            obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileName\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileReName\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
@@ -27,7 +27,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Grid("grd_boardList","20","30","1037","620",null,null,null,null,null,null,this);
+            obj = new Grid("grd_boardList","20","30","1037","520",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("ds_boardList");
             obj.set_autofittype("col");
@@ -46,7 +46,7 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
 
-            obj = new PopupDiv("popDetail","30","25","1030","825",null,null,null,null,null,null,this);
+            obj = new PopupDiv("popDetail","-5","3","1030","825",null,null,null,null,null,null,this);
             obj.set_text("PopupDiv00");
             obj.set_visible("false");
             obj.set_background("aliceblue");
@@ -82,7 +82,7 @@
 
             obj = new Static("Static04","475","40","190","60",null,null,null,null,null,null,this.popDetail.form);
             obj.set_taborder("5");
-            obj.set_text("1번 게시글");
+            obj.set_text("번 게시글");
             obj.set_font("normal 25pt/normal \"Arial\"");
             this.popDetail.addChild(obj.name, obj);
 
@@ -136,13 +136,8 @@
             obj.set_borderRadius("4px");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_file","340","500","325","30",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("13");
-            obj.set_borderRadius("4px");
-            this.popDetail.addChild(obj.name, obj);
-
             obj = new Button("btn_commentSubmit","517","650","66","32",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("14");
+            obj.set_taborder("13");
             obj.set_text("댓글등록");
             obj.set_background("cornflowerblue");
             obj.set_borderRadius("6px");
@@ -152,12 +147,12 @@
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Edit("edt_comment","345","565","405","65",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("15");
+            obj.set_taborder("14");
             obj.set_borderRadius("4px");
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Button("btn_update","550","98","66","32",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("16");
+            obj.set_taborder("15");
             obj.set_text("수정하기");
             obj.set_background("cornflowerblue");
             obj.set_borderRadius("6px");
@@ -167,7 +162,7 @@
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Button("btn_popUpBack","690","98","66","32",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("17");
+            obj.set_taborder("16");
             obj.set_text("이전으로");
             obj.set_background("cornflowerblue");
             obj.set_borderRadius("6px");
@@ -177,7 +172,7 @@
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Button("btn_remove","620","98","66","32",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("18");
+            obj.set_taborder("17");
             obj.set_text("삭제하기");
             obj.set_background("cornflowerblue");
             obj.set_borderRadius("6px");
@@ -186,27 +181,24 @@
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new FileDownload("FileDownload00","665","500","94","30",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("19");
-            obj.set_text("File Download");
-            obj.set_borderRadius("5px");
-            this.popDetail.addChild(obj.name, obj);
-
             obj = new Button("btn_popUpClose","1000","5","20","25",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("20");
+            obj.set_taborder("18");
             obj.set_text("X");
             obj.set_background("dodgerblue");
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             obj.set_cursor("pointer");
             this.popDetail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_cBoardNo","810","565","140","20",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("21");
+            obj = new Edit("edt_cBoardNo","825","276","60","41",null,null,null,null,null,null,this.popDetail.form);
+            obj.set_taborder("19");
             obj.set_visible("false");
+            obj.set_border("1px solid transparent");
+            obj.set_background("transparent");
+            obj.set_font("normal 25pt/normal \"Arial\"");
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Grid("grd_comment","308","695","492","130",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("22");
+            obj.set_taborder("20");
             obj.set_binddataset("ds_comments");
             obj.set_cursor("pointer");
             obj.set_autofittype("col");
@@ -214,7 +206,7 @@
             this.popDetail.addChild(obj.name, obj);
 
             obj = new Button("btn_cRemove","804","695","66","32",null,null,null,null,null,null,this.popDetail.form);
-            obj.set_taborder("23");
+            obj.set_taborder("21");
             obj.set_text("삭제하기");
             obj.set_background("cornflowerblue");
             obj.set_borderRadius("6px");
@@ -241,6 +233,14 @@
             obj.set_background("royalblue");
             obj.set_color("white");
             this.popDetail.form.popComments.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cBoardNo00","420","50","60","41",null,null,null,null,null,null,this.popDetail.form);
+            obj.set_taborder("22");
+            obj.set_visible("true");
+            obj.set_border("1px solid transparent");
+            obj.set_background("transparent");
+            obj.set_font("normal 25pt/normal \"Arial\"");
+            this.popDetail.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,670,this,function(p){});
@@ -272,10 +272,6 @@
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item6","popDetail.form.edt_file","value","ds_boardList","board_fileName");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
             obj = new BindItem("item7","popDetail.form.edt_comment","value","ds_comments","comment_content");
             this.addChild(obj.name, obj);
             obj.bind();
@@ -285,6 +281,10 @@
             obj.bind();
 
             obj = new BindItem("item11","popDetail.form.popComments.form.edt_commentModify","value","ds_comments","comment_content");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item6","popDetail.form.edt_cBoardNo00","value","ds_boardList","board_no");
             this.addChild(obj.name, obj);
             obj.bind();
             
@@ -314,6 +314,7 @@
         {
         	currentboardNo = e.row;
         	this.popDetail.trackPopupByComponent(obj, obj.getOffsetWidth(), obj.getOffsetHeight(), 1200, 800);
+
         };
 
 
@@ -410,11 +411,32 @@
         		this.popDetail.form.popComments.closePopup();
         	}
 
+        	if(id == "tr_count") {
+        		if(nErrorCode) {
+        			this.alert("조회수 반영 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("조회수 반영 성공");
+        	}
+
         };
 
         // 게시글 닫기
         this.popDetail_btn_popUpClose_onclick = function(obj,e)
         {
+        	var boardNo = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
+        	var boardCnt = this.popDetail.form.edt_boardCount.value;
+        	var boardTitle = this.popDetail.form.edt_boardTitle.value;
+        	var boardContent = this.popDetail.form.ta_boardContent.value;
+        	// boardCnt = boardCnt + 1;
+        	this.transaction(
+        			"tr_count" 					  	  // 1. ID
+        			, "SnuUrl::board/count.snu" 		  // 2. URL
+        			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+        			, "" 	  // 4. OutDs : S -> F jsp(SELECT)
+        	        , "in_var1=" + boardNo + " in_var2=" + boardCnt	+ " in_var3=" + nexacro.wrapQuote(boardTitle) + " in_var4=" + nexacro.wrapQuote(boardContent)// 5. InVar : F -> S(var)
+        			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+        		)
         	this.popDetail.closePopup();
         	this.reload();
         };
@@ -422,6 +444,19 @@
         // 게시글 닫기
         this.popDetail_btn_popUpBack_onclick = function(obj,e)
         {
+        	var boardNo = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
+        	var boardCnt = this.popDetail.form.edt_boardCount.value;
+        	var boardTitle = this.popDetail.form.edt_boardTitle.value;
+        	var boardContent = this.popDetail.form.ta_boardContent.value;
+        	// boardCnt = boardCnt + 1;
+        	this.transaction(
+        			"tr_count" 					  	  // 1. ID
+        			, "SnuUrl::board/count.snu" 		  // 2. URL
+        			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+        			, "" 	  // 4. OutDs : S -> F jsp(SELECT)
+        	        , "in_var1=" + boardNo + " in_var2=" + boardCnt	+ " in_var3=" + nexacro.wrapQuote(boardTitle) + " in_var4=" + nexacro.wrapQuote(boardContent)// 5. InVar : F -> S(var)
+        			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+        		)
         	this.popDetail.closePopup();
         	this.reload();
         };
@@ -429,12 +464,15 @@
         // 게시글 수정
         this.popDetail_btn_update_onclick = function(obj,e)
         {
+        	var boardTitle = this.popDetail.form.edt_boardTitle.value;
+        	var boardContent = this.popDetail.form.ta_boardContent.value;
+        	var boardNo = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
         	this.transaction(
         		  "tr_bUpdate"
-        		, "SnuUrl::board/register.snu"
-        		, "in_boardList=ds_boardList:U"
+        		, "SnuUrl::board/modify.snu"
         		, ""
-        		, "in_var1=" + nexacro.wrapQuote(name)
+        		, ""
+        		, "in_var1=" + nexacro.wrapQuote(boardTitle) + " in_var2=" + nexacro.wrapQuote(boardContent) + " in_var3=" + boardNo
         		, "fn_callback_tran"
         	);
         };
@@ -468,7 +506,7 @@
         // 댓글 등록
         this.popDetail_btn_commentSubmit_onclick = function(obj,e)
         {
-        	var registerBtn = this.confirm("해당 댓을 등록하시겠습니까?", "댓글 등록");
+        	var registerBtn = this.confirm("해당 댓글을 등록하시겠습니까?", "댓글 등록");
         	var commentContent = this.popDetail.form.edt_comment.value;
         	var boardNo = this.ds_boardList.getColumn(currentboardNo, "board_no");
         	if(registerBtn == true) {
@@ -490,7 +528,7 @@
         };
 
         // 댓글 목록
-        var sCode = nexacro.getEnvironmentVariable("ev_Val");
+        var sName = nexacro.getEnvironmentVariable("ev_Val1");
         this.commentsList = function(currentboardNo)
         {
         	var board_no = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
@@ -499,7 +537,7 @@
         		, "SnuUrl::comment/list.snu"
         		, ""
         		,"ds_comments=out_comments" // 4.OutDs : S->F jsp(SELECT)
-        		,"in_var1=" + board_no + " in_var2=" + sCode // 5.InVar : F->S(var)
+        		,"in_var1=" + board_no + " in_var2=" + sName // 5.InVar : F->S(var)
         	);
         }
 
@@ -553,6 +591,23 @@
 
         };
 
+        this.popDetail_oncloseup = function(obj,e)
+        {
+        	var boardNo = this.ds_boardList.getColumn(this.ds_boardList.rowposition, "board_no");
+        	var boardCnt = this.popDetail.form.edt_boardCount.value;
+        	var boardTitle = this.popDetail.form.edt_boardTitle.value;
+        	var boardContent = this.popDetail.form.ta_boardContent.value;
+        	// boardCnt = boardCnt + 1;
+        	this.transaction(
+        			"tr_count" 					  	  // 1. ID
+        			, "SnuUrl::board/count.snu" 		  // 2. URL
+        			, ""							  // 3. InDs : F -> S jsp(I, U, D)
+        			, "" 	  // 4. OutDs : S -> F jsp(SELECT)
+        	        , "in_var1=" + boardNo + " in_var2=" + boardCnt	+ " in_var3=" + nexacro.wrapQuote(boardTitle) + " in_var4=" + nexacro.wrapQuote(boardContent)// 5. InVar : F -> S(var)
+        			, "fn_callback_tran"			  // 6. callback function(transaction 완료시 호출되는 함수)
+        		)
+        };
+
         });
         
         // Regist UI Components Event
@@ -562,6 +617,8 @@
             this.grd_boardList.addEventHandler("oncelldblclick",this.grd_boardList_oncelldblclick,this);
             this.btn_boardWrite.addEventHandler("onclick",this.btn_boardWrite_onclick,this);
             this.popDetail.addEventHandler("onpopup",this.popDetail_onpopup,this);
+            this.popDetail.addEventHandler("onsetfocus",this.popDetail_onsetfocus,this);
+            this.popDetail.addEventHandler("oncloseup",this.popDetail_oncloseup,this);
             this.popDetail.form.Static00.addEventHandler("onclick",this.Static00_onclick,this);
             this.popDetail.form.edt_boardWriteDate.addEventHandler("onchanged",this.popDetail_edt_boardWriteDate_onchanged,this);
             this.popDetail.form.Static04.addEventHandler("onclick",this.Static04_onclick,this);
