@@ -110,4 +110,15 @@
 		JOIN ENROLL_LECTURE EL ON(L.L_CODE = EL.L_CODE)
 		WHERE S_CODE = #{sCode}
 	</select>
+	
+	<delete id="deleteLecture" parameterType="string">
+		DELETE FROM LECTURE WHERE L_CODE = #{lCode }
+	</delete>
+	
+	<update id="updateLecture">
+		UPDATE LECTURE
+		SET L_TYPE = #{lType}, L_NAME = #{lName}, L_OBJECTIVE = #{lObjective}, L_CONTENTS = #{lContents}, TEXTBOOK = #{textbook},
+		L_CAPACITY = #{lCapacity}, L_YEAR = #{lYear}, L_SEMESTER = #{lSemester}, CREDIT = #{credit}
+		WHERE L_CODE = #{lCode}
+	</update>
 </mapper>

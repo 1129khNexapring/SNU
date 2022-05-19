@@ -75,20 +75,20 @@
             obj = new Edit("edt_email","210","273","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("7");
             obj.set_color("black");
-            obj.set_readonly("true");
+            obj.set_readonly("false");
             obj.set_background("white");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Edit("edt_phone","210","348","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("8");
-            obj.set_readonly("true");
+            obj.set_readonly("false");
             obj.set_color("black");
             obj.set_background("white");
             this.grid_detail.addChild(obj.name, obj);
 
             obj = new Edit("edt_address","210","423","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("9");
-            obj.set_readonly("true");
+            obj.set_readonly("false");
             obj.set_color("black");
             obj.set_background("white");
             this.grid_detail.addChild(obj.name, obj);
@@ -115,7 +115,7 @@
             obj.set_enable("false");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Button("Button00","250","602","120","38",null,null,null,null,null,null,this);
+            obj = new Button("btn_update","250","602","120","38",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("수정");
             obj.set_color("black");
@@ -167,8 +167,8 @@
         this.frm_proInfo_onload = function(obj,e)
         {
         	this.transaction(
-        		"prof_select"
-        		,"SnuUrl::prof/selectProfBypCode.snu"
+        		"selectProf"
+        		,"SnuUrl::professor/profInfo.snu"
         		,""
         		,"ds_prof=out_prof"
         		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val")
@@ -176,14 +176,38 @@
         	);
         };
 
+        this.btn_update_onclick = function(obj,e)
+        {
+        	this.transaction(
+        		"updateProf"
+        		,"SnuUrl::professor/profModify.snu"
+        		,"in_prof=ds_prof:U"
+        		,""
+        		,""
+        		,"fn_callback_tran"
+        	);
+        };
 
         this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
         {
-        	if(id == "prof_select")
+        	if(id == "selectProf")
         	{
         		if(nErrorCode < 0)
         		{
         			this.alert("조회 실패 : " + sErrorMsg);
+        			return;
+        		}
+        	}
+        	if(id == "updateProf")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("수정 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		else
+        		{
+        			this.alert("수정 성공!");
         			return;
         		}
         	}
@@ -196,6 +220,7 @@
             this.addEventHandler("onload",this.frm_proInfo_onload,this);
             this.grid_detail.form.Static00_01.addEventHandler("onclick",this.grid_detail_Static00_01_onclick,this);
             this.grid_detail.form.rdo_gender.addEventHandler("onitemchanged",this.grid_detail_rdo_gender_onitemchanged,this);
+            this.btn_update.addEventHandler("onclick",this.btn_update_onclick,this);
         };
         this.loadIncludeScript("frm_proInfo.xfdl");
         this.loadPreloadList();

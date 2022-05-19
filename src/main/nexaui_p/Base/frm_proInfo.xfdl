@@ -12,10 +12,10 @@
               <Static id="Static00_02" taborder="3" text="이메일" left="40" top="268" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_03" taborder="4" text="연락처" left="40" top="343" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_04" taborder="5" text="성별" left="40" top="193" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Edit id="edt_name" taborder="6" left="210" top="123" width="198" height="35" readonly="true" color="black" background="white" enable="false"/>
-              <Edit id="edt_email" taborder="7" left="210" top="273" width="198" height="35" color="black" readonly="true" background="white"/>
-              <Edit id="edt_phone" taborder="8" left="210" top="348" width="198" height="35" readonly="true" color="black" background="white"/>
-              <Edit id="edt_address" taborder="9" left="210" top="423" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="Edit00_00" taborder="6" left="210" top="123" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="Edit00_00_00_00" taborder="7" left="210" top="273" width="198" height="35" color="black" readonly="false" background="white"/>
+              <Edit id="Edit00_00_00_00_00" taborder="8" left="210" top="348" width="198" height="35" readonly="false" color="black" background="white"/>
+              <Edit id="Edit00_00_00_00_00_00" taborder="9" left="210" top="423" width="198" height="35" readonly="false" color="black" background="white"/>
               <Radio id="rdo_gender" taborder="10" left="212" top="201" width="198" height="40" onitemchanged="grid_detail_rdo_gender_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" enable="false" color="black">
                 <Dataset id="innerdataset">
                   <ColumnInfo>
@@ -42,7 +42,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Button id="Button00" taborder="1" text="수정" left="250" top="602" width="120" height="38" color="black" background="skyblue"/>
+        <Button id="btn_update" taborder="1" text="수정" left="250" top="602" width="120" height="38" color="black" background="skyblue" onclick="btn_update_onclick"/>
       </Layout>
     </Layouts>
     <Bind>
@@ -53,6 +53,56 @@
       <BindItem id="item4" compid="grid_detail.form.edt_phone" propid="value" datasetid="ds_prof" columnid="pPhone"/>
       <BindItem id="item5" compid="grid_detail.form.edt_address" propid="value" datasetid="ds_prof" columnid="pAddress"/>
     </Bind>
+    <Script type="xscript5.1"><![CDATA[
+this.frm_proInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"selectProf"
+		,"SnuUrl::professor/profInfo.snu"
+		,""
+		,"ds_prof=out_prof"
+		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val") 
+		,"fn_callback_tran" 
+	);
+};
+
+
+this.btn_update_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"updateProf"
+		,"SnuUrl::professor/profModify.snu"
+		,"in_prof=ds_prof:U"
+		,""
+		,""
+		,"fn_callback_tran"
+	);
+};
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "selectProf")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패 : " + sErrorMsg);
+			return;
+		}
+	}
+	if(id == "updateProf")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("수정 실패 : " + sErrorMsg);
+			return;
+		}
+		else
+		{
+			this.alert("수정 성공!");
+			return;
+		}
+	}
+};]]></Script>
     <Objects>
       <Dataset id="ds_prof">
         <ColumnInfo>
@@ -70,30 +120,5 @@
         </ColumnInfo>
       </Dataset>
     </Objects>
-    <Script type="xscript5.1"><![CDATA[
-this.frm_proInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
-{
-	this.transaction(
-		"prof_select"
-		,"SnuUrl::prof/selectProfBypCode.snu"
-		,""
-		,"ds_prof=out_prof"
-		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val") 
-		,"fn_callback_tran" 
-	);
-};
-
-
-this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
-{
-	if(id == "prof_select")
-	{
-		if(nErrorCode < 0)
-		{
-			this.alert("조회 실패 : " + sErrorMsg);
-			return;
-		}
-	}
-};]]></Script>
   </Form>
 </FDL>

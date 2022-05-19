@@ -223,6 +223,69 @@ public class LectureController {
 		return result;
 	}
 	
+	// 강의 계획서 수정 사항 저장
+	@RequestMapping(value="/lecture/saveLecture.snu", method=RequestMethod.POST)
+	public NexacroResult saveLecture(
+			@ParamDataSet(name="in_lecture") DataSet inLecture
+			,@ParamVariable(name="in_var") String pCode) throws Exception{
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		
+		int dResult = 0;
+		for(int i = 0; i < inLecture.getRemovedRowCount(); i++) {
+			System.out.println("12341234");
+			String lCode = inLecture.getRemovedData(i, "lCode").toString();
+			System.out.println(lCode);
+			dResult += lService.removeLecture(lCode);
+		}
+		
+		int uResult = 0;
+		for(int i = 0; i < inLecture.getRowCount(); i++) {
+			int rowType = inLecture.getRowType(i);
+			String lCode      = dsGet(inLecture, i, "lCode");
+			String lType    = dsGet(inLecture, i, "lType");
+			String lName       = dsGet(inLecture, i, "lName");
+			String lObjective         = dsGet(inLecture, i, "lObjective");
+			String lContents           = dsGet(inLecture, i, "lContents");
+			String textbook   = dsGet(inLecture, i, "textbook");
+			String lDays	= dsGet(inLecture, i, "lDays");
+			String credit     = dsGet(inLecture, i, "credit");
+			String lYear      = dsGet(inLecture, i, "lYear");
+			String lSemester      = dsGet(inLecture, i, "lSemester");
+			String lCapacity      = dsGet(inLecture, i, "lCapacity");
+			String lStatus		= dsGet(inLecture, i, "lStatus");
+			String dCode      = pService.printProfessorById(pCode).getdCode();
+			Lecture lecture = new Lecture(
+					lCode
+				,	lType
+				, 	lName
+				,	lObjective
+				,	lContents
+				,	textbook
+				,	Integer.parseInt(lDays)
+				,	Integer.parseInt(credit)
+				,   Integer.parseInt(lYear)
+				,	Integer.parseInt(lSemester)
+				,	Integer.parseInt(lCapacity)
+				,	lStatus
+				,	pCode
+				,	dCode);
+			System.out.println(lecture);
+			uResult += lService.modifyLecture(lecture);
+		}
+		if(uResult < 0 && dResult < 0) {
+			nErrorCode = -1;
+			strErrorMsg = "FAIL";
+		}else {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCCESS";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+		
+	}
 	// dsGet
 	public String dsGet(DataSet ds, int rowNo, String colId) throws Exception {
 		String value;
