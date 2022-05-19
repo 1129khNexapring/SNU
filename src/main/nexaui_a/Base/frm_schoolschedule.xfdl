@@ -11,34 +11,30 @@
                 <Column size="80"/>
                 <Column size="80"/>
                 <Column size="80"/>
-                <Column size="80"/>
               </Columns>
               <Rows>
-                <Row band="head" size="24"/>
+                <Row size="24" band="head"/>
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="acNo"/>
-                <Cell col="1" text="aCode"/>
-                <Cell col="2" text="title"/>
-                <Cell col="3" text="startDate"/>
-                <Cell col="4" text="endDate"/>
+                <Cell text="일정번호"/>
+                <Cell col="1" text="일정내용"/>
+                <Cell col="2" text="시작일"/>
+                <Cell col="3" text="종료일"/>
               </Band>
               <Band id="body">
                 <Cell text="bind:acNo"/>
-                <Cell col="1" text="bind:aCode"/>
-                <Cell col="2" text="bind:title"/>
-                <Cell col="3" text="bind:startDate"/>
-                <Cell col="4" text="bind:endDate"/>
+                <Cell col="1" text="bind:title"/>
+                <Cell col="2" text="bind:startDate"/>
+                <Cell col="3" text="bind:endDate"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Button id="btn_selectSchedule" taborder="1" text="조회" left="50" top="10" width="120" height="50" onclick="btn_selectSchedule_onclick"/>
-        <Button id="btn_insertSchedule" taborder="2" text="일정추가" left="640" top="15" width="120" height="50" onclick="btn_insertSchedule_onclick"/>
-        <Button id="btn_modifySchedule" taborder="3" text="저장" left="770" top="15" width="120" height="50" onclick="btn_modifySchedule_onclick"/>
-        <Button id="btn_deleteSchedule" taborder="4" text="일정삭제" left="900" top="15" width="120" height="50" onclick="btn_deleteSchedule_onclick"/>
-        <Div id="Div00" taborder="5" text="Div00" left="50" top="374" width="955" height="168" border="1px solid">
+        <Button id="btn_insertSchedule" taborder="1" text="일정추가" left="640" top="15" width="120" height="50" onclick="btn_insertSchedule_onclick"/>
+        <Button id="btn_modifySchedule" taborder="2" text="저장" left="770" top="15" width="120" height="50" onclick="btn_modifySchedule_onclick"/>
+        <Button id="btn_deleteSchedule" taborder="3" text="일정삭제" left="900" top="15" width="120" height="50" onclick="btn_deleteSchedule_onclick"/>
+        <Div id="Div00" taborder="4" text="Div00" left="50" top="374" width="955" height="168" border="1px solid">
           <Layouts>
             <Layout>
               <Calendar id="Calendar_start" taborder="0" left="439" top="77" width="140" height="39" editformat="yy-MM-dd" dateformat="yy-MM-dd "/>
@@ -94,17 +90,6 @@ if(sId == "tr_selectSchedule")
 };
 
 
-this.btn_selectSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	this.transaction(
-		"tr_selectSchedule"
-		,"SnuURL::schedule/list.snu"
-		,""
-		,"ds_schedule=out_schedule"
-		,""
-		,"fn_callback_schedule"
-	);
-};
 
 this.btn_insertSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
@@ -140,6 +125,18 @@ this.btn_deleteSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 {
 	this.ds_schedule.deleteRow(this.ds_schedule.rowposition);
 };
+
+this.frm_schoolschedule_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"tr_selectSchedule"
+		,"SnuURL::schedule/list.snu"
+		,""
+		,"ds_schedule=out_schedule"
+		,""
+		,"fn_callback_schedule"
+	);
+};
 ]]></Script>
     <Objects>
       <Dataset id="ds_schedule">
@@ -155,6 +152,7 @@ this.btn_deleteSchedule_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
     <Bind>
       <BindItem id="item1" compid="Div00.form.Calendar_start" propid="value" datasetid="ds_schedule" columnid="startDate"/>
       <BindItem id="item2" compid="Div00.form.Calendar_end" propid="value" datasetid="ds_schedule" columnid="endDate"/>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_schedule" columnid="title"/>
     </Bind>
   </Form>
 </FDL>
