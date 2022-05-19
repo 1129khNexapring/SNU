@@ -9,10 +9,10 @@
       <Script rule_version="1.02"/>
     </Rule>
     <Info project="C:\Users\HyoGwang\git\SNU2\src\main\nexaui_a\" generated="C:\Users\HyoGwang\Documents\nexacro\17.1\outputs\Admin\">
-      <File url="environment.xml" checksum="20220512103555" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220513143626" errormsg=""/>
-      <File url="appvariables.xml" checksum="20220512103554" errormsg=""/>
-      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220512103556" errormsg=""/>
+      <File url="environment.xml" checksum="20220507190225" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20220510144910" errormsg=""/>
+      <File url="appvariables.xml" checksum="20220507190225" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20220507190225" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\resources\Resource.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\CompBase.json" checksum="20211110093724" errormsg=""/>
@@ -20,7 +20,34 @@
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\Grid.json" checksum="20211110093726" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\ListView.json" checksum="20211110093728" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\component\DeviceAPI.json" checksum="20211110093726" errormsg=""/>
-      <File url="Application_Desktop.xadl" checksum="20220512103556" errormsg=""/>
+      <File url="Application_Desktop.xadl" checksum="20220509175048" errormsg=""/>
+      <File url="Application_Desktop.xadl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_notice.xfdl" checksum="20220509213312" errormsg=""/>
+      <File url="Base\frm_absenceschool.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_lecture.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_professor.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_reservist.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_returnschool.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_scholarship.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_schoolmsg.xfdl" checksum="20220510115407" errormsg=""/>
+      <File url="Base\frm_schoolschedule.xfdl" checksum="20220510230345" errormsg=""/>
+      <File url="Base\frm_student.xfdl" checksum="20220508231327" errormsg=""/>
+      <File url="Base\frm_suggestion.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_swsession.xfdl" checksum="20220507203624" errormsg=""/>
+      <File url="Base\frm_transfermajor.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Base\frm_volunteer.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="FrameBase\Form_Left.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="FrameBase\Form_Mdi.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="FrameBase\Form_Top.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="FrameBase\Form_Work.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Popup\lectureDetail.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Popup\loaReturnMsg.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Popup\rehabReturnMsg.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Popup\TransferReturnMsg.xfdl" checksum="20220507190225" errormsg=""/>
+      <File url="Popup\writeNotice.xfdl" checksum="20220513125040" errormsg=""/>
+      <File url="Popup\writeInfo.xfdl" checksum="20220509223746" errormsg=""/>
+      <File url="Popup\modifyInfo.xfdl" checksum="20220510101804" errormsg=""/>
+      <File url="Base\lib_filetransupdown.xjs" checksum="20220510162139" errormsg=""/>
     </Info>
   </GenInfo>
 </root>

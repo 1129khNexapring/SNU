@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_proInfo" width="1080" height="670" titletext="New Form">
+  <Form id="frm_proInfo" width="1080" height="670" titletext="New Form" onload="frm_proInfo_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
         <Div id="grid_detail" taborder="0" left="90" top="70" width="460" height="521" background="lightgray" text="">
@@ -12,10 +12,10 @@
               <Static id="Static00_02" taborder="3" text="이메일" left="40" top="268" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_03" taborder="4" text="연락처" left="40" top="343" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_04" taborder="5" text="성별" left="40" top="193" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Edit id="Edit00_00" taborder="6" left="210" top="123" width="198" height="35" readonly="true" color="black" background="white"/>
-              <Edit id="Edit00_00_00_00" taborder="7" left="210" top="273" width="198" height="35" color="black" readonly="true" background="white"/>
-              <Edit id="Edit00_00_00_00_00" taborder="8" left="210" top="348" width="198" height="35" readonly="true" color="black" background="white"/>
-              <Edit id="Edit00_00_00_00_00_00" taborder="9" left="210" top="423" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="edt_name" taborder="6" left="210" top="123" width="198" height="35" readonly="true" color="black" background="white" enable="false"/>
+              <Edit id="edt_email" taborder="7" left="210" top="273" width="198" height="35" color="black" readonly="true" background="white"/>
+              <Edit id="edt_phone" taborder="8" left="210" top="348" width="198" height="35" readonly="true" color="black" background="white"/>
+              <Edit id="edt_address" taborder="9" left="210" top="423" width="198" height="35" readonly="true" color="black" background="white"/>
               <Radio id="rdo_gender" taborder="10" left="212" top="201" width="198" height="40" onitemchanged="grid_detail_rdo_gender_onitemchanged" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" enable="false" color="black">
                 <Dataset id="innerdataset">
                   <ColumnInfo>
@@ -38,7 +38,7 @@
                   </Rows>
                 </Dataset>
               </Radio>
-              <MaskEdit id="mskedt_pCode" taborder="11" left="209" top="50" width="199" height="37" readonly="true" color="black" background="white" format="A###" type="string"/>
+              <MaskEdit id="mskedt_pCode" taborder="11" left="209" top="50" width="199" height="37" readonly="true" color="black" background="white" format="P###" type="string" enable="false"/>
             </Layout>
           </Layouts>
         </Div>
@@ -48,10 +48,52 @@
     <Bind>
       <BindItem id="item0" compid="grid_detail.form.rdo_gender" propid="value" datasetid="ds_prof" columnid="pGender"/>
       <BindItem id="item1" compid="grid_detail.form.mskedt_pCode" propid="value" datasetid="ds_prof" columnid="pCode"/>
-      <BindItem id="item2" compid="grid_detail.form.Edit00_00" propid="value" datasetid="ds_prof" columnid="pName"/>
-      <BindItem id="item3" compid="grid_detail.form.Edit00_00_00_00" propid="value" datasetid="ds_prof" columnid="pEmail"/>
-      <BindItem id="item4" compid="grid_detail.form.Edit00_00_00_00_00" propid="value" datasetid="ds_prof" columnid="pPhone"/>
-      <BindItem id="item5" compid="grid_detail.form.Edit00_00_00_00_00_00" propid="value" datasetid="ds_prof" columnid="pAddress"/>
+      <BindItem id="item2" compid="grid_detail.form.edt_name" propid="value" datasetid="ds_prof" columnid="pName"/>
+      <BindItem id="item3" compid="grid_detail.form.edt_email" propid="value" datasetid="ds_prof" columnid="pEmail"/>
+      <BindItem id="item4" compid="grid_detail.form.edt_phone" propid="value" datasetid="ds_prof" columnid="pPhone"/>
+      <BindItem id="item5" compid="grid_detail.form.edt_address" propid="value" datasetid="ds_prof" columnid="pAddress"/>
     </Bind>
+    <Objects>
+      <Dataset id="ds_prof">
+        <ColumnInfo>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
+          <Column id="pPassword" type="STRING" size="256"/>
+          <Column id="pRrn" type="STRING" size="256"/>
+          <Column id="pAddress" type="STRING" size="256"/>
+          <Column id="pEmail" type="STRING" size="256"/>
+          <Column id="pGender" type="STRING" size="256"/>
+          <Column id="pPhone" type="STRING" size="256"/>
+          <Column id="pAddmission" type="STRING" size="256"/>
+          <Column id="advisorYN" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.frm_proInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"prof_select"
+		,"SnuUrl::prof/selectProfBypCode.snu"
+		,""
+		,"ds_prof=out_prof"
+		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val") 
+		,"fn_callback_tran" 
+	);
+};
+
+
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	if(id == "prof_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("조회 실패 : " + sErrorMsg);
+			return;
+		}
+	}
+};]]></Script>
   </Form>
 </FDL>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="timetableMapper">
+  	<resultMap type="Timetable" id="timetableResultMap">
+  		<id 	property="semester" column="SEMESTER"/>
+  		<result property="year" 	column="YEAR"/>
+  		<result property="lsDay" 	column="LS_DAY"/>
+  		<result property="lsDay1" 	column="LS_DAY1"/>
+  		<result property="lsRoom" 	column="LS_ROOM"/>
+  		<result property="lName" 	column="L_NAME"/>
+  	</resultMap>
+  	<select id="selectTimetable" resultMap="timetableResultMap">
+  		SELECT SEMESTER, YEAR, LS_DAY, LS_DAY1, LS_ROOM, L_NAME FROM ENROLL_LECTURE
+		JOIN L_SCHEDULE USING(L_CODE)
+		JOIN LECTURE USING(L_CODE)
+		WHERE S_CODE = #{inVar1 }
+  	</select>
+  </mapper>

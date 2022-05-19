@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.ttt.snu.book.domain.Book;
 import org.ttt.snu.enrollLecture.domain.EnrollLectureDomain;
 import org.ttt.snu.grade.domain.Grade;
 import org.ttt.snu.grade.domain.ScoreList;
+import org.ttt.snu.grade.service.GradeService;
 import org.ttt.snu.grade.service.logic.GradeServiceImpl;
+import org.ttt.snu.lecture.domain.Lecture;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
@@ -19,6 +22,10 @@ public class GradeController {
 	
 	@Autowired
 	private GradeServiceImpl gService;
+	
+	@Autowired
+	private GradeService ggService;
+
 	
 	// 강의평가 조회
 	@RequestMapping(value="/lectureScore/list.snu", method=RequestMethod.GET)
@@ -92,6 +99,26 @@ public class GradeController {
 		return null;
 	}
 		
-		
+	//학생 성적조회
+	@RequestMapping(value ="/grade/list.snu", method = RequestMethod.POST)
+	public NexacroResult printGrade(
+			@ParamVariable(name="inVar1") String sCode) {
+		int nErrorCode = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Lecture> lList = ggService.printGrade(sCode);
+		if (!lList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		} else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("out_grade", lList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+
 
 }

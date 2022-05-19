@@ -1,5 +1,9 @@
 package org.ttt.snu.lecture.domain;
 
+import java.util.List;
+
+import org.ttt.snu.grade.domain.Grade;
+
 public class Lecture {
 	private String lCode;
 	private String lType;
@@ -15,7 +19,7 @@ public class Lecture {
 	private String lStatus;
 	private String pCode;
 	private String dCode;
-	
+
 	public Lecture() {}
 
 	public Lecture(String lCode, String lType, String lName, String lObjective, String lContents, String textbook,

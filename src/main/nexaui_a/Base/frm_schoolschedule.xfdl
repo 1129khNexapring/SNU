@@ -32,6 +32,38 @@
         <Button id="Button01" taborder="2" text="초기화" left="852" top="136" width="119" height="35" onclick="Button01_onclick"/>
         <Button id="Button02" taborder="3" text="저장" left="856" top="250" width="116" height="45" onclick="Button02_onclick"/>
         <TextArea id="TextArea00" taborder="4" left="325" top="275" width="516" height="326"/>
+        <Button id="Button03" taborder="5" text="Button03" left="175" top="266" width="100" height="35" onclick="Button03_onclick"/>
+        <Grid id="Grid01" taborder="6" left="190" top="370" width="522" height="205" binddataset="dsSchedule">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="acNo"/>
+                <Cell col="1" text="aCode"/>
+                <Cell col="2" text="acTitle"/>
+                <Cell col="3" text="startDate"/>
+                <Cell col="4" text="endDate"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:acNo"/>
+                <Cell col="1" text="bind:aCode"/>
+                <Cell col="2" text="bind:acTitle"/>
+                <Cell col="3" text="bind:startDate"/>
+                <Cell col="4" text="bind:endDate"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
     <Objects>
@@ -58,6 +90,15 @@
             <Col id="Column1">22</Col>
           </Row>
         </Rows>
+      </Dataset>
+      <Dataset id="dsSchedule">
+        <ColumnInfo>
+          <Column id="acNo" type="INT" size="256"/>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="acTitle" type="STRING" size="256"/>
+          <Column id="startDate" type="STRING" size="256"/>
+          <Column id="endDate" type="STRING" size="256"/>
+        </ColumnInfo>
       </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.sFileUrl = nexacro.getEnvironment().services["SnuURL"].url+"/uploadFiles.snu"; //http://127.0.0.1:7776
@@ -218,6 +259,7 @@ this.fn_FileClear = function()
 	//파일정보 모두 삭제
 	this.dsFileList.clearData();
 }
+
 ]]></Script>
   </Form>
 </FDL>

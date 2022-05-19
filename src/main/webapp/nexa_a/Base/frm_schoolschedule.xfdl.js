@@ -27,6 +27,11 @@
             this.addChild(obj.name, obj);
 
 
+            obj = new Dataset("dsSchedule", this);
+            obj._setContents("<ColumnInfo><Column id=\"acNo\" type=\"INT\" size=\"256\"/><Column id=\"aCode\" type=\"STRING\" size=\"256\"/><Column id=\"acTitle\" type=\"STRING\" size=\"256\"/><Column id=\"startDate\" type=\"STRING\" size=\"256\"/><Column id=\"endDate\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
             obj = new FileDialog("FileDialog00", this);
             this.addChild(obj.name, obj);
 
@@ -58,6 +63,17 @@
 
             obj = new TextArea("TextArea00","325","275","516","326",null,null,null,null,null,null,this);
             obj.set_taborder("4");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button03","175","266","100","35",null,null,null,null,null,null,this);
+            obj.set_taborder("5");
+            obj.set_text("Button03");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid01","190","370","522","205",null,null,null,null,null,null,this);
+            obj.set_taborder("6");
+            obj.set_binddataset("dsSchedule");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"acNo\"/><Cell col=\"1\" text=\"aCode\"/><Cell col=\"2\" text=\"acTitle\"/><Cell col=\"3\" text=\"startDate\"/><Cell col=\"4\" text=\"endDate\"/></Band><Band id=\"body\"><Cell text=\"bind:acNo\"/><Cell col=\"1\" text=\"bind:aCode\"/><Cell col=\"2\" text=\"bind:acTitle\"/><Cell col=\"3\" text=\"bind:startDate\"/><Cell col=\"4\" text=\"bind:endDate\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -237,6 +253,26 @@
         	this.dsFileList.clearData();
         }
 
+        this.Button03_onclick = function(obj,e)
+        {
+        	this.transaction(
+        	"tr_scList"
+        	,"SnuURL::calendar/list.snu"
+        	,""
+        	,"dsSchedule=outSchedule"
+        	,""
+        	,"fn_callback_sc"
+        	)
+        };
+
+        this.fn_callback_sc = function(sId, nErrorCode, sErrorMsg)
+        {
+        	if(sId == "tr_scList")
+        	{
+
+        	}
+        }
+
         });
         
         // Regist UI Components Event
@@ -247,6 +283,7 @@
             this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
             this.Button01.addEventHandler("onclick",this.Button01_onclick,this);
             this.Button02.addEventHandler("onclick",this.Button02_onclick,this);
+            this.Button03.addEventHandler("onclick",this.Button03_onclick,this);
             this.FileDialog00.addEventHandler("onclose",this.FileDialog00_onclose,this);
             this.FileUpTransfer00.addEventHandler("onsuccess",this.FileUpTransfer00_onsuccess,this);
             this.FileUpTransfer00.addEventHandler("onprogress",this.FileUpTransfer00_onprogress,this);
