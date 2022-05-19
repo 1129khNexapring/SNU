@@ -146,7 +146,7 @@
           <Col id="FORM_URL">Base::frm_helpcareer.xfdl</Col>
         </Row>
         <Row>
-          <Col id="LIST">계절학기 관리</Col>
+          <Col id="LIST">수강 관리</Col>
           <Col id="LEVEL">0</Col>
           <Col id="LIST_ID">90</Col>
         </Row>
@@ -161,6 +161,12 @@
           <Col id="LEVEL">1</Col>
           <Col id="LIST_ID">9020</Col>
           <Col id="FORM_URL">Base::frm_seasoncareer.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="LIST_ID">9030</Col>
+          <Col id="LIST">수강신청</Col>
+          <Col id="LEVEL">1</Col>
+          <Col id="FORM_URL">Base::frm_class.xfdl</Col>
         </Row>
         <Row>
           <Col id="LIST">마이페이지 관리</Col>

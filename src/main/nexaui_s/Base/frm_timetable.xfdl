@@ -3,44 +3,7 @@
   <Form id="frm_timetable" width="1080" height="670" titletext="New Form" onload="frm_timetable_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="Grid00" taborder="0" left="53" top="310" width="497" height="162" binddataset="dsTimetable" autofittype="col">
-          <Formats>
-            <Format id="default">
-              <Columns>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-              </Columns>
-              <Rows>
-                <Row band="head" size="24"/>
-                <Row size="24"/>
-              </Rows>
-              <Band id="head">
-                <Cell text="semester"/>
-                <Cell col="1" text="year"/>
-                <Cell col="2" text="lsDay"/>
-                <Cell col="3" text="lsDay1"/>
-                <Cell col="4" text="lsRoom"/>
-                <Cell col="5" text="lName"/>
-                <Cell col="6" text="sCode"/>
-              </Band>
-              <Band id="body">
-                <Cell text="bind:semester"/>
-                <Cell col="1" text="bind:year"/>
-                <Cell col="2" text="bind:lsDay"/>
-                <Cell col="3" text="bind:lsDay1"/>
-                <Cell col="4" text="bind:lsRoom"/>
-                <Cell col="5" text="bind:lName"/>
-                <Cell col="6" text="bind:sCode"/>
-              </Band>
-            </Format>
-          </Formats>
-        </Grid>
-        <Grid id="Grid01" taborder="1" left="129" top="43" width="411" height="257" binddataset="timetable" autofittype="col">
+        <Grid id="Grid01" taborder="0" left="395" top="180" width="411" height="257" binddataset="timetable" autofittype="col">
           <Formats>
             <Format id="default">
               <Columns>
@@ -76,11 +39,11 @@
         </Grid>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[this.Monday = this.timetable.getColID(1);
-this.Tuesday = this.timetable.getColID(2);
-this.Wednesday = this.timetable.getColID(3);
-this.Thursday = this.timetable.getColID(4);
-this.Friday = this.timetable.getColID(5);
+    <Script type="xscript5.1"><![CDATA[this.Monday = this.timetable.getColID(1);	//월요일
+this.Tuesday = this.timetable.getColID(2);	//화요일
+this.Wednesday = this.timetable.getColID(3);//수요일
+this.Thursday = this.timetable.getColID(4);	//목요일
+this.Friday = this.timetable.getColID(5);	//금요일
 
 this.frm_timetable_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
@@ -89,7 +52,7 @@ this.frm_timetable_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	"tr_timetable"
 	,"SnuURL::timetable/list.snu"
 	,""
-	,"dsTimetable=outTimetable"
+	,"dsTimetable=outTimetable dsTimetable01=outTimetable"
 	,"in_Var1="+name+""
 	,"fn_callback_tt"
 	)
@@ -103,74 +66,114 @@ this.fn_callback_tt = function(sId, nErrorCode, sErrorMsg)
 		{
 			return;
 		}
-		//데이터가 있는 경우
-		//먼저 2022년 1학기부터 구분
-		var dRow = this.dsTimetable.getRowCount(); //dRow = 3
-		for(var i = 0; i<dRow; i++)// 3줄을 탐방
-		{	
-			//첫번째 열을 볼텐데..
-			var lsDay = this.dsTimetable.getColumn(i,"lsDay");
-			//var lsDay1 = this.dsTimetable.getColumn(i,"lsDay1");
-			var lName = this.dsTimetable.getColumn(i,"lName");
-			var Days = lsDay.split(",");
-			var Day = Days[0]; //월
-			var time00 = Days[1]; //1
-			var time01 = Days[2];
-			//월요일,1
-			//수요일1,2
-			//월요일,3		
-			if(this.Monday == Day)
-			{
-					var expr = this.Monday == Day;
-					var tRow = this.dsTimetable.findRowExpr(expr);
-					
-				
-				this.timetable.setColumn(time00-1,1,lName);
-				//월1, 월3 등록완료
-				//만약에 월1,2면 어떻게 처리할 것인가? 이때는 time01이 2값이 될 것
-				if(time01 > 0)
-				{
-					this.timetable.setColumn(time01-1,1,lName);
-				}
-				
-				
-			}
-			if(this.Tuesday == Day)
-			{
-				this.timetable.setColumn(time00-1,2,lName);
-				if(time01 > 0)
-				{
-					this.timetable.setColumn(time01-1,2,lName);
-				}
-			}
-			
-			if(this.Wednesday == Day)
-			{
-				this.timetable.setColumn(time00-1,3,lName);
-				if(time01 > 0)
-				{
-					this.timetable.setColumn(time01-1,3,lName);
-				}
-			}
-			if(this.Thursday == Day)
-			{
-				this.timetable.setColumn(time00-1,4,lName);
-				if(time01>0)
-				{
-					this.timetable.setColumn(time01-1,4,lName);
-				}
-			}
-			if(this.Friday == Day)
-			{
-				this.timetable.setColumn(time00-1,5,lName);
-				if(time01>0)
-				{
-					this.timetable.setColumn(time01-1,5,lName);
-				}
-			}
-			
 		
+		var dRow = this.dsTimetable.getRowCount(); 
+		for(var i = 0; i<dRow; i++)
+		{	
+			var lName 	= this.dsTimetable.getColumn(i,"lName");
+			var lsDay 	= this.dsTimetable.getColumn(i,"lsDay");
+			var Days 	= lsDay.split(",");
+			if(this.Monday == Days[0])
+			{
+				this.timetable.setColumn(Days[1]-1,1,lName);
+				if(Days[2] > 0)
+				{
+					this.timetable.setColumn(Days[2]-1,1,lName);
+				}
+				
+			}
+			if(this.Tuesday == Days[0])
+			{
+				this.timetable.setColumn(Days[1]-1,2,lName);
+				if(Days[2] > 0)
+				{
+					this.timetable.setColumn(Days[2]-1,2,lName);
+				}
+			}
+			if(this.Wednesday == Days[0])
+			{
+				this.timetable.setColumn(Days[1]-1,3,lName);
+				if(Days[2] > 0)
+				{
+					this.timetable.setColumn(Days[2]-1,3,lName);
+				}
+			}
+			if(this.Thursday == Days[0])
+			{
+				this.timetable.setColumn(Days[1]-1,4,lName);
+				if(Days[2] > 0)
+				{
+					this.timetable.setColumn(Days[2]-1,4,lName);
+				}
+			}
+			if(this.Friday == Days[0])
+			{
+				this.timetable.setColumn(Days[1]-1,5,lName);
+				if(Days[2] > 0)
+				{
+					this.timetable.setColumn(Days[2]-1,5,lName);
+				}
+			}
 		}
+		var rRow = this.dsTimetable01.getRowCount();
+		for(var j=0; j<rRow; j++)
+		{
+			var name = this.dsTimetable01.getColumn(j,"lName");
+			var lsDay1 = this.dsTimetable01.getColumn(j,"lsDay1");
+			if (lsDay1 != null)
+			{
+				var Days1 = lsDay1.split(",");
+				if(this.Monday == Days1[0])
+				{
+					this.timetable.setColumn(Days1[1]-1,1,name);
+					if(Days1[2] > 0)
+					{
+						this.timetable.setColumn(Days1[2]-1,1,name);
+					}
+				}
+				if(this.Tuesday == Days1[0])
+				{
+					this.timetable.setColumn(Days1[1]-1,2,name);
+					if(Days1[2] > 0)
+					{
+						this.timetable.setColumn(Days1[2]-1,2,name);
+					}
+				}
+				if(this.Wednesday == Days1[0])
+				{
+					this.timetable.setColumn(Days1[1]-1,3,name);
+					if(Days1[2] > 0)
+					{
+						this.timetable.setColumn(Days1[2]-1,3,name);
+					}
+				}
+				if(this.Thursday == Days1[0])
+				{
+					this.timetable.setColumn(Days1[1]-1,4,name);
+					if(Days1[2] > 0)
+					{
+						this.timetable.setColumn(Days1[2]-1,4,name);
+					}
+				}
+				if(this.Friday == Days1[0])
+				{
+					this.timetable.setColumn(Days1[1]-1,5,name);
+					if(Days1[2] > 0)
+					{
+						this.timetable.setColumn(Days1[2]-1,5,name);
+					}
+				}
+			}
+			else if(lsDay1 == null)
+			{
+				continue;
+			}
+		}
+		
+		
+		
+		
+		
 		
 		
 		
@@ -237,6 +240,17 @@ this.fn_callback_tt = function(sId, nErrorCode, sErrorMsg)
             <Col id="교시">9</Col>
           </Row>
         </Rows>
+      </Dataset>
+      <Dataset id="dsTimetable01">
+        <ColumnInfo>
+          <Column id="semester" type="INT" size="256"/>
+          <Column id="year" type="INT" size="256"/>
+          <Column id="lsDay" type="STRING" size="256"/>
+          <Column id="lsDay1" type="STRING" size="256"/>
+          <Column id="lsRoom" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
       </Dataset>
     </Objects>
   </Form>
