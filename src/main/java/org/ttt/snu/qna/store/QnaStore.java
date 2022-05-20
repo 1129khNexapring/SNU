@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.ttt.snu.qna.domain.Qna;
+import org.ttt.snu.qna.domain.QnaReply;
 
 public interface QnaStore {
 
@@ -12,5 +13,7 @@ public interface QnaStore {
 	int updateCount(SqlSession sqlSession, Qna qna);
 
 	int registerQna(SqlSession sqlSession, Qna qna);
+
+	List<QnaReply> printAllQnaReply(SqlSession sqlSession, int qnaNo);
 
 }
