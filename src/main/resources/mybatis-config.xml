@@ -36,7 +36,7 @@
 		<typeAlias type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" alias="RequestVolunteer"/>
 
 		<typeAlias type="org.ttt.snu.qna.domain.Qna" alias="Qna"/>
-
+			<typeAlias type="org.ttt.snu.qna.domain.QnaReply" alias="QnaReply"/>
 
 		<typeAlias type="org.ttt.snu.timetable.domain.Timetable" alias="Timetable"/>
 

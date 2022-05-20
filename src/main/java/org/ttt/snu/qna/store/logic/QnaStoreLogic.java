@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.ttt.snu.qna.domain.Qna;
+import org.ttt.snu.qna.domain.QnaReply;
 import org.ttt.snu.qna.store.QnaStore;
 
 @Repository
@@ -30,6 +31,12 @@ public class QnaStoreLogic implements QnaStore {
 	public int registerQna(SqlSession sqlSession, Qna qna) {
 		int result = sqlSession.insert("QnaMapper.registerQna", qna);
 		return result;
+	}
+
+	@Override
+	public List<QnaReply> printAllQnaReply(SqlSession sqlSession, int qnaNo) {
+		List<QnaReply> qnaReply = sqlSession.selectList("QnaMapper.qnaReplyList", qnaNo);
+		return qnaReply;
 	}
 
 	

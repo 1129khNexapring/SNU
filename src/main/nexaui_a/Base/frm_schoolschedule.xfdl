@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
   <Form id="frm_schoolschedule" width="1280" height="720" titletext="New Form" onload="frm_schoolschedule_onload">
     <Layouts>
@@ -11,25 +11,22 @@
                 <Column size="80"/>
                 <Column size="80"/>
                 <Column size="80"/>
-                <Column size="80"/>
               </Columns>
               <Rows>
-                <Row band="head" size="24"/>
+                <Row size="24" band="head"/>
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="acNo"/>
-                <Cell col="1" text="aCode"/>
-                <Cell col="2" text="title"/>
-                <Cell col="3" text="startDate"/>
-                <Cell col="4" text="endDate"/>
+                <Cell text="일정번호"/>
+                <Cell col="1" text="제목"/>
+                <Cell col="2" text="시작일"/>
+                <Cell col="3" text="종료일"/>
               </Band>
               <Band id="body">
                 <Cell text="bind:acNo"/>
-                <Cell col="1" text="bind:aCode"/>
-                <Cell col="2" text="bind:title"/>
-                <Cell col="3" text="bind:startDate"/>
-                <Cell col="4" text="bind:endDate"/>
+                <Cell col="1" text="bind:title"/>
+                <Cell col="2" text="bind:startDate"/>
+                <Cell col="3" text="bind:endDate"/>
               </Band>
             </Format>
           </Formats>

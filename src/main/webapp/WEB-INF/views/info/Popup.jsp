@@ -32,6 +32,8 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
 	position: fixed;
 	left: 85%;
 	top: 48%;
+	width: 300px;
+    height: 400px;
 	transform: translate(-50%, -50%);
 	padding: 30px;
 	background: #fff;
@@ -57,6 +59,7 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
 	border: black solid 1px;
 	text-align: center;
 	text-decoration: none;
+	padding-top : 350px;
 }
 
 .layerPopup div {
@@ -69,7 +72,8 @@ font-family: SF Pro KR, SF Pro Display, SF Pro Icons, AOS Icons, Apple Gothic,
 	font-weight: 600;
 	weight: 100%;
 	height: 30px;
-	line-height: 30px
+	line-height: 30px;
+	padding-top:350px;
 }
 
 .layerPopup #close {
