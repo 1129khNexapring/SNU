@@ -2,6 +2,7 @@ package org.ttt.snu.academicCaldedar.service.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ttt.snu.academicCaldedar.domain.AcademicCalendar;
@@ -13,6 +14,8 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
 	@Autowired
 	private AcademicCalendarStore aStore;
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
 	public void addSchedule(AcademicCalendar academicCalendar) {
@@ -30,5 +33,6 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 	public void removeSchedule(String title) {
 		aStore.deleteSchedule(title);
 	}
+	
 
 }

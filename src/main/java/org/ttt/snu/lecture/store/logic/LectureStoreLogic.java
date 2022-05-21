@@ -53,6 +53,12 @@ public class LectureStoreLogic implements LectureStore{
 		return result;
 
 	}
+	//학생 - 수강신청 가능 강의 조회
+	@Override
+	public List<Lecture> selectEnrollLectureList(SqlSession sqlSession) {
+		List<Lecture> lList = sqlSession.selectList("LectureMapper.getLectureList");
+		return lList;
+	}
 	
 	
 

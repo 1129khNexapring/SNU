@@ -22,6 +22,8 @@ public interface LectureService {
 
 	public int registerLecture(Lecture lecture);
 
+	public List<Lecture> getLectureList();
+
 	
 	
 

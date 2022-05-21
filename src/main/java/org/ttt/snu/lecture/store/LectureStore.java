@@ -23,6 +23,8 @@ public interface LectureStore {
 
 	int insertLecture(SqlSession sqlSession, Lecture lecture);
 
+	List<Lecture> selectEnrollLectureList(SqlSession sqlSession);
+
 	
 
 }

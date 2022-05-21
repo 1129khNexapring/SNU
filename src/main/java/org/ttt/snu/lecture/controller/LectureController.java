@@ -231,9 +231,27 @@ public class LectureController {
 		}
 	}
 
-
-		
-		
+	//학생- 수강가능한 강의 조회
+	@RequestMapping(value="/canEnrollLecture/list.snu", method=RequestMethod.GET)
+	public NexacroResult getLectureList()
+	{
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		List<Lecture> lList = lService.getLectureList();
+		if(!lList.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addDataSet("outLecture", lList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
 	
 
 }

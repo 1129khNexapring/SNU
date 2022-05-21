@@ -35,7 +35,7 @@
 		<typeAlias type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" alias="RequestVolunteer"/>
 		<typeAlias type="org.ttt.snu.timetable.domain.Timetable" alias="Timetable"/>
 		<typeAlias type="org.ttt.snu.grade.domain.ScoreList" alias="ScoreList"/>
-
+		<typeAlias type="org.ttt.snu.courseCalendar.domain.courseCalendar" alias="courseCalendar"/>
 		<typeAlias type="org.ttt.snu.lectureEvaluation.domain.LectureEvaluation" alias="LectureEvaluation"/>
 		
 
@@ -70,5 +70,6 @@
 		<mapper resource="mappers/requestVolunteer-mapper.xml"/>
 		<mapper resource="mappers/lectureEvaluation-mapper.xml"/>
 		<mapper resource="mappers/timetable-mapper.xml"/>
+		<mapper resource="mappers/courseCalendar-mapper.xml"/>
 	</mappers>
 </configuration>

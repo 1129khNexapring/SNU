@@ -46,8 +46,7 @@ public class AcademicCalendarController {
 		
 		return null;
 	}
-	//일정 출력
-	
+	//일정 출력	
 	@RequestMapping(value = "/schedule.snu", method=RequestMethod.GET)
 	public String schdule(Model model) {
 		List<AcademicCalendar> aList = aService.showSchedule();

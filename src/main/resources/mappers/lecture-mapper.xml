@@ -75,8 +75,17 @@
 			</choose>
 		</where>
 	</select>
+	<select id="getLectureList" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE WHERE L_STATUS = 'Y'
+	</select>
+	
+	
 	<insert id="insertLecture">
 		INSERT INTO LECTURE VALUES(#{lCode}, #{lType}, #{lName}, #{lObjective}, #{lContents}, #{textbook}, #{lDays}, #{credit}, #{lYear}, #{lSemester}, #{lCapacity}, DEFAULT, #{pCode}, #{dCode})
+	</insert>
+	
+	<insert id="courseRegister">
+		INSERT INTO ENROLL_LECTURE VALUES(#{semester }, #{year }, #{sCode }, #{lCode })
 	</insert>
 	<update id="updateLectureStatus">
 		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE =

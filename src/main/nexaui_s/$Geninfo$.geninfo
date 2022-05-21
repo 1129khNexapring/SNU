@@ -10,7 +10,7 @@
     </Rule>
     <Info project="C:\Users\User\Desktop\SNU\src\main\nexaui_s\" generated="C:\Users\User\Documents\nexacro\17.1\outputs\Student\">
       <File url="environment.xml" checksum="20220429091055" errormsg=""/>
-      <File url="typedefinition.xml" checksum="20220515194634" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20220521072504" errormsg=""/>
       <File url="appvariables.xml" checksum="20220519095323" errormsg=""/>
       <File url="_resource_\_theme_\default\theme.xcss" checksum="20220429091055" errormsg=""/>
       <File url="C:\Program Files (x86)\nexacro\17.1\nexacro17lib\framework\Framework.json" checksum="20211110093728" errormsg=""/>
@@ -52,7 +52,8 @@
       <File url="Base\frm_seasoncareer.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\frm_seasonrequest.xfdl" checksum="20220429091056" errormsg=""/>
       <File url="Base\popup_lectureScore.xfdl" checksum="20220513152741" errormsg=""/>
-      <File url="Base\frm_class.xfdl" checksum="20220519100431" errormsg=""/>
+      <File url="Base\frm_class.xfdl" checksum="20220521103349" errormsg=""/>
+      <File url="Popup\EnrollLecture.xfdl" checksum="20220521113507" errormsg=""/>
     </Info>
   </GenInfo>
 </root>
