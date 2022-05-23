@@ -70,7 +70,7 @@
         {
         		this.transaction(
         		"tr_select"
-        		,"tttUrl::volunteer/list.snu"
+        		,"SnuURL::volunteer/list.snu"
         		,""
         		,"ds_vol=out_volunteer"
         		,""
@@ -94,7 +94,7 @@
 
         			this.transaction(
         					"tr_register"
-        					,"tttUrl::vol/request.snu"
+        					,"SnuURL::vol/request.snu"
         					,"in_vol=ds_requestVol:U"
         					,""
         					,""

@@ -25,6 +25,8 @@ public interface LectureStore {
 
 	List<Lecture> viewLecture(SqlSession sqlSession, String sCode);
 
+	List<Lecture> seasonList(SqlSession sqlSession, String sCode);
+
 	
 
 }

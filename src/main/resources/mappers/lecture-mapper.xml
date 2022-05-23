@@ -110,4 +110,9 @@
 		JOIN ENROLL_LECTURE EL ON(L.L_CODE = EL.L_CODE)
 		WHERE S_CODE = #{sCode}
 	</select>
+	
+	<!--  계절학기 조회   -->
+	<select id="seasonList" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE
+	</select>
 </mapper>

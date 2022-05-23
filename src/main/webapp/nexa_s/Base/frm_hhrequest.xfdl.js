@@ -145,7 +145,7 @@
         {
         	this.transaction(
                 	"tr_register"
-                	,"tttUrl::loa/request.snu"
+                	,"SnuURL::loa/request.snu"
                 	,"in_loa=ds_loa:U"
                 	,""
                 	,"inVar1="

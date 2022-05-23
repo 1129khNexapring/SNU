@@ -67,6 +67,11 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> vlList = lStore.viewLecture(sqlSession, sCode);
 		return vlList;
 	}
+	@Override
+	public List<Lecture> seaonList(String sCode) {
+		List<Lecture> lList = lStore.seasonList(sqlSession, sCode);
+		return lList;
+	}
 	
 
 }

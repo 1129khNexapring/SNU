@@ -170,7 +170,7 @@
         {
         	this.transaction(
                 		"tr_select"// 1.ID
-                		,"tttUrl::student/info.snu"// 2.URL
+                		,"SnuURL::student/info.snu"// 2.URL
                 		,"" // 3.InDs : F->S jsp(I,U,D)
                 		,"ds_student=out_student" // 4.OutDs : S->F jsp(SELECT)
                 		,"inVar1="+sCode // 5.InVar : F->S(var)
@@ -179,7 +179,7 @@
 
            this.transaction(
                 	"tr_studentDept"// 1.ID
-                	,"tttUrl::studentDept/list.snu"// 2.URL
+                	,"SnuURL::studentDept/list.snu"// 2.URL
                 	,"" // 3.InDs : F->S jsp(I,U,D)
                 	,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
                 	,"inVar1=" + sCode // 5.InVar : F->S(var)
@@ -200,7 +200,7 @@
         	{
         			this.transaction(
         				"tr_student"
-        				,"tttUrl::student/modify.snu"
+        				,"SnuURL::student/modify.snu"
         				,""
         				,""
         				,"inVar1=" + sCode + " inVar2=" + phone + " inVar3=" + nexacro.wrapQuote(address) + " inVar4=" + email

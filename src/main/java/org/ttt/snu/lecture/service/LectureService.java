@@ -24,6 +24,8 @@ public interface LectureService {
 
 	public List<Lecture> viewList(String sCode);
 
+	public List<Lecture> seaonList(String sCode);
+
 	
 	
 
