@@ -79,7 +79,7 @@
         {
         		this.transaction(
         		"tr_select"
-        		,"tttUrl::request/milList.snu"
+        		,"SnuURL::request/milList.snu"
         		,""
         		,"ds_mil=out_mil"
         		,"inVar1=" + sCode

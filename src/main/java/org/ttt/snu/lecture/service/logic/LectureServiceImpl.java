@@ -67,6 +67,12 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> vlList = lStore.viewLecture(sqlSession, sCode);
 		return vlList;
 	}
+
+	@Override
+	public List<Lecture> seaonList(String sCode) {
+		List<Lecture> lList = lStore.seasonList(sqlSession, sCode);
+		return lList;
+
 	//교수 - 강의 계획서 삭제
 	@Override
 	public int removeLecture(String lCode) {
@@ -78,6 +84,7 @@ public class LectureServiceImpl implements LectureService{
 	public int modifyLecture(Lecture lecture) {
 		int result = lStore.updateLecture(sqlSession, lecture);
 		return result;
+
 	}
 	
 

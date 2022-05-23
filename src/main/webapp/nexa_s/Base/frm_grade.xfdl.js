@@ -60,7 +60,7 @@
         {
         	this.transaction(
                 		"tr_select"
-                		,"tttUrl::grade/list.snu"
+                		,"SnuURL::grade/list.snu"
                 		,""
                 		,"ds_grade=out_grade"
                 		,"inVar1=" +sCode

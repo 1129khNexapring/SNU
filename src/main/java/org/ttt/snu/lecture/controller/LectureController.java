@@ -143,6 +143,28 @@ public class LectureController {
 		return result;
 	}
 	
+	//학생 - 계절학기조회화면
+	@RequestMapping(value="/season/list.snu", method=RequestMethod.POST)
+	public NexacroResult seasonList(
+			@ParamVariable(name="inVar1") String sCode) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<Lecture> lList = lService.seaonList(sCode);
+		System.out.println(lList);
+		if(!lList.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addDataSet("out_lecture", lList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
 	
 
 	//교수 - 강의 계획서 조회

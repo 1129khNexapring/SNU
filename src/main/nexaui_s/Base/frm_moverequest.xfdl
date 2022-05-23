@@ -42,7 +42,7 @@ this.frm_moverequest_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	this.transaction(
         	"tr_select"// 1.ID
-        	,"tttUrl::movedept/list.snu"// 2.URL
+        	,"SnuURL::movedept/list.snu"// 2.URL
         	,"" // 3.InDs : F->S jsp(I,U,D)
         	,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
         	,"inVar1=" + sCode // 5.InVar : F->S(var)
@@ -55,7 +55,7 @@ this.Combo00_onmouseenter = function(obj:nexacro.Combo,e:nexacro.MouseEventInfo)
 {
 	this.transaction(
 			"tr_selectDept"
-			,"tttUrl::allDept/list.snu"
+			,"SnuURL::allDept/list.snu"
 			,""
 			,"ds_allDept=outDept"
 			,""
@@ -83,7 +83,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	
 	this.transaction(
 			"tr_requestTransfer"
-			,"tttUrl::requestTran/list.snu"
+			,"SnuURL::requestTran/list.snu"
 			,"in_tran=ds_tran:U"
 			,""
 			,"inVar1="

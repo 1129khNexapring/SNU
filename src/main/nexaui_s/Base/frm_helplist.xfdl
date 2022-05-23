@@ -48,7 +48,7 @@ this.frm_helpLIst_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 		this.transaction(
 		"tr_select"
-		,"tttUrl::volunteer/list.snu"
+		,"SnuURL::volunteer/list.snu"
 		,""
 		,"ds_vol=out_volunteer"
 		,""
@@ -72,7 +72,7 @@ this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo
 	
 			this.transaction(
 					"tr_register"
-					,"tttUrl::vol/request.snu"
+					,"SnuURL::vol/request.snu"
 					,"in_vol=ds_requestVol:U"
 					,""
 					,""
