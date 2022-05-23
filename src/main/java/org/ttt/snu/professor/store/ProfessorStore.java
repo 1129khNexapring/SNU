@@ -10,4 +10,6 @@ public interface ProfessorStore {
 
 	List<Professor> selectProfessorListBydCode(SqlSession sqlSession, String dCode);
 
+	int updateProf(SqlSession sqlSession, Professor prof);
+
 }

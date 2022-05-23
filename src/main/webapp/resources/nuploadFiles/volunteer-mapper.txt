@@ -1,0 +1,14 @@
+<where>
+		<if test="dCode != 'undefined'.toString()">
+			D_CODE LIKE #{dCode }||'%' AND L_STATUS = 'Y'
+		</if>
+		<if test="lType != 'undefined'.toString()">
+			L_TYPE = #{lType } AND L_STATUS = 'Y'
+		</if>
+		<if test="dCode != 'undefined'.toString() and lType != 'undefined'.toString()">
+			D_CODE LIKE ${dCode }||'%' AND L_TYPE = ${lType } AND L_STATUS = 'Y'
+		</if>
+		<if test="dCode == 'undefined'.toString() and lType == 'undefined'.toString()">
+			L_STATUS = 'Y'
+		</if>
+	</where>		

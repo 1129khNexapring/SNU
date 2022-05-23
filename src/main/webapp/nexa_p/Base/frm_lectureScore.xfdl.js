@@ -31,7 +31,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_scoreList");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"교과목명\"/><Cell col=\"1\" text=\"담당교수\"/><Cell col=\"2\" text=\"평균(5점 만점)\"/></Band><Band id=\"body\"><Cell text=\"bind:lName\"/><Cell col=\"1\" text=\"bind:pName\"/><Cell col=\"2\" text=\"bind:leScore\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"교과목명\"/><Cell col=\"1\" text=\"담당교수\"/><Cell col=\"2\" text=\"평균(5점 만점)\"/></Band><Band id=\"body\"><Cell text=\"bind:lName\"/><Cell col=\"1\" text=\"bind:pName\"/><Cell col=\"2\" text=\"expr:leScore / 4\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this

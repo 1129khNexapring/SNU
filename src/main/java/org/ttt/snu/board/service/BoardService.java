@@ -14,7 +14,8 @@ public interface BoardService {
 	public List<Board> printAllSearch(PageInfo pi);
 	public int registerBoard(Board board);
 	public int modifyBoard(Board board);
-	public int removeBoard(String boardNo);
+	public int removeBoard(Board board);
+	public int updateBoardCnt(Board board);
 	
 	// 댓글 영역
 	public int printOneByNo(Integer boardNo);
@@ -22,7 +23,7 @@ public interface BoardService {
 	public List<Comments> printAllComments(int boardNo, String sCode);
 	public int registerComments(Comments comments);
 	public int modifyComments(Comments comments);
-	public int removeComments(int commentNo);
+	public int removeComments(Comments comments);
 
 	
 }

@@ -22,4 +22,10 @@ public class ProfessorStoreLogic implements ProfessorStore{
 		return pList;
 	}
 
+	@Override
+	public int updateProf(SqlSession sqlSession, Professor prof) {
+		int result = sqlSession.update("ProfessorMapper.updateProfInfo", prof);
+		return result;
+	}
+
 }

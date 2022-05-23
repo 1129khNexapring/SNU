@@ -29,24 +29,27 @@
 		SELECT * FROM BOARD 
 	</select>
 	<insert id="insertBoard">
-		INSERT INTO BOARD VALUES(B_SEQ_NO.NEXTVAL, #{board_title}, #{board_content}, DEFAULT, DEFAULT, 'P901', #{board_fileName}, #{board_fileReName}, #{board_writer}, #{board_count})
+		INSERT INTO BOARD VALUES(B_SEQ_NO.NEXTVAL, #{board_title}, #{board_content}, DEFAULT, DEFAULT, #{p_code}, #{board_writer}, #{board_count})
 	</insert>
 	<update id="updateBoard">
 		UPDATE BOARD SET BOARD_TITLE = #{board_title}, BOARD_CONTENT = #{board_content} WHERE BOARD_NO = #{board_no}
 	</update>
+	<update id="updateBoardCnt">
+		UPDATE BOARD SET BOARD_COUNT = BOARD_COUNT + 1 WHERE BOARD_NO = #{board_no}
+	</update>
 	<delete id="deleteBoard">
-		DELETE FROM BOARD WHERE BOARD_NO = #{boardNo}
+		DELETE FROM BOARD WHERE BOARD_NO = #{board_no}
 	</delete>
 	
 	
 	
 	<select id="selectAllComments" resultMap="commentsResultMap">
 		SELECT * FROM
-		(SELECT COMMENT_NO, S_NAME, COMMENT_CONTENT, COMMENT_DATE, S_CODE, BOARD_NO FROM COMMENTS JOIN STUDENT USING(S_CODE))
-		WHERE BOARD_NO = #{boardNo} AND S_CODE = #{sCode}
+		(SELECT COMMENT_NO, S_NAME, COMMENT_CONTENT, COMMENT_DATE, S_CODE, P_CODE, BOARD_NO FROM COMMENTS JOIN STUDENT USING(S_CODE))
+		WHERE BOARD_NO = #{boardNo} AND S_CODE = 'S001'
 	</select>
 	<insert id="insertComments">
-		INSERT INTO COMMENTS VALUES(C_SEQ_NO.NEXTVAL, #{comment_content}, SYSDATE, 'S001', null, #{board_no})
+		INSERT INTO COMMENTS VALUES(C_SEQ_NO.NEXTVAL, #{comment_content}, SYSDATE, null, #{p_code}, #{board_no})
 	</insert>
 	<update id="updateComments">
 		UPDATE COMMENTS SET COMMENT_CONTENT = #{comment_content} WHERE COMMENT_NO = #{comment_no}

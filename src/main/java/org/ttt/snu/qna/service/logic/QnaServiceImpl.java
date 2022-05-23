@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ttt.snu.qna.domain.Qna;
+import org.ttt.snu.qna.domain.QnaReply;
 import org.ttt.snu.qna.service.QnaService;
 import org.ttt.snu.qna.store.QnaStore;
 
@@ -34,6 +35,12 @@ public class QnaServiceImpl implements QnaService{
 	public int registerQna(Qna qna) {
 		int result = qStore.registerQna(sqlSession, qna);
 		return result;
+	}
+
+	@Override
+	public List<QnaReply> printAllQnaReply(int qnaNo) {
+		List<QnaReply> qnaReply = qStore.printAllQnaReply(sqlSession, qnaNo);
+		return qnaReply;
 	}
 
 }

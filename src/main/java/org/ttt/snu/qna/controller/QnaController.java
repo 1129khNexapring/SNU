@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.ttt.snu.board.domain.Comments;
 import org.ttt.snu.book.domain.Book;
 import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.qna.domain.Qna;
+import org.ttt.snu.qna.domain.QnaReply;
 import org.ttt.snu.qna.service.QnaService;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
@@ -86,6 +88,27 @@ public class QnaController {
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
+	}
+	@RequestMapping(value="qna")
+	public NexacroResult qnaReplyList(@ParamVariable(name="in_var1") int  qnaNo) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<QnaReply> qnaReply = qService.printAllQnaReply(qnaNo);
+		if(!qnaReply.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}	
+		result.addDataSet("out_qnaReply", qnaReply);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+		
+		
+	
 	}
 
 }

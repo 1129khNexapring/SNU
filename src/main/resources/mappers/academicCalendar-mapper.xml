@@ -17,13 +17,21 @@
   
   </select> 
   
-  <insert id="addSchedule" parameterType="AcademicCalendar">
+  <insert id="insertSchedule" parameterType="AcademicCalendar">
   	INSERT INTO ACADEMIC_CALENDAR(AC_NO, A_CODE, TITLE, START_DATE, END_DATE)
-  			VALUES(AC_NO.NEXTVAL, 'admin', #{title}, #{startDate}, #{endDate} )
+  			VALUES(AC_NO.NEXTVAL, 'admin', #{title}, #{startDate}, #{endDate})
   </insert>
   
   <delete id="deleteSchedule" >
   	DELETE FROM ACADEMIC_CALENDAR WHERE TITLE = ${title}
   </delete>
+  
+   <select id="selectScheduleList" resultMap="calendarResultMap">
+  	SELECT AC_NO, A_CODE, TITLE, START_DATE, END_DATE FROM ACADEMIC_CALENDAR
+  </select>
+  
+  <update id="updateSchedule" parameterType="AcademicCalendar">
+  UPDATE ACADEMIC_CALENDAR SET TITLE = #{title}, START_DATE = #{startDate}, END_DATE = #{endDate} WHERE AC_NO = #{acNo}
+  </update>
   </mapper>
 
