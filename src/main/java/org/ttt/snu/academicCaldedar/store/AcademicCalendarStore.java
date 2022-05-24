@@ -12,9 +12,12 @@ public interface AcademicCalendarStore {
 	void addSchedule(AcademicCalendar academicCalendar);
 
 	void deleteSchedule(String title);
-
 	
+	int registerSchedule(SqlSession sqlSession, AcademicCalendar calendar);
 
-	
+
+	List<AcademicCalendar> printAllSchedule();
+
+	int modifySchedule(SqlSession sqlSession, AcademicCalendar calendar);
 
 }

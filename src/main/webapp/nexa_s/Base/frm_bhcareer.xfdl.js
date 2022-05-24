@@ -83,7 +83,7 @@
         {
         	this.transaction(
                 		"tr_select"// 1.ID
-                		,"tttUrl::bb/list.snu"// 2.URL
+                		,"SnuURL::bb/list.snu"// 2.URL
                 		,"" // 3.InDs : F->S jsp(I,U,D)
                 		,"ds_rehab=out_rehab" // 4.OutDs : S->F jsp(SELECT)
                 		,"inVar1="+sCode // 5.InVar : F->S(var)
@@ -117,7 +117,7 @@
         						this.ds_rehab.deleteRow(row);
         						this.transaction(
         							"tr_delete"// 1.ID
-        							,"tttUrl::rehab/request.snu"// 2.URL
+        							,"SnuURL::rehab/request.snu"// 2.URL
         							,"in_rehab=ds_rehab:U" // 3.InDs : F->S jsp(I,U,D)
         							,"" // 4.OutDs : S->F jsp(SELECT)
         							,"inVar1="+sCode // 5.InVar : F->S(var)

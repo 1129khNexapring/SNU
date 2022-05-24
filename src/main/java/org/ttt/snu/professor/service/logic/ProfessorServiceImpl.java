@@ -29,4 +29,10 @@ public class ProfessorServiceImpl implements ProfessorService{
 		return pList;
 	}
 
+	@Override
+	public int modifyProf(Professor prof) {
+		int result = pStore.updateProf(sqlSession, prof);
+		return result;
+	}
+
 }

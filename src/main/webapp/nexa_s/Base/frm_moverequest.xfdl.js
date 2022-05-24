@@ -142,7 +142,7 @@
         {
         	this.transaction(
                 	"tr_select"// 1.ID
-                	,"tttUrl::movedept/list.snu"// 2.URL
+                	,"SnuURL::movedept/list.snu"// 2.URL
                 	,"" // 3.InDs : F->S jsp(I,U,D)
                 	,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
                 	,"inVar1=" + sCode // 5.InVar : F->S(var)
@@ -155,7 +155,7 @@
         {
         	this.transaction(
         			"tr_selectDept"
-        			,"tttUrl::allDept/list.snu"
+        			,"SnuURL::allDept/list.snu"
         			,""
         			,"ds_allDept=outDept"
         			,""
@@ -183,7 +183,7 @@
 
         	this.transaction(
         			"tr_requestTransfer"
-        			,"tttUrl::requestTran/list.snu"
+        			,"SnuURL::requestTran/list.snu"
         			,"in_tran=ds_tran:U"
         			,""
         			,"inVar1="

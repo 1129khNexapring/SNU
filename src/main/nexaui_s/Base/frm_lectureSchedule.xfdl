@@ -1,16 +1,185 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="frm_lectureSchedule" width="1080" height="670" titletext="New Form">
+  <Form id="frm_lectureSchedule" width="1080" height="670" titletext="New Form" onload="frm_lectureSchedule_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Button id="Button00" taborder="0" text="Button00" left="159" top="175" width="148" height="50" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="0" left="25" top="130" width="475" height="411" binddataset="ds_lecture" autofittype="col" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="226"/>
+                <Column size="80"/>
+                <Column size="84"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="과목명"/>
+                <Cell col="1" text="담당교수"/>
+                <Cell col="2" text="조회"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:lName" textAlign="center"/>
+                <Cell col="1" text="bind:pCode" textAlign="center" displaytype="combotext" combodataset="ds_professor" combocodecol="pCode" combodatacol="pName"/>
+                <Cell col="2" text="조회" textAlign="center" displaytype="buttoncontrol"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="1" text="Div00" left="510" top="131" width="566" height="409" border="1px solid" background="#f4f5ff">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="강의명" left="13" top="16" width="138" height="43" font="bold 14px/normal &quot;Gulim&quot;"/>
+              <Static id="Static00_00" taborder="1" text="날짜" left="13" top="109" width="138" height="43" font="bold 14px/normal &quot;Gulim&quot;"/>
+              <Static id="Static00_01" taborder="2" text="시간" left="13" top="202" width="138" height="43" font="bold 14px/normal &quot;Gulim&quot;"/>
+              <Static id="Static00_02" taborder="3" text="강의실" left="13" top="295" width="138" height="43" font="bold 14px/normal &quot;Gulim&quot;"/>
+              <Static id="Static00_02_00" taborder="4" text="강의코드" left="272" top="16" width="138" height="43" font="bold 14px/normal &quot;Gulim&quot;"/>
+              <Static id="static_lname" taborder="5" text="" left="76" top="24" width="136" height="30" border="1px solid" borderRadius="5px 5px 5px 5px" background="#ffffff" textAlign="center" fittocontents="none" wordWrap="char"/>
+              <Static id="static_ldate" taborder="6" text="" left="76" top="116" width="136" height="30" border="1px solid" borderRadius="5px" background="#ffffff" textAlign="center"/>
+              <Static id="static_ltime" taborder="7" text="" left="76" top="210" width="136" height="30" border="1px solid" borderRadius="5px" background="#ffffff" textAlign="center"/>
+              <Static id="static_lroom" taborder="8" text="" left="76" top="303" width="136" height="30" border="1px solid" borderRadius="5px" background="#ffffff" textAlign="center"/>
+              <Static id="static_lcode" taborder="9" text="" left="354" top="24" width="136" height="30" border="1px solid" borderRadius="5px" background="#ffffff" textAlign="center"/>
+              <Static id="Static01" taborder="10" text="*강의계획" left="273" top="120" width="77" height="27" onclick="Div00_Static01_onclick" font="bold 14px/normal &quot;Gulim&quot;"/>
+              <TextArea id="TextArea00" taborder="11" left="309" top="162" width="240" height="226"/>
+            </Layout>
+          </Layouts>
+        </Div>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+    <Script type="xscript5.1"><![CDATA[var sName = nexacro.getEnvironmentVariable("ev_Val1");
+var sCode = nexacro.getEnvironmentVariable("ev_Val");
+
+this.frm_lectureSchedule_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+        		"tr_select"// 1.ID
+        		,"SnuURL::lecture/viewlist.snu"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"ds_lecture=out_lecture" // 4.OutDs : S->F jsp(SELECT)
+        		,"inVar1="+sCode // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+				)
+};
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.cell==2){
+		var row =  this.ds_lecture.rowposition;
+		var lName = this.ds_lecture.getColumn(row, "lName");
+		var lCode = this.ds_lecture.getColumn(row, "lCode");
+		var lsDate =this.ds_lecture.getColumn(row, "lsDate");
+		var lTime = this.ds_lecture.getColumn(row, "lsDay");
+		var lsRoom = this.ds_lecture.getColumn(row, "lsRoom");
+		var lsContents = this.ds_lecture.getColumn(row, "lsContents");
+
+		this.Div00.form.static_lname.set_text(lName);
+		this.Div00.form.static_lcode.set_text(lCode);
+		this.Div00.form.static_ldate.set_text(lsDate);
+		this.Div00.form.static_ltime.set_text(lTime);
+		this.Div00.form.static_lroom.set_text(lsRoom);
+		this.Div00.form.TextArea00.set_text(lsContents);
+	}
+};
+
+this.Div00_Static01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
 	
 };
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_lschedule">
+        <ColumnInfo>
+          <Column id="lsNo" type="STRING" size="256"/>
+          <Column id="lsDate" type="STRING" size="256"/>
+          <Column id="lsContents" type="STRING" size="256"/>
+          <Column id="lsDay" type="STRING" size="256"/>
+          <Column id="lsDay1" type="STRING" size="256"/>
+          <Column id="lsRoom" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_lecture">
+        <ColumnInfo>
+          <Column id="lsNo" type="STRING" size="256"/>
+          <Column id="lsDate" type="STRING" size="256"/>
+          <Column id="lsDay" type="STRING" size="256"/>
+          <Column id="lsDay1" type="STRING" size="256"/>
+          <Column id="lsRoom" type="STRING" size="256"/>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lsContents" type="STRING" size="256"/>
+          <Column id="lDays" type="INT" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_professor">
+        <ColumnInfo>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="pName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="pCode">P060</Col>
+            <Col id="pName">김진섭</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P901</Col>
+            <Col id="pName">김병수</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P002</Col>
+            <Col id="pName">김제니</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P009</Col>
+            <Col id="pName">고출봉</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P061</Col>
+            <Col id="pName">한상훈</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P902</Col>
+            <Col id="pName">이철헌</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P100</Col>
+            <Col id="pName">김병국</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P062</Col>
+            <Col id="pName">함덕수</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P101</Col>
+            <Col id="pName">지경노</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P030</Col>
+            <Col id="pName">이철용</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P031</Col>
+            <Col id="pName">권백종</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P032</Col>
+            <Col id="pName">박주희</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P033</Col>
+            <Col id="pName">김기백</Col>
+          </Row>
+          <Row>
+            <Col id="pCode">P034</Col>
+            <Col id="pName">황태석</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

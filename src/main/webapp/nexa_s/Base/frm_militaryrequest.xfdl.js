@@ -164,7 +164,7 @@
         {
         	this.transaction(
                 	"tr_select"// 1.ID
-                	,"tttUrl::military/list.snu"// 2.URL
+                	,"SnuURL::military/list.snu"// 2.URL
                 	,"" // 3.InDs : F->S jsp(I,U,D)
                 	,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
                 	,"inVar1=" + sCode // 5.InVar : F->S(var)
@@ -187,7 +187,7 @@
 
         	this.transaction(
         			"tr_requestMil"
-        			,"tttUrl::requestMil/list.snu"
+        			,"SnuURL::requestMil/list.snu"
         			,"in_mil=ds_mil:U"
         			,""
         			,""

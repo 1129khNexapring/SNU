@@ -43,9 +43,12 @@
     <Service prefixid="font" type="resource" url="./_resource_/_font_/" version="0" cachelevel="session" include_subdir="false"/>
     <Service prefixid="Base" type="form" url="./Base/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="FrameBase" type="form" url="./FrameBase/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+
+    <Service prefixid="SnuURL" type="JSP" version="0" cachelevel="session" include_subdir="false" communicationversion="0" url="http://127.0.0.1:9396"/>
+
     <Service prefixid="tttUrl" type="JSP" version="0" cachelevel="session" include_subdir="false" communicationversion="0" url="http://127.0.0.1:8881"/>
     <Service prefixid="SnuURL" type="JSP" version="0" cachelevel="session" include_subdir="false" communicationversion="0" url="http://127.0.0.1:7776"/>
-    <Service prefixid="Popup" type="form" url="./Popup/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+
   </Services>
   <Protocols/>
   <DeviceAdaptors/>

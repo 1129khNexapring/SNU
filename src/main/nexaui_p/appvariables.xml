@@ -55,7 +55,19 @@
           <Col id="MENU_ID">50</Col>
           <Col id="MENU_NAME">강의 스케줄 관리</Col>
           <Col id="MENU_LEVEL">0</Col>
-          <Col id="FORM_URL">Base::frm_lectureScheduler.xfdl</Col>
+          <Col id="FORM_URL"></Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">5010</Col>
+          <Col id="FORM_URL">Base::frm_lectureSchedule.xfdl</Col>
+          <Col id="MENU_LEVEL">1</Col>
+          <Col id="MENU_NAME">강의 스케줄 조회</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">5020</Col>
+          <Col id="MENU_LEVEL">1</Col>
+          <Col id="MENU_NAME">강의 스케줄 등록</Col>
+          <Col id="FORM_URL">Base::frm_lectureScheduleWriteForm.xfdl</Col>
         </Row>
         <Row>
           <Col id="MENU_ID">60</Col>
@@ -67,7 +79,7 @@
           <Col id="MENU_ID">70</Col>
           <Col id="MENU_NAME">강의 관리</Col>
           <Col id="MENU_LEVEL">0</Col>
-          <Col id="FORM_URL"></Col>
+          <Col id="FORM_URL"/>
         </Row>
         <Row>
           <Col id="MENU_ID">7010</Col>

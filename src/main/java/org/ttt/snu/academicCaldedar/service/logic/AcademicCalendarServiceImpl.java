@@ -14,6 +14,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
 	@Autowired
 	private AcademicCalendarStore aStore;
+
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -34,5 +35,24 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 		aStore.deleteSchedule(title);
 	}
 	
+
+	@Override
+	public int registerSchedule(AcademicCalendar calendar) {
+		int result = aStore.registerSchedule(sqlSession, calendar);
+		return result;
+		
+	}
+
+	@Override
+	public List<AcademicCalendar> printAllSchedule() {
+		List<AcademicCalendar> aList = aStore.printAllSchedule();
+		return aList;
+	}
+
+	@Override
+	public int modifySchedule(AcademicCalendar calendar) {
+		int result = aStore.modifySchedule(sqlSession, calendar);
+		return result;
+	}
 
 }

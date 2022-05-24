@@ -107,7 +107,7 @@
         	var row =  this.ds_loa.rowposition;
         		this.transaction(
                 		"tr_select"// 1.ID
-                		,"tttUrl::hh/list.snu"// 2.URL
+                		,"SnuURL::hh/list.snu"// 2.URL
                 		,"" // 3.InDs : F->S jsp(I,U,D)
                 		,"ds_loa=out_loa" // 4.OutDs : S->F jsp(SELECT)
                 		,"inVar1="+sCode // 5.InVar : F->S(var)
@@ -148,7 +148,7 @@
         						this.ds_loa.deleteRow(row);
         						this.transaction(
         							"tr_delete"// 1.ID
-        							,"tttUrl::loa/request.snu"// 2.URL
+        							,"SnuURL::loa/request.snu"// 2.URL
         							,"in_loa=ds_loa:U" // 3.InDs : F->S jsp(I,U,D)
         							,"" // 4.OutDs : S->F jsp(SELECT)
         							,"inVar1="+sCode // 5.InVar : F->S(var)

@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_boardList", this);
-            obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileName\" type=\"STRING\" size=\"256\"/><Column id=\"board_fileReName\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"board_no\" type=\"STRING\" size=\"256\"/><Column id=\"board_title\" type=\"STRING\" size=\"256\"/><Column id=\"board_content\" type=\"STRING\" size=\"256\"/><Column id=\"board_date\" type=\"STRING\" size=\"256\"/><Column id=\"b_status\" type=\"STRING\" size=\"256\"/><Column id=\"p_code\" type=\"STRING\" size=\"256\"/><Column id=\"board_writer\" type=\"STRING\" size=\"256\"/><Column id=\"board_count\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -118,23 +118,6 @@
             obj.set_color("white");
             obj.set_font("normal bold 10pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
-
-            obj = new FileUpload("file_up","430","495","250","30",null,null,null,null,null,null,this);
-            obj.set_taborder("14");
-            obj.set_borderRadius("4px");
-            obj.set_edge("");
-            obj.set_visible("false");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_addFile","685","495","55","20",null,null,null,null,null,null,this);
-            obj.set_taborder("15");
-            obj.set_text("Add File");
-            obj.set_visible("false");
-            this.addChild(obj.name, obj);
-
-            obj = new Edit("Edit00","485","520","140","20",null,null,null,null,null,null,this);
-            obj.set_taborder("16");
-            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1080,590,this,function(p){});
@@ -166,10 +149,6 @@
             obj = new BindItem("item5","ta_boardContent","value","ds_boardList","board_content");
             this.addChild(obj.name, obj);
             obj.bind();
-
-            obj = new BindItem("item6","Edit00","value","ds_boardList","board_fileName");
-            this.addChild(obj.name, obj);
-            obj.bind();
             
             // TriggerItem Information
 
@@ -183,17 +162,22 @@
         // User Script
         this.registerScript("frm_boardWriteForm.xfdl", function() {
         // 게시글 등록
+        var pCode = nexacro.getEnvironmentVariable("ev_Val");
+        var pName = nexacro.getEnvironmentVariable("ev_Val1");
         this.btn_submit_onclick = function(obj,e)
         {
+        	var boardTitle = this.edt_boardTitle.value;
+        	var boardContent = this.ta_boardContent.value;
+        	var boardCount = 0;
         	var registerBtn = this.confirm("해당 게시글을 등록하시겠습니까?", "게시글 등록")
         	if(registerBtn == true) {
 
         		this.transaction(
         			"tr_register"  	 	 	 	 	      // 1.ID
         			,"SnuUrl::board/register.snu"   	  // 2.URL
-        			,"in_boardList=ds_boardList:U" 		  // 3.InDs : F->S jsp(I,U,D)
+        			,"" 		  // 3.InDs : F->S jsp(I,U,D)
         			,"" 							 	  // 4.OutDs : S->F jsp(SELECT)
-        			,"in_var1=" + nexacro.wrapQuote(name) 			// 5.InVar : F->S(var)
+        			,"in_var1=" + nexacro.wrapQuote(boardTitle) + " in_var2=" + nexacro.wrapQuote(boardContent) + " in_var3=" + boardCount + " in_var4=" + pCode + " in_var5=" + pName // 5.InVar : F->S(var)
         			,"fn_callback_tran"		// 6.callback function(transaction 완료시 호출되는 함수)
 
         		);
@@ -223,11 +207,6 @@
         	this.ds_boardList.setColumn(this.ds_boardList, "board_date", today);
         };
 
-        this.btn_addFile_onclick = function(obj,e)
-        {
-        	this.file_up.appendItem();
-        };
-
         });
         
         // Regist UI Components Event
@@ -243,7 +222,6 @@
             this.Static00_00_01_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.Static00_00_00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.btn_submit.addEventHandler("onclick",this.btn_submit_onclick,this);
-            this.btn_addFile.addEventHandler("onclick",this.btn_addFile_onclick,this);
         };
         this.loadIncludeScript("frm_boardWriteForm.xfdl");
         this.loadPreloadList();

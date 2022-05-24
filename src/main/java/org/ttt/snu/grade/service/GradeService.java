@@ -7,6 +7,7 @@ import org.ttt.snu.enrollLecture.domain.EnrollLectureDomain;
 import org.ttt.snu.grade.domain.Grade;
 import org.ttt.snu.grade.domain.LectureEvaluation;
 import org.ttt.snu.grade.domain.ScoreList;
+import org.ttt.snu.lecture.domain.Lecture;
 
 public interface GradeService {
 	
@@ -16,5 +17,6 @@ public interface GradeService {
 	
 	public int registerGrade(Grade grade);
 	public int modifyGrade(Grade grade);
+	public List<Lecture> printGrade(String sCode);
 	
 }

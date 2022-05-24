@@ -64,7 +64,6 @@ public class InfoController {
 	public NexacroResult registerInfo(
 			@ParamVariable(name="in_Var1") String title)
 	{
-		System.out.println(title);
 		int nErrorCode = 0;
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();

@@ -25,5 +25,11 @@
 	<select id="selectProfessorListBydCode" parameterType="string" resultMap="professorResultMap">
 		SELECT * FROM PROFESSOR WHERE D_CODE = #{dCode }
 	</select>
+	
+	<update id="updateProfInfo">
+		UPDATE PROFESSOR
+		SET P_GENDER = #{pGender}, P_EMAIL = #{pEmail}, P_PHONE = #{pPhone}, P_ADDRESS = #{pAddress}
+		WHERE P_CODE = #{pCode}
+	</update>
 
 </mapper>

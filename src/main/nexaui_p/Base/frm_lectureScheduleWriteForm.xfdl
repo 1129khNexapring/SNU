@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_lectureScheduleWriteForm" width="1080" height="670" titletext="New Form" onload="frm_lectureScheduleWriteForm_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Div id="Div00" taborder="0" left="52" top="32" width="975" height="588" background="lightgray">
+          <Layouts>
+            <Layout>
+              <Combo id="Combo00" taborder="0" left="139" top="63" width="182" height="52"/>
+              <Static id="Static00_00" taborder="1" text="강의명" left="43" top="67" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_00_00" taborder="2" text="요일 선택" left="43" top="160" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Combo id="Combo00_00_00" taborder="3" left="140" top="240" width="182" height="52"/>
+              <Static id="Static00_00_00_00" taborder="4" text="시작 교시" left="42" top="244" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Static id="Static00_00_00_00_00" taborder="5" text="끝 교시" left="43" top="320" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
+              <Combo id="Combo00_00_00_00" taborder="6" left="140" top="313" width="182" height="52"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.frm_lectureScheduleWriteForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"lecturePlanListView"
+		,"SnuUrl::lecture/planListBypCode.snu"
+		,""
+		,"ds_lecture=out_lecture"
+		,"in_var1=" + nexacro.getEnvironmentVariable("ev_Val") 
+		,"fn_callback_tran" 
+	);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_lecture">
+        <ColumnInfo>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="STRING" size="256"/>
+          <Column id="credit" type="STRING" size="256"/>
+          <Column id="lYear" type="STRING" size="256"/>
+          <Column id="lSemester" type="STRING" size="256"/>
+          <Column id="lCapacity" type="STRING" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Combo00" propid="value" datasetid="ds_lecture" columnid="lName"/>
+    </Bind>
+  </Form>
+</FDL>

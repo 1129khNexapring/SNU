@@ -146,7 +146,7 @@
         {
         	this.transaction(
                 	"tr_register"
-                	,"tttUrl::rehab/request.snu"
+                	,"SnuURL::rehab/request.snu"
                 	,"in_rehab=ds_rehab:U"
                 	,""
                 	,"inVar1="

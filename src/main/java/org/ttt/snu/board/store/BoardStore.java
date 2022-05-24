@@ -16,9 +16,11 @@ public interface BoardStore {
 	public Board selectOneByNo(SqlSession sqlSession, Integer boardNo);
 	public int updateCount(SqlSession sqlSession, Integer boardNo);
 	
+	
 	public int insertBoard(SqlSession sqlSession, Board board);
 	public int updateBoard(SqlSession sqlSession, Board board);
 	public int deleteBoard(SqlSession sqlSession, Board board);
+	public int updateBoardCnt(SqlSession sqlSession, Board board);
 	
 	// 댓글 영역
 	public List<Comments> selectAllComments(SqlSession sqlSession, int boardNo, String sCode);

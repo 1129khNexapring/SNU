@@ -64,7 +64,7 @@
         {
         		this.transaction(
         		"tr_select"
-        		,"tttUrl::vol/list.snu"
+        		,"SnuURL::vol/list.snu"
         		,""
         		,"ds_requestVol=out_requestVol"
         		,"inVar1="+sCode

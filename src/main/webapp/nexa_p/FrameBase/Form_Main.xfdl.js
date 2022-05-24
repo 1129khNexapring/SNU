@@ -11,7 +11,6 @@
         {
             this.set_name("Form_Work");
             this.set_titletext("Form_Work");
-            this.set_background("aqua");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1080,590);
@@ -21,14 +20,11 @@
 
             
             // UI Components Initialize
-            obj = new Button("Button00","130","64","142","48",null,null,null,null,null,null,this);
+            obj = new Button("Button00","16","15","1050","555",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_text("Button00");
-            this.addChild(obj.name, obj);
-
-            obj = new CheckBox("CheckBox00","361","151","150","20",null,null,null,null,null,null,this);
-            obj.set_taborder("1");
-            obj.set_text("CheckBox00");
+            obj.set_text("교수 통합 정보 시스템에 오신걸 환영합니다.");
+            obj.set_font("normal 30pt/normal \"Arial\"");
+            obj.set_background("transparent");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -62,7 +58,7 @@
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-            this.Button00.addEventHandler("onclick",this.Button00_onclick,this);
+
         };
         this.loadIncludeScript("Form_Main.xfdl");
         this.loadPreloadList();
