@@ -39,5 +39,23 @@ public class QnaStoreLogic implements QnaStore {
 		return qnaReply;
 	}
 
+	@Override
+	public int registerQnaReply(SqlSession sqlSession, QnaReply qnaReply) {
+		int result = sqlSession.insert("QnaMapper.insertQnaReply", qnaReply);
+		return result;
+	}
+
+	@Override
+	public int modifyQnaReply(SqlSession sqlSession, QnaReply qnaReply) {
+		int result = sqlSession.update("QnaMapper.updateQnaReply", qnaReply);
+		return result;
+	}
+
+	@Override
+	public int removeQnaReply(SqlSession sqlSession, QnaReply qnaReply) {
+		int result = sqlSession.delete("QnaMapper.deleteQnaReply", qnaReply);
+		return result;
+	}
+
 	
 }

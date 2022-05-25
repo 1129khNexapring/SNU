@@ -18,7 +18,7 @@
         </Div>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
+    <Script type="xscript5.1"><![CDATA[//스케줄 등록
 this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	var title = this.Div00.form.Edit00.value;

@@ -77,7 +77,7 @@
         
         // User Script
         this.registerScript("insertSchedule.xfdl", function() {
-
+        //스케줄 등록
         this.Div00_btn_scheduleRegister_onclick = function(obj,e)
         {
         	var title = this.Div00.form.Edit00.value;

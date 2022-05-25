@@ -20,6 +20,11 @@
             obj = new Dataset("ds_qna", this);
             obj._setContents("<ColumnInfo><Column id=\"qnaNo\" type=\"STRING\" size=\"256\"/><Column id=\"qnaTitle\" type=\"STRING\" size=\"256\"/><Column id=\"qnaContent\" type=\"STRING\" size=\"256\"/><Column id=\"qnaDate\" type=\"STRING\" size=\"256\"/><Column id=\"qnaStatus\" type=\"STRING\" size=\"256\"/><Column id=\"qnaCount\" type=\"STRING\" size=\"256\"/><Column id=\"sCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_qnaReply", this);
+            obj._setContents("<ColumnInfo><Column id=\"aCode\" type=\"STRING\" size=\"256\"/><Column id=\"qnaReplyNo\" type=\"INT\" size=\"256\"/><Column id=\"qnaReplyContent\" type=\"STRING\" size=\"256\"/><Column id=\"qnaReplyDate\" type=\"STRING\" size=\"256\"/><Column id=\"qnaNo\" type=\"INT\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Grid("Grid00","110","104","666","216",null,null,null,null,null,null,this);
@@ -73,6 +78,15 @@
         		}
         		this.alert("건의 조회 성공");
         	}
+        	if(sId == "qna_register")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("댓글 등록 실패" + sErrorMsg);
+        		}
+        			this.alert("건의 조회 성공");
+        			}
+
 
         }
 

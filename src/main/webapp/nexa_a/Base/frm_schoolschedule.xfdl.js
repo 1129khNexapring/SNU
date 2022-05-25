@@ -152,7 +152,7 @@
 
 
 
-
+        //일정 입력 팝업 출력
         this.btn_insertSchedule_onclick = function(obj,e)
         {
 
@@ -168,7 +168,7 @@
 
 
 
-
+        //일정 수정
         this.btn_modifySchedule_onclick = function(obj,e)
         {
 
@@ -183,11 +183,15 @@
         	)
         };
 
+
+        //일정 삭제
         this.btn_deleteSchedule_onclick = function(obj,e)
         {
         	this.ds_schedule.deleteRow(this.ds_schedule.rowposition);
         };
 
+
+        //일정 리스트 출력
         this.frm_schoolschedule_onload = function(obj,e)
         {
         	this.transaction(
