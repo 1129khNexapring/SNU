@@ -89,13 +89,10 @@ public class QnaController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-<<<<<<< HEAD
-	@RequestMapping(value="qnaReply/list.snu")
-=======
+
 	
 	//댓글리스트 조회
 	@RequestMapping(value="/qnaReply/list.snu")
->>>>>>> refs/heads/daegwang
 	public NexacroResult qnaReplyList(@ParamVariable(name="in_var1") int  qnaNo) {
 		int    nErrorCode  = 0;
 		String strErrorMsg = "START";
