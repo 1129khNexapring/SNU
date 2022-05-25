@@ -71,7 +71,7 @@
 
         	this.transaction(
                 		"tr_select"// 1.ID
-                		,"tttUrl::qna/list.snu"// 2.URL
+                		,"SnuURL::qna/list.snu"// 2.URL
                 		,"" // 3.InDs : F->S jsp(I,U,D)
                 		,"ds_qna=out_qna" // 4.OutDs : S->F jsp(SELECT)
                 		,"inVar1=" // 5.InVar : F->S(var)
@@ -123,7 +123,7 @@
 
         	this.transaction(
                 		"tr_register"
-                		,"tttUrl::qna/count.snu"
+                		,"SnuURL::qna/count.snu"
                 		,""
                 		,""
                 		,"inVar1=" + qnaNo + " inVar2=" + qnaCount

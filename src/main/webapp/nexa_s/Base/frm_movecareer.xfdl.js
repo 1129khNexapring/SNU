@@ -79,7 +79,7 @@
         {
         	this.transaction(
                 		"tr_select"// 1.ID
-                		,"tttUrl::request/movelist.snu"// 2.URL
+                		,"SnuURL::request/movelist.snu"// 2.URL
                 		,"" // 3.InDs : F->S jsp(I,U,D)
                 		,"ds_tran=out_tran" // 4.OutDs : S->F jsp(SELECT)
                 		,"inVar1="+sCode // 5.InVar : F->S(var)

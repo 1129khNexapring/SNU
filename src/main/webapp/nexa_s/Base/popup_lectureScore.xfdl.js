@@ -201,7 +201,7 @@
         	{
         		this.transaction(
                 		"tr_register"
-                		,"tttUrl::score/register.snu"
+                		,"SnuURL::score/register.snu"
                 		,""
                 		,""
                 		,"inVar1=" + sCode + " inVar2=" + lCode + " inVar3=" + addRadio
@@ -227,7 +227,7 @@
         	{
         		this.transaction(
                 		"tr_register"
-                		,"tttUrl::score/modify.snu"
+                		,"SnuURL::score/modify.snu"
                 		,""
                 		,""
                 		,"inVar1=" + sCode + " inVar2=" + lCode + " inVar3=" + addRadio

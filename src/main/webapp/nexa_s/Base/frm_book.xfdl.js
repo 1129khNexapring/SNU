@@ -177,7 +177,7 @@
                 {
                 	this.transaction(
                 		"tr_select"
-                		,"tttUrl::book/list.snu"
+                		,"SnuURL::book/list.snu"
                 		,""
                 		,"ds_book=out_book"
                 		,""
@@ -239,7 +239,7 @@
         	this.ds_book.deleteRow(this.ds_book.rowposition);
                 	this.transaction(
                 		"tr_register"
-                		,"tttUrl::book/delete.snu"
+                		,"SnuURL::book/delete.snu"
                 		,""
                 		,""
                 		,"inVar1=" + bsNo
@@ -262,7 +262,7 @@
         	{
                 	this.transaction(
                 		"tr_modify"
-                		,"tttUrl::book/modify.snu"
+                		,"SnuURL::book/modify.snu"
                 		,""
                 		,""
                 		,"inVar1=" + bsNo + " inVar2=" + nexacro.wrapQuote(bsTitle) + " inVar3=" + nexacro.wrapQuote(bsText)
@@ -299,7 +299,7 @@
         	{
         	this.transaction(
                 		"tr_register"
-                		,"tttUrl::book/register.snu"
+                		,"SnuURL::book/register.snu"
                 		,""
                 		,""
                 		,"inVar1=" + sCode + " inVar2=" + nexacro.wrapQuote(newTitle) + " inVar3=" + nexacro.wrapQuote(newContent)
@@ -309,7 +309,7 @@
         			this.PopupDiv01.closePopup();
         			this.transaction(
                 		"tr_select"
-                		,"tttUrl::book/list.snu"
+                		,"SnuURL::book/list.snu"
                 		,""
                 		,"ds_book=out_book"
                 		,""

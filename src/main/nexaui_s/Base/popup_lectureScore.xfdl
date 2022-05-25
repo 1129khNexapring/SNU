@@ -177,7 +177,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	{
 		this.transaction(
         		"tr_register"
-        		,"tttUrl::score/register.snu"
+        		,"SnuURL::score/register.snu"
         		,""
         		,""
         		,"inVar1=" + sCode + " inVar2=" + lCode + " inVar3=" + addRadio
@@ -203,7 +203,7 @@ this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	{
 		this.transaction(
         		"tr_register"
-        		,"tttUrl::score/modify.snu"
+        		,"SnuURL::score/modify.snu"
         		,""
         		,""
         		,"inVar1=" + sCode + " inVar2=" + lCode + " inVar3=" + addRadio

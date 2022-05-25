@@ -36,7 +36,7 @@ this.frm_helpcareer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 		this.transaction(
 		"tr_select"
-		,"tttUrl::vol/list.snu"
+		,"SnuURL::vol/list.snu"
 		,""
 		,"ds_requestVol=out_requestVol"
 		,"inVar1="+sCode

@@ -70,7 +70,7 @@
         {
         	this.transaction(
         		"tr_select"
-        		,"tttUrl::request/schlist.snu"
+        		,"SnuURL::request/schlist.snu"
         		,""
         		,"ds_sch=out_sch"
         		,"inVar1=" + sCode

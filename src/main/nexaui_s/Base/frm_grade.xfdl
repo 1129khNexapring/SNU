@@ -46,7 +46,7 @@ this.frm_grade_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	this.transaction(
         		"tr_select"
-        		,"tttUrl::grade/list.snu"
+        		,"SnuURL::grade/list.snu"
         		,""
         		,"ds_grade=out_grade"
         		,"inVar1=" +sCode

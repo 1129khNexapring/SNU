@@ -17,7 +17,9 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-
+            obj = new Dataset("ds_qna", this);
+            obj._setContents("<ColumnInfo><Column id=\"qnaNo\" type=\"INT\" size=\"256\"/><Column id=\"qnaTitle\" type=\"STRING\" size=\"256\"/><Column id=\"qnaContent\" type=\"STRING\" size=\"256\"/><Column id=\"qnaDate\" type=\"STRING\" size=\"256\"/><Column id=\"qnaStatus\" type=\"STRING\" size=\"256\"/><Column id=\"qnaCount\" type=\"INT\" size=\"256\"/><Column id=\"sCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Static("Static00_01","18","85","152","45",null,null,null,null,null,null,this);
@@ -80,14 +82,14 @@
 
         	this.transaction(
                 		"tr_register"
-                		,"tttUrl::qna/register.snu"
+                		,"SnuURL::qna/register.snu"
                 		,""
                 		,""
                 		,"inVar1=" + rTitle + " inVar2=" + rContent + " inVar3=" + sCode
                 		,"fn_callback_tran"
                 	)
         	this.close();
-        	this.reload(this.parent);
+        	this.parent.reload();
         };
 
 

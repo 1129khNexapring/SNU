@@ -111,6 +111,12 @@
 		WHERE S_CODE = #{sCode}
 	</select>
 	
+
+	<!--  계절학기 조회   -->
+	<select id="seasonList" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE
+	</select>
+
 	<delete id="deleteLecture" parameterType="string">
 		DELETE FROM LECTURE WHERE L_CODE = #{lCode }
 	</delete>

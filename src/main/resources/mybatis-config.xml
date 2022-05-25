@@ -46,6 +46,7 @@
 
 		<typeAlias type="org.ttt.snu.lectureEvaluation.domain.LectureEvaluation" alias="LectureEvaluation"/>
 		<typeAlias type="org.ttt.snu.grade.domain.LectureGrade" alias="LectureGrade"/>
+		<typeAlias type="org.ttt.snu.vacationSession.domain.VacationSession" alias="VacationSession"/>
 		
 		
 
@@ -81,6 +82,7 @@
 		<mapper resource="mappers/lectureEvaluation-mapper.xml"/>
 
 		<mapper resource="mappers/qna-mapper.xml"/>
+		<mapper resource="mappers/vacationSession-mapper.xml"/>
 
 		<mapper resource="mappers/timetable-mapper.xml"/>
 

@@ -159,7 +159,7 @@
         {
         	this.transaction(
                 		"tr_select"// 1.ID
-                		,"tttUrl::lecture/viewlist.snu"// 2.URL
+                		,"SnuURL::lecture/viewlist.snu"// 2.URL
                 		,"" // 3.InDs : F->S jsp(I,U,D)
                 		,"ds_lecture=out_lecture" // 4.OutDs : S->F jsp(SELECT)
                 		,"inVar1="+sCode // 5.InVar : F->S(var)
