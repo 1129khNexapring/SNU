@@ -43,4 +43,22 @@ public class QnaServiceImpl implements QnaService{
 		return qnaReply;
 	}
 
+	@Override
+	public int registerQnaReply(QnaReply qnaReply) {
+		int result = qStore.registerQnaReply(sqlSession, qnaReply);
+		return result;
+	}
+
+	@Override
+	public int modifyQnaReply(QnaReply qnaReply) {
+		int result = qStore.modifyQnaReply(sqlSession, qnaReply);
+		return result;
+	}
+
+	@Override
+	public int removeQnaReply(QnaReply qnaReply) {
+		int result = qStore.removeQnaReply(sqlSession, qnaReply);
+		return result;
+	}
+
 }

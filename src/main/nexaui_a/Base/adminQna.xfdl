@@ -48,6 +48,15 @@
           <Column id="sCode" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
+      <Dataset id="ds_qnaReply">
+        <ColumnInfo>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="qnaReplyNo" type="INT" size="256"/>
+          <Column id="qnaReplyContent" type="STRING" size="256"/>
+          <Column id="qnaReplyDate" type="STRING" size="256"/>
+          <Column id="qnaNo" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[var currentboardNo = 0;
 this.adminQna_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
@@ -73,6 +82,15 @@ this.adminQna_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 		}
 		this.alert("건의 조회 성공");
 	}
+	if(sId == "qna_register")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("댓글 등록 실패" + sErrorMsg);
+		}
+			this.alert("건의 조회 성공");
+			}
+	
 	
 }
 

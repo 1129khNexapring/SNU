@@ -16,4 +16,10 @@ public interface QnaStore {
 
 	List<QnaReply> printAllQnaReply(SqlSession sqlSession, int qnaNo);
 
+	int registerQnaReply(SqlSession sqlSession, QnaReply qnaReply);
+
+	int modifyQnaReply(SqlSession sqlSession, QnaReply qnaReply);
+
+	int removeQnaReply(SqlSession sqlSession, QnaReply qnaReply);
+
 }

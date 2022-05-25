@@ -19,7 +19,7 @@
 		<result property="qnaReplyContent"   column="QNA_REPLY_CONTENT"/>
 		<result property="qnaReplyDate"      column="QNA_R_DATE"/>
 		<result property="aCode"      		 column="A_CODE"/>
-		<result property="QnaNo"      		 column="QNA_NO"/>
+		<result property="qnaNo"      		 column="QNA_NO"/>
 		
 	</resultMap>
 
@@ -34,5 +34,21 @@
 	<insert id="registerQna">
 		INSERT INTO QNA_BOARD VALUES(SEQ_QNA.NEXTVAL, #{qnaTitle}, #{qnaContent}, DEFAULT, DEFAULT, DEFAULT, #{sCode})
 	</insert>
+	
+	<select id="qnaReplyList" resultMap="qnaReplyResultMap">
+	SELECT * FROM QNA_REPLY WHERE QNA_NO = #{qnaNo}
+	</select>
+	
+	<insert id="insertQnaReply">
+	INSERT INTO QNA_REPLY VALUES(SEQ_QNA_REPLY.NEXTVAL, #{qnaReplyContent}, DEFAULT, 'admin', #{qnaNo})
+	</insert>
+	
+	<update id="updateQnaReply">
+	UPDATE QNA_REPLY SET QNA_REPLY_CONTENT = #{qnaReplyContent} WHERE QNA_REPLY_NO = #{qnaReplyNo}
+	</update>
+	
+	<delete id="deleteQnaReply">
+	DELETE FROM QNA_REPLY WHERE QNA_REPLY_NO = #{qnaReplyNo}
+	</delete>
 </mapper>
 

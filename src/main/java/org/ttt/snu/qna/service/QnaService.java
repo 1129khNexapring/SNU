@@ -15,4 +15,10 @@ public interface QnaService {
 
 	List<QnaReply> printAllQnaReply(int qnaNo);
 
+	int registerQnaReply(QnaReply qnaReply);
+
+	int modifyQnaReply(QnaReply qnaReply);
+
+	int removeQnaReply(QnaReply qnaReply);
+
 }

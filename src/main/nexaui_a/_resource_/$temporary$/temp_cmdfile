@@ -1,0 +1,27 @@
+﻿-P
+"C:\Users\eorhk\git\SNU\src\main\nexaui_a\Admin.xprj"
+-O
+"C:\Users\eorhk\Documents\nexacro\17.1\outputs\Admin"
+-B
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-FILE
+"'C:\Users\eorhk\git\SNU\src\main\nexaui_a\environment.xml','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Application_Desktop.xadl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\adminQna.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_absenceschool.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_lecture.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_notice.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_professor.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_reservist.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_returnschool.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_scholarship.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_schoolmsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_schoolschedule.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_student.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_swsession.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_transfermajor.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_volunteer.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\lib_filetransupdown.xjs','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Left.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Mdi.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Top.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Work.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\insertSchedule.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\lectureDetail.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\loaReturnMsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\modifyInfo.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\qnaAdminDetail.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\rehabReturnMsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\TransferReturnMsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\writeInfo.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\writeNotice.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\_resource_\_theme_\default'"
+-JSVERSION
+"ECMAScript 2015(ES6)"
+-BOOTSTRAP
+-MODULE
+-BROWSER
+NRE,Internet Explorer 11,Internet Explorer 10,Chrome,Safari,
+-D2
+"C:\Users\eorhk\git\SNU\src\main\webapp\nexa_a\."
+-DB2
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-DT2
+4369
+-DF2
+"'C:\Users\eorhk\git\SNU\src\main\nexaui_a\environment.xml','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Application_Desktop.xadl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\adminQna.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_absenceschool.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_lecture.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_notice.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_professor.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_reservist.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_returnschool.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_scholarship.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_schoolmsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_schoolschedule.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_student.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_swsession.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_transfermajor.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\frm_volunteer.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Base\lib_filetransupdown.xjs','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Left.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Mdi.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Top.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\FrameBase\Form_Work.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\insertSchedule.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\lectureDetail.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\loaReturnMsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\modifyInfo.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\qnaAdminDetail.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\rehabReturnMsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\TransferReturnMsg.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\writeInfo.xfdl','C:\Users\eorhk\git\SNU\src\main\nexaui_a\Popup\writeNotice.xfdl'"
+-IGNORECOMPRESS
+"C:\Users\eorhk\git\SNU\src\main\nexaui_a\.ignorecompress"
+-RTL
+-Q
+68054
