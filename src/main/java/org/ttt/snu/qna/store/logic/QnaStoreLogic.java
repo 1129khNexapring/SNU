@@ -57,5 +57,18 @@ public class QnaStoreLogic implements QnaStore {
 		return result;
 	}
 
+	@Override
+	public int adminUpdateQnaReply(SqlSession sqlSession, int qnaNo) {
+		int result = sqlSession.update("QnaMapper.updateQnaReplyStatus", qnaNo);
+		
+		return result;
+	}
+
+	
+
+
+	
+	
+
 	
 }

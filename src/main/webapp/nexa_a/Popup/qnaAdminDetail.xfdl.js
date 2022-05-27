@@ -13,7 +13,7 @@
             this.set_titletext("New Form");
             if (Form == this.constructor)
             {
-                this._setFormPosition(480,550);
+                this._setFormPosition(690,550);
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
@@ -64,7 +64,7 @@
             obj.set_taborder("3");
             obj.set_binddataset("ds_qnaReply");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"qnaReplyNo\"/><Cell col=\"1\" text=\"qnaReplyContent\"/><Cell col=\"2\" text=\"qnaReplyDate\"/></Band><Band id=\"body\"><Cell text=\"bind:qnaReplyNo\"/><Cell col=\"1\" text=\"bind:qnaReplyContent\"/><Cell col=\"2\" text=\"bind:qnaReplyDate\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"댓글번호\" suppressalign=\"first\"/><Cell col=\"1\" text=\"댓글내용\"/><Cell col=\"2\" text=\"작성일\"/></Band><Band id=\"body\"><Cell text=\"bind:qnaReplyNo\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:qnaReplyContent\"/><Cell col=\"2\" text=\"bind:qnaReplyDate\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new PopupDiv("popModifyQnaReply","40","410","360","54",null,null,null,null,null,null,this);
@@ -85,9 +85,15 @@
             obj.set_taborder("2");
             obj.set_text("삭제");
             this.popModifyQnaReply.addChild(obj.name, obj);
+
+            obj = new Grid("Grid01","504","276","170","100",null,null,null,null,null,null,this);
+            obj.set_taborder("4");
+            obj.set_binddataset("ds_qnaReply");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"aCode\"/><Cell col=\"1\" text=\"qnaReplyNo\"/><Cell col=\"2\" text=\"qnaReplyContent\"/><Cell col=\"3\" text=\"qnaReplyDate\"/><Cell col=\"4\" text=\"qnaNo\"/></Band><Band id=\"body\"><Cell text=\"bind:aCode\"/><Cell col=\"1\" text=\"bind:qnaReplyNo\"/><Cell col=\"2\" text=\"bind:qnaReplyContent\"/><Cell col=\"3\" text=\"bind:qnaReplyDate\"/><Cell col=\"4\" text=\"bind:qnaNo\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
-            obj = new Layout("default","",480,550,this,function(p){});
+            obj = new Layout("default","",690,550,this,function(p){});
             obj.set_mobileorientation("landscape");
             this.addLayout(obj.name, obj);
             
@@ -123,32 +129,33 @@
         */// 	this.ds_qna.setColumn(0, "qnaCount", this.parent.qnaCount);
         // 	this.ds_qna.setColumn(0, "sCode", this.parent.sCode);
 
-        	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
-        	this.transaction(
-        		"tr_qnaReplyList"
-        		, "SnuURL::qnaReply/list.snu"
-        		, ""
-        		,"ds_qnaReply=out_qnaReply"
-        		,"in_var1=" + qnaNo
-        		,"tr_callback_qnaReply"
-        	);
-        };
-
-        this.Edit00_oneditclick = function(obj,e)
-        {
-        	var d = new Date();
-        	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+        // 	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+        // 	this.transaction(
+        // 		"tr_qnaReplyList"
+        // 		, "SnuURL::qnaReply/list.snu"
+        // 		, ""
+        // 		,"ds_qnaReply=out_qnaReply"
+        // 		,"in_var1=" + qnaNo
+        // 		,"tr_callback_qnaReply"
+        // 	);
         	this.ds_qnaReply.addRow();
-        	this.ds_qnaReply.setColumn(this.ds_qnaReply.rowposition, "qnaReplyDate", today)
+        	this.ds_qnaReply.setColumn(0, "qnaNo", this.parent.qnaNo);
+        	this.ds_qnaReply.setColumn(0, "qnaReplyNo", 	 this.parent.qnaReplyNo);
+        	this.ds_qnaReply.setColumn(0, "qnaReplyContent", this.parent.qnaReplyContent);
+         	this.ds_qnaReply.setColumn(0, "qnaReplyDate",	 this.parent.qnaReplyDate);
         };
-
-
 
         this.btn_qnaReplyRegister_onclick = function(obj,e)
         {
         	var insertbutton = this.confirm("댓글을 등록하시겠습니까?", "댓글 등록");
         	var qnaReplyContent = this.edt_register.value;
         	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+
+        	var d = new Date();
+        	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+        	this.ds_qnaReply.addRow();
+        	this.ds_qnaReply.setColumn(this.ds_qnaReply.rowposition, "qnaReplyDate", today)
+
         	if(insertbutton == true) {
         		this.transaction(
         			"tr_qnaReplyRegister"
@@ -160,6 +167,7 @@
         		);
         		/*this.alert(nexacro.wrapQuote(qnaReplyContent))*/
         	}
+        	Form.reload();
 
         		this.fn_callback_qnaReply = function(sId, nErrorCode, sErrorMsg)
         {

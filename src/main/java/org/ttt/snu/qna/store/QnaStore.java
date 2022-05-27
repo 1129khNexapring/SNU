@@ -22,4 +22,11 @@ public interface QnaStore {
 
 	int removeQnaReply(SqlSession sqlSession, QnaReply qnaReply);
 
+	int adminUpdateQnaReply(SqlSession sqlSession, int qnaNo);
+
+	
+
+
+	
+
 }

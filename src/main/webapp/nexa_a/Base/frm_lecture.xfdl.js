@@ -56,7 +56,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_Ylecture");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"69\"/><Column size=\"68\"/><Column size=\"256\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"강의코드\"/><Cell col=\"1\" text=\"구분\"/><Cell col=\"2\" text=\"강의명\"/><Cell col=\"3\" text=\"정원\"/></Band><Band id=\"body\"><Cell text=\"bind:lCode\"/><Cell col=\"1\" text=\"bind:lType\"/><Cell col=\"2\" text=\"bind:lName\"/><Cell col=\"3\" text=\"bind:lCapacity\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"69\"/><Column size=\"68\"/><Column size=\"256\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"강의코드\" textAlign=\"center\"/><Cell col=\"1\" text=\"구분\"/><Cell col=\"2\" text=\"강의명\"/><Cell col=\"3\" text=\"정원\"/></Band><Band id=\"body\"><Cell text=\"bind:lCode\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:lType\"/><Cell col=\"2\" text=\"bind:lName\"/><Cell col=\"3\" text=\"bind:lCapacity\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_lList","287","41","63","39",null,null,null,null,null,null,this);
