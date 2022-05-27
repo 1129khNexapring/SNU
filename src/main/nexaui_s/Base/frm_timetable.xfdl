@@ -3,7 +3,7 @@
   <Form id="frm_timetable" width="1080" height="670" titletext="New Form" onload="frm_timetable_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="Grid01" taborder="0" left="395" top="180" width="411" height="257" binddataset="timetable" autofittype="col">
+        <Grid id="Grid01" taborder="0" left="395" top="180" width="411" height="250" binddataset="timetable" autofittype="col" fillareatype="none" autosizingtype="both">
           <Formats>
             <Format id="default">
               <Columns>
