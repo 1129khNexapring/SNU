@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ttt.snu.courseCalendar.domain.courseCalendar;
 import org.ttt.snu.enrollLecture.domain.EnrollLecture;
+import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.student.domain.Student;
 
 public interface EnrollLectureService {
@@ -13,5 +14,11 @@ public interface EnrollLectureService {
 	List<courseCalendar> getDay(courseCalendar cc);
 
 	int registerCourse(EnrollLecture lecture);
+
+	int modifyCapacity(Lecture lecture);
+
+	
+
+	
 
 }

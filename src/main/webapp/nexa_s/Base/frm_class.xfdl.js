@@ -166,7 +166,7 @@
         			var nTop  = system.clientToScreenY(this,10);
         			var objParam = {semester : this.Div01.form.Div00.form.Combo00.value }
         			var objChild = new ChildFrame("popEnrollLecture", nLeft, nTop, 700, 560);
-        			objChild.set_formurl("Popup::EnrollLecture.xfdl");
+        			objChild.set_formurl("Base::EnrollLecture.xfdl");
         			objChild.set_openalign("center middle");
         			objChild.set_dragmovetype("normal");
         			objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popLecture");

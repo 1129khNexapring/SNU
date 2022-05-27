@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.ttt.snu.courseCalendar.domain.courseCalendar;
 import org.ttt.snu.enrollLecture.domain.EnrollLecture;
 import org.ttt.snu.enrollLecture.store.EnrollLectureStore;
+import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.student.domain.Student;
 
 @Repository
@@ -30,6 +31,16 @@ public class EnrollLectureStoreLogic implements EnrollLectureStore {
 		int result = sqlSession.insert("LectureMapper.courseRegister", lecture);
 		return result;
 	}
+	//수강신청이 완료되면 해당 수강인원 감소시키기
+	@Override
+	public int updateLecture(SqlSession sqlSession, Lecture lecture) {
+		int result = sqlSession.update("LectureMapper.modifyCapacity", lecture);
+		System.out.println(result);
+		return result;
+	}
+	
+	
+	
 	
 	
 }

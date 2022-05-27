@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.ttt.snu.courseCalendar.domain.courseCalendar;
 import org.ttt.snu.enrollLecture.domain.EnrollLecture;
+import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.student.domain.Student;
 
 public interface EnrollLectureStore {
@@ -14,5 +15,13 @@ public interface EnrollLectureStore {
 	List<courseCalendar> selectDay(SqlSession sqlSession, courseCalendar cc);
 
 	int insertLecture(SqlSession sqlSession, EnrollLecture lecture);
+
+	int updateLecture(SqlSession sqlSession, Lecture lecture);
+
+	
+
+	
+
+	
 
 }

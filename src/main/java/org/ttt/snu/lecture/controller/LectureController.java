@@ -18,6 +18,7 @@ import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.lecture.service.LectureService;
 
 import org.ttt.snu.student.domain.Student;
+import org.ttt.snu.student.service.StudentService;
 import org.ttt.snu.professor.service.ProfessorService;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
@@ -36,6 +37,9 @@ public class LectureController {
 	
 	@Autowired
 	private ProfessorService pService;
+	
+	@Autowired
+	private StudentService sService;
 	
 	@RequestMapping(value="/lecture/list.snu", method=RequestMethod.GET)
 	public String boardListView(
@@ -320,13 +324,18 @@ public class LectureController {
 	}
 
 	//학생- 수강가능한 강의 조회
-	@RequestMapping(value="/canEnrollLecture/list.snu", method=RequestMethod.GET)
-	public NexacroResult getLectureList()
+	@RequestMapping(value="/canEnrollLecture/list.snu", method=RequestMethod.POST)
+	public NexacroResult getLectureList(
+			@ParamVariable(name="in_Var1") String sCode)
 	{
+		System.out.println(sCode);
+		List<Student> sList = sService.studentInfo(sCode);
+		System.out.println(sList);
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "";
 		NexacroResult result = new NexacroResult();
 		List<Lecture> lList = lService.getLectureList();
+		//List<Student> sList = 
 		if(!lList.isEmpty())
 		{
 			nErrorCode = 0;
@@ -335,6 +344,7 @@ public class LectureController {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
 		}
+		result.addDataSet("outStudent", sList);
 		result.addDataSet("outLecture", lList);
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);

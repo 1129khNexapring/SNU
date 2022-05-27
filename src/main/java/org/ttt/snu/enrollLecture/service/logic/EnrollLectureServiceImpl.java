@@ -9,6 +9,7 @@ import org.ttt.snu.courseCalendar.domain.courseCalendar;
 import org.ttt.snu.enrollLecture.domain.EnrollLecture;
 import org.ttt.snu.enrollLecture.service.EnrollLectureService;
 import org.ttt.snu.enrollLecture.store.EnrollLectureStore;
+import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.student.domain.Student;
 
 @Service
@@ -36,4 +37,13 @@ public class EnrollLectureServiceImpl implements EnrollLectureService {
 		int result = eStore.insertLecture(sqlSession, lecture);
 		return result;
 	}
+	//수강신청된 강의 수강인원 감소시키기
+	@Override
+	public int modifyCapacity(Lecture lecture) {
+		int result = eStore.updateLecture(sqlSession, lecture);
+		return result;
+	}
+	
+	
+	
 }

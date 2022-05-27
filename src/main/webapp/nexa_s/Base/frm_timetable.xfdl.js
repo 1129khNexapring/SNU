@@ -32,10 +32,12 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Grid("Grid01","395","180","411","257",null,null,null,null,null,null,this);
+            obj = new Grid("Grid01","395","180","411","250",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_binddataset("timetable");
             obj.set_autofittype("col");
+            obj.set_fillareatype("none");
+            obj.set_autosizingtype("both");
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"45\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"교시\"/><Cell col=\"1\" text=\"월요일\"/><Cell col=\"2\" text=\"화요일\"/><Cell col=\"3\" text=\"수요일\"/><Cell col=\"4\" text=\"목요일\"/><Cell col=\"5\" text=\"금요일\"/></Band><Band id=\"body\"><Cell text=\"bind:교시\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:월요일\"/><Cell col=\"2\" text=\"bind:화요일\"/><Cell col=\"3\" text=\"bind:수요일\"/><Cell col=\"4\" text=\"bind:목요일\"/><Cell col=\"5\" text=\"bind:금요일\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
             // Layout Functions

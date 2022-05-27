@@ -1,6 +1,7 @@
 package org.ttt.snu.enrollLecture.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.ttt.snu.courseCalendar.domain.courseCalendar;
 import org.ttt.snu.courseCalendar.service.courseCalendarService;
 import org.ttt.snu.enrollLecture.domain.EnrollLecture;
 import org.ttt.snu.enrollLecture.service.EnrollLectureService;
+import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.student.domain.Student;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
@@ -22,19 +24,14 @@ public class EnrollLectureController {
 	
 	@Autowired
 	private EnrollLectureService eService;
-//	@Autowired
-//	private courseCalendarService ccService;
 	//수강신청 진행하기 위한 학생 정보가 맞는 지 정합성 여부 판단
 	@RequestMapping(value="/check/registerCourse.snu", method=RequestMethod.POST)
 	public NexacroResult checkAndTransferPage(
 			 @ParamVariable(name="sCode") String sCode
 			,@ParamVariable(name="sName") String sName
 			,@ParamVariable(name="semester") int semester) {
-		//System.out.println(sCode); S001
-		//System.out.println(sName); 김치곤
-		//System.out.println(semester); 1
 		String title = semester+"학기 수강신청";
-		System.out.println(title); //1학기 수강신청
+		System.out.println(title);
 		int nErrorCode = 0;
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();
@@ -43,12 +40,10 @@ public class EnrollLectureController {
 		Student student = new Student();
 		student.setsCode(sCode);
 		student.setsName(sName);
-		//System.out.println(student.getsCode()); S001
 		int iResult = eService.checkStudent(student);
 		if(iResult > 0)
 		{	
 			List<courseCalendar> ccList = eService.getDay(cc);
-			//System.out.println(ccList);
 			if(!ccList.isEmpty()) {
 				nErrorCode = 0;
 				strErrorMsg = "데이터정합성여부 통과";
@@ -81,22 +76,30 @@ public class EnrollLectureController {
 		int i;
 		NexacroResult result = new NexacroResult();
 		int iResult = 0;
+		int uResult = 0;
 		for(i=0; i<inCourseRegister.getRowCount(); i++)
 		{
 			int semester = session;
 			int year = Year;
 			String sCode = studentCode;
 			String lCode = dsGet(inCourseRegister, i, "lCode");
-			//System.out.println(lCode); //L007, L189, L078, L901
 			EnrollLecture Lecture = new EnrollLecture(semester, year, sCode, lCode);
-			//System.out.println(Lecture);
 			iResult += eService.registerCourse(Lecture);
 		}
-		//System.out.println(iResult); 4
 		if(iResult < 0) {
 			nErrorCode = -1;
 			strErrorMsg = "오류가 발생했습니다.";
 		}else {
+			//수강신청이 완료된 부분, 완료됐으면 해당 수강신청인원을 감소
+			for(i=0; i<inCourseRegister.getRowCount(); i++)
+			{				
+				String lCode = dsGet(inCourseRegister, i, "lCode");
+				int lCapacity = Integer.parseInt(dsGet(inCourseRegister, i, "lCapacity"));
+				Lecture lecture = new Lecture();
+				lecture.setlCapacity(lCapacity-1);
+				lecture.setlCode(lCode);
+				 uResult += eService.modifyCapacity(lecture);
+			}
 			nErrorCode = 0;
 			strErrorMsg = "수강신청이 완료됐습니다!";
 		}
