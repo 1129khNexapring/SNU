@@ -85,6 +85,7 @@ public class ProfessorController {
 		}else {
 			nErrorCode 	= -1;
 		}
+		return result;
 	}
 	// 교수 - 본인 정보 조회
 	@RequestMapping(value = "/professor/profInfo.snu", method = RequestMethod.POST)

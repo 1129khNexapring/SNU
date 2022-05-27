@@ -23,6 +23,9 @@ public interface LectureStore {
 
 	int insertLecture(SqlSession sqlSession, Lecture lecture);
 
+
+	List<Lecture> selectEnrollLectureList(SqlSession sqlSession);
+
 	List<Lecture> viewLecture(SqlSession sqlSession, String sCode);
 
 
@@ -31,6 +34,7 @@ public interface LectureStore {
 	int deleteLecture(SqlSession sqlSession, String lCode);
 
 	int updateLecture(SqlSession sqlSession, Lecture lecture);
+
 
 
 	

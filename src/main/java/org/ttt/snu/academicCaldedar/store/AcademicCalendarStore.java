@@ -15,7 +15,9 @@ public interface AcademicCalendarStore {
 	
 	int registerSchedule(SqlSession sqlSession, AcademicCalendar calendar);
 
+
 	List<AcademicCalendar> printAllSchedule();
 
 	int modifySchedule(SqlSession sqlSession, AcademicCalendar calendar);
+
 }

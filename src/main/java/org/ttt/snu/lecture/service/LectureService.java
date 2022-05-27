@@ -22,8 +22,10 @@ public interface LectureService {
 
 	public int registerLecture(Lecture lecture);
 
-	public List<Lecture> viewList(String sCode);
 
+	public List<Lecture> getLectureList();
+
+	public List<Lecture> viewList(String sCode);
 
 	public List<Lecture> seaonList(String sCode);
 

@@ -62,4 +62,8 @@
 	<select id="selectIngListBydCode" parameterType="string" resultMap="studentResultMap">
 		SELECT * FROM STUDENT WHERE D_CODE = #{dCode}
 	</select>
+	
+	<select id="checkStudent" resultType="_int">
+		SELECT COUNT(*) FROM STUDENT WHERE S_CODE = #{sCode } AND S_NAME = #{sName }
+	</select>
 </mapper>

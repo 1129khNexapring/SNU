@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="calendarMapper"> 
+ <resultMap type="AcademicCalendar" id="calendarResultMap">
+		<id property="acNo" column="AC_NO" />
+		<result property="aCode" column="A_CODE" />
+		<result property="title" column="TITLE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+</resultMap>
+<resultMap type="AcademicCalendar" id="classCalendar">
+		<id property="title" 			column="TITLE"/>
+		<result property="startDate" 	column="START_DATE"/>
+</resultMap>
+ <select id="showSchedule" resultMap="calendarResultMap">
+  	SELECT AC_NO, A_CODE, TITLE, START_DATE, END_DATE FROM ACADEMIC_CALENDAR
+  
+  </select> 
+  
+  <insert id="insertSchedule" parameterType="AcademicCalendar">
+  	INSERT INTO ACADEMIC_CALENDAR(AC_NO, A_CODE, TITLE, START_DATE, END_DATE)
+  			VALUES(AC_NO.NEXTVAL, 'admin', #{title}, #{startDate}, #{endDate})
+  </insert>
+  
+  <delete id="deleteSchedule" >
+  	DELETE FROM ACADEMIC_CALENDAR WHERE TITLE = ${title}
+  </delete>
+  
+<<<<<<< HEAD
+=======
+   <select id="selectScheduleList" resultMap="calendarResultMap">
+  	SELECT AC_NO, A_CODE, TITLE, START_DATE, END_DATE FROM ACADEMIC_CALENDAR
+  </select>
+  
+  <update id="updateSchedule" parameterType="AcademicCalendar">
+  UPDATE ACADEMIC_CALENDAR SET TITLE = #{title}, START_DATE = #{startDate}, END_DATE = #{endDate} WHERE AC_NO = #{acNo}
+  </update>
+>>>>>>> master
+  </mapper>
+

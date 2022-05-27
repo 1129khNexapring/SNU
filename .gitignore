@@ -1,12 +1,13 @@
 .settings
-.classpath
+*.classpath
 .project
 .springBeans
 .DS_Store
 .metadata
 *.geninfo
-*.xfdl$
-*.xml$
+*.xfdl.js*
+*.xml.js*
 */$temporary$/*
+*/_windows_/*
 /bin/
 /target/

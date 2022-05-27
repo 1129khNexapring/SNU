@@ -89,14 +89,27 @@
 			</choose>
 		</where>
 	</select>
+	<select id="getLectureList" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE WHERE L_STATUS = 'Y'
+	</select>
+	
+	
 	<insert id="insertLecture">
 		INSERT INTO LECTURE VALUES(#{lCode}, #{lType}, #{lName}, #{lObjective}, #{lContents}, #{textbook}, #{lDays}, #{credit}, #{lYear}, #{lSemester}, #{lCapacity}, DEFAULT, #{pCode}, #{dCode})
+	</insert>
+	
+	<insert id="courseRegister">
+		INSERT INTO ENROLL_LECTURE VALUES(#{semester }, #{year }, #{sCode }, #{lCode })
 	</insert>
 	<update id="updateLectureStatus">
 		UPDATE LECTURE SET L_STATUS = 'Y' WHERE L_CODE =
 		#{inVar1 }
 	</update>
-
+	
+	<!-- 수강신청되면 해당 강의수용인원감소 -->
+	<update id="modifyCapacity">
+		UPDATE LECTURE SET L_CAPACITY = #{lCapacity } WHERE L_CODE = #{lCode }
+	</update>
 	<!-- 학생 강의평가조회 -->
 	<select id="selectMyLecture" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE L
@@ -110,8 +123,12 @@
 		JOIN ENROLL_LECTURE EL ON(L.L_CODE = EL.L_CODE)
 		WHERE S_CODE = #{sCode}
 	</select>
+	<!-- 강의정보가져오기 -->
 	
-
+	<select id="getLectureInfo" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE WHERE L_CODE = #{lCode }
+	</select>
+	
 	<!--  계절학기 조회   -->
 	<select id="seasonList" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE

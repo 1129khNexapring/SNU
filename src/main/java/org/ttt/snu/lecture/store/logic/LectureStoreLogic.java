@@ -53,6 +53,13 @@ public class LectureStoreLogic implements LectureStore{
 		return result;
 
 	}
+
+	//학생 - 수강신청 가능 강의 조회
+	@Override
+	public List<Lecture> selectEnrollLectureList(SqlSession sqlSession) {
+		List<Lecture> lList = sqlSession.selectList("LectureMapper.getLectureList");
+		return lList;
+	}
 	@Override
 	public List<Lecture> viewLecture(SqlSession sqlSession, String sCode) {
 		List<Lecture> vlList = sqlSession.selectList("LectureMapper.viewlist", sCode);
@@ -63,7 +70,7 @@ public class LectureStoreLogic implements LectureStore{
 	public List<Lecture> seasonList(SqlSession sqlSession, String sCode) {
 		List<Lecture> lList = sqlSession.selectList("LectureMapper.seasonList", sCode);
 		return lList;
-
+	}
 	//교수 - 강의 계획서 삭제
 	@Override
 	public int deleteLecture(SqlSession sqlSession, String lCode) {
@@ -75,6 +82,7 @@ public class LectureStoreLogic implements LectureStore{
 	public int updateLecture(SqlSession sqlSession, Lecture lecture) {
 		int result = sqlSession.update("LectureMapper.updateLecture", lecture);
 		return result;
+
 
 	}
 	

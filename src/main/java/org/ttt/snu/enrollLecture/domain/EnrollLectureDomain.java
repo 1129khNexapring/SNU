@@ -1,7 +1,6 @@
 package org.ttt.snu.enrollLecture.domain;
 
 public class EnrollLectureDomain {
-	
 	private String dName;
 	private String sName;
 	private String lName;
@@ -11,7 +10,7 @@ public class EnrollLectureDomain {
 	private String lCode;
 	private String attendanceStatus;
 	
-	public EnrollLectureDomain() {}
+	public EnrollLectureDomain () {}
 
 	public EnrollLectureDomain(String dName, String sName, String lName, String pCode, String lDate, String sCode,
 			String lCode, String attendanceStatus) {
@@ -96,5 +95,6 @@ public class EnrollLectureDomain {
 				+ ", lDate=" + lDate + ", sCode=" + sCode + ", lCode=" + lCode + ", attendanceStatus="
 				+ attendanceStatus + "]";
 	}
+	
 	
 }
