@@ -18,14 +18,14 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="qnaNo"/>
+                <Cell text="qnaNo" textAlign="center"/>
                 <Cell col="1" text="qnaTitle"/>
                 <Cell col="2" text="qnaDate"/>
                 <Cell col="3" text="qnaStatus"/>
                 <Cell col="4" text="sCode"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:qnaNo"/>
+                <Cell text="bind:qnaNo" textAlign="center"/>
                 <Cell col="1" text="bind:qnaTitle"/>
                 <Cell col="2" text="bind:qnaDate"/>
                 <Cell col="3" text="bind:qnaStatus"/>
@@ -96,6 +96,16 @@ this.adminQna_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
+	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+	this.transaction(
+		"tr_qnaReplyList"
+		, "SnuURL::qnaReply/list.snu"
+		, ""
+		,"ds_qnaReply=out_qnaReply" 
+		,"in_var1=" + qnaNo
+		,"tr_callback_qnaReply"
+	);
+	
 	
 	var nRow = this.ds_qna.rowposition;
 
@@ -115,6 +125,9 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 	objChild.set_dragmovetype("normal");
 	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popupCallback");
 	trace("Popup::qnaAdminDetail.xfdl");
+	
+	
+	
 };
 
 

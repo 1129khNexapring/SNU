@@ -32,7 +32,7 @@
             obj.set_binddataset("ds_qna");
             obj.set_autosizingtype("none");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"qnaNo\"/><Cell col=\"1\" text=\"qnaTitle\"/><Cell col=\"2\" text=\"qnaDate\"/><Cell col=\"3\" text=\"qnaStatus\"/><Cell col=\"4\" text=\"sCode\"/></Band><Band id=\"body\"><Cell text=\"bind:qnaNo\"/><Cell col=\"1\" text=\"bind:qnaTitle\"/><Cell col=\"2\" text=\"bind:qnaDate\"/><Cell col=\"3\" text=\"bind:qnaStatus\"/><Cell col=\"4\" text=\"bind:sCode\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"qnaNo\" textAlign=\"center\"/><Cell col=\"1\" text=\"qnaTitle\"/><Cell col=\"2\" text=\"qnaDate\"/><Cell col=\"3\" text=\"qnaStatus\"/><Cell col=\"4\" text=\"sCode\"/></Band><Band id=\"body\"><Cell text=\"bind:qnaNo\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:qnaTitle\"/><Cell col=\"2\" text=\"bind:qnaDate\"/><Cell col=\"3\" text=\"bind:qnaStatus\"/><Cell col=\"4\" text=\"bind:sCode\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -92,6 +92,16 @@
 
         this.Grid00_oncelldblclick = function(obj,e)
         {
+        	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+        	this.transaction(
+        		"tr_qnaReplyList"
+        		, "SnuURL::qnaReply/list.snu"
+        		, ""
+        		,"ds_qnaReply=out_qnaReply"
+        		,"in_var1=" + qnaNo
+        		,"tr_callback_qnaReply"
+        	);
+
 
         	var nRow = this.ds_qna.rowposition;
 
@@ -111,6 +121,9 @@
         	objChild.set_dragmovetype("normal");
         	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popupCallback");
         	trace("Popup::qnaAdminDetail.xfdl");
+
+
+
         };
 
 

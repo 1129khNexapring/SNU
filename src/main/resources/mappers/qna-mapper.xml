@@ -50,5 +50,10 @@
 	<delete id="deleteQnaReply">
 	DELETE FROM QNA_REPLY WHERE QNA_REPLY_NO = #{qnaReplyNo}
 	</delete>
+	
+	<update id="updateQnaReplyStatus">
+	UPDATE QNA_BOARD SET QNA_STATUS = 'Y' WHERE QNA_NO = #{qnaNo}
+	</update>
+	
 </mapper>
 

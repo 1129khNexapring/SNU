@@ -46,6 +46,9 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public int registerQnaReply(QnaReply qnaReply) {
 		int result = qStore.registerQnaReply(sqlSession, qnaReply);
+		   if(result > 0) {
+		         result = qStore.adminUpdateQnaReply(sqlSession, qnaReply.getQnaNo());
+		      }
 		return result;
 	}
 
