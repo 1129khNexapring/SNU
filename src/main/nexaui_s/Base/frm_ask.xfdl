@@ -45,7 +45,7 @@ this.frm_ask_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	this.transaction(
         		"tr_select"// 1.ID
-        		,"tttUrl::qna/list.snu"// 2.URL
+        		,"SnuURL::qna/list.snu"// 2.URL
         		,"" // 3.InDs : F->S jsp(I,U,D)
         		,"ds_qna=out_qna" // 4.OutDs : S->F jsp(SELECT)
         		,"inVar1=" // 5.InVar : F->S(var)
