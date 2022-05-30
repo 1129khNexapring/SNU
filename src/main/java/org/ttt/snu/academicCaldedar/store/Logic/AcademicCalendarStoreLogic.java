@@ -50,6 +50,4 @@ public class AcademicCalendarStoreLogic implements AcademicCalendarStore {
 		return result;
 	}
 
-
-	
-	}
+}

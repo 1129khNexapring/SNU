@@ -89,7 +89,6 @@ public class QnaController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-
 	
 	//댓글리스트 조회
 	@RequestMapping(value="/qnaReply/list.snu")
