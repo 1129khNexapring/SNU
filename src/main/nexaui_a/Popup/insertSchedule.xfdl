@@ -1,20 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
 
-  <Form id="insertSchedule" width="600" height="500" titletext="New Form">
-    <Layouts>
-      <Layout height="500" mobileorientation="landscape" width="600">
-        <Div id="Div00" taborder="0" text="Div00" left="6" top="42" width="584" height="376" border="1px solid">
-          <Layouts>
-            <Layout>
-              <Edit id="Edit00" taborder="0" left="245" top="77" width="154" height="40"/>
-              <Calendar id="Calendar00" taborder="1" left="249" top="147" width="148" height="38" dateformat="yy-MM-dd ddd" editformat="yy-MM-dd"/>
-              <Calendar id="Calendar01" taborder="2" left="251" top="211" width="146" height="30" onchanged="Div00_Calendar01_onchanged" headformat="yyyy.MM"/>
-              <Static id="Static00" taborder="3" text="제목" left="141" top="79" width="86" height="38"/>
-              <Static id="Static01" taborder="4" text="시작 날짜" left="135" top="149" width="84" height="40" onclick="Static01_onclick"/>
-              <Static id="Static02" taborder="5" text="종료 날짜" left="135" top="216" width="62" height="30"/>
-              <Button id="btn_scheduleRegister" taborder="6" text="완료" left="439" top="314" width="120" height="50" onclick="Div00_btn_scheduleRegister_onclick"/>
-
   <Form id="insertSchedule" width="480" height="480" titletext="New Form">
     <Layouts>
       <Layout height="480" mobileorientation="landscape" width="480">
@@ -34,40 +20,6 @@
         </Div>
       </Layout>
     </Layouts>
-<<<<<<< HEAD
-    <Script type="xscript5.1"><![CDATA[//스케줄 등록
-this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	var title = this.Div00.form.Edit00.value;
-        	var startDate = this.Div00.form.Calendar00.value;
-        	var endDate = this.Div00.form.Calendar01.value;
-
-
-
-        	this.transaction(
-        	"tr_scheduleRegister"
-        	,"SnuURL::schedule/register.snu"
-        	,""
-        	,""
-        	,"title=" + nexacro.wrapQuote(title) + " startDate="+ startDate + " endDate=" + endDate +""
-        	,"fn_callback_schedule"
-
-
-        	)
-        }
-
-        	this.fn_callback_schedule = function(sId, nErrorCode, sErrorMsg)
-        {
-        	if(sId == "tr_scheduleRegister")
-        	{
-        		if(nErrorCode < 0)
-        		{""
-        			this.alert("일정 등록 실패" + sErrorMsg);
-        		}
-        		this.alert("일정 등록 성공");
-        	}
-
-=======
 
     <Script type="xscript5.1"><![CDATA[this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
@@ -105,8 +57,6 @@ this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.
 
 this.Div00_Calendar01_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
 {
-	
->>>>>>> branch 'master' of https://github.com/1129khNexapring/SNU.git
 };
 ]]></Script>
     <Objects>
@@ -121,6 +71,7 @@ this.Div00_Calendar01_onchanged = function(obj:nexacro.Calendar,e:nexacro.Change
       </Dataset>
     </Objects>
 
+<!--
     <Script type="xscript5.1"><![CDATA[
 this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
@@ -155,6 +106,7 @@ this.Div00_btn_scheduleRegister_onclick = function(obj:nexacro.Button,e:nexacro.
 
 };
 ]]></Script>
+-->
 
   </Form>
 </FDL>

@@ -92,6 +92,12 @@ public class LectureServiceImpl implements LectureService{
 		int result = lStore.updateLecture(sqlSession, lecture);
 		return result;
 	}
+	//학생 - 시간표클릭 시 해당 강의 관련 상세정보 조회
+	@Override
+	public List<Lecture> printLectureBylName(Lecture lecture) {
+		List<Lecture> list = lStore.selectLectureByClick(sqlSession,lecture);
+		return list;
+	}
 	
 
 }

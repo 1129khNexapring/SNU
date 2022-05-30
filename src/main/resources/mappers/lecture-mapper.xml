@@ -129,6 +129,10 @@
 		SELECT * FROM LECTURE WHERE L_CODE = #{lCode }
 	</select>
 	
+	<select id="getLectureDetail" resultMap="lectureResultMap">
+		SELECT * FROM LECTURE WHERE L_NAME = #{lName }
+	</select>
+	
 	<!--  계절학기 조회   -->
 	<select id="seasonList" resultMap="lectureResultMap">
 		SELECT * FROM LECTURE
@@ -137,6 +141,7 @@
 	<delete id="deleteLecture" parameterType="string">
 		DELETE FROM LECTURE WHERE L_CODE = #{lCode }
 	</delete>
+	
 	
 	<update id="updateLecture">
 		UPDATE LECTURE

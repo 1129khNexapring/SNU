@@ -35,6 +35,8 @@ public interface LectureStore {
 
 	int updateLecture(SqlSession sqlSession, Lecture lecture);
 
+	List<Lecture> selectLectureByClick(SqlSession sqlSession,Lecture lecture);
+
 
 
 	

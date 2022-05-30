@@ -35,6 +35,8 @@ public interface LectureService {
 
 	public int modifyLecture(Lecture lecture);
 
+	public List<Lecture> printLectureBylName(Lecture lecture);
+
 
 	
 

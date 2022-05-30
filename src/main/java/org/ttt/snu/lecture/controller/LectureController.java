@@ -350,6 +350,28 @@ public class LectureController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-	
-
+	//학생 - 시간표클릭시 강의상세정보 조회
+	@RequestMapping(value="lecture/detailbyClick.snu", method=RequestMethod.POST)
+	public NexacroResult getLectureDetail(
+			@ParamVariable(name="in_Var1") String lName)
+	{
+		Lecture lecture = new Lecture();
+		lecture.setlName(lName);
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		List<Lecture> List = lService.printLectureBylName(lecture);
+		if(!List.isEmpty())
+		{
+			nErrorCode = 0;
+			strErrorMsg = "상세조회 성공";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "상세조회 실패";
+		}
+		result.addDataSet("outInfo", List);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
 }

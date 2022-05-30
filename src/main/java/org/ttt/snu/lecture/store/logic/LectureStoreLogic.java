@@ -85,6 +85,12 @@ public class LectureStoreLogic implements LectureStore{
 
 
 	}
+	//학생-클릭한 해당 강의 상세정보 가져오기
+	@Override
+	public List<Lecture> selectLectureByClick(SqlSession sqlSession,Lecture lecture) {
+		List<Lecture> list = sqlSession.selectList("LectureMapper.getLectureDetail", lecture);
+		return list;
+	}
 	
 	
 

@@ -70,6 +70,7 @@
             </Layout>
           </Layouts>
         </Div>
+        <Button id="Button00" taborder="2" text="Button00" left="75" top="18" width="36" height="16"/>
       </Layout>
     </Layouts>
     <Bind>

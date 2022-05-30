@@ -154,4 +154,10 @@ public class StudentController {
 		return result;
 
 	}
+	@RequestMapping(value="/backtologin.snu", method=RequestMethod.GET)
+	public String goBacklogin()
+	{
+		
+		return "user/loginPage";
+	}
 }

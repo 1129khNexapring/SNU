@@ -3,20 +3,20 @@
   <Form id="frm_timetable" width="1080" height="670" titletext="New Form" onload="frm_timetable_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Grid id="Grid01" taborder="0" left="395" top="180" width="411" height="250" binddataset="timetable" autofittype="col" fillareatype="none" autosizingtype="both">
+        <Grid id="Grid01" taborder="0" left="80" top="120" width="830" height="348" binddataset="timetable" autofittype="col" fillareatype="none" autosizingtype="none" oncellclick="Grid01_oncellclick" scrollbartype="none none">
           <Formats>
             <Format id="default">
               <Columns>
                 <Column size="45"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
+                <Column size="187"/>
+                <Column size="187"/>
+                <Column size="187"/>
+                <Column size="187"/>
+                <Column size="187"/>
               </Columns>
               <Rows>
-                <Row size="24" band="head"/>
-                <Row size="24"/>
+                <Row size="30" band="head"/>
+                <Row size="35"/>
               </Rows>
               <Band id="head">
                 <Cell text="교시"/>
@@ -53,7 +53,7 @@ this.frm_timetable_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	,"SnuURL::timetable/list.snu"
 	,""
 	,"dsTimetable=outTimetable dsTimetable01=outTimetable"
-	,"in_Var1="+name+""
+	,"in_Var1="+name
 	,"fn_callback_tt"
 	)
 };
@@ -168,28 +168,35 @@ this.fn_callback_tt = function(sId, nErrorCode, sErrorMsg)
 			{
 				continue;
 			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		}		
 	}
 }
+//해당 그리드 셀 클릭시 강의 detail보여주기 위한 창 생성
+//this.alert(e.cell) 좌측부터 우측으로 1,2,3,4,5
+this.Grid01_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+	//그리드 기준으로 가져와야지
+	var nRow 	 = this.Grid01.rowcount;
+	var lName 	 = this.Grid01.getCellValue(e.row, e.cell);
+	//findRow로 해당 dsTimetable을 돌려서 그 열을 찾고 그 열을 통해서 getColum가져오는거로 로직 진행
+	var fRow 	 = this.dsTimetable.findRow("lName", lName);
+	var lsRoom 	 = this.dsTimetable.getColumn(fRow,"lsRoom");
+	var nLeft 	 = system.clientToScreenX(this,10);
+	var nTop  	 = system.clientToScreenY(this,10);
+	var objParam = {objlName : lName
+					,objlsRoom : lsRoom};
+	var objChild = new ChildFrame("popLectureDetail", nLeft, nTop, 500, 500);
+	objChild.set_formurl("Base::popup_lectureDetail.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popCallback");
+	
+};
 
-
-
-]]></Script>
+this.fn_popCallback = function(sPopId, strReturn)
+{
+	
+}]]></Script>
     <Objects>
       <Dataset id="dsTimetable">
         <ColumnInfo>

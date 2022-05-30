@@ -99,6 +99,7 @@ this.fn_callback_el = function(sId, nErrorCode, sErrorMsg)
 			this.alert(sErrorMsg);
 		}
 		this.alert(sErrorMsg);
+		this.close();
 	}
 }
 //트랜잭션을 통해 받아온 강의리스트 중에 cell을 더블클릭하면 confirm창?
@@ -211,13 +212,7 @@ this.btn_registerCourse_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 		}
 	}
 };
-//학부check 강의 수 check확인하는 용도
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	var sDept = this.dsStudent.getColumn(0,"dCode");
-	this.alert(sDept);
-	var lDept = this.dsLecture.getColumn(e)
-};
+
 ]]></Script>
     <Objects>
       <Dataset id="dsLecture">
