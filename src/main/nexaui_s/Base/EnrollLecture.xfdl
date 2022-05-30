@@ -99,7 +99,6 @@ this.fn_callback_el = function(sId, nErrorCode, sErrorMsg)
 			this.alert(sErrorMsg);
 		}
 		this.alert(sErrorMsg);
-		this.close();
 	}
 }
 //트랜잭션을 통해 받아온 강의리스트 중에 cell을 더블클릭하면 confirm창?
@@ -165,6 +164,51 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 				this.courseRegister.setColumn(nRow,"lCapacity",lCapacity);
 				}
 		}	
+	}
+};
+//cell더블클릭하면 해당 강의를 데이터셋에서 제거 하고 confirm창
+this.Grid01_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var rtn = this.confirm("해당 강의를 장바구니에서 제거하시겠습니까?", "수강신청 창");
+	if(rtn = true)
+	{
+		this.courseRegister.deleteRow(e.row);
+	}
+};
+
+//이번에 트랜잭션할 때는 데이터셋으로 해야함
+//등록하려고 할 때, 학부 check, 남은 강의인원수 check
+this.btn_registerCourse_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	var rtn = this.confirm("수강신청을 완료하시겠습니까?", "수강신청 창");
+	if(rtn = true)
+	{	
+		var minCredit = 12;
+		var maxCredit = 21;
+		var totalCredit = this.Grid01.getSummValue(3);
+		if (totalCredit < minCredit)
+		{
+			this.alert("최소학점은 "+minCredit+"학점입니다. 기준에 맞춰서 수강등록해주세요");
+		}
+		if (totalCredit > maxCredit)
+		{
+			this.alert("최대학점은 "+maxCredit+"학점입니다. 기준에 맞춰서 수강등록해주세요");
+		}else if(totalCredit >= minCredit && totalCredit <= maxCredit)
+		{
+			var session = this.parent.semester; 
+			var sCode 	= nexacro.getEnvironmentVariable("ev_Val");
+			var d = new Date();
+			var year = d.getYear(); 
+			this.transaction(
+			"tr_courseRegister"
+			,"SnuURL::course/register.snu"
+			,"in_courseRegister=courseRegister"
+			,""
+			,"session="+session+" sCode="+sCode+" year="+year+""
+			,"fn_callback_el"
+			)
+			
+		}
 	}
 };
 //cell더블클릭하면 해당 강의를 데이터셋에서 제거 하고 confirm창

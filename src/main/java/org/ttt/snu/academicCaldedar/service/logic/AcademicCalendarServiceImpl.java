@@ -14,7 +14,7 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 
 	@Autowired
 	private AcademicCalendarStore aStore;
-
+	
 	@Autowired
 	private SqlSession sqlSession;
 
@@ -34,7 +34,6 @@ public class AcademicCalendarServiceImpl implements AcademicCalendarService {
 	public void removeSchedule(String title) {
 		aStore.deleteSchedule(title);
 	}
-	
 
 	@Override
 	public int registerSchedule(AcademicCalendar calendar) {
