@@ -84,7 +84,12 @@ public class ProfessorController {
 			strErrorMsg = "SUCC";
 		}else {
 			nErrorCode 	= -1;
+			strErrorMsg = "Fail";
 		}
+		result.addDataSet("out_prof", pList);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
 	}
 	// 교수 - 본인 정보 조회
 	@RequestMapping(value = "/professor/profInfo.snu", method = RequestMethod.POST)

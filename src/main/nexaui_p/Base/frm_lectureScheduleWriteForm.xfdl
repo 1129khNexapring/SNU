@@ -3,19 +3,93 @@
   <Form id="frm_lectureScheduleWriteForm" width="1080" height="670" titletext="New Form" onload="frm_lectureScheduleWriteForm_onload">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Div id="Div00" taborder="0" left="52" top="32" width="975" height="588" background="lightgray">
+        <Div id="Div00" taborder="0" left="52" top="32" width="458" height="458" background="lightgray" text="">
           <Layouts>
             <Layout>
-              <Combo id="Combo00" taborder="0" left="139" top="63" width="182" height="52"/>
+              <Combo id="Combo00" taborder="0" left="139" top="63" width="182" height="52" innerdataset="ds_lecture" datacolumn="lName" codecolumn="lCode"/>
               <Static id="Static00_00" taborder="1" text="강의명" left="43" top="67" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
               <Static id="Static00_00_00" taborder="2" text="요일 선택" left="43" top="160" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Combo id="Combo00_00_00" taborder="3" left="140" top="240" width="182" height="52"/>
-              <Static id="Static00_00_00_00" taborder="4" text="시작 교시" left="42" top="244" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Static id="Static00_00_00_00_00" taborder="5" text="끝 교시" left="43" top="320" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;"/>
-              <Combo id="Combo00_00_00_00" taborder="6" left="140" top="313" width="182" height="52"/>
+              <Combo id="Combo00_00_00" taborder="3" left="140" top="240" width="182" height="52" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">1</Col>
+                      <Col id="datacolumn">1</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2</Col>
+                      <Col id="datacolumn">2</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">3</Col>
+                      <Col id="datacolumn">3</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">4</Col>
+                      <Col id="datacolumn">4</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">5</Col>
+                      <Col id="datacolumn">5</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">6</Col>
+                      <Col id="datacolumn">6</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">7</Col>
+                      <Col id="datacolumn">7</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">8</Col>
+                      <Col id="datacolumn">8</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">9</Col>
+                      <Col id="datacolumn">9</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Static id="Static00_00_00_00" taborder="4" text="교시" left="42" top="244" width="97" height="45" font="bold 16px/normal &quot;Gulim&quot;,&quot;맑은 고딕&quot;" onclick="Div00_Static00_00_00_00_onclick"/>
+              <Radio id="Radio00" taborder="5" left="137" top="162" width="300" height="51" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">월</Col>
+                      <Col id="datacolumn">월</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">화</Col>
+                      <Col id="datacolumn">화</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">수</Col>
+                      <Col id="datacolumn">수</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">목</Col>
+                      <Col id="datacolumn">목</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">금</Col>
+                      <Col id="datacolumn">금</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Radio>
             </Layout>
           </Layouts>
         </Div>
+        <Button id="btn_register" taborder="1" text="등록" left="210" top="390" width="120" height="38" color="black" background="skyblue" onclick="btn_register_onclick"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[

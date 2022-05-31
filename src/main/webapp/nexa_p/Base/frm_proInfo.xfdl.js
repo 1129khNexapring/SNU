@@ -64,29 +64,28 @@
             obj.set_font("bold 16px/normal \"Gulim\",\"맑은 고딕\"");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_name","210","123","198","35",null,null,null,null,null,null,this.grid_detail.form);
+            obj = new Edit("Edit00_00","210","123","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("6");
             obj.set_readonly("true");
             obj.set_color("black");
             obj.set_background("white");
-            obj.set_enable("false");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_email","210","273","198","35",null,null,null,null,null,null,this.grid_detail.form);
+            obj = new Edit("Edit00_00_00_00","210","273","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("7");
             obj.set_color("black");
             obj.set_readonly("false");
             obj.set_background("white");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_phone","210","348","198","35",null,null,null,null,null,null,this.grid_detail.form);
+            obj = new Edit("Edit00_00_00_00_00","210","348","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("8");
             obj.set_readonly("false");
             obj.set_color("black");
             obj.set_background("white");
             this.grid_detail.addChild(obj.name, obj);
 
-            obj = new Edit("edt_address","210","423","198","35",null,null,null,null,null,null,this.grid_detail.form);
+            obj = new Edit("Edit00_00_00_00_00_00","210","423","198","35",null,null,null,null,null,null,this.grid_detail.form);
             obj.set_taborder("9");
             obj.set_readonly("false");
             obj.set_color("black");
@@ -151,6 +150,22 @@
             obj = new BindItem("item5","grid_detail.form.edt_address","value","ds_prof","pAddress");
             this.addChild(obj.name, obj);
             obj.bind();
+
+            obj = new BindItem("item6","grid_detail.form.Edit00_00_00_00","value","ds_prof","pEmail");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item7","grid_detail.form.Edit00_00_00_00_00","value","ds_prof","pPhone");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item8","grid_detail.form.Edit00_00_00_00_00_00","value","ds_prof","pAddress");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item9","grid_detail.form.Edit00_00","value","ds_prof","pName");
+            this.addChild(obj.name, obj);
+            obj.bind();
             
             // TriggerItem Information
 
@@ -175,6 +190,7 @@
         		,"fn_callback_tran"
         	);
         };
+
 
         this.btn_update_onclick = function(obj,e)
         {

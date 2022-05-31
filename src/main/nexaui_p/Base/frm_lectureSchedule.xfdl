@@ -3,9 +3,63 @@
   <Form id="frm_lectureScheduler" width="1080" height="670" titletext="New Form">
     <Layouts>
       <Layout height="670" mobileorientation="landscape" width="1080">
-        <Calendar id="Calendar00" taborder="0" left="53" top="78" width="490" height="334" onchanged="Calendar00_onchanged"/>
+        <Grid id="Grid00" taborder="0" left="78" top="52" width="822" height="336" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="월"/>
+                <Cell col="1" text="화"/>
+                <Cell col="2" text="수"/>
+                <Cell col="3" text="목"/>
+                <Cell col="4" text="금"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:월"/>
+                <Cell col="1" text="bind:화"/>
+                <Cell col="2" text="bind:수"/>
+                <Cell col="3" text="bind:목"/>
+                <Cell col="4" text="bind:금"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[]]></Script>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="월" type="STRING" size="256"/>
+          <Column id="화" type="STRING" size="256"/>
+          <Column id="수" type="STRING" size="256"/>
+          <Column id="목" type="STRING" size="256"/>
+          <Column id="금" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="월">데이터베이스의 기초</Col>
+            <Col id="화">객체지향 프로그래밍의 기초와 이해</Col>
+          </Row>
+          <Row/>
+          <Row>
+            <Col id="화">나는빅데이터를진짜로배운적이없다니깐요</Col>
+            <Col id="금">파이썬</Col>
+          </Row>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

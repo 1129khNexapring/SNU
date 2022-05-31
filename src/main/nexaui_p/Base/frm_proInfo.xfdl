@@ -52,6 +52,10 @@
       <BindItem id="item3" compid="grid_detail.form.edt_email" propid="value" datasetid="ds_prof" columnid="pEmail"/>
       <BindItem id="item4" compid="grid_detail.form.edt_phone" propid="value" datasetid="ds_prof" columnid="pPhone"/>
       <BindItem id="item5" compid="grid_detail.form.edt_address" propid="value" datasetid="ds_prof" columnid="pAddress"/>
+      <BindItem id="item6" compid="grid_detail.form.Edit00_00_00_00" propid="value" datasetid="ds_prof" columnid="pEmail"/>
+      <BindItem id="item7" compid="grid_detail.form.Edit00_00_00_00_00" propid="value" datasetid="ds_prof" columnid="pPhone"/>
+      <BindItem id="item8" compid="grid_detail.form.Edit00_00_00_00_00_00" propid="value" datasetid="ds_prof" columnid="pAddress"/>
+      <BindItem id="item9" compid="grid_detail.form.Edit00_00" propid="value" datasetid="ds_prof" columnid="pName"/>
     </Bind>
     <Script type="xscript5.1"><![CDATA[
 this.frm_proInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)

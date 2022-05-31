@@ -20,9 +20,9 @@
 
             
             // UI Components Initialize
-            obj = new Button("Button00","406","230","120","50",null,null,null,null,null,null,this);
+            obj = new Grid("Grid00","124","81","820","250",null,null,null,null,null,null,this);
             obj.set_taborder("0");
-            obj.set_text("Button00");
+            obj._setContents("");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
