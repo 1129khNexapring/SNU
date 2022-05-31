@@ -12,5 +12,11 @@ public interface AcademicCalendarService {
 
 	public void removeSchedule(String title);
 
+	public List<AcademicCalendar> printAllSchedule();
+
+	public int registerSchedule(AcademicCalendar calendar);
+
+	public int modifySchedule(AcademicCalendar calendar);
+
 }
 

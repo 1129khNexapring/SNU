@@ -21,17 +21,30 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	
 	this.transaction(
         		"tr_register"
-        		,"tttUrl::qna/register.snu"
+        		,"SnuURL::qna/register.snu"
         		,""
         		,""
         		,"inVar1=" + rTitle + " inVar2=" + rContent + " inVar3=" + sCode
         		,"fn_callback_tran"
         	)
 	this.close();
-	this.reload(this.parent);
+	this.parent.reload();
 };
 
 
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_qna">
+        <ColumnInfo>
+          <Column id="qnaNo" type="INT" size="256"/>
+          <Column id="qnaTitle" type="STRING" size="256"/>
+          <Column id="qnaContent" type="STRING" size="256"/>
+          <Column id="qnaDate" type="STRING" size="256"/>
+          <Column id="qnaStatus" type="STRING" size="256"/>
+          <Column id="qnaCount" type="INT" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

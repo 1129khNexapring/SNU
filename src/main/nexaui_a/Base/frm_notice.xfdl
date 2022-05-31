@@ -25,8 +25,8 @@
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="80"/>
-                <Column size="80"/>
+                <Column size="43"/>
+                <Column size="167"/>
                 <Column size="80"/>
                 <Column size="80"/>
               </Columns>
@@ -35,10 +35,10 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="noticeNo"/>
-                <Cell col="1" text="noticeTitle"/>
-                <Cell col="2" text="noticeDate"/>
-                <Cell col="3" text="noticeWriter"/>
+                <Cell text="번호"/>
+                <Cell col="1" text="제목"/>
+                <Cell col="2" text="작성일"/>
+                <Cell col="3" text="작성자"/>
               </Band>
               <Band id="body">
                 <Cell text="bind:noticeNo"/>

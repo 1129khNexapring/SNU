@@ -17,13 +17,13 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="강의코드"/>
+                <Cell text="강의코드" textAlign="center"/>
                 <Cell col="1" text="구분"/>
                 <Cell col="2" text="강의명"/>
                 <Cell col="3" text="정원"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:lCode"/>
+                <Cell text="bind:lCode" textAlign="center"/>
                 <Cell col="1" text="bind:lType"/>
                 <Cell col="2" text="bind:lName"/>
                 <Cell col="3" text="bind:lCapacity"/>

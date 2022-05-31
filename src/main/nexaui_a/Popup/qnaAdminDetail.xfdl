@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="qnaAdminDetail" width="690" height="550" titletext="New Form" onload="qnaAdminDetail_onload">
+    <Layouts>
+      <Layout height="550" mobileorientation="landscape" width="690">
+        <Div id="Div00" taborder="0" text="Div00" left="10" top="10" width="460" height="330" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit00" taborder="0" left="99" top="29" width="115" height="40"/>
+              <Static id="Static00" taborder="1" text="제목" left="36" top="37" width="55" height="24"/>
+              <TextArea id="TextArea00" taborder="2" left="98" top="92" width="314" height="207" onchanged="Div00_TextArea00_onchanged"/>
+              <Static id="Static02" taborder="3" text="내용" left="36" top="179" width="43" height="26"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Edit id="edt_register" taborder="1" left="22" top="478" width="322" height="42" onchanged="Edit00_onchanged" oneditclick="Edit00_oneditclick"/>
+        <Button id="btn_qnaReplyRegister" taborder="2" text="댓글등록" left="368" top="478" width="84" height="42" onclick="btn_qnaReplyRegister_onclick"/>
+        <Grid id="Grid00" taborder="3" left="22" top="375" width="428" height="93" binddataset="ds_qnaReply" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="댓글번호" suppressalign="first"/>
+                <Cell col="1" text="댓글내용"/>
+                <Cell col="2" text="작성일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:qnaReplyNo" textAlign="center"/>
+                <Cell col="1" text="bind:qnaReplyContent"/>
+                <Cell col="2" text="bind:qnaReplyDate"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <PopupDiv id="popModifyQnaReply" text="PopupDiv00" visible="false" left="40" top="410" width="360" height="54">
+          <Layouts>
+            <Layout>
+              <Edit id="edt_modifyqnaReply" taborder="0" left="13" top="13" width="137" height="34"/>
+              <Button id="btn_modifyQnaReply" taborder="1" text="수정완료" left="158" top="14" width="92" height="33" onclick="popModifyQnaReply_btn_modifyQnaReply_onclick"/>
+              <Button id="btn_removeQnaReply" taborder="2" text="삭제" left="264" top="14" width="92" height="33" onclick="popModifyQnaReply_btn_removeQnaReply_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Grid id="Grid01" taborder="4" left="504" top="276" width="170" height="100" binddataset="ds_qnaReply">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="aCode"/>
+                <Cell col="1" text="qnaReplyNo"/>
+                <Cell col="2" text="qnaReplyContent"/>
+                <Cell col="3" text="qnaReplyDate"/>
+                <Cell col="4" text="qnaNo"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:aCode"/>
+                <Cell col="1" text="bind:qnaReplyNo"/>
+                <Cell col="2" text="bind:qnaReplyContent"/>
+                <Cell col="3" text="bind:qnaReplyDate"/>
+                <Cell col="4" text="bind:qnaNo"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_qna">
+        <ColumnInfo>
+          <Column id="qnaNo" type="STRING" size="256"/>
+          <Column id="qnaTitle" type="STRING" size="256"/>
+          <Column id="qnaContent" type="STRING" size="256"/>
+          <Column id="qnaDate" type="STRING" size="256"/>
+          <Column id="qnaStatus" type="STRING" size="256"/>
+          <Column id="qnaCount" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_qnaReply">
+        <ColumnInfo>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="qnaReplyNo" type="INT" size="256"/>
+          <Column id="qnaReplyContent" type="STRING" size="256"/>
+          <Column id="qnaReplyDate" type="STRING" size="256"/>
+          <Column id="qnaNo" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.form.Edit00" propid="value" datasetid="ds_qna" columnid="qnaTitle"/>
+      <BindItem id="item1" compid="Div00.form.TextArea00" propid="value" datasetid="ds_qna" columnid="qnaContent"/>
+    </Bind>
+    <Script type="xscript5.1"><![CDATA[
+this.qnaAdminDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+  this.ds_qna.addRow();
+	this.ds_qna.setColumn(0, "qnaNo", 	 this.parent.qnaNo);
+	this.ds_qna.setColumn(0, "qnaTitle", this.parent.qnaTitle);
+ 	this.ds_qna.setColumn(0, "qnaContent",	 this.parent.qnaContent);
+// 	this.ds_qna.setColumn(0, "qnaDate",	 this.parent.qnaDate);
+/*	this.ds_qna.setColumn(0, "qnaStatus",  this.parent.qnaStatus);
+*/// 	this.ds_qna.setColumn(0, "qnaCount", this.parent.qnaCount);
+// 	this.ds_qna.setColumn(0, "sCode", this.parent.sCode);
+	
+// 	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+// 	this.transaction(
+// 		"tr_qnaReplyList"
+// 		, "SnuURL::qnaReply/list.snu"
+// 		, ""
+// 		,"ds_qnaReply=out_qnaReply" 
+// 		,"in_var1=" + qnaNo
+// 		,"tr_callback_qnaReply"
+// 	);
+	this.ds_qnaReply.addRow();
+	this.ds_qnaReply.setColumn(0, "qnaNo", this.parent.qnaNo);
+	this.ds_qnaReply.setColumn(0, "qnaReplyNo", 	 this.parent.qnaReplyNo);
+	this.ds_qnaReply.setColumn(0, "qnaReplyContent", this.parent.qnaReplyContent);
+ 	this.ds_qnaReply.setColumn(0, "qnaReplyDate",	 this.parent.qnaReplyDate);
+};
+
+this.btn_qnaReplyRegister_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var insertbutton = this.confirm("댓글을 등록하시겠습니까?", "댓글 등록");
+	var qnaReplyContent = this.edt_register.value;
+	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+	
+	var d = new Date();
+	var today = (d.getYear() + "" + ((d.getMonth()+1)+"").padLeft(2,'0')+""+(""+d.getDate()));
+	this.ds_qnaReply.addRow();
+	this.ds_qnaReply.setColumn(this.ds_qnaReply.rowposition, "qnaReplyDate", today)
+	
+	if(insertbutton == true) {
+		this.transaction(
+			"tr_qnaReplyRegister"
+			, "SnuURL::qnaReply/register.snu"
+			, ""
+			, ""
+			, "in_var1=" + qnaNo + " in_var2=" + nexacro.wrapQuote(qnaReplyContent)
+			, "tr_callback_qnaReply"
+		);
+		/*this.alert(nexacro.wrapQuote(qnaReplyContent))*/
+	}
+	Form.reload();
+	
+		this.fn_callback_qnaReply = function(sId, nErrorCode, sErrorMsg)
+{
+	
+	
+	if(sId == "tr_qnaReplyRegister")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("댓글 등록 실패" + sErrorMsg);
+		}
+			this.alert("댓글 등록 성공");
+			}
+	
+	}
+	if(sId == "tr_qnaReplyUpdate")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("댓글 수정 실패" + sErrorMsg);
+			}
+			this.alert("댓글 수정 성공");
+			}
+			
+			
+		if(sId == "tr_removeQnaReply")
+		{
+			if(nErrorCode < 0 )
+			{
+				this.alert("댓글 삭제 실패" + sErrorMsg);
+				}
+				this.alert("댓글 삭제 성공");
+				}
+				
+	
+};
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+
+	
+	var qnaReply = this.popModifyQnaReply.form.edt_modifyqnaReply;
+	qnaReply.set_value("");
+	var nRow = this.ds_qnaReply.rowposition;
+	this.popModifyQnaReply.trackPopupByComponent(obj, 50, 30, 370, 100);
+	currentqnaReplyNo = e.row;
+
+};
+
+
+
+
+
+
+this.popModifyQnaReply_btn_modifyQnaReply_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var qnaReplyNo = this.ds_qnaReply.getColumn(currentqnaReplyNo, "qnaReplyNo");
+	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+	var qnaReplyContent = this.popModifyQnaReply.form.edt_modifyqnaReply.value;
+	var modifyBtn = this.confirm("해당 댓글을 수정하시겠습니까?", "댓글 수정");
+	if(modifyBtn == true) {
+			this.transaction(
+			  "tr_qnaReplyUpdate"
+			, "SnuURL::qnaReply/modify.snu"
+			, ""
+			, ""
+			, "in_var1=" + qnaNo + " in_var2=" + qnaReplyNo + " in_var3=" + nexacro.wrapQuote(qnaReplyContent) 
+			, "fn_callback_qnaReply"
+		);
+	};
+};
+
+this.popModifyQnaReply_btn_removeQnaReply_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+	var qnaReplyNo = this.ds_qnaReply.getColumn(currentqnaReplyNo, "qnaReplyNo");
+	var deleteBtn = this.confirm("해당 댓글을 삭제하시겠습니까?", "댓글 삭제");
+	if(deleteBtn == true) {
+			this.transaction(
+			"tr_removeQnaReply"
+			, "SnuURL::qnaReply/delete.snu"
+			, ""
+			, ""
+			, "in_var1=" + qnaReplyNo
+			, "fn_callback_qnaReply"
+		);
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

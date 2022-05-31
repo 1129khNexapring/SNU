@@ -62,10 +62,23 @@ public class LectureServiceImpl implements LectureService{
 		List<Lecture> lList = lStore.selectMyLecture(sqlSession, sCode);
 		return lList;
 	}
+
+	//학생 수강신청 가능 강의 조회
+	@Override
+	public List<Lecture> getLectureList() {
+		List<Lecture> lList = lStore.selectEnrollLectureList(sqlSession);
+		return lList;
+	}
 	@Override
 	public List<Lecture> viewList(String sCode) {
 		List<Lecture> vlList = lStore.viewLecture(sqlSession, sCode);
 		return vlList;
+	}
+
+	@Override
+	public List<Lecture> seaonList(String sCode) {
+		List<Lecture> lList = lStore.seasonList(sqlSession, sCode);
+		return lList;
 	}
 	//교수 - 강의 계획서 삭제
 	@Override
@@ -78,6 +91,12 @@ public class LectureServiceImpl implements LectureService{
 	public int modifyLecture(Lecture lecture) {
 		int result = lStore.updateLecture(sqlSession, lecture);
 		return result;
+	}
+	//학생 - 시간표클릭 시 해당 강의 관련 상세정보 조회
+	@Override
+	public List<Lecture> printLectureBylName(Lecture lecture) {
+		List<Lecture> list = lStore.selectLectureByClick(sqlSession,lecture);
+		return list;
 	}
 	
 

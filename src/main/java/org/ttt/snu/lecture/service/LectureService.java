@@ -22,11 +22,21 @@ public interface LectureService {
 
 	public int registerLecture(Lecture lecture);
 
+
+	public List<Lecture> getLectureList();
+
 	public List<Lecture> viewList(String sCode);
+
+	public List<Lecture> seaonList(String sCode);
+
+	
 
 	public int removeLecture(String lCode);
 
 	public int modifyLecture(Lecture lecture);
+
+	public List<Lecture> printLectureBylName(Lecture lecture);
+
 
 	
 

@@ -5,7 +5,7 @@
       <Layout width="1080" height="670" screenid="Desktop_screen">
         <Button id="btn_bookmark" taborder="0" text="☆" left="7" top="6" width="23" height="20" font="bold 14px/normal &quot;Malgun Gothic&quot;" onclick="btn_bookmark_onclick"/>
         <Static id="st_title" taborder="1" text="Static00" left="41" top="6" width="344" height="27"/>
-        <Div id="div_work" taborder="2" text="Div00" left="7" top="44" width="1064" height="616"/>
+        <Div id="Div00" taborder="2" text="Div00" left="8" top="37" width="911" height="549" border="1px solid black"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
@@ -33,6 +33,8 @@ this.Form_Work_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 		this.btn_bookmark.set_text("★"); //별은 텍스트
 		this.fv_myMenu = "D";
 	}
+	
+	
 };
 
 

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.ttt.snu.board.domain.Comments;
 import org.ttt.snu.book.domain.Book;
 import org.ttt.snu.lecture.domain.Lecture;
 import org.ttt.snu.qna.domain.Qna;
+import org.ttt.snu.qna.domain.QnaReply;
 import org.ttt.snu.qna.service.QnaService;
 
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
@@ -87,5 +89,103 @@ public class QnaController {
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
-
+	
+	//댓글리스트 조회
+	@RequestMapping(value="/qnaReply/list.snu")
+	public NexacroResult qnaReplyList(@ParamVariable(name="in_var1") int  qnaNo) {
+		int    nErrorCode  = 0;
+		String strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		List<QnaReply> qnaReply = qService.printAllQnaReply(qnaNo);
+		System.out.println(qnaReply);
+		if(!qnaReply.isEmpty()) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}	
+		result.addDataSet("out_qnaReply", qnaReply);
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+		
+	@RequestMapping(value="/qnaReply/register.snu", method=RequestMethod.POST)
+	public NexacroResult qnaReplyRegister(
+				  @ParamVariable(name="in_var1") int qnaNo
+				, @ParamVariable(name="in_var2") String qnaReplyContent
+				) {
+		System.out.println(qnaNo);
+		System.out.println(qnaReplyContent);
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		QnaReply qnaReply = new QnaReply();
+		NexacroResult result = new NexacroResult();
+		qnaReply.setQnaNo(qnaNo);
+		qnaReply.setQnaReplyContent(qnaReplyContent);
+		int qResult = qService.registerQnaReply(qnaReply);
+		if(qResult > 0) {
+			nErrorCode  = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode  = -1;
+			strErrorMsg = "FAIL";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	
+	@RequestMapping(value="/qnaReply/modify.snu", method=RequestMethod.POST)
+	public NexacroResult modifyQnaReply(
+					@ParamVariable(name="in_var1") int qnaNo
+					,@ParamVariable(name="in_var2") int qnaReplyNo
+					,@ParamVariable(name="in_var3") String qnaReplyContent
+					) {
+		
+			System.out.println(qnaReplyNo);
+			System.out.println(qnaReplyContent);
+			int nErrorCode = 0;
+			String strErrorMsg = "";
+			QnaReply qnaReply = new QnaReply();
+			NexacroResult result = new NexacroResult();
+			qnaReply.setQnaNo(qnaNo);
+			qnaReply.setQnaReplyNo(qnaReplyNo);
+			qnaReply.setQnaReplyContent(qnaReplyContent);
+			int uResult = qService.modifyQnaReply(qnaReply);
+				if(uResult > 0) {
+					nErrorCode  = 0;
+					strErrorMsg = "SUCC";
+				}else {
+					nErrorCode  = -1;
+					strErrorMsg = "FAIL";
+				}
+				result.addVariable("ErrorCode", nErrorCode);
+				result.addVariable("ErrorMsg", strErrorMsg);
+				return result;
+	}
+	@RequestMapping(value="/qnaReply/delete.snu", method=RequestMethod.POST)
+	public NexacroResult removeQnaReply(@ParamVariable(name="in_var1") int qnaReplyNo) {
+		int nErrorCode = 0;
+		String strErrorMsg = "";
+		NexacroResult result = new NexacroResult();
+		QnaReply qnaReply = new QnaReply();
+		qnaReply.setQnaReplyNo(qnaReplyNo);
+		int dResult = qService.removeQnaReply(qnaReply);
+		if(dResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+			
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "FAIL";
+			
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
 }

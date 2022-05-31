@@ -52,32 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
         selectable: true,
         locale: 'ko',
         displayEventTime: false,
-        allDay:true,
-        eventClick: function(info) {
-            if(window.confirm("일정을 삭제하시겠습니까?")) {
-                info.event.remove();
-                
-                console.log(info.event);
-                var events = new Array(); // Json 데이터를 받기 위한 배열 선언
-                var obj = new Object();
-                	
-                    obj.title = info.event._def.title;
-                    obj.start = info.event._instance.range.start;
-                    obj.end = info.event._instance.range.end;
-                    events.push(obj);
-
-                console.log(events);
-            }
-            $(function deleteData(){
-                $.ajax({
-                    url: "/schedule/delete.snu",
-                    type: "POST",
-                    dataType: "json",
-                    data: JSON.stringify(events),
-                    
-                })
-            })
-        },
+       
+      
           
         
         events: [
@@ -85,15 +61,19 @@ document.addEventListener('DOMContentLoaded', function() {
         	  for (int i = 0; i < aList.size(); i++) {
         		  AcademicCalendar calendar = (AcademicCalendar)aList.get(i);
       %>	
-        	  {
-        	   title : '<%= calendar.getTitle() %>',
-        	   start : '<%= calendar.getStartDate() %>',
-        	   end : '<%= calendar.getEndDate() %>T23:59:59'
-        	   },
+		      {
+		   	   title : '<%= calendar.getTitle() %>',
+		   	   start : '<%= calendar.getStartDate() %>',
+		   	   end : '<%= calendar.getEndDate()%>T23:59:59'
+		   	   },
       <%
       	}
       %>
-      		
+      {
+   	   title : 'title',
+   	   start : '2000-05-12',
+   	   end : '2000-05-14T23:59:59'
+   	   },
         ]
       });
 

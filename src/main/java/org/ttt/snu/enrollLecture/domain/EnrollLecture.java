@@ -1,15 +1,14 @@
 package org.ttt.snu.enrollLecture.domain;
 
 public class EnrollLecture {
-	
-	private String semester;
+	private int semester;
 	private int year;
 	private String sCode;
 	private String lCode;
 	
 	public EnrollLecture() {}
 
-	public EnrollLecture(String semester, int year, String sCode, String lCode) {
+	public EnrollLecture(int semester, int year, String sCode, String lCode) {
 		super();
 		this.semester = semester;
 		this.year = year;
@@ -17,11 +16,11 @@ public class EnrollLecture {
 		this.lCode = lCode;
 	}
 
-	public String getSemester() {
+	public int getSemester() {
 		return semester;
 	}
 
-	public void setSemester(String semester) {
+	public void setSemester(int semester) {
 		this.semester = semester;
 	}
 

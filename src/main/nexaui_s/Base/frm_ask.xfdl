@@ -7,6 +7,7 @@
           <Formats>
             <Format id="default">
               <Columns>
+                <Column size="48"/>
                 <Column size="80"/>
                 <Column size="284"/>
                 <Column size="80"/>
@@ -16,14 +17,16 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="작성자"/>
-                <Cell col="1" text="건의내용"/>
-                <Cell col="2" text="작성일"/>
+                <Cell text="글번호"/>
+                <Cell col="1" text="작성자"/>
+                <Cell col="2" text="건의내용"/>
+                <Cell col="3" text="작성일"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:sCode" textAlign="center"/>
-                <Cell col="1" text="bind:qnaContent" textAlign="center"/>
-                <Cell col="2" text="bind:qnaDate" textAlign="center"/>
+                <Cell text="bind:qnaNo"/>
+                <Cell col="1" text="bind:sCode" textAlign="center"/>
+                <Cell col="2" text="bind:qnaContent" textAlign="center"/>
+                <Cell col="3" text="bind:qnaDate" textAlign="center"/>
               </Band>
             </Format>
           </Formats>
@@ -42,7 +45,7 @@ this.frm_ask_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	this.transaction(
         		"tr_select"// 1.ID
-        		,"tttUrl::qna/list.snu"// 2.URL
+        		,"SnuURL::qna/list.snu"// 2.URL
         		,"" // 3.InDs : F->S jsp(I,U,D)
         		,"ds_qna=out_qna" // 4.OutDs : S->F jsp(SELECT)
         		,"inVar1=" // 5.InVar : F->S(var)
@@ -94,7 +97,11 @@ this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo
 		
 	this.transaction(
         		"tr_register"
-        		,"tttUrl::qna/count.snu"
+
+        		,"SnuURL::qna/count.snu"
+
+     
+
         		,""
         		,""
         		,"inVar1=" + qnaNo + " inVar2=" + qnaCount
@@ -140,6 +147,15 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
           <Column id="qnaStatus" type="STRING" size="256"/>
           <Column id="qnaCount" type="INT" size="256"/>
           <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_qnaReply">
+        <ColumnInfo>
+          <Column id="qnaReplyNo" type="INT" size="256"/>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="qnaReplyContent" type="STRING" size="256"/>
+          <Column id="qnaReplyDate" type="STRING" size="256"/>
+          <Column id="qnaNo" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
     </Objects>

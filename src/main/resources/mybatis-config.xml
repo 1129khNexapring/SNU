@@ -36,16 +36,17 @@
 		<typeAlias type="org.ttt.snu.requestVolunteer.domain.RequestVolunteer" alias="RequestVolunteer"/>
 
 		<typeAlias type="org.ttt.snu.qna.domain.Qna" alias="Qna"/>
-
+			<typeAlias type="org.ttt.snu.qna.domain.QnaReply" alias="QnaReply"/>
 
 		<typeAlias type="org.ttt.snu.timetable.domain.Timetable" alias="Timetable"/>
 
 		
 
 		<typeAlias type="org.ttt.snu.grade.domain.ScoreList" alias="ScoreList"/>
-
+		<typeAlias type="org.ttt.snu.courseCalendar.domain.courseCalendar" alias="courseCalendar"/>
 		<typeAlias type="org.ttt.snu.lectureEvaluation.domain.LectureEvaluation" alias="LectureEvaluation"/>
 		<typeAlias type="org.ttt.snu.grade.domain.LectureGrade" alias="LectureGrade"/>
+		<typeAlias type="org.ttt.snu.vacationSession.domain.VacationSession" alias="VacationSession"/>
 		
 		
 
@@ -81,8 +82,9 @@
 		<mapper resource="mappers/lectureEvaluation-mapper.xml"/>
 
 		<mapper resource="mappers/qna-mapper.xml"/>
+		<mapper resource="mappers/vacationSession-mapper.xml"/>
 
 		<mapper resource="mappers/timetable-mapper.xml"/>
-
+		<mapper resource="mappers/courseCalendar-mapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="adminQna" width="1080" height="670" titletext="New Form" onload="adminQna_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="landscape" width="1080">
+        <Grid id="Grid00" taborder="0" left="110" top="104" width="666" height="216" binddataset="ds_qna" autosizingtype="none" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="qnaNo" textAlign="center"/>
+                <Cell col="1" text="qnaTitle"/>
+                <Cell col="2" text="qnaDate"/>
+                <Cell col="3" text="qnaStatus"/>
+                <Cell col="4" text="sCode"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:qnaNo" textAlign="center"/>
+                <Cell col="1" text="bind:qnaTitle"/>
+                <Cell col="2" text="bind:qnaDate"/>
+                <Cell col="3" text="bind:qnaStatus"/>
+                <Cell col="4" text="bind:sCode"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_qna">
+        <ColumnInfo>
+          <Column id="qnaNo" type="STRING" size="256"/>
+          <Column id="qnaTitle" type="STRING" size="256"/>
+          <Column id="qnaContent" type="STRING" size="256"/>
+          <Column id="qnaDate" type="STRING" size="256"/>
+          <Column id="qnaStatus" type="STRING" size="256"/>
+          <Column id="qnaCount" type="STRING" size="256"/>
+          <Column id="sCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_qnaReply">
+        <ColumnInfo>
+          <Column id="aCode" type="STRING" size="256"/>
+          <Column id="qnaReplyNo" type="INT" size="256"/>
+          <Column id="qnaReplyContent" type="STRING" size="256"/>
+          <Column id="qnaReplyDate" type="STRING" size="256"/>
+          <Column id="qnaNo" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var currentboardNo = 0;
+this.adminQna_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+        		"qna_select"// 1.ID
+        		,"SnuURL::qna/list.snu"
+        		,"" 
+        		,"ds_qna=out_qna" 
+        		,"inVar1=" 
+        		,"fn_callback_qna" 
+				)
+};
+
+
+	this.fn_callback_qna = function(sId, nErrorCode, sErrorMsg)
+{
+	if(sId == "qna_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("건의 조회 실패" + sErrorMsg);
+		}
+		this.alert("건의 조회 성공");
+	}
+	if(sId == "qna_register")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("댓글 등록 실패" + sErrorMsg);
+		}
+			this.alert("건의 조회 성공");
+			}
+	
+	
+}
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var qnaNo = this.ds_qna.getColumn(this.ds_qna.rowposition, "qnaNo");
+	this.transaction(
+		"tr_qnaReplyList"
+		, "SnuURL::qnaReply/list.snu"
+		, ""
+		,"ds_qnaReply=out_qnaReply" 
+		,"in_var1=" + qnaNo
+		,"tr_callback_qnaReply"
+	);
+	
+	
+	var nRow = this.ds_qna.rowposition;
+
+	var objParam = {qnaNo: this.ds_qna.getColumn(nRow, "qnaNo")
+					,qnaTitle: this.ds_qna.getColumn(nRow, "qnaTitle")
+					,qnaContent: this.ds_qna.getColumn(nRow, "qnaContent")
+					,qnaDate: this.ds_qna.getColumn(nRow, "qnaDate")
+					,qnaStatus: this.ds_qna.getColumn(nRow, "qnaStatus")
+					,qnaCount: this.ds_qna.getColumn(nRow, "qnaCount")
+					,sCode: this.ds_qna.getColumn(nRow, "sCode")};
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop  = system.clientToScreenY(this, 10);
+	var objChild = new ChildFrame("popqnaAdminDetail", nLeft, nTop, 480, 600);
+	objChild.set_formurl("Popup::qnaAdminDetail.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("normal");
+	objChild.showModal(this.getOwnerFrame(), objParam, this, "fn_popupCallback");
+	trace("Popup::qnaAdminDetail.xfdl");
+	
+	
+	
+};
+
+
+this.fn_popupCallback = function(strPopupId, strReturn)
+{
+	if(strReturn == undefined) 
+	{
+	return;
+	}
+	if(strPopupId == "popqnaAdminDetail")
+	{
+		return;
+	}
+}]]></Script>
+  </Form>
+</FDL>

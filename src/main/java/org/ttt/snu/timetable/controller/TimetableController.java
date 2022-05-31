@@ -20,7 +20,7 @@ public class TimetableController {
 	@RequestMapping(value="/timetable/list.snu",method=RequestMethod.POST)
 	public NexacroResult timetableByStudent(
 			@ParamVariable(name="in_Var1") String inVar1)
-	{
+	{	
 		int nErrorCode = 0;
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();

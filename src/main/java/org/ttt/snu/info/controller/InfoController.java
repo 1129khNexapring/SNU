@@ -38,13 +38,15 @@ public class InfoController {
 	}
 	
 	//관리자 학교알림이 넥사크로에서 조회
-	@RequestMapping(value="/info/list.snu", method=RequestMethod.GET)
+	@RequestMapping(value="/info/list.snu", method=RequestMethod.POST)
 	public NexacroResult printAllinfo()
 	{
 		int nErrorCode = 0;
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();
-		List<Info> iList = iService.printAllNInfo();
+		System.out.println("트랜");
+		List<Info> iList = iService.printAllNInfo();	
+		System.out.println(iList);
 		if(!iList.isEmpty())
 		{
 			nErrorCode = 0;
@@ -64,7 +66,6 @@ public class InfoController {
 	public NexacroResult registerInfo(
 			@ParamVariable(name="in_Var1") String title)
 	{
-		System.out.println(title);
 		int nErrorCode = 0;
 		String strErrorMsg = "";
 		NexacroResult result = new NexacroResult();

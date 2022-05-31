@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="popup_lectureDetail" width="500" height="500" titletext="New Form" onload="popup_lectureDetail_onload">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="500">
+        <Div id="Div00" taborder="0" text="" left="5" top="8" width="489" height="485" border="1px solid black">
+          <Layouts>
+            <Layout>
+              <ListView id="ListView00" taborder="0" left="13" top="11" width="460" height="460" binddataset="dsLectureInfo">
+                <Formats>
+                  <Format id="default">
+                    <Band id="body" width="100%" height="411">
+                      <Cell id="Cell04" left="10" top="10" width="120" height="24" text="강의명" textAlign="center"/>
+                      <Cell id="Cell05" left="135" top="10" width="315" height="24" text="bind:lName"/>
+                      <Cell id="Cell06" left="10" top="42" width="120" height="49" text="강의목표" textAlign="center"/>
+                      <Cell id="Cell07" left="135" top="42" width="315" height="48" text="bind:lObjective"/>
+                      <Cell id="Cell08" left="10" top="101" width="120" height="179" text="강의내용" textAlign="center"/>
+                      <Cell id="Cell09" left="135" top="101" width="315" height="179" text="bind:lContents" wordWrap="char"/>
+                      <Cell id="Cell10" left="10" top="290" width="120" height="24" text="교재" textAlign="center"/>
+                      <Cell id="Cell11" left="135" top="290" width="315" height="24" text="bind:textbook" textAlign="center"/>
+                      <Cell id="Cell00" left="10" top="318" width="120" height="24" text="강의실" textAlign="center"/>
+                      <Cell id="Cell01" left="135" top="318" width="315" height="24" text="bind:lName" combodataset="room" combodatacol="lsRoom" combocodecol="lName" displaytype="combotext"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </ListView>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//강의관련내용 가져오기
+this.popup_lectureDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var nRow = this.room.addRow();
+	this.room.setColumn(nRow,"lsRoom",this.parent.objlsRoom);
+	this.room.setColumn(nRow,"lName", this.parent.objlName);
+	var lName = this.parent.objlName;
+	this.transaction(
+	"tr_lectureDetailfromTimetable"
+	,"SnuURL::lecture/detailbyClick.snu"
+	,""
+	,"dsLectureInfo=outInfo"
+	,"in_Var1="+nexacro.wrapQuote(lName)+""
+	,"fn_callback_detail"
+	)
+};
+
+this.fn_callback_detail = function(sId, nErrorCode, sErrorMsg)
+{
+	
+}]]></Script>
+    <Objects>
+      <Dataset id="dsLectureInfo">
+        <ColumnInfo>
+          <Column id="lCode" type="STRING" size="256"/>
+          <Column id="lType" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+          <Column id="lObjective" type="STRING" size="256"/>
+          <Column id="lContents" type="STRING" size="256"/>
+          <Column id="textbook" type="STRING" size="256"/>
+          <Column id="lDays" type="INT" size="256"/>
+          <Column id="credit" type="INT" size="256"/>
+          <Column id="lYear" type="INT" size="256"/>
+          <Column id="lSemester" type="INT" size="256"/>
+          <Column id="lCapacity" type="INT" size="256"/>
+          <Column id="lStatus" type="STRING" size="256"/>
+          <Column id="pCode" type="STRING" size="256"/>
+          <Column id="dCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="room">
+        <ColumnInfo>
+          <Column id="lsRoom" type="STRING" size="256"/>
+          <Column id="lName" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

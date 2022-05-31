@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="VacationSessionMapper">
+	<resultMap type="org.ttt.snu.vacationSession.domain.VacationSession"
+		id="vsMap">
+		<id property="vNo" column="V_NO" />
+		<result property="vRequestDate" column="V_REQUEST_DATE" />
+		<result property="vStatus" column="V_STATUS" />
+		<result property="vMsg" column="V_MSG" />
+		<result property="sCode" column="S_CODE" />
+		<result property="lCode" column="L_CODE" />
+	</resultMap>
+	
+	<insert id="registerVs">
+		INSERT INTO V_SESSION VALUES(SEQ_VS.NEXTVAL, DEFAULT, DEFAULT, NULL, #{sCode}, #{lCode})
+	</insert>
+	
+	<select id="selectAllRequest" resultMap="vsMap">
+		SELECT * FROM V_SESSION WHERE S_CODE = #{sCode}
+	</select>
+</mapper>

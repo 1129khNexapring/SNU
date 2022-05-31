@@ -13,6 +13,15 @@
 		<result property="qnaCount" column="QNA_COUNT" />
 		<result property="sCode" column="S_CODE" />
 	</resultMap>
+	
+	<resultMap type="QnaReply" id="qnaReplyResultMap">
+		<id property="qnaReplyNo" 			 column="QNA_REPLY_NO"/>
+		<result property="qnaReplyContent"   column="QNA_REPLY_CONTENT"/>
+		<result property="qnaReplyDate"      column="QNA_R_DATE"/>
+		<result property="aCode"      		 column="A_CODE"/>
+		<result property="qnaNo"      		 column="QNA_NO"/>
+		
+	</resultMap>
 
 	<select id="printAllQna" resultMap="qnaResultMap">
 		SELECT * FROM QNA_BOARD
@@ -25,5 +34,26 @@
 	<insert id="registerQna">
 		INSERT INTO QNA_BOARD VALUES(SEQ_QNA.NEXTVAL, #{qnaTitle}, #{qnaContent}, DEFAULT, DEFAULT, DEFAULT, #{sCode})
 	</insert>
+	
+	<select id="qnaReplyList" resultMap="qnaReplyResultMap">
+	SELECT * FROM QNA_REPLY WHERE QNA_NO = #{qnaNo}
+	</select>
+	
+	<insert id="insertQnaReply">
+	INSERT INTO QNA_REPLY VALUES(SEQ_QNA_REPLY.NEXTVAL, #{qnaReplyContent}, DEFAULT, 'admin', #{qnaNo})
+	</insert>
+	
+	<update id="updateQnaReply">
+	UPDATE QNA_REPLY SET QNA_REPLY_CONTENT = #{qnaReplyContent} WHERE QNA_REPLY_NO = #{qnaReplyNo}
+	</update>
+	
+	<delete id="deleteQnaReply">
+	DELETE FROM QNA_REPLY WHERE QNA_REPLY_NO = #{qnaReplyNo}
+	</delete>
+	
+	<update id="updateQnaReplyStatus">
+	UPDATE QNA_BOARD SET QNA_STATUS = 'Y' WHERE QNA_NO = #{qnaNo}
+	</update>
+	
 </mapper>
 
