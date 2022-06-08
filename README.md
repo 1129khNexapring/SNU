@@ -78,5 +78,6 @@ TTT - 파이널프로젝트
 
 ## 주요 기능
 - 수강신청
-  
+  ![수강신청](https://user-images.githubusercontent.com/90033066/172543954-83477e58-692d-4d61-8a2c-fd1db7fe3384.PNG)
+
 
