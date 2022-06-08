@@ -77,17 +77,34 @@ TTT - 파이널프로젝트
 ---
 
 ## 주요 기능
+
 - 수강신청
+  
   ![수강신청](https://user-images.githubusercontent.com/90033066/172543954-83477e58-692d-4d61-8a2c-fd1db7fe3384.PNG)
+
+
 - 강의계획서 등록
-  ![강의 계획서 등록](https://user-images.githubusercontent.com/90033066/172544224-3070d7ea-1217-4bc7-907e-031aa7041602.PNG)
+ 
+ ![강의 계획서 등록](https://user-images.githubusercontent.com/90033066/172544224-3070d7ea-1217-4bc7-907e-031aa7041602.PNG)
+
+
 - 강의평가
+  
   ![강의평가](https://user-images.githubusercontent.com/90033066/172544370-b7fc85bf-317a-4f5c-9de6-6cddd73f1665.PNG)
+
+
 - 시간표
+  
   ![시간표](https://user-images.githubusercontent.com/90033066/172544607-8ff72c9f-fac7-4699-b4ed-e09580b8d878.PNG)
+
+
 - 풀캘린더
-  ![풀캘린더](https://user-images.githubusercontent.com/90033066/172544675-d28e7853-d82d-457d-91a2-527d02555dc6.PNG)
+ 
+ ![풀캘린더](https://user-images.githubusercontent.com/90033066/172544675-d28e7853-d82d-457d-91a2-527d02555dc6.PNG)
+
+
 - 학생출결관리
+  
   ![학생 출결 관리](https://user-images.githubusercontent.com/90033066/172544764-eedab447-425f-49ec-ae58-fb339cf5e900.PNG)
 
   
