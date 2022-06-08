@@ -82,5 +82,8 @@ TTT - 파이널프로젝트
 - 강의계획서 등록
   ![강의 계획서 등록](https://user-images.githubusercontent.com/90033066/172544224-3070d7ea-1217-4bc7-907e-031aa7041602.PNG)
 - 강의평가
+  ![강의평가](https://user-images.githubusercontent.com/90033066/172544370-b7fc85bf-317a-4f5c-9de6-6cddd73f1665.PNG)
+- 시간표
+  
   
 
